@@ -1,0 +1,120 @@
+{extend name="index/index"}
+{block name="content"}
+
+    <div class="page-header">
+    <h5>修改产品组</h5>
+</div>
+    <div class="main">
+        <div class="mixbox">
+            <form id="addgroup" class="form-horizontal" action="">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">名称：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="name" id="name" value="{$res.name}" class="form-control unline title" placeholder="请输入名称" />
+
+                    </div>
+                    <input type="hidden" name="id" value="{$res.id}">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">一级标识：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="identify" id="identify" value="{$res.identify}" class="form-control unline title" placeholder="请输入标识" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">二级标识：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="erji" id="erji" value="{$res.erji}" class="form-control unline title" placeholder="请输入标识" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <button type="submit" class="btn btn-ces tijiao">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{/block}
+{block name="script"}
+<!--<script type="text/javascript">
+    $(function() {
+        $('#selectTitle').initList();
+        $('.watch').on('click', function() {
+            $('#watchModal .modal-cont').html($(this).data('cont'));
+            $('#watchModal').modal('show');
+        });
+        $('.select select').on('change', function() {
+            if($(this).val() == '1') {
+                $('.crowdGroup').removeClass('hidden');
+                $('.aloneGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            } else {
+                $('.aloneGroup').removeClass('hidden');
+                $('.crowdGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            }
+        });
+    })
+</script>-->
+<script>
+
+    $('.tijiao').click(function () {
+
+        //提交时间后获取所有内容 判断
+        if ($('#name').val() == '') {
+            alert('请输入服务器名称!');
+            return false;
+        }
+        /* if ($('#phone').val() == '') {
+         alert('请输入手机号!');
+         return false;
+         }
+         if ($('#password').val() == '') {
+         alert('请输入密码!');
+         return false;
+         }
+         if ($('#repassword').val() == '') {
+         alert('请重复输入密码');
+         return false;
+         }*/
+        var formData = new FormData($('#addgroup')[0]);
+        $.ajax({
+            url: "{:url('product/edit_group')}",
+            type: "post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                if (data['msg'] == 1) {
+                    alert('修改成功');
+                    window.location.href = "{:url('product/progroup')}";
+                }/*else if(data['msg'] == 2){
+                 alert('两次密码不一致');
+                 }else if(data['msg'] == 3){
+                 alert('该用户名已存在');
+                 }else if(data['msg'] == 4){
+                 alert('密码不能少于6位');
+                 }else if(data['msg'] == 5){
+                 alert('请输入正确的手机号');
+                 }else if(data['msg'] == 6){
+                 alert('该手机号已经注册过了');
+                 }*/
+                else
+                {
+                    alert('修改失败');
+                    window.history.back(-1);
+                }
+            },
+        });
+
+        return false;
+    })
+</script>
+{/block}

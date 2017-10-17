@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<!--这里未使用定制bootstrap，而是使用覆盖的方式，是为了大家届时替换为第三方cdn-->
+		<link rel="stylesheet" href="__PUBLIC__/admin/css/lib/bootstrap.min.css" type="text/css">
+		<!--<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_537moa3csbr9t3xr.css" />-->
+        <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_it542entz5btke29.css">
+		<!--[if lt IE 9]>
+ 	    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+ 	    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+   		<![endif]-->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/lib/daterangepicker-bs3.css" />
+
+        <!--<link rel="stylesheet" href="css/css/style.css?v0.001" />-->
+		<link rel="stylesheet/less" type="text/css" href="__PUBLIC__/admin/css/less/style.less?v1.0.0" />
+		<script type="text/javascript" src="__PUBLIC__/admin/js/lib/less.js"></script>
+	</head>
+
+	<body>
+		<div class="page">
+			<div class="page-sidebar">
+				<div class="page-firstmenu">
+					<a href="" class="logo">
+						<!--<span class="team-logo" style="background-image: url(img/logo-ico.png)"></span>-->
+						<img src="__PUBLIC__/admin/img/logo.png" class="img-responsive" alt="" />
+					</a>
+					<div class="nav">
+						<ul class="list-inline">
+                            {foreach $menu as $vo}
+                            <li data-toggle="tooltip" title="{$vo.munu}" {if condition="$Request.session.id eq $vo.id"} class="active" {/if}>
+                            <a href="{:url($vo.url,['lid'=>$vo.id])}">{$vo.munu}</a>
+                            </li>
+                            {/foreach}
+						</ul>
+					</div>
+				</div>
+				<div class="page-user">
+					<span class="user-name">ylsq</span>
+					<div class="info-list">
+						<div class="info-cont">
+							<p>ylsq</p>
+							<p>+86-13789398868</p>
+						</div>
+						<ul class="list-unstyled">
+							<li>
+								<a href="" class="cre">个人邀请奖励</a>
+							</li>
+							<li>
+								<a href="">账号设置</a>
+							</li>
+							<li>
+								<a href="">切换店铺</a>
+							</li>
+							<li>
+								<a href="">退出</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="page-container">
+				<div class="page-lastmenu wht">
+					<div class="page-header">
+						<h5>{$name}</h5>
+					</div>
+					<ul class="list-unstyled">
+                        {foreach $right as $k=>$r}
+                        <li {if condition="$Request.session.num eq $r.num"} class="active" {/if}>
+                        <a href="{:url($r.url,['num'=>$r.num])}">{$r.munu}</a>
+                        </li>
+                        {/foreach}
+					</ul>
+				</div>
+
+                    {block name="content"}
+                    <div class="mixbox board">
+                        <h5><b>新手必备<small><a href="">新商户如何做到月入3万＋！</a></small></b></h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="" class="or">
+                                    <h4>有效提升客单价</h4>
+                                    <p>优惠套餐，打包销售</p>
+                                    <button type="button" class="btn btn-ces btn-xs">了解详情</button>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="" class="gr">
+                                    <h4>有效提升客单价</h4>
+                                    <p>优惠套餐，打包销售</p>
+                                    <button type="button" class="btn btn-ces btn-xs">了解详情</button>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="" class="pr">
+                                    <h4>有效提升客单价</h4>
+                                    <p>优惠套餐，打包销售</p>
+                                    <button type="button" class="btn btn-ces btn-xs">了解详情</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mixbox">
+                        <h5><b>经营渠道</b></h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="" class="media hot">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media new">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="media un">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mixbox">
+                        <h5><b>经营渠道</b></h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="" class="media hot">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media new">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="media un">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mixbox">
+                        <h5><b>经营渠道</b></h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="" class="media hot">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media new">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="media un">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="" class="media">
+                                    <div class="media-left">
+                                        <img src="img/mixbox-wx.png" alt="" />
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <h5><b>微信红包</b></h5>
+                                        <p>公众号群发红包</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mixbox">
+                        <h5><b>第三方应用</b></h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="">
+                                    <img src="img/ump_barber5.jpg" class="img-responsive" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+					{/block}
+
+                </div>
+			<div class="page-right">
+				<div class="page-header">
+					<h5><i class="iconfont icon-yiwen"></i>帮助和服务</h5>
+				</div>
+				<div class="mixbox">
+					<div class="page-header line">
+						<h5>帮助中心<a href="" class="pull-right">进入<i class="iconfont icon-you"></i></a></h5>
+					</div>
+					<h5>营销中心是什么？</h5>
+					<p>有赞营销中心提供丰富的互动营销工具，您可自由选用，让您轻轻松松与客户互动，推广店铺促成交。</p>
+					<ul class="list-unstyled">
+						<li>
+							<a href="">新商户经营指南</a>
+						</li>
+						<li>
+							<a href="">新商户经营指南</a>
+						</li>
+						<li>
+							<a href="">新商户经营指南</a>
+						</li>
+					</ul>
+				</div>
+				<div class="mixbox">
+					<div class="page-header line">
+						<h5>七朵服务经理</h5>
+					</div>
+					<a class="media">
+						<div class="media-left media-middle">
+							<img src="__PUBLIC__/admin/img/header.jpg" class="img-circle" />
+						</div>
+						<div class="media-body media-middle">
+							<h4>叶落深秋</h4>
+							<p>有问题来问我哦</p>
+						</div>
+					</a>
+				</div>
+				<div class="mixbox un">
+					<div class="page-header line">
+						<h5>找服务<a href="" class="pull-right">发布服务需求<i class="iconfont icon-you"></i></a></h5>
+					</div>
+				</div>
+			</div>
+			<div class="page-footer">
+				<a href="//www.qiduo.net/" class="logo" target="_blank"></a>
+			</div>
+		</div>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/jquery-1.11.0.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/bootstrap.min.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/jquery.form.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/echarts.min.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/moment.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/daterangepicker.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/list-script.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/app.js"></script>
+        <script type="text/javascript" src="__ROOT__/static/admin/js/lib/summernote.js"></script>
+        <script>
+            var url='';
+            $(".zhixing").click(function () {
+                url= $(this).attr('href');
+
+                $('#yznum').modal('show');
+                if($(this).hasClass('js-del')){
+                    return false;
+                }
+                return false;
+            })
+            //    var href=$(".zhixing").attr('href');
+            $(".js-yznum").click(function () {
+                var worknum=$(".worknum").val();
+                if(worknum==''){
+                    alert('为了您的安全,请确认您的工码!');
+                }else{
+                    $.ajax({
+                        type: 'POST',
+                        url:"{:url('base/yznum')}",
+                        data: {worknum:worknum},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data['msg'] == 1) {
+                                window.location.href=url;
+                            }else{
+                                alert('工码验证失败!');
+                                window.location.reload();
+                            }
+                            /*else if(data['msg'] == 2){
+                             alert('您没有操作权限!');*/
+                        }
+                    })
+                }
+            })
+        </script>
+        {block name="script"}
+
+        {/block}
+	</body>
+
+</html>

@@ -1,0 +1,167 @@
+{extend name="index/index"}
+{block name="content"}
+    <div class="page-header">
+        <ul class="nav nav-tabs line">
+            <li class="active">
+                <a href="javascript:;">修改服务器组</a>
+            </li>
+            <li>
+                <a href="{:url('resources/group')}">服务器组管理</a>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <form id="addgroup" class="form-horizontal" action="">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">名称：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="name" id="name" value="{$res.name}" class="form-control unline title" placeholder="请输入名称" />
+
+                    </div>
+                    <input type="hidden" name="id" value="{$res.id}">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">标识：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="identify" id="identify" value="{$res.identify}" class="form-control unline title" placeholder="请输入标识" />
+
+                    </div>
+                </div>
+                <!--	<div class="form-group">
+                        <label class="col-md-2 control-label" for="">填充类型：</label>
+                        <div class="col-md-4">
+                            <div class="radio inline">
+                            <input class="vba-rd" type="radio" name="filltype" id="rd1" value="" checked="checked">
+                            <label class="vba-ridbox" for="rd1">加入到最少使用的完整服务器</label>
+                            <input class="vba-rd" type="radio" name="filltype" id="rd2" value="">
+                            <label class="vba-ridbox" for="rd2">加入到已激活的默认服务器直至满额，然后切换到下个最少使用的服务器</label>
+                        </div>
+                        </div>
+                    </div>-->
+                <!--<div class="form-group aloneGroup">
+                    <label for="" class="col-md-2 control-label">所选服务器：</label>
+                    <div class="col-md-6">
+                        <div id="selectTitle" class="list-select">
+                            <div class="list-title">
+                                <h4>请选择服务器并移到右边</h4>
+                            </div>
+                            <div class="list-body">
+                                <div class="item-box left-box">
+                                    &lt;!&ndash; 左边框初始化待选项 &ndash;&gt;
+                                    <span class="item" data-id="xigua">西瓜</span>
+                                    <span class="item" data-id="pingguo">苹果</span>
+                                    <span class="item" data-id="xiangjiao">香蕉</span>
+                                    <span class="item" data-id="boluo">菠萝</span>
+                                    <span class="item" data-id="caomei">草莓</span>
+                                    <span class="item" data-id="yali">鸭梨</span>
+                                    <span class="item" data-id="mitao">蜜桃</span>
+                                    <span class="item" data-id="sangguo">桑果</span>
+                                    <span class="item" data-id="yangmei">杨梅</span>
+                                    <span class="item" data-id="putao">葡萄</span>
+                                </div>
+                                <div class="center-box">
+                                    <button type="button" class="btn btn-default btn-sm add-one mb10" title="添加选中项"><i class="iconfont icon-you"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm add-all mb10" title="添加全部"><i class="iconfont icon-syou"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm remove-one mb10" title="移除选中项"><i class="iconfont icon-zuo"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm remove-all" title="移除全部"><i class="iconfont icon-szuo"></i></button>
+                                </div>
+                                <div class="item-box right-box">
+                                </div>
+                            </div>
+                            <div class="list-footer">
+                                <button type="button" class="btn btn-ces btn-sm selected-val" title="获取选择值，输出到控制台">确定</button>
+                            </div>
+                            <input type="text" name="hideSel" class="hidden" id="hideSel" value="" />
+                        </div>
+
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <button type="submit" class="btn btn-ces tijiao">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+<!--<script type="text/javascript">
+    $(function() {
+        $('#selectTitle').initList();
+        $('.watch').on('click', function() {
+            $('#watchModal .modal-cont').html($(this).data('cont'));
+            $('#watchModal').modal('show');
+        });
+        $('.select select').on('change', function() {
+            if($(this).val() == '1') {
+                $('.crowdGroup').removeClass('hidden');
+                $('.aloneGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            } else {
+                $('.aloneGroup').removeClass('hidden');
+                $('.crowdGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            }
+        });
+    })
+</script>-->
+<script>
+
+    $('.tijiao').click(function () {
+
+        //提交时间后获取所有内容 判断
+        if ($('#name').val() == '') {
+            alert('请输入服务器名称!');
+            return false;
+        }
+        /* if ($('#phone').val() == '') {
+         alert('请输入手机号!');
+         return false;
+         }
+         if ($('#password').val() == '') {
+         alert('请输入密码!');
+         return false;
+         }
+         if ($('#repassword').val() == '') {
+         alert('请重复输入密码');
+         return false;
+         }*/
+        var formData = new FormData($('#addgroup')[0]);
+        $.ajax({
+            url: "{:url('resources/edit_group')}",
+            type: "post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                if (data['msg'] == 1) {
+                    alert('修改成功');
+                    window.location.href = "{:url('resources/group')}";
+                }/*else if(data['msg'] == 2){
+                 alert('两次密码不一致');
+                 }else if(data['msg'] == 3){
+                 alert('该用户名已存在');
+                 }else if(data['msg'] == 4){
+                 alert('密码不能少于6位');
+                 }else if(data['msg'] == 5){
+                 alert('请输入正确的手机号');
+                 }else if(data['msg'] == 6){
+                 alert('该手机号已经注册过了');
+                 }*/
+                else
+                {
+                    alert('修改失败');
+                    window.history.back(-1);
+                }
+            },
+        });
+
+        return false;
+    })
+</script>
+{/block}

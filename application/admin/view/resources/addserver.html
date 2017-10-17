@@ -1,0 +1,221 @@
+{extend name="index/index"}
+{block name="content"}
+		<div class="page-header">
+			<ul class="nav nav-tabs line">
+				<li class="active">
+					<a href="#nav1" data-toggle="tab">添加服务器</a>
+				</li>
+				<li>
+					<a href="#nav2" data-toggle="tab">服务器组管理</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="mixbox">
+				<form id="addserver" class="form-horizontal" action="{:url('resources/serveradd')}" method="post">
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">名称：</label>
+						<div class="col-md-4">
+							<input type="text" name="name" class="form-control unline title" placeholder="请输入名称" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">主机名：</label>
+						<div class="col-md-4">
+							<input type="text" name="hostname" class="form-control unline title" placeholder="请输入主机名" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">服务器组：</label>
+						<div class="col-md-4">
+							<div class="select">
+								<select name="cate_id" class="form-control unline">
+									{empty name="group"}
+									<option value="">暂无分类</option>
+									{else/}
+									{volist name="group" id="v"}
+									<option value="{$v['id']}">{$v['name']}</option>
+									{/volist}
+									{/empty}
+								</select>
+								<label class="unline-label"></label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">IP地址：</label>
+						<div class="col-md-4">
+							<input type="text" name="ip_address" class="form-control unline title" placeholder="请输入IP地址" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">分配的IP地址：</label>
+						<div class="col-md-4">
+							<textarea name="assign_ip" type="text" class="form-control unline idiograph" placeholder="请输入分配的IP地址" rows="6"></textarea>
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">每月成本：</label>
+						<div class="col-md-4">
+							<input type="text" name="cost" class="form-control unline title" placeholder="请输入每月成本" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">数据中心/NOC：</label>
+						<div class="col-md-4">
+							<input type="text" name="datacenter" class="form-control unline title" placeholder="请输入数据中心" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">最大账号数量：</label>
+						<div class="col-md-4">
+							<input type="text" name="max_num" class="form-control unline title" placeholder="请输入最大账号数量" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">服务器状态地址：</label>
+						<div class="col-md-4">
+							<input type="text" name="serversta_add" class="form-control unline title" placeholder="请输入服务器状态地址" />
+							<label class="unline-label"></label>
+							<span class="help-block">要显示此服务器在服务器状态页中，请输入服务器状态文件夹的完整的路径（需要上传文件到您要监视的每个服务器的上 - 例如：http://www.whmcs.com/status/</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">启用/禁用：</label>
+						<div class="col-md-4">
+							<div class="checkbox inunline">
+								<input class="vba-ck" type="checkbox" name="status" id="dck1" value="">
+								<label class="vba-chekbox" for="dck1">勾选禁用此服务器</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">类型：</label>
+						<div class="col-md-4">
+							<div class="select">
+								<select name="type" class="form-control unline">
+									<option value="1">Centova Cast</option>
+									<option value="2">Cloudmin</option>
+								</select>
+								<label class="unline-label"></label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">用户名：</label>
+						<div class="col-md-4">
+							<input type="text" name="username" class="form-control unline title" placeholder="请输入用户名" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">密码：</label>
+						<div class="col-md-4">
+							<input type="text" name="password" class="form-control unline title" placeholder="请输入密码" />
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">访问散列值：</label>
+						<div class="col-md-4">
+							<textarea name="hashvalue" type="text" class="form-control unline idiograph" placeholder="代替密码(用于 cPanel 服务器)" rows="6"></textarea>
+							<label class="unline-label"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="">安全：</label>
+						<div class="col-md-4">
+							<div class="checkbox inunline">
+								<input class="vba-ck" type="checkbox" name="pattern" id="ck1" value="1">
+								<label class="vba-chekbox" for="ck1">选中复选框使用 SSL 连接模式</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-4">
+							<button type="submit" class="btn btn-ces tijiao">提交</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+<div class="modal fade" id="watchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">邮件内容</h4>
+			</div>
+			<div class="modal-body">
+				<div class="modal-cont"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script>
+
+	$('.tijiao').click(function () {
+
+	/*	//提交时间后获取所有内容 判断
+		if ($('#username').val() == '') {
+			alert('请输入用户名!');
+			return false;
+		}
+		if ($('#phone').val() == '') {
+			alert('请输入手机号!');
+			return false;
+		}
+		if ($('#password').val() == '') {
+			alert('请输入密码!');
+			return false;
+		}
+		if ($('#repassword').val() == '') {
+			alert('请重复输入密码');
+			return false;
+		}*/
+		var formData = new FormData($('#addserver')[0]);
+		$.ajax({
+			url: "{:url('resources/serveradd')}",
+			type: "post",
+			data: formData,
+			async: false,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				console.log(data);
+				if (data['msg'] == 1) {
+					alert('添加成功');
+					window.location.href = "{:url('resources/server')}";
+				}/*else if(data['msg'] == 2){
+					alert('两次密码不一致');
+				}else if(data['msg'] == 3){
+					alert('该用户名已存在');
+				}else if(data['msg'] == 4){
+					alert('密码不能少于6位');
+				}else if(data['msg'] == 5){
+					alert('请输入正确的手机号');
+				}else if(data['msg'] == 6){
+					alert('该手机号已经注册过了');
+				}*/
+				else
+				{
+					alert('添加失败');
+					window.history.back(-1);
+				}
+			},
+		});
+
+		return false;
+	})
+</script>
+{/block}

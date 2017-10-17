@@ -1,0 +1,70 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<ul class="nav nav-tabs line">
+						<li>
+							<a href="{:url('operate/platform',['id'=>$userid])}">概览</a>
+						</li>
+						<li>
+							<a href="javascript:;">客户资料</a>
+						</li>
+						<li>
+							<a href="#nav3">联系方式</a>
+						</li>
+						<li>
+							<a href="#nav3">产品服务</a>
+						</li>
+						<li>
+							<a href="#nav3">域名</a>
+						</li>
+						<li>
+							<a href="{:url('operate/transaction',['id'=>$userid])}">交易记录</a>
+						</li>
+						<li>
+							<a href="#nav3">邮件</a>
+						</li>
+						<li  class="active">
+							<a href="{:url('operate/remarks',['id'=>$userid])}">备注</a>
+						</li>
+						<li>
+							<a href="#nav3">操作日志</a>
+						</li>
+					</ul>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="page-header">
+							<h4>添加新的备注</h4>
+						</div>
+						<form class="form-horizontal" action="{:url('operate/remarksadd')}" method="post">
+							<div class="form-group">
+								<div class="col-md-12">
+									<div id="adddefault"></div>
+								</div>
+							</div>
+							<div class="form-group text-center">
+								<button type="submit" class="btn btn-ces">添加</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			{/block}
+		{block name="script"}
+		<script>
+			$(function() {
+				$("#adddefault").summernote({
+					lang: 'zh-CN',
+					height: 300,
+					toolbar: [
+						// [groupName, [list of button]]
+						['style', ['style', 'undo', 'redo', 'bold', 'italic', 'underline', 'clear']],
+						['font', ['strikethrough', 'hr']],
+						['fontsize', ['fontsize']],
+						['color', ['color']],
+						['para', ['ul', 'ol', 'fullscreen', 'codeview']],
+						['height', ['height']]
+					]
+				});
+			})
+		</script>
+		{/block}

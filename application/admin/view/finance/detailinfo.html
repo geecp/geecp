@@ -1,0 +1,80 @@
+{extend name="index/index"}
+{block name="content"}
+    <div class="page-header">
+        <h5>财务操作详情</h5>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <div class="form-horizontal worderinfo clearfix">
+                <label class="col-md-1 control-label">序号:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.id}</p>
+                </div>
+                <label class="col-md-1 control-label">状态:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info"><span {if condition="$res.status eq 4"}  class="round text-info" {elseif condition="$res.status eq 5"} class="round text-danger" {else} class="round text-info" {/if}>
+                        {if condition="$res.status eq 4"} 已到账
+                        {elseif condition="$res.status eq 5"/}未到账
+                        {else/}已完成
+                        {/if}</span></p>
+                </div>
+
+                <label class="col-md-1 control-label">金额:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info"><span class="money">{$res.money}</span></p>
+                </div>
+                <label class="col-md-1 control-label">凭证:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.voucher}</p>
+                </div>
+                <label class="col-md-1 control-label">客户:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.userid}</p>
+                </div>
+                <label class="col-md-1 control-label">类型:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">
+                        {if condition="$res.transaction_type eq 4"}入款
+                        {elseif condition="$res.transaction_type eq 5"}退款
+                        {elseif condition="$res.transaction_type eq 5"}退款
+                        {elseif condition="$res.transaction_type eq 6"}优惠虚增
+                        {elseif condition="$res.transaction_type eq 7"}其他
+                        {else}消费
+                        {/if}
+                    </p>
+                </div>
+                <label class="col-md-1 control-label">相关银行:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.receivables}</p>
+                </div>
+                <label class="col-md-1 control-label">类型:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">
+                        {if condition="$res.status eq 4"}已到账
+                        {elseif condition="$res.status eq 5"}未到账
+                        {else"}已完成
+                        {/if}</p>
+                </div>
+                <label class="col-md-1 control-label">公开原因:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.public} </p>
+                </div>
+                <label class="col-md-1 control-label">内部记录:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.inside}</p>
+                </div>
+
+                <label class="col-md-1 control-label">操作者:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.auditor}</p>
+                </div>
+                <label class="col-md-1 control-label">提交时间:</label>
+                <div class="col-md-5">
+                    <p class="form-control-static info">{$res.creat_time}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+{/block}

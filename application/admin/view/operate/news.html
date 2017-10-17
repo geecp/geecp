@@ -1,0 +1,88 @@
+{extend name="index/index"}
+{block name="content"}
+<div class="page-header">
+    <h5>新闻动态</h5>
+</div>
+<div class="main">
+    <div class="mixbox">
+        <div class="table-responsive">
+
+            <div class="tool-box">
+                <a href="{:url('operate/addnews')}" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增</a>
+                <!-- <a href="" class="btn btn-danger"><i class="iconfont icon-del	 r"></i>删除</a>-->
+            </div>
+            <hr>
+            <table class="table tools">
+                <thead>
+                <tr class="sortmix">
+                    <th class="lock">序号</th>
+                    <th class="lock">标题</th>
+                    <th class="lock">作者</th>
+                    <th class="lock">状态</th>
+                    <th class="lock">分类</th>
+                    <th class="lock">浏览次数</th>
+                    <th class="lock">发布时间</th>
+                    <th class="lock control">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $res as $val}
+                <tr>
+                <th scope="row">{$val['id']}</th>
+                 <td>{$val['title']}</td>
+                <td>{$val['author']}</td>
+                    {if condition="($val['status'] == 1)"}
+                    <td>展示</td>
+                    {else /}
+                    <td>隐藏</td>
+                    {/if}
+                <td>{$val['tab']}</td>
+                <td>{$val['view']}</td>
+                <td>{$val['createtime']}</td>
+                <td class="control">
+                <a class="control btn btn-ces btn-xs" href="{:url('operate/editnews',['id'=>$val['id']])}">编辑</a>
+                <a href="javascript:void(0);"   class="btn btn-success btn-xs del" delid="{$val['id']}">删除</a>
+                </td>
+                </tr>
+                {/foreach}
+
+                </tbody>
+            </table>
+            <div class="vba-pagination">
+                <ul class="pagination">
+                    {$res->render()}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+    $(".del").click(function () {
+        var id = $(this).attr('delid');
+        $.ajax({
+            url: "{:url('operate/delnews')}",
+            type: "POST",
+            data: {id:id},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                if (data['msg'] == 1) {
+                    alert('删除成功');
+                    window.location.href = "{:url('operate/news')}";
+                }else
+                {
+                    alert('删除失败');
+                    window.history.back(-1);
+                }
+            },
+        });
+
+        return false;
+    })
+
+</script>
+{/block}

@@ -1,0 +1,58 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<h5>订单详情</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="form-horizontal worderinfo clearfix">
+							<label class="col-md-1 control-label">订单号:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res.order_id}</p>
+							</div>
+							<label class="col-md-1 control-label">状态:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">
+									<span {if condition="$res.status eq 1"}  class="round text-success" {elseif condition="$res.status eq 2"} class="round text-danger" {else} class="round text-muted" {/if}>
+									{if condition="$res.status eq 1"} 支付成功
+									{elseif condition="$res.status eq 2"/}未支付
+									{else/}已取消
+									{/if}
+									</span></p>
+							</div>
+							<label class="col-md-1 control-label">截至帐期:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">2017-05-08 13:03:49</p>
+							</div>
+							<label class="col-md-1 control-label">产品名称:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res.product}</p>
+							</div>
+							<label class="col-md-1 control-label">支付方式:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{if condition="$res.payment eq 1"} 支付宝 {else/}微信 {/if}</p>
+							</div>
+							<label class="col-md-1 control-label">订单金额:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info"><span class="money">{$res.money}</span></p>
+							</div>
+							<label class="col-md-1 control-label">客户名称:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res.userid}</p>
+							</div>
+							<!--<label class="col-md-1 control-label">快递单号:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">123132132</p>
+							</div>
+							<label class="col-md-1 control-label">发票备注:</label>
+							<div class="col-md-11">
+								<p class="form-control-static info">紧急事故恢复 </p>
+							</div>
+							<label class="col-md-1 control-label">发票内容:</label>
+							<div class="col-md-10">
+								<p class="form-control-static info">a</p>
+							</div>-->
+						</div>
+					</div>
+				</div>
+		{/block}

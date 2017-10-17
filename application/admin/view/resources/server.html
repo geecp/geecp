@@ -1,0 +1,60 @@
+{extend name="index/index"}
+{block name="content"}
+		<div class="page-header">
+			<ul class="nav nav-tabs line">
+				<li class="active">
+					<a href="#nav1" data-toggle="tab">服务器管理</a>
+				</li>
+				<li>
+					<a href="#nav2" data-toggle="tab">服务器组管理</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="mixbox">
+				<div class="table-responsive">
+					<div class="tool-box">
+						<a href="{:url('resources/addserver')}" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增服务器</a>
+					</div>
+					<table class="table tools">
+						<thead>
+						<tr class="sortmix">
+							<th><button type="button" class="btn">分组</button></th>
+							<th><button type="button" class="btn">服务器名称</button></th>
+							<th><button type="button" class="btn">IP地址</button></th>
+							<th><button type="button" class="btn">激活的账户</button></th>
+							<th><button type="button" class="btn">已使用量</button></th>
+							<th><button type="button" class="btn">状态</button></th>
+							<th><button type="button" class="btn">管理</button></th>
+							<th class="lock">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						{foreach $data as $val}
+						<tr>
+							<td>{$val.cate_id}</td>
+							<td>{$val.name}</td>
+							<td scope="row">{$val.ip_address}</td>
+							<td scope="row">1/200</td>
+							<td scope="row">1%</td>
+							<td scope="row"><span {if condition="$val.status eq 0"} class="round text-danger" {else} class="round text-success"{/if}>{if condition="$val.status eq 1"}启用{else}禁用{/if}</span></td>
+							<td>
+								<a class="btn btn-ces btn-xs">登录到控制面板</a>
+							</td>
+							<td>
+								<a href="" class="btn btn-ces btn-xs">修改</a>
+								<a href="" class="btn btn-danger btn-xs">删除</a>
+							</td>
+						</tr>
+						{/foreach}
+						</tbody>
+					</table>
+					<div class="vba-pagination">
+						<ul class="pagination">
+							{$data->render()}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+{/block}

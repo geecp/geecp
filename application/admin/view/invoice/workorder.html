@@ -1,0 +1,132 @@
+{extend name="index/index"}
+{block name="content"}
+        <div class="page-header">
+            <h5>工单列表</h5>
+        </div>
+        <div class="main">
+            <div class="mixbox">
+                <div class="table-responsive">
+                    <!--<div class="tool-box">
+                        <a href="" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增</a>
+                        <a href="" class="btn btn-danger"><i class="iconfont icon-del	 r"></i>删除</a>
+                    </div>
+                    <hr />-->
+                    <div class="tool-box">
+                        <a href="" class="btn btn-ces btn-sm">全部</a>
+                        <a href="" class="btn btn-default btn-sm">待处理</a>
+                        <a href="" class="btn btn-default btn-sm">待客户反馈</a>
+                        <a href="" class="btn btn-default btn-sm">待客户确认</a>
+                        <a href="" class="btn btn-default btn-sm">待评价</a>
+                        <a href="" class="btn btn-default btn-sm">已完成</a>
+                    </div>
+                    <hr />
+                    <table class="table tools">
+                        <thead>
+                        <tr class="sortmix">
+                            <th class="lock">
+                                <input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+                                <label class="vba-chekbox" for="checkboxf"></label>
+                            </th>
+                            <th class="lock">工单编号</th>
+                            <th class="lock">工单标题</th>
+                            <th class="lock">工单类型</th>
+                            <th class="lock">问题特征</th>
+                            <th class="lock">提交用户</th>
+                            <th class="lock">指派人员</th>
+                            <th class="lock">工单状态</th>
+                            <th class="lock">发起时间</th>
+                            <th class="lock control">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $res as $val}
+                        <tr>
+                            <td>
+                                <input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+                                <label class="vba-chekbox" for="checkboxf"></label>
+                            </td>
+                            <th scope="row">{$val['workorderid']}</th>
+                            <td><span>{$val['questiontitle']}</span></td>
+                            <td>{$val['type']}</td>
+                            <td>{$val['describe']}</td>
+                            <td>{$val['coustom']}</td>
+                            <td>{$val['workid']}</td>
+                            <td><span {if condition="$val['status'] eq 1"} class="round text-info" {elseif condition="$val['status'] eq 2"} class="round text-danger"
+                                      {elseif condition="$val['status'] eq 3"} class="round text-success"
+                                      {elseif condition="$val['status'] eq 4"} class="round text-warning"
+                                      {elseif condition="$val['status'] eq 5"} class="round text-muted"
+                                      {else} class="round text-muted"
+                                      {/if} >
+                                {if condition="$val['status'] eq 1"} 待处理
+                                {elseif condition="$val['status'] eq 2"/}待客户反馈
+                                {elseif condition="$val['status'] eq 3"/}待客户确认
+                                {elseif condition="$val['status'] eq 4"/}待评价
+                                {elseif condition="$val['status'] eq 5"/}已完成
+                                {else/}已注销
+                                {/if}
+                                </span>
+                            </td>
+                            <td>{$val['time']}</td>
+                            <td class="control">
+                                <a class="control btn btn-ces btn-xs" href="">详情</a>
+                                <a data-id="100322" class="control btn btn-success btn-xs change">更换指派人</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+
+                        </tbody>
+                    </table>
+                    <div class="vba-pagination">
+                        <ul class="pagination">
+                            {$data->render()}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">更换指派人</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="" action="">
+                    <input class="changeId" name="changeId" type="hidden" />
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-2">更换给：</label>
+                        <div class="col-md-10">
+                            <div class="select">
+                                <select class="form-control line">
+                                    <option value="1">吴奇隆</option>
+                                    <option value="2">吴京</option>
+                                    <option value="3">吴镇宇</option>
+                                    <option value="4">吴君如</option>
+                                </select>
+                                <label class="line-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-ces" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $('.change').on('click', function() {
+        $('#changeModal').modal('show');
+        $('#changeModal').find('.changeId').val($(this).data('id'));
+
+    });
+</script>
+{/block}

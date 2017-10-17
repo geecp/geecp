@@ -1,0 +1,166 @@
+{extend name="index/index"}
+{block name="content"}
+
+    <div class="page-header">
+        <ul class="nav nav-tabs line">
+            <li>
+                <a href="{:url('operate/index')}">工单列表</a>
+            </li>
+            <li  class="active">
+                <a href="{:url('operate/workordergroup')}">工单类型</a>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <div class="table-responsive">
+                <p class="pull-right">每页显示<span class="ml10 mr10">{$count}</span>条数据</p>
+                <div class="tool-box">
+                    <a href="#realNameModal" data-toggle="modal" class="btn btn-primary" id="addonecategorys">添加一级目录</a>
+                    <a href="#realNameModal" data-toggle="modal" class="btn btn-primary" id="addcategotys">添加子分类目录</a>
+                </div>
+                <table class="table tools">
+                    <thead>
+                    <tr class="sortmix">
+                        <th class="lock">编号</th>
+                        <th class="lock">类型</th>
+                        <th class="lock">修改时间</th>
+                        <th class="lock control">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {empty name="list"}
+                    <tr>
+                        <td class="text-center" colspan="11">没有需要显示的数据!</td>
+                    </tr>
+                    {else/}
+                    {volist name="list" id="v"}
+                    <tr>
+                        <!--<td scope="row"><input type="checkbox" name="checkedArticle" /></td>-->
+                        <th>{$v.id}</th>
+                        <td><?= str_repeat('&nbsp',$v['count'] * 6).' |-- '.$v['name']?></td>
+                        <td>{$v.update_time}</td>
+                        <td>
+                            <!--<a href="{:url('Articlen/updatecategory',['id'=>$v.id])}">编辑</a>-->
+                            <!-- - -->
+                            <a href="#realNameModal" data-toggle="modal" class="bianji" gid="{$v.id}" gname="{$v.name}">编辑</a>
+                            -
+                            <!--<a href="#">禁用</a>-->
+                            <!-- - -->
+                            <a href="{:url('Articlen/delcategory',['id'=>$v.id])}">删除</a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    {/empty}
+                    </tbody>
+                </table>
+                <div class="vba-pagination">
+                    <ul class="pagination">
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="realNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title tjflml">添加子分类目录</h4>
+            </div>
+            <form action="{:url('Articlen/addcategory')}" class="form-horizontal" id="form" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类目录名称：</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control pull-left mulumincheng" name="name" id="" placeholder="请输入目录名称" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选择父级目录：</label>
+                        <div class="col-sm-4">
+                            <select name="pid" class="form-control xzk">
+                                <!--<option value="0">一级目录</option>-->
+                                {notempty name="modals1"}
+                                {volist name="modals1" id="v"}
+                                <option value="{$v.id}">{$v.name}</option>
+                                {/volist}
+                                {/notempty}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+            <form action="{:url('Articlen/addworkordergroup')}" class="form-horizontal" id="form1" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">一级分类目录名称：</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control pull-left mulumincheng" name="name"  placeholder="请输入一级目录名称" />
+                            <input type="hidden" name="pid" value="0"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $('.bianji').click(function () {
+        $('#form1').hide();
+        $('#form').show();
+        var id = $(this).attr('gid');
+        $('.tjflml').html('编辑');
+        $.ajax({
+            type:'POST',
+            url:"{:url('operate/selectpid')}",
+            data:{id:id},
+            dateType:'json',
+            success:function (data) {
+                console.log(data);
+                if (data) {
+                    $(".mulumincheng").attr('value',data['name']);
+                    $(".mulumincheng").parent().append('<input type="hidden" class="appendid" name="id" value="'+data['id']+'">');
+                    var xzk = $('.xzk').children();
+                    for (i = 0; i < xzk.length;i++) {
+                        if (data['pid'] == 0) {
+                            if (xzk.eq(i).html() == ' '+data['name'] ) {
+                                xzk.eq(i).attr('selected','selected');
+                            }
+                        } else {
+                            if (xzk.eq(i).val() == data['pid'] ) {
+                                xzk.eq(i).attr('selected','selected');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    $('#addcategotys').click(function () {
+        $('.tjflml').html('添加子分类');
+        $('#form').show();
+        $('#form1').hide();
+        $('.appendid').remove();
+    });
+    $('#addonecategorys').click(function () {
+        $('.tjflml').html('添加一级分类');
+        $('#form').hide();
+        $('#form1').show();
+    });
+</script>
+{/block}

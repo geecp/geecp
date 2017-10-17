@@ -1,0 +1,131 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*luanyongjian*/
+/* 帮助中心背景*/
+.nav-right>li.regi.bg6{background:#2e303f;height:63px;border-bottom:1px solid #3c49a6}
+.hd.bd{border-bottom:1px solid #3c49a6}
+.vps-nav-bg{background:#4251b6 url(../images/20160821img7.png) no-repeat top center;height:224px;position:relative;top:-64px}
+.prelative{position:relative;top:-172px}
+/*帮助中心搜索 start*/
+.prelative2{position:relative;top:-210px}
+.searchbox{width:1200px;margin:0 auto;overflow:hidden}
+.searchleft{float:left;color:#fff;line-height:40px;font-size:30px;margin-top:42px}
+.searchleft i{width:3px;height:38px;display:inline-block;background:#fff;margin-right:15px;vertical-align:middle}
+.searchright{float:left;margin-left:210px;margin-top:45px}
+.search{overflow:hidden}
+.search input{width:420px;border:none;background:#fff;height:39px;line-height:39px;font-size:16px;color:#333;padding-left:15px;float:left}
+.search input:focus{outline:none}
+.search .ssbtn{width:72px;height:39px;background:#6a7ae8;border-top-right-radius:3px;border-bottom-right-radius:3px;float:left}
+.search .ssbtn i{background:url(../images/20160817img2.png) no-repeat;width:24px;height:24px;display:inline-block;margin-left:24px;margin-top:8px}
+.hotsearch{overflow:hidden}
+.hotsearch span{color:#fff;line-height:36px;margin-left:6px;}
+.hotsearch a{color:#fff;line-height:36px;display:inline-block;margin:0 2px}
+.hotsearch a:hover{text-decoration:underline;color:#fff}
+/*帮助中心搜索 end*/
+/*helpindex start*/
+.width1200{width:1200px;margin-left:auto;margin-right:auto;overflow:hidden}
+.quest-tit{font-size:22px;margin-top:42px}
+.questionbox{overflow:hidden;padding-left:25px;padding-top:20px;padding-bottom:75px}
+.wentilist{float:left}
+.wentilist li{background:url(../images/20160817img5.png) no-repeat 0 12px;padding-left:18px;}
+.wentilist li a{font-size:14px;color:#333;max-width:520px;display:inline-block;line-height:26px;overflow:hidden;text-overflow:ellipsis;word-break:break-all;white-space:nowrap}
+.wentilist li a:hover{color:#4251b6;text-decoration:underline}
+.bgf4{background:#f4f4f4}
+.server-item{overflow:hidden;padding-top:50px}
+.iconlist{float:left;width:150px;margin:0 75px 50px;text-align:center}
+.icon-txt{font-size:16px;color:#666;line-height:46px;display:block}
+.iconlist:hover .icon-txt{color:#4251b6}
+.servericon{background:url(../images/20160817img3.png) no-repeat;width:75px;height:75px;display:inline-block;}
+.icon1{background-position:0 0}
+.icon1:hover{background-position:0 -75px}
+.icon2{background-position:-75px 0}
+.icon2:hover{background-position:-75px -75px}
+.icon3{background-position:-150px 0}
+.icon3:hover{background-position:-150px -75px}
+.icon4{background-position:-225px 0}
+.icon4:hover{background-position:-225px -75px}
+.icon5{background-position:-300px 0}
+.icon5:hover{background-position:-300px -75px}
+.icon6{background-position:-375px 0}
+.icon6:hover{background-position:-375px -75px}
+.icon7{background-position:-450px 0}
+.icon7:hover{background-position:-450px -75px}
+.icon8{background-position:-525px 0}
+.icon8:hover{background-position:-525px -75px}
+.icon-trans{-webkit-transition:all 600ms ease-in-out;-moz-transition:all 600ms ease-in-out;-o-transition:all 600ms ease-in-out;-ms-transition:all 600ms ease-in-out;transition:all 600ms ease-in-out}
+.pro-wrap{overflow:hidden;padding-top:45px}
+.pro-unit{width:425px;float:left;overflow:hidden;margin-bottom:60px}
+.pro-icon{background:url(../images/20160819img7.png) no-repeat;display:inline-block;float:left}
+.uniticon1{background-position:0 0;width:86px;height:71px}
+.uniticon2{background-position:-86px 0;width:86px;height:71px}
+.uniticon3{background-position:-172px 0;width:86px;height:71px}
+.uniticon4{background-position:-258px 0;width:86px;height:75px}
+.uniticon5{background-position:-344px 0;width:86px;height:75px}
+.uniticon6{background-position:-430px 0;width:86px;height:75px}
+.procontent{float:left;margin-left:20px}
+.pro-tit{font-size:16px;margin-bottom:5px}
+.procontent a{display:block;font-size:14px;color:#666;line-height:28px;max-width:230px;overflow:hidden;text-overflow:ellipsis;word-break:break-all;white-space:nowrap}
+.procontent a:hover{color:#4251b6;text-decoration:underline}
+.help-item{overflow:hidden;padding:35px 0}
+.onlinebox{border:1px solid #ddd;background:#fff;float:left;margin-right:70px;padding-top:35px;padding-bottom:15px;width:350px;height:135px;text-align:center}
+.onlinebox:hover{border:1px solid #4251b6;-webkit-transition: all .5s;
+-moz-transition: all .5s;
+-ms-transition: all .5s;
+-o-transition: all .5s}
+.helpcontent{overflow:hidden;padding-left:58px;height:100px}
+.help-left-icon1{background:url(../images/20160817img4.png) no-repeat -239px 0;width:43px;height:55px;display:block;float:left}
+.help-left-icon2{background:url(../images/20160817img4.png) no-repeat -303px 0;width:46px;height:54px;display:block;float:left}
+.help-left-icon3{background:url(../images/20160817img4.png) no-repeat -360px 0;width:47px;height:55px;display:block;float:left}
+.help-right-txt{float:left;margin-left:20px;overflow:hidden;text-align:left}
+.help-right-txt p{color:#999}
+.help-right-txt .helptit{font-size:18px;color:#333;margin-bottom:5px}
+.zixunbtn{width:98px;height:35px;line-height:35px;font-size:14px;color:#fff;text-align:center;background:#4251b6;display:inline-block}
+.zixunbtn i{background:url(../images/20160817img6.png) no-repeat;width:15px;height:15px;display:inline-block;vertical-align:middle;margin-right:6px;margin-top:-3px}
+.zixunbtn:hover{background:#4251b6;color:#fff;-webkit-transition: all .5s;
+-moz-transition: all .5s;
+-ms-transition: all .5s;
+-o-transition: all .5s}
+/*helpindex end*/
+/*help-details start*/
+.left-sidenav{float:left;width:215px;border-top:1px solid #eee;border-left:1px solid #eee;margin-top:42px}
+.left-sidenav ul li{line-height:35px;text-align:center;border-right:1px solid #eee;border-bottom:1px solid #eee}
+.left-sidenav ul li a{width:215px;height:35px;line-height:35px;font-size:14px;text-align:center;display:block}
+.left-sidenav ul li a:hover{background:#009fd9;color:#fff}
+.left-sidenav ul li a.current{background:#009fd9;color:#fff}
+.left-sidenav ul li.sidenav-tit{font-size:16px;background:#eee}
+.right-container{width:905px;float:right;margin-top:42px}
+.list-tit{font-size:18px;line-height:52px;color:#4251b6;border-bottom:1px dashed #eee}
+.link-list{padding-top:16px;padding-left:32px;padding-bottom:52px;overflow:hidden}
+.link-list li{font-size:14px;line-height:46px;height:46px;padding-right:32px;border-bottom:1px dashed #eee}
+.link-list li a{color:#666;margin-left:6px}
+.link-list li a:hover{color:#ff8800}
+.list-left{float:left;max-width:600px;overflow:hidden;text-overflow:ellipsis;word-break:break-all;white-space:nowrap}
+.list-right{float:right;color:#666;font-size:12px}
+.list-right span{margin-left:10px}
+.pagebtnbox{overflow:hidden;line-height:29px}
+.pagebtnbox a{border:1px solid #ddd;padding:0 10px;margin-right:3px;line-height:29px;display:inline-block;text-align:center;background:#fff}
+.pagebtnbox a.current{border:1px solid #fff;background:#fff;color:#4251b6;font-weight:bold}
+.pagebtnbox a:hover{background:#4251b6;border:1px solid #4251b6;color:#fff}
+.pageinput{width:35px;height:29px;border:1px solid #ddd;text-align:center;outline:none;margin:0 8px}
+.pageinput:focus{border:1px solid #4251b6}
+/*help-details end*/
+/*检索 start*/
+.left-col{float:left;width:600px;margin:55px 0;overflow:hidden;border-right:1px solid #b9b9b9;padding-right:160px;min-height:500px}
+.left-col-item{margin-bottom:25px}
+.left-col-tit{font-size:18px;color:#4251b6;max-width:560px;overflow:hidden;text-overflow:ellipsis;word-break:break-all;white-space:nowrap}
+.left-col-tit a{text-decoration:underline}
+.left-col-tit a:hover{text-decoration:underline}
+.left-col-tit span{text-decoration:underline}
+.left-col-txt{font-size:14px;color:#555;line-height:24px}
+.item-data{color:#666;line-height:20px}
+.right-col{float:right;width:400px;padding-left:20px;padding-top:55px}
+.right-col-tit{font-size:18px}
+.xg-pro-box{overflow:hidden;margin-top:20px}
+.xg-pro-item{float:left;text-align:center;display:block;margin-right:70px;margin-bottom:25px}
+.xg-pro-item span{font-size:14px;color:#4251b6;line-height:36px;display:block}
+.xg-pro-item:hover span{text-decoration:underline}
+/*检索 end*/
+
+
+
+

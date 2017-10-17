@@ -1,0 +1,249 @@
+{extend name="index/index"}
+{block name="content"}
+    <div class="page-header">
+        <h5>虚拟主机产品</h5>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <form id="addserver" class="form-horizontal" action="{:url('product/productadd')}" method="post">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">产品名称：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="name" class="form-control unline title" placeholder="请输产品入名称" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">产品标识：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="title" class="form-control unline title" placeholder="请输入产品标识" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">产品组：</label>
+                    <div class="col-md-4">
+                        <div class="select">
+                            <select name="pro_id" class="form-control unline title">
+                                {empty name="group"}
+                                <option value="">暂无分类</option>
+                                {else/}
+                                {volist name="group" id="v"}
+                                <option value="{$v['id']}">{$v['name']}</option>
+                                {/volist}
+                                {/empty}
+                            </select>
+                            <label class="unline-label"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">产品配置(空间大小)：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="space" class="form-control unline title" placeholder="请输入产品配置" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">操作系统：</label>
+                    <div class="col-md-4">
+                        {foreach $system as $k=>$v}
+                        <input class="vba-ck" type="checkbox" name="system[]" id="checkbox.{$k}" value="{$v.id}" {notempty name="data.system"}{in name="v.id" value="$res.system"} checked="checked" {/in}{/notempty}/>
+                        <label class="vba-chekbox" for="checkbox.{$k}">{$v.name} {$v.version}</label>
+                        {/foreach}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">支持语言及其版本：</label>
+                    <div class="col-md-4">
+                        <input class="vba-ck" type="checkbox" name="language[]" id="checkbox1" value="1"/>
+                        <label class="vba-chekbox" for="checkbox1">PHP 5.2/5.3/5.4/5.5/5.6、html、CGI、伪静态</label>
+                        <input class="vba-ck" type="checkbox" name="language[]" id="checkbox2" value="2"/>
+                        <label class="vba-chekbox" for="checkbox2">ASP、.net2.0/3.5/4.0、html、CGI、伪静态</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">MYSQL版本：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="mysql" class="form-control unline title" placeholder="请输入MYSQL版本" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">所属机房：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="room" class="form-control unline title" placeholder="请输入所属机房" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">带宽：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="bandwidth" class="form-control unline title" placeholder="请输入带宽" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">月流量：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="flow" class="form-control unline title" placeholder="请输入月流量" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">数据库大小：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="dbsize" class="form-control unline title" placeholder="请输入数据库大小 " />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">子站点数量：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="webnum" class="form-control unline title" placeholder="请输入子站点数量" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">可绑域名数量：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="domainnum" name="domainnum" class="form-control unline title" placeholder="请输入可绑域名数量" />
+                        <label class="line-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">一个月价钱：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="month" class="form-control unline title" placeholder="请输入一个月价钱" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">半年价钱：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="half" class="form-control unline title" placeholder="请输入半年价钱" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">一年价钱：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="year" class="form-control unline title" placeholder="请输入一年价钱" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                    <div class="form-group">
+                    <label class="col-md-2 control-label" for="">两年价钱：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="two" class="form-control unline title" placeholder="请输入两年价钱" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">三年价钱：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="three" class="form-control unline title" placeholder="请输入三年价钱" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">五年价钱：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="five" class="form-control unline title" placeholder="请输入五年价钱" />
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">一级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_1" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_1"}value="{$data.agent_1}"{/notempty}/>
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">二级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_2" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_2"}value="{$data.agent_2}"{/notempty}/>
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">三级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_3" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_3"}value="{$data.agent_3}"{/notempty}/>
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">四级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_4" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_4"}value="{$data.agent_4}"{/notempty}/>
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">五级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_5" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_5"}value="{$data.agent_5}"{/notempty}/>
+                        <label class="unline-label"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <button type="submit" class="btn btn-ces tijiao">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{/block}
+{block name="script"}
+<script>
+    $(function() {
+        $('#selectTitle').initList();
+
+        $('.select select').on('change', function() {
+            if($(this).val() == '1') {
+                $('.crowdGroup').removeClass('hidden');
+                $('.aloneGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            } else {
+                $('.aloneGroup').removeClass('hidden');
+                $('.crowdGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            }
+        });
+    })
+
+
+    $('.tijiao').click(function () {
+        var formData = new FormData($('#addserver')[0]);
+        $.ajax({
+            url: "{:url('product/productadd')}",
+            type: "post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                //console.log(data);
+                if (data['msg'] == 1) {
+                    alert('添加成功');
+                    //window.location.href = "{:url('product/product')}";
+                }else if(data['msg'] == 2) {
+                    alert('请选择服务器后再添加');
+                }else
+                {
+                    alert('添加失败');
+                    //window.history.back(-1);
+                }
+            },
+        });
+
+        return false;
+    })
+</script>
+{/block}

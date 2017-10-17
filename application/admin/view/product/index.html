@@ -1,0 +1,982 @@
+{extend name="index/index"}
+{block name="content"}
+
+				<div class="page-header">
+					<h5>域名管理</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="table-responsive">
+							<p class="pull-right">每页显示<span class="ml10 mr10">{$count}</span>条数据</p>
+							<div class="tool-box">
+								<a class="btn btn-ces btn-add"><i class="iconfont icon-plus r"></i>新增</a>
+								<a class="btn btn-danger"><i class="iconfont icon-del r" ></i>删除</a>
+							</div>
+							<table class="table tools table-center">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock" style="width: 5%;">
+											<input class="vba-ck" type="checkbox" name="ckf[]" id="checkboxf" value="">
+											<label class="vba-chekbox" for="checkboxf"></label>
+										</th>
+										<th class="lock" style="width: 10%;">序号</th>
+										<th class="lock" style="width: 10%;">后缀</th>
+										<th class="lock" style="width: 20%;">描述</th>
+										<th class="lock" style="width: 10%;">类型</th>
+										<th class="lock">接口</th>
+										<th class="lock" style="width: 5%;">价格</th>
+										<th class="lock" style="width: 10%;">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								<tr class="add hidden">
+
+									<td>
+										<input class="vba-ck" type="checkbox" name="ckf" id="" value="">
+										<label class="vba-chekbox" for="checkboxf"></label>
+									</td>
+									<td scope="row">
+										<div class="form-group">
+											<input type="text" class="form-control unline" value="">
+										</div>
+									</td>
+									<td scope="row">
+										<div class="form-group">
+											<input type="text" class="form-control unline" value="">
+										</div>
+									</td>
+									<td scope="row">
+										<div class="form-group">
+											<input type="text" class="form-control unline" value="">
+										</div>
+									</td>
+									<td scope="row">
+										<div class="form-group">
+												<select class="form-control">
+													<option value="1">hot</option>
+													<option value="2">sale</option>
+													<option value="3">荐</option>
+													<option value="4">new</option>
+												</select>
+										</div>
+									</td>
+									<td>
+										<div class="form-group">
+											<div class="select">
+												<select class="form-control">
+													<option value="1">西部数码</option>
+													<option value="2">百度云</option>
+												</select>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="form-group">
+											<a class="label label-info callEditPrice" data-name="" data-oval="" data-xval="" data-dval="" data-dxval="" data-cxjg="" data-zrjg=""><i class="iconfont icon-sousuoleimu"></i></a>
+										</div>
+									</td>
+									<td></td>
+									<td class="control">
+										<div class="form-group">
+											<a class="control"><span class="js-right">确定</span></a>
+											-
+											<a class="control"><span class="">取消</span></a>
+										</div>
+									</td>
+								</tr>
+								{foreach $domain as $v}
+
+									<tr  data-trid="{$v.id}">
+										<td>
+											<input class="vba-ck" type="checkbox" name="ckf[]" id="{$v.id}" value="{$v.id}">
+											<label class="vba-chekbox" for="{$v.id}"></label>
+										</td>
+										<td scope="row">
+											<div class="open">
+												{$v.number}
+											</div>
+											<div class="form-group hidden">
+												<input type="text" class="form-control unline" value="{$v.number}">
+											</div>
+										</td>
+										<td scope="row">
+											<div class="open">
+												{$v.suffix}
+											</div>
+											<div class="form-group hidden">
+												<input type="text" class="form-control unline" value="{$v.suffix}">
+											</div>
+										</td>
+										<td scope="row">
+											<div class="open">
+												{$v.text}
+											</div>
+											<div class="form-group hidden">
+												<input type="text" class="form-control unline" value="{$v.text}">
+											</div>
+										</td>
+										<td>
+											<div class="open">
+												{switch name="v.tag"}
+												{case value="1"}hot{/case}
+												{case value="2"}sale{/case}
+												{case value="3"}荐{/case}
+												{case value="4"}new{/case}
+												{/switch}
+											</div>
+											<div class="form-group hidden">
+												<div class="select">
+													<select class="form-control">
+														<option value="1" {eq name="v.tag" value="1"}selected{/eq}>hot</option>
+														<option value="2" {eq name="v.tag" value="2"}selected{/eq}>sale</option>
+														<option value="3" {eq name="v.tag" value="3"}selected{/eq}>荐</option>
+														<option value="4" {eq name="v.tag" value="4"}selected{/eq}>new</option>
+													</select>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="open">
+												{switch name="v.APIID"}
+												{case value="1"}西部数码{/case}
+												{case value="2"}百度云{/case}
+												{/switch}
+											</div>
+											<div class="form-group hidden">
+												<div class="select">
+													<select class="form-control">
+														<option value="1" {eq name="v.APIID" value="1"}selected{/eq}>西部数码</option>
+														<option value="2" {eq name="v.APIID" value="2"}selected{/eq}>百度云</option>
+													</select>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="open">
+												<a class="label label-info callPrice" data-name="{$v.suffix}" data-oval="{$v.price}" data-xval="{$v.renew}" data-dval="{$v.agent}" data-dxval="{$v.agerenew}" data-cxjg="{$v.pro}" data-zrjg="{$v.into}">查看</a>
+
+											</div>
+											<div class="form-group hidden">
+												<a class="label label-info callEditPrice js-save" data-info="{$v.id}" data-name="{$v.suffix}" data-oval="{$v.price}" data-xval="{$v.renew}" data-dval="{$v.agent}" data-dxval="{$v.agerenew}" data-cxjg="{$v.pro}" data-zrjg="{$v.into}">编辑</a>
+											</div>
+										</td>
+										<!--<td>
+											<div class="open">
+												<input type="checkbox" class="toggle success" name="" id="t.{$v.id}" nid="{$v.id}" nstate="{$v.state}" value="" {if condition="$v['state'] eq 1"} checked="checked" {/if}>
+												<label class="toggle-round" for="t.{$v.id}"></label>
+											</div>
+										</td>-->
+										<td class="control">
+											<div class="open">
+												<a class="control edit"><span class="js-edit"  data-info="{$v.id}">编辑</span></a>
+												-
+												<a class="control"><span class="js-del" info="{$v.id}">删除</span></a>
+											</div>
+											<div class="form-group hidden">
+												<a class="control"><span class="js-right">确定</span></a>
+												-
+												<a class="control"><span class="">删除</span></a>
+											</div>
+										</td>
+										{/foreach}
+									</tr>
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination">
+									{$domain->render()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+		<div id="callPrice" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">域名价格</h4>
+					</div>
+					<div class="modal-body tabHome">
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>购买价(一年)</th>
+									<th>购买价(二年)</th>
+									<th>购买价(三年)</th>
+									<th>购买价(四年)</th>
+									<th>购买价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span>1</span>元</td>
+									<td><span>2</span>元</td>
+									<td><span>3</span>元</td>
+									<td><span>4</span>元</td>
+									<td><span>5</span>元</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>续费价(一年)</th>
+									<th>续费价(二年)</th>
+									<th>续费价(三年)</th>
+									<th>续费价(四年)</th>
+									<th>续费价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span>1</span>元</td>
+									<td><span>2</span>元</td>
+									<td><span>3</span>元</td>
+									<td><span>4</span>元</td>
+									<td><span>5</span>元</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>代理价(一年)</th>
+									<th>代理价(二年)</th>
+									<th>代理价(三年)</th>
+									<th>代理价(四年)</th>
+									<th>代理价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span>1</span>元</td>
+									<td><span>2</span>元</td>
+									<td><span>3</span>元</td>
+									<td><span>4</span>元</td>
+									<td><span>5</span>元</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>代理续费价(一年)</th>
+									<th>代理续费价(二年)</th>
+									<th>代理续费价(三年)</th>
+									<th>代理续费价(四年)</th>
+									<th>代理续费价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span>1</span>元</td>
+									<td><span>2</span>元</td>
+									<td><span>3</span>元</td>
+									<td><span>4</span>元</td>
+									<td><span>5</span>元</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+							<tr>
+								<th>促销价(一年)</th>
+								<th>促销价(二年)</th>
+								<th>促销价(三年)</th>
+								<th>促销价(四年)</th>
+								<th>促销价(五年)</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td><span>1</span>元</td>
+								<td><span>2</span>元</td>
+								<td><span>3</span>元</td>
+								<td><span>4</span>元</td>
+								<td><span>5</span>元</td>
+							</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+							<tr>
+								<th>转入价(一年)</th>
+								<th>转入价(二年)</th>
+								<th>转入价(三年)</th>
+								<th>转入价(四年)</th>
+								<th>转入价(五年)</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td><span>1</span>元</td>
+								<td><span>2</span>元</td>
+								<td><span>3</span>元</td>
+								<td><span>4</span>元</td>
+								<td><span>5</span>元</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="callEditPrice" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">域名价格</h4>
+					</div>
+					<div class="modal-body tabHome exp-box">
+						<div class="form-group">
+							<div class="col-md-10">
+								<label class="line-label"></label>
+							</div>
+						</div>
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>购买价(一年)</th>
+									<th>购买价(二年)</th>
+									<th>购买价(三年)</th>
+									<th>购买价(四年)</th>
+									<th>购买价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>续费价(一年)</th>
+									<th>续费价(二年)</th>
+									<th>续费价(三年)</th>
+									<th>续费价(四年)</th>
+									<th>续费价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+								<tr>
+									<th>代理价(一年)</th>
+									<th>代理价(二年)</th>
+									<th>代理价(三年)</th>
+									<th>代理价(四年)</th>
+									<th>代理价(五年)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" class="form-control line" value="" placeholder="">
+											<label class="line-label"></label>
+											<span class="input-group-addon">元</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-center">
+							<thead>
+							<tr>
+								<th>代理续费价(一年)</th>
+								<th>代理续费价(二年)</th>
+								<th>代理续费价(三年)</th>
+								<th>代理续费价(四年)</th>
+								<th>代理续费价(五年)</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+							</tr>
+
+							</tbody>
+
+						</table>
+						<table class="table table-center">
+							<thead>
+							<tr>
+								<th>促销价(一年)</th>
+								<th>促销价(二年)</th>
+								<th>促销价(三年)</th>
+								<th>促销价(四年)</th>
+								<th>促销价(五年)</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+							</tr>
+
+							</tbody>
+
+						</table>
+						<table class="table table-center">
+							<thead>
+							<tr>
+								<th>转入价(一年)</th>
+								<th>转入价(二年)</th>
+								<th>转入价(三年)</th>
+								<th>转入价(四年)</th>
+								<th>转入价(五年)</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" class="form-control line" value="" placeholder="">
+										<label class="line-label"></label>
+										<span class="input-group-addon">元</span>
+									</div>
+								</td>
+							</tr>
+
+							</tbody>
+
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary">保存</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+{/block}
+{block name="script"}
+<script>
+	//全选按钮
+	$('thead th input[type="checkbox"].vba-ck').on('click', function() {
+		if($(this).is(':checked')) {
+			$('input[name="' + $(this).attr('name') + '"]').prop('checked', true);
+		} else {
+			$('input[name="' + $(this).attr('name') + '"]').prop('checked', false);
+		}
+
+	});
+
+	$(".btn-danger").click(function () {
+		var str ='';
+		$.each($('input:checkbox:checked'),function(){
+			if ($(this).val()!=''){
+				str += $(this).val() + ",";
+			}
+		});
+		//去掉最后一个逗号(如果不需要去掉，就不用写)
+		if (str.length > 0) {
+			str = str.substr(0,str.length - 1);
+		}
+		var id = str;
+		$.ajax({
+			type: 'POST',
+			url:"{:url('product/delete')}",
+			data: {id: id},
+			dataType: 'json',
+			success: function (data) {
+				if (data['msg'] == 1) {
+					alert('删除成功');
+					window.location.reload();
+				}else if(data['msg'] == 2){
+					alert('您没有操作权限!');
+				}else{
+					alert("删除失败");
+				}
+			}
+		})
+	})
+	//更改状态按钮
+			$(".toggle").click(function () {
+				var id = $(this).attr('nid');
+				var thiss = $(this);
+				var stat = $(this).attr('nstate');
+				if (stat == 1) {
+					stat = 2;
+				} else {
+					stat = 1;
+				}
+
+				$.ajax({
+					type: 'POST',
+					url:"{:url('product/savestatus')}",
+					data: {id: id, state: stat},
+					dataType: "json",
+					success: function (data) {
+						if (data['msg'] == 1) {
+
+						}else if(data['msg'] == 2){
+							alert('您没有操作权限!');
+						}
+					}
+				});
+
+			})
+
+			//呼叫价格面板
+			$('.callPrice').on('click', function() {
+				var ov = $(this).data('oval').split(',');
+				var xv = $(this).data('xval').split(',');
+				var dv = $(this).data('dval').split(',');
+				var dxv = $(this).data('dxval').split(',');
+				var cxjg = $(this).data('cxjg').split(',');
+				var into = $(this).data('zrjg').split(',');
+				$.each(ov, function(i, e) {
+					$('#callPrice .table').eq(0).find('td').eq(i).find('span').html(e);
+				});
+				$.each(xv, function(i, e) {
+					$('#callPrice .table').eq(1).find('td').eq(i).find('span').html(e);
+				});
+				$.each(dv, function(i, e) {
+					$('#callPrice .table').eq(2).find('td').eq(i).find('span').html(e);
+				});
+				$.each(dxv, function(i, e) {
+					$('#callPrice .table').eq(3).find('td').eq(i).find('span').html(e);
+				});
+				$.each(cxjg, function(i, e) {
+					$('#callPrice .table').eq(4).find('td').eq(i).find('span').html(e);
+				});
+				$.each(into, function(i, e) {
+					$('#callPrice .table').eq(5).find('td').eq(i).find('span').html(e);
+				});
+				$('#callPrice .modal-title').html($(this).data('name'));
+				$('#callPrice').modal('show');
+			});
+			//呼叫编辑价格面板
+			$('.callEditPrice').on('click', function() {
+				var t = $(this);
+				var ov = $(this).data('oval').split(',');
+				var xv = $(this).data('xval').split(',');
+				var dv = $(this).data('dval').split(',');
+				var dxv = $(this).data('dxval').split(',');
+				var cxjg = $(this).data('cxjg').split(',');
+				var into = $(this).data('zrjg').split(',');
+				if($(this).data('name')){
+					$('#callEditPrice .modal-title').html($(this).data('name'));
+					$('#callEditPrice .name').val($(this).data('name'));
+					$.each(ov, function(i, e) {
+						$('#callEditPrice .table').eq(0).find('td').eq(i).find('.form-control').val(e);
+					});
+					$.each(xv, function(i, e) {
+						$('#callEditPrice .table').eq(1).find('td').eq(i).find('.form-control').val(e);
+					});
+					$.each(dv, function(i, e) {
+						$('#callEditPrice .table').eq(2).find('td').eq(i).find('.form-control').val(e);
+					});
+					$.each(dxv, function(i, e) {
+						$('#callEditPrice .table').eq(3).find('td').eq(i).find('.form-control').val(e);
+					});
+					$.each(cxjg, function(i, e) {
+						$('#callEditPrice .table').eq(4).find('td').eq(i).find('.form-control').val(e);
+					});
+					$.each(into, function(i, e) {
+						$('#callEditPrice .table').eq(5).find('td').eq(i).find('.form-control').val(e);
+					});
+				}else{
+					$('#callEditPrice .modal-title').html('域名价格表');
+					$('#callEditPrrice .table').find('.form-control').val('');
+				}
+				$('#callEditPrice').modal('show');
+				$('#callEditPrice .btn-primary').on('click', function() {
+					var cov = cxv = cdv = cdxv = cxjg = into = [];
+//					$('#callEditPrice .table .form-control').each(function(i, e) {
+//						if(e.value == '') {
+//							alert('请将价格输入完整！');
+//							return false;
+//						}
+//					});
+					$('#callEditPrice .table').eq(0).find('.form-control').each(function(i, e) {
+						if(i == '4') {
+							cov += e.value;
+						} else {
+							cov += e.value + ',';
+						}
+					});
+
+					$('#callEditPrice .table').eq(1).find('.form-control').each(function(i, e) {
+						if(i == '4') {
+							cxv += e.value;
+						} else {
+							cxv += e.value + ',';
+						}
+					});
+					$('#callEditPrice .table').eq(2).find('.form-control').each(function(i, e) {
+						if(i == '4') {
+							cdv += e.value;
+						} else {
+							cdv += e.value + ',';
+						}
+					});
+					$('#callEditPrice .table').eq(3).find('.form-control').each(function(i, e) {
+						if(i == '4') {
+							cdxv += e.value;
+						} else {
+							cdxv += e.value + ',';
+						}
+					});
+					$('#callEditPrice .table').eq(4).find('.form-control').each(function(i, e) {
+						if(i == '4') {
+							cxjg += e.value;
+						} else {
+							cxjg += e.value + ',';
+						}
+					});
+					$('#callEditPrice .table').eq(5).find('.form-control').each(function(i, e) {
+						if(i == '4') {
+							into += e.value;
+						} else {
+							into += e.value + ',';
+						}
+					});
+					$(t).attr('data-name', $('#callEditPrice').find('.name').val());
+					$(t).attr('data-oval', cov);
+					$(t).attr('data-xval', cxv);
+					$(t).attr('data-dval', cdv);
+					$(t).attr('data-dxval', cdxv);
+					$(t).attr('data-cxjg', cxjg);
+					$(t).attr('data-zrjg', into);
+					var id=$(t).attr('data-info');
+					$('#callEditPrice').modal('hide');
+
+				});
+			});
+
+	//编辑
+	$('.table .edit').on('click', function() {
+		$(this).parents('tr').find('.form-group').removeClass('hidden');
+		$(this).parents('tr').find('.open').addClass('hidden');
+	});
+	$('.form-group .control').on('click', function() {
+		var id=$(this).parents('tr').data('trid');
+//			cov = $(this).parents('tr').find('.callEditPrice').attr('data-name');
+		cov = $(this).parents('tr').find('.callEditPrice').attr('data-oval');
+		cxv = $(this).parents('tr').find('.callEditPrice').attr('data-xval');
+		cdv = $(this).parents('tr').find('.callEditPrice').attr('data-dval');
+		cdxv = $(this).parents('tr').find('.callEditPrice').attr('data-dxval');
+		cxjg = $(this).parents('tr').find('.callEditPrice').attr('data-cxjg');
+		into = $(this).parents('tr').find('.callEditPrice').attr('data-zrjg');
+		if(cov == '' ){
+			alert('价格表不完整,请重新填写');
+			return false;
+		}else if(cxv == ''){
+			alert('价格表不完整,请重新填写');
+			return false;
+		}else if(cdv == ''){
+			alert('价格表不完整,请重新填写');
+			return false;
+		}else if(cdxv == ''){
+			alert('价格表不完整,请重新填写');
+			return false;
+		}else if(cxjg == ''){
+			alert('价格表不完整,请重新填写');
+			return false;
+		}else if(into == ''){
+			alert('价格表不完整,请重新填写');
+			return false;
+		}
+		if($(this).parents('tr').hasClass('add')) {
+			$(this).parents('tr').addClass('hidden');
+		}
+		$(this).parents('tr').find('.form-group').addClass('hidden');
+		$(this).parents('tr').find('.open').removeClass('hidden');
+		if($(this).find('span').hasClass('js-right')) {
+
+			var f = $(this).parents('tr');
+			var c = [];
+			f.find('.form-control').each(function(i, e) {
+
+				if(i != '4') {
+					c += e.value + ',';
+				} else {
+					c += e.value;
+				}
+
+			});
+
+			if(id == undefined){
+
+					$.ajax({
+						type: 'POST',
+						url:"{:url('product/add_domain')}",
+						data: {data:c,price:cov,renew:cxv,agent:cdv,agerenew:cdxv,pro:cxjg,into:into},
+						dataType: 'json',
+						success: function (data) {
+//						console.log(data);
+							if (data['msg'] == 1) {
+								alert('添加成功');
+								window.location.reload();
+							}else if(data['msg'] == 2){
+								alert('您没有操作权限!');
+							}
+							else if(data['msg'] == 3){
+								alert('请把数据填写完整!');
+							}else{
+								alert('添加失败');
+								window.location.reload();
+							}
+						}
+					});
+
+
+				//console.log(c)
+			}else {
+				$.ajax({
+					type: 'POST',
+					url:"{:url('product/save_domain')}",
+					data: {id: id,data:c,price:cov,renew:cxv,agent:cdv,agerenew:cdxv,pro:cxjg,into:into},
+
+					dataType: 'json',
+					success: function (data) {
+						console.log(data);
+						if (data['msg'] == 1) {
+							alert('修改成功');
+							window.location.reload();
+						}else if(data['msg'] == 2){
+							alert('您没有操作权限!');
+						}else{
+							alert('修改失败');
+							window.location.reload();
+						}
+					}
+				});
+			}
+		}
+	});
+	$('.btn-add').on('click',function(){
+		$('tr.add').removeClass('hidden');
+	});
+
+	//删除按钮
+	$(".js-del").click(function () {
+		var id = $(this).attr('info');
+
+		$.ajax({
+			type: 'POST',
+			url:"{:url('product/delete')}",
+			data: {id: id},
+			dataType: 'json',
+			success: function (data) {
+				if (data['msg'] == 1) {
+					alert('删除成功');
+					window.location.reload();
+				}else if(data['msg'] == 2){
+					alert('您没有操作权限!');
+				}
+				else if(data['msg'] == 3){
+					alert('非法操作!');
+				}else{
+					alert("删除失败");
+				}
+			}
+		})
+	})
+</script>
+{/block}

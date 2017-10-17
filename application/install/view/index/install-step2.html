@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<!--这里未使用定制bootstrap，而是使用覆盖的方式，是为了大家届时替换为第三方cdn-->
+		<link rel="stylesheet" href="__ROOT__/static/install/css/lib/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="__ROOT__/static/install/css/lib/swiper-3.3.1.min.css" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_it542entz5btke29.css" />
+		<!--[if lt IE 9]>
+ 	    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+ 	    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+   		<![endif]-->
+		<!--<link rel="stylesheet" href="__ROOT__/static/install/css/css/style.css?v0.001" />-->
+		<link rel="stylesheet/less" type="text/css" href="__ROOT__/static/install/css/less/style.less?v1.0.0" />
+		<script type="text/javascript" src="__ROOT__/static/install/js/lib/less.js"></script>
+	</head>
+
+	<body class="install">
+		<div class="install-step step2 amid">
+			<div class="thumbnail">
+				<div class="header-box" style="background-image: url('__ROOT__/static/install/img/bj2.png');">
+					<div class="amid text-center">
+						<div class="media">
+							<div class="media-left media-middle">
+								<span>2.</span>
+							</div>
+							<div class="media-body media-middle">
+								<h2>设置运行环境</h2>
+								<p>检测服务器环境以及站点ID</p>
+							</div>
+						</div>
+					</div>
+					<ul class="nav nav-pills nav-justified step step-round-wh unhover">
+						<li class="active">
+							<a>检查环境</a>
+						</li>
+						<li class="active">
+							<a>设置运行环境</a>
+						</li>
+						<li>
+							<a>创建数据库</a>
+						</li>
+						<li>
+							<a>安装</a>
+						</li>
+					</ul>
+				</div>
+				<div class="caption body-box">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label for="" class="control-label col-md-4">请输入您的站点ID：</label>
+							<div class="col-md-8">
+								<input type="text" name="id" id="id" class="form-control unline" />
+							</div>
+						</div>
+					</div>
+					<div class="mt45">
+						<a href="install.php?s=/index/install_step1.html" class="btn btn-ces">上一步</a>
+						<button class="btn btn-ces verify">下一步</button>
+					</div>
+				</div>
+				<div class="copyright">
+					Copyright&copy; 2016-2017 Geesystem
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="__ROOT__/static/install/js/lib/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="__ROOT__/static/install/js/lib/bootstrap.min.js"></script>
+		<script type="text/javascript" src="__ROOT__/static/install/js/lib/swiper-3.3.1.jquery.min.js"></script>
+		<script type="text/javascript" src="__ROOT__/static/install/js/lib/swiper.animate.min.js"></script>
+		<script type="text/javascript">
+			var swiper = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				paginationClickable: '.swiper-pagination',
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				spaceBetween: 30,
+				effect: 'fade',
+				loop: true,
+				autoplay: 5000,
+				autoplayDisableOnInteraction: false
+			});
+			$(window).scroll(function(e) {
+				if(this.scrollY > 430) {
+					$('.navbar').addClass('fixed');
+				} else {
+					$('.navbar').removeClass('fixed');
+				}
+			});
+			$(".verify").on('click',function () {
+				var id=$('#id').val();
+				$.ajax({
+					async: false,
+					type: 'POST',
+					url:"install.php?s=/index/verifyWebId.html",
+					data: {webid: id},
+					dataType: "json",
+					success: function (data) {
+						if(data == 1){
+							window.location.href='install.php?s=/index/install_step3.html';
+						}else {
+							alert('请填写正确的站点ID！');
+						}
+					}
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

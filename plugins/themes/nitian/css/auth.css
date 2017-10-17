@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>景安网络&#8211;中央认证系统</title>
+		<link type="text/css" rel="stylesheet" href="/cas/css/cas.css;jsessionid=FAADCE70B8C485C8D7EE8FAB021933C4" />
+				<link type="text/css" rel="stylesheet" href="css/caslogin.css;jsessionid=FAADCE70B8C485C8D7EE8FAB021933C4" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>	
+				<script type="text/javascript" src="js/dialog/js/jquery-ui-1.9.2.custom.min.js"></script>
+			<link href="css/reset.css" rel="stylesheet" type="text/css" />
+		<link href="css/gainet-tologin.css" rel="stylesheet" type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="icon" href="/cas/favicon.ico;jsessionid=FAADCE70B8C485C8D7EE8FAB021933C4" type="image/x-icon" />
+	</head><body>
+<div class="login-top">
+    	<div class="login-1000">
+        	<div class="login-topl">
+				<a href="http://www.zzidc.com"><img src="images/20150709img1.gif" width="222" height="75" /></a>
+       	   		<p style="margin-top:-6px;color:#999">河南专业的多线服务器托管商</p>
+            </div>
+            	<div class="login-topc">
+  		        	
+                  			会员服务平台
+                  		</div>
+            <div class="login-topr">
+            	<a href="http://www.zzidc.com">景安首页</a><i></i>
+                <a href="https://beian.zzidc.com" target="_blank">免费备案</a><i></i>
+                24小时热线电话4006-598-598
+            </div>
+        </div>
+    </div>
+    <div class="login-content clearfix">
+		<!-- 代码 开始 -->
+		<div class="daimabiji">
+			<ul class="slides">
+</ul>
+		</div>
+		<!-- 代码 结束 -->
+    	<div class="login-login">
+        	<div class="login-login-title">会员登录</div>
+            <div class="login-login-list">
+            <form id="credential" action="/cas/login;jsessionid=FAADCE70B8C485C8D7EE8FAB021933C4?service=https%3A%2F%2Fwww.zzidc.com%2Fhyzx%2Fauth.action%3Bjsessionid%3D64E9FE5D5374FB030A9F8580CCFD9E77%3Frandom%3D0.3665025514179012" method="post"><ul>
+            		<li style="height:auto;margin-top:10px;color:#666">
+						用户名
+					</li>
+                	<li>
+<input id="username" name="username" class="required new_userjj" tabindex="1" placeholder="用户名/手机号/邮箱" accesskey="n" type="text" value="" size="25" autocomplete="off"/></li>
+					<li style="height:auto;margin-top:10px;color:#666">
+						密码
+					</li>
+                    <li>
+<input id="password" name="password" class="required new_passwd new_userjj" tabindex="2" placeholder="登录密码" accesskey="p" type="password" value="" size="25" autocomplete="off"/></li>
+                    <li id="login-loginok">
+                    	<button type="submit" class="list-btn">登录</button>
+                    </li>
+                    <input type="hidden" value="07d42e88-d325-4e82-b9dd-513536eed92c" name="uuid">
+					<input type="hidden" name="lt" value="LT-841637-S93o1JtXoSdLRPFbBiFg4c6GZUOVJT-ac.zzidc.com" />
+					<input type="hidden" name="execution" value="e1s1" />
+					<input type="hidden" name="_eventId" value="submit" />
+                    <li>
+                    	<a href="http://beta.zzidc.com/main/member/initForgetPasswd.html">忘记密码？</a>
+                    		<a href="http://www.zzidc.com/main/member/initRegister" id="loginok">立即注册</a>                        
+                    </li>
+                </ul>
+            </form></div>
+            <div class="login-login-bottom">
+            	<a id="loginok1">其它登录方式：</a>
+				<a class="a-icon" href="https://graph.qq.com/oauth2.0/authorize?client_id=101222817&redirect_uri=https%3A%2F%2Fac.zzidc.com%2Fcas%2Flogin%3Fclient_name%3DTencentQQClient&response_type=code&service=https://www.zzidc.com/hyzx/auth.action?random=0.3665025514179012"></a>
+               	<a class="a-icon1" href="https://api.weibo.com/oauth2/authorize?client_id=2080107461&redirect_uri=https%3A%2F%2Fac.zzidc.com%2Fcas%2Flogin%3Fclient_name%3DSinaWeiboClient&response_type=code&service=https://www.zzidc.com/hyzx/auth.action?random=0.3665025514179012"></a>
+</div>
+        </div>
+    </div>
+    <div class="login-bottom footer-p">
+    	<p>Copyright © 2004 - <script type="text/javascript">document.write(new Date().getFullYear());</script> ZhengZhou GAINET Network Technology Co., Ltd. All rights reserved.</p>
+		<p>郑州市景安网络科技股份有限公司. 版权所有</p>
+		</div>
+</body>
+<script src="js/jquery.flexslider-2.2.2.min.js"></script>
+<script src="js/jquery.placeholder.js"></script>
+<script type="text/javascript"> 
+		$(function(){
+			$('input').placeholder();
+			$("#username").focus();
+			$.ajax({
+				url:"getCasFocusPictures",
+				async:true,
+				type:"POST",
+				data:{param:"6014"},
+				dataType:"text",
+				success:function(data){
+					if(data==null||data==""){
+						//无结果
+					}else{
+						var jo = eval("("+data+")");
+		             	$.each(jo,function(i,item){
+		             		$(".slides").append("<li><a href=\""+item["gswz"]+"\" target=\"_blank\"><img src=\"/images/evaluation/photo/"+item["logotp"]+"\"/></a></li>");
+		             	});
+					}
+	             	$('.daimabiji').flexslider({
+					animation: 'fade',
+					pauseOnHover: true,
+					animationDuration: 600,
+					prevText: '上一个',
+					nextText: '下一个'
+					});
+				},
+				error:function(data){
+				
+				}
+			});
+			
+			remote_logout("http://www.kuaiyun.cn/caslogout.action");
+			remote_logout("/caslogout.action");
+		})
+		function remote_logout(url){
+			$.ajax({
+				url:url,
+				data:{},
+				type:"get",
+				success:function(data){
+					console.log("同步退出成功！");
+				},
+				error:function(){
+					console.log("同步退出失败！");
+				}
+			});
+		}
+</script>

@@ -1,0 +1,166 @@
+{extend name="index/index"}
+{block name="content"}
+
+				<!--<div class="page-lastmenu wht">
+					<div class="page-header">
+						<h5>安全中心</h5>
+					</div>
+					<ul class="list-unstyled">
+						<li class="active">
+							<a href="">封禁记录</a>
+						</li>
+						<li>
+							<a href="">操作记录</a>
+						</li>
+					</ul>
+				</div>
+				<div class="page-header">
+					<ul class="nav nav-tabs line">
+						<li class="active">
+							<a href="#nav1" data-toggle="tab">选项一</a>
+						</li>
+						<li>
+							<a href="#nav2" data-toggle="tab">选项二</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">选项三</a>
+						</li>
+					</ul>
+				</div>-->
+				<div class="page-header">
+					<h5>发票资质</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="alert alert-default alert-sm">
+							温馨提示： 发票在开具后 3 个工作日内寄出，收到发票包裹后，请仔细检查核对后再签收，如有问题请及时拒收。
+						</div>
+						<ul class="list-unstyled row ucenter-info">
+							<li class="col-xs-3 text-center">可开票总金额
+								<h1 class="text-danger rmb">{$summoney}</h1></li>
+							<li class="col-xs-3 text-center">技术服务类可开票金额
+								<h1 class="text-ces rmb">{$jishumoney}</h1></li>
+							<li class="col-xs-3 text-center">其他类可开票金额
+								<h1 class="info rmb">0</h1></li>
+						</ul>
+						<hr />
+						<div class="table-responsive">
+							<div class="tool-box">
+								<form class="form-inline" action="{:url('finance/ticketlist')}" method="get">
+									<div class="btn-group">
+										<div class="col-md-12">
+											<select name="istatus" class="form-control">
+												<option value="">全部</option>
+												<option value="1" {if condition="$Request.session.istatus eq 1"} selected="selected"{/if} >审核通过</option>
+												<option value="2" {if condition="$Request.session.istatus eq 2"} selected="selected"{/if} >审核中</option>
+												<option value="3" {if condition="$Request.session.istatus eq 3"} selected="selected"{/if} >审核失败</option>
+											</select>
+										</div>
+									</div>
+									<div class="input-group pull-right">
+										<span><input type="text" name="head" placeholder="请输入发票抬头查询" value="{$Request.session.head}"  class="form-control">
+										<input type="submit" value="点击查询" class="btn btn-ces"></span>
+									</div>
+								</form>
+
+							</div>
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock tal">序号</th>
+										<th class="lock">资质申请时间</th>
+										<th class="lock">单位名称</th>
+										<th class="lock">统一社会信用代码</th>
+										<!--<th class="lock">税号</th>-->
+										<th class="lock">注册地址</th>
+										<th class="lock">注册电话</th>
+										<th class="lock">开户银行</th>
+										<th class="lock">银行账户</th>
+										<th class="lock">类型</th>
+										<th class="lock">状态</th>
+										<th class="lock">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								{foreach $res as $val}
+									<tr>
+										<th>{$val.id}</th>
+										<th scope="row">{$val.time}</th>
+										<td>{$val.head}</td>
+										<td>{$val.credit}</td>
+									<!--	<td>{$val.taxnum}</td>-->
+										<td>{$val.regaddress}</td>
+										<td>{$val.regphone}</td>
+										<td>{$val.bankname}</td>
+										<td>{$val.bankaccount}</td>
+										<td>{if condition="$val.type eq 1"}增值税发票{else/}普通发票{/if}</td>
+										<td><span {if condition="$val.status eq 1"}  class="round text-info" {elseif condition="$val.status eq 2"} class="round text-danger" {elseif condition="$val.status eq 3"} class="round text-success" {elseif condition="$val.status eq 2"} class="round text-warning"  {else} class="round text-muted" {/if}>
+											{if condition="$val.status eq 1"} 审核通过
+											{elseif condition="$val.status eq 2"/}审核中
+											{else/}审核失败
+											{/if}</span></td>
+										<td>
+											{if condition="$val.status eq 1"}<!--审核通过-->
+											<a href="{:url('finance/ticketInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="3"   nid="{$val.id}"  class="btn btn-danger btn-xs js-save">取消通过</a>
+											{elseif condition="$val.status eq 2"/}<!--审核中-->
+											<a href="{:url('finance/ticketInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="1"  nid="{$val.id}" class="btn btn-success btn-xs js-save">通过</a>
+											<a href="javascript:;" val="3"   nid="{$val.id}"  class="btn btn-danger btn-xs js-save">不通过</a>
+											{else/}
+											<a href="{:url('finance/ticketInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="1"  nid="{$val.id}" class="btn btn-success btn-xs js-save">通过</a>
+											{/if}
+										</td>
+									</tr>
+
+								{/foreach}
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination pull-left">
+									{$res->render()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+{/block}
+	{block name="script"}
+		<script type="text/javascript">
+			$('.callCont').on('click', function() {
+				$('#ticketCont .modal-cont').html($(this).data('cont'));
+				$('#ticketCont').modal('show');
+			});
+			$('.callRemark').on('click', function() {
+				$('#ticketRemark .modal-cont').html($(this).data('cont'));
+				$('#ticketRemark').modal('show');
+			});
+			/*$('.sendoff').on('click', function() {
+				$('#ticketNum').modal('show');
+			});*/
+			$(".js-save").click(function () {
+				var id = $(this).attr('nid');
+				var status = $(this).attr('val');
+				$.ajax({
+					type: 'POST',
+					url: "{:url('finance/savestatus')}",
+					data: {id: id, status: status},
+					dataType: "json",
+					success: function (data) {
+						if (data['msg'] == 1) {
+							alert('修改成功!');
+							window.location.reload();
+						}else if(data['msg'] == 2){
+							alert('您没有操作权限!');
+						} else {
+							alert('修改失败');
+							window.location.reload();
+						}
+						}
+					})
+			})
+		</script>
+{/block}

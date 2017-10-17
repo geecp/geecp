@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>微信收银台</title>
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: #E3E8F6;
+            font-family: "PingHei", "Lucida Grande", "Lucida Sans Unicode", "Helvetica", "Arial", "Verdana", "sans-serif", "Microsoft Yahei", "微软雅黑"
+        }
+
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .header {
+            margin: 0;
+            background: #FFF;
+            height: 80px;
+            line-height: 80px;
+            border: 1px solid #DBE0EC;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .header .title {
+            margin: 0 auto;
+            width: 118px;
+            background: url(__ROOT__/static/login/img/weixin.png) left center no-repeat;
+            padding: 0 0 0 62px;
+        }
+
+        .main {
+            width: 960px;
+            margin: 30px auto 35px auto;
+        }
+
+        .main .top {
+            height: 9px;
+            background: url(__ROOT__/static/login/img/top.png) 0 0 no-repeat;
+        }
+
+        .main .title {
+            height: 80px;
+            line-height: 80px;
+            padding: 0 97px 0 153px;
+            font-size: 18px;
+            background: #FFF;
+            border-color: #DDE2ED;
+            border-style: solid;
+            border-width: 0 1px;
+        }
+
+        .main .title label,
+        .main .title span {
+            color: #E0151B;
+        }
+
+        .main .title label {
+            font-size: 12px;
+        }
+
+        .main .middle {
+            border-color: #DDE2ED;
+            border-style: solid;
+            border-width: 0 1px;
+            background: #FFF;
+            padding: 0 97px;
+        }
+
+        .main .middle .content {
+            border-top: 1px dashed #F0F0F0;
+            padding: 35px 35px 20px 35px;
+        }
+
+        .main .middle .content:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        .code {
+            float: left;
+            width: 218px;
+            height: 218px;
+        }
+
+        .middle ul {
+            margin: 16px 0 0 263px;
+        }
+
+        .middle ul label {
+            color: #999;
+        }
+
+        .middle li {
+            list-style: none;
+            line-height: 38px;
+        }
+
+        .bottom {
+            background: url(__ROOT__/static/login/img/bottom.png) no-repeat;
+            height: 43px;
+        }
+
+        .footer {
+            padding: 0;
+            height: 75px;
+            border-color: #DDE2ED;
+            border-style: solid;
+            border-width: 0 1px 1px 1px;
+            background-color: #FFF;
+            color: #CCC;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            padding: 0;
+            line-height: 30px;
+            font-size: 14px;
+        }
+
+        .error {
+            height: 200px;
+            background: #FFF;
+            padding-top: 154px;
+            display: none;
+        }
+
+        .error .content {
+            width: 200px;
+            min-height: 110px;
+            margin: 0 auto;
+            padding-left: 117px;
+            background: url(__ROOT__/static/login/img/error.png) left center no-repeat;
+        }
+
+        .error .content p {
+            margin: 0;
+        }
+
+        .error .content .tip {
+            padding-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .error .content span {
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+    <script type="text/javascript" src="__ROOT__/static/login/js/lib/jquery-1.11.0.js"></script>
+</head>
+
+<body>
+<div class="header">
+    <div class="title">微信支付</div>
+</div>
+<div class="main">
+    <div class="top"></div>
+    <div id="pay">
+        <div class="title">支付金额 <label style="font-size: 18px;">￥{$data.money}</label><span id="price"></span>，请使用微信扫描下方二维码完成支付</div>
+        <div class="middle">
+            <div class="content">
+                <div id="container" class="code"><img style="width: 100%;" src="{$data.url}" /></div>
+                <ul>
+                    <li><label>商家名称：</label><span id="business">上海七朵信息科技有限公司</span></li>
+                    <li><label>商品名称：</label><span id="commodity">{$data.goods}</span></li>
+                    <li><label>交易单号：</label><span id="transactionId">{$data.orderid}</span></li>
+                    <li><label>创建时间：</label><span id="createTime">{$data.create_time}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="error" class="error">
+        <div class="content">
+            <p class="tip">温馨提示</p>
+            <p>
+                <span id="errorText"></span>
+            </p>
+        </div>
+    </div>
+    <div class="bottom"></div>
+    <div class="footer">
+        <p>七朵云</p>
+        <p>客服电话：</p>
+    </div>
+</div>
+<script type="text/javascript">
+    var timer = null;
+    var flag = false;
+    var orderid="{$data.order}";
+    var op = {
+        url: "{:url('Wxpay/wxpayok')}",
+        type: 'post',
+        data: {
+            order:orderid
+        },
+        dataType:'json',
+        success: function(data) {
+            console.log(data)
+            if(data==1){
+                window.location.href="http://v1.qiduo.net/member/index/index.html#/billing/listinfo'";
+            }else{
+                window.clearInterval(ti);
+                ti = setInterval(function() {
+                    if(flag) {
+                        window.clearInterval(ti);
+                    } else {
+                        $.ajax(op);
+                    }
+                }, '3000');
+            }
+        }
+    }
+    var ti = setInterval(function() {
+        if(flag) {
+            window.clearInterval(ti);
+        } else {
+            $.ajax(op);
+        }
+    }, '3000');
+</script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+{extend name="index/index"}
+{block name="content"}
+
+		<div class="page-header">
+			<h5>工作平台</h5>
+		</div>
+		<!--<div class="page-header">
+			<ul class="nav nav-tabs line">
+				<li class="active">
+					<a href="#nav1" data-toggle="tab">概览</a>
+				</li>
+				<li>
+					<a href="#nav2" data-toggle="tab">客户资料</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">联系方式</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">产品服务</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">域名</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">交易记录</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">邮件</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">备注</a>
+				</li>
+				<li>
+					<a href="#nav3" data-toggle="tab">操作日志</a>
+				</li>
+			</ul>
+		</div>-->
+		<div class="main">
+
+				<div class="mixbox domain">
+					<form action="{:url('operate/userlist')}">
+						<div class="domain-sel">
+							<div class="input-group input-group-lg">
+								<input type="text" name="userid" class="form-control userid" placeholder="请输入要查询的客户id">
+								<span class="input-group-btn">
+										<button type="submit" class="btn btn-ces js-sel" type="button">立即查询</button>
+								</span>
+							</div>
+						</div>
+					</form>
+					<div class="mixbox un">
+						{empty name="userlist"}
+						<h4><i class="iconfont icon-nodata"></i><span>暂无数据~</span></h4>
+						{else/}
+						<table class="table tools">
+
+							<thead>
+							<tr class="sortmix">
+								<th class="lock">序号</th>
+								<th class="lock">客户id</th>
+								<th class="lock">客户名</th>
+								<th class="lock">申请时间</th>
+								<th class="lock" style="text-align:right">操作</th>
+
+							</tr>
+							</thead>
+
+							<tbody>
+							<tr>
+
+								<td>
+									{$userlist.id}
+								</td>
+								<td>
+									{$userlist.userid}
+								</td>
+								<td>
+									{$userlist.username}
+								</td>
+								<td>
+									{$userlist.creat_time}
+								</td>
+
+								<td >
+									<a href="{:url('operate/platform',['id'=>$userlist.id])}" class="btn btn-ces btn-xs">详情</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						{/empty}
+					</div>
+					</div>
+			</div>
+
+{/block}
+{block name="script"}
+<script type="text/javascript">
+	$(".js-sel").click(function () {
+		var userid =$(".userid").val();
+		if(userid == ''){
+			alert("请填写客户id以后再进行查询");
+		}
+
+	})
+</script>
+{/block}

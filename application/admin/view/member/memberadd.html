@@ -1,0 +1,188 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<h5>新增员工</h5>
+				</div>
+				<div class="main user">
+					<div class="mixbox">
+						<form id="userinfo" class="form-horizontal" method="post" action="{:url('member/addmember')}">
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">工号：</label>
+								<div class="col-md-4">
+									<input type="text" name="jobnum" class="form-control unline jobnum" id="jobnum" placeholder="请输入工号" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">姓名：</label>
+								<div class="col-md-4">
+									<input type="text" name="username" id="username" class="form-control unline name" placeholder="请输入姓名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">手机号：</label>
+								<div class="col-md-4">
+									<input type="text" name="mobile" id="mobile" class="form-control unline mobile" placeholder="请输入手机号" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">密码：</label>
+								<div class="col-md-4">
+									<input type="password" name="password" id="password" class="form-control unline password" placeholder="请输入密码" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">工码：</label>
+								<div class="col-md-4">
+									<input type="password" name="worknum" id="worknum" class="form-control unline laborcode" placeholder="请输入工码" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">性别：</label>
+								<div class="col-md-4">
+									<div class="radio inline">
+										<input class="vba-rd" type="radio" name="sex" id="rd1" value="1" checked="checked">
+										<label class="vba-ridbox" for="rd1">男</label>
+										<input class="vba-rd" type="radio" name="sex" id="rd2" value="2">
+										<label class="vba-ridbox" for="rd2">女</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">头像：</label>
+								<div class="col-md-4">
+									<div class="form-control-static">
+										<label for="file"><i class="iconfont icon-imgadd"></i></label>
+										<input type="file" name="file" id="file" class="hidden" onchange="upperCase(this)" />
+									</div>
+
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="">用户组：</label>
+								<div class="col-md-2">
+									<div class="select">
+										<select name="adm_group" class="form-control line">
+											{empty name="group"}
+											<option value="">暂无分类</option>
+											{else/}
+											{volist name="group" id="v"}
+											<option value="{$v['id']}">{$v['author']}</option>
+											{/volist}
+											{/empty}
+										</select>
+										<label class="line-label"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-2 col-md-2">
+									<button type="submit" class="btn btn-ces tijiao">提交修改</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+		{/block}
+		{block name="script"}
+		<script>
+			function upperCase(e) {
+				var thiss = $(e);
+				var file = $(e).context.files[0];
+				//判断类型是不是图片
+				if(!/image\/\w+/.test(file.type)){
+					alert("请确保文件为图像类型");
+					return false;
+				}
+
+				var upfile = new FormData();
+			/*	upfile.append('img', file);
+							$.ajax({
+								type: 'post',
+									data: upfile,
+									contentType: false,
+									processData: false,
+								async: false,
+									dataType: 'json',
+								url: "/admin/articlen/editbospic.html",
+								success: function(data) {
+										window.location.reload();
+									}
+								});*/
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+
+				reader.onload = function() {
+					console.log(upfile)
+					$(e).parent().find('label').html('<div style="background-image: url(' + this.result + ');" class="img-circle"></div>');
+				}
+			}
+
+			$('.select select').on('change',function(){
+				if($(this).val() == 'max'){
+					$('.userGroup').removeClass('hidden');
+				} else {
+					$('.userGroup').addClass('hidden');
+				}
+			})
+			$('.tijiao').click(function () {
+
+				//提交时间后获取所有内容 判断
+				if ($('#username').val() == '') {
+					alert('请输入姓名!');
+					return false;
+				}
+				if ($('#mobile').val() == '') {
+					alert('请输入手机号!');
+					return false;
+				}
+				if ($('#jobnum').val() == '') {
+					alert('请输入工号!');
+					return false;
+				}
+				if ($('#password').val() == '') {
+					alert('请输入密码!');
+					return false;
+				}
+				if ($('#worknum').val() == '') {
+					alert('请输入工码');
+					return false;
+				}
+				var formData = new FormData($('#userinfo')[0]);
+				$.ajax({
+					url: "{:url('member/addmember')}",
+					type: "post",
+					data: formData,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						if (data['msg'] == 1) {
+							alert('添加成功');
+							window.location.href = "{:url('Member/index')}";
+						}else if(data['msg'] == 2){
+							alert('BOS配置错误');
+						}else if(data['msg'] == 3){
+							alert('该用户已存在');
+						}else if(data['msg'] == 4){
+							alert('密码不能少于6位');
+						}else if(data['msg'] == 5){
+							alert('请输入正确的手机号');
+						}else if(data['msg'] == 6){
+							alert('该手机号已经注册过了');
+						}else if(data['msg'] == 11){
+							alert('请上传头像');
+						}
+						else
+						{
+							alert('添加失败');
+							window.history.back(-1);
+						}
+					},
+				});
+
+				return false;
+			})
+
+		</script>
+		{/block}

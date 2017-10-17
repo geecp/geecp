@@ -1,0 +1,120 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<ul class="nav nav-tabs line">
+						<li>
+							<a href="{:url('operate/platform',['id'=>$userid])}">概览</a>
+						</li>
+						<li>
+							<a href="{:url('operate/userinfo',['id'=>$userid])}">客户资料</a>
+						</li>
+						<li>
+							<a href="#nav3">联系方式</a>
+						</li>
+						<li>
+							<a href="#nav3">产品服务</a>
+						</li>
+						<li>
+							<a href="#nav3">域名</a>
+						</li>
+						<li class="active">
+							<a href="{:url('operate/transaction',['id'=>$userid])}">交易记录</a>
+						</li>
+						<li>
+							<a href="#nav3">邮件</a>
+						</li>
+						<li>
+							<a href="{:url('operate/remarks',['id'=>$userid])}">备注</a>
+						</li>
+						<li>
+							<a href="#nav3">操作日志</a>
+						</li>
+					</ul>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="tool-box">
+							<a href="" class="btn btn-ces"><i class="iconfont icon-plus r"></i> 添加新的交易流水信息</a>
+						</div>
+						<hr />
+						<ul class="list-unstyled row ucenter-info">
+							<li class="col-xs-3 text-center">
+								总收入
+								<h1 class="text-ces rmb">{$shouru}</h1>
+							</li>
+							<li class="col-xs-3 text-center">
+								手续费总计
+								<h1 class="text-warning rmb">0</h1>
+							</li>
+							<li class="col-xs-3 text-center">
+								总支出
+								<h1 class="text-danger rmb">{$zhichu}</h1>
+							</li>
+							<li class="col-xs-3 text-center">
+								结余
+								<h1 class="text-success rmb">{$jieyu}</h1>
+							</li>
+						</ul>
+						<hr />
+						<div class="table-responsive">
+
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th style="text-align: left" class="lock">序号</th>
+										<th class="lock">订单编号</th>
+										<th class="lock">金额</th>
+										<th class="lock">付款方式</th>
+										<th class="lock">交易类型</th>
+										<th class="lock">支付状态</th>
+
+										<!--<th class="lock">手续费</th>-->
+										<th class="lock">时间</th>
+										<th class="lock" width="">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									{foreach $data as $val}
+									<tr>
+										<td scope="row" >{$val['id']}</td>
+										<td>{$val['order_id']}</td>
+										<td><span class="money text-success">{$val.money}</span></td>
+										<td><i {if condition="$val.channel_type eq 1"} class="iconfont icon-zhifubao"    {elseif condition="$val.channel_type eq 2"} class="iconfont icon-weixinzhifu" {else} class="iconfont icon-zhuanzhang"{/if}></i></td>
+										<td>{if condition="$val.transaction_type eq 1"}充值
+											{elseif condition="$val.transaction_type eq 2"/}购买
+											{elseif condition="$val.transaction_type eq 3"/}退款
+											{elseif condition="$val.transaction_type eq 4"/}入款
+											{elseif condition="$val.transaction_type eq 5"/}退款
+											{elseif condition="$val.transaction_type eq 6"/}优惠虚增
+											{elseif condition="$val.transaction_type eq 8"/}消费
+											{else/}其他
+											{/if}
+										</td>
+										<td><span {if condition="$val.status eq 1"}  class="round text-info" {elseif condition="$val.status eq 2"} class="round text-danger" {elseif condition="$val.status eq 3"} class="round text-muted" {elseif condition="$val.status eq 4"} class="round text-success"  {elseif condition="$val.status eq 5"} class="round text-danger" {elseif condition="$val.status eq 6"} class="round text-success"  {else} class="round text-success" {/if}>
+											{if condition="$val.status eq 1"} 支付成功
+											{elseif condition="$val.status eq 2"/}未支付
+											{elseif condition="$val.status eq 3"/}已取消
+											{elseif condition="$val.status eq 4"/}已到账
+											{elseif condition="$val.status eq 5"/}未到账
+											{else/}已完成
+											{/if}</span></td>
+										<!--<td><span class="money text-warning">0</span></td>-->
+										<!--<td><span class="money text-danger">0</span></td>-->
+										<td scope="row" width="150">{$val.creat_time}</td>
+										<td>
+											<a href="{:url('operate/traninfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">查看</a>
+										</td>
+									</tr>
+								{/foreach}
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination pull-left">
+									{$data->render()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			{/block}

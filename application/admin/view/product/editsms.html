@@ -1,0 +1,116 @@
+{extend name="index/index"}
+{block name="content"}
+
+    <div class="page-header">
+        <h5>编辑短信类型</h5>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <form id="addserver" class="form-horizontal" action="{:url('product/savesms')}" method="post">
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">短信类型：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="name" class="form-control unline title" placeholder="请输产品入型号" {notempty name="data.name"}value="{$data.name}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">价格：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="price" class="form-control unline title" placeholder="请输产品价格" {notempty name="data.price"}value="{$data.price}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">一级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_1" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_1"}value="{$data.agent_1}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">二级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_2" class="form-control unline title" placeholder="请输产品入返点比例，例：0.05" {notempty name="data.agent_2"}value="{$data.agent_2}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">三级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_3" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_3"}value="{$data.agent_3}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">四级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_4" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_4"}value="{$data.agent_4}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">五级代理商返点比例：</label>
+                    <div class="col-md-4">
+                        <input type="text" name="agent_5" class="form-control unline title" placeholder="请输产品返点比例，例：0.05" {notempty name="data.agent_5"}value="{$data.agent_5}"{/notempty}/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="">等级状态：</label>
+                    <div class="checkbox col-md-4">
+                        <select class="form-control line" name="status">
+                            <option value="1" {notempty name="data.status"}{eq name="data.status" value="1" }selected{/eq}{/notempty}>启用</option>
+                            <option value="0" {notempty name="data.status"}{eq name="data.status" value="0" }selected{/eq}{/notempty}>停用</option>
+                        </select>
+                    </div>
+                </div>
+
+                <input type="hidden" name="id" {notempty name="data.id"} value={$data.id} {/notempty}>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-4">
+                        <button type="submit" class="btn btn-ces tijiao">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+<script>
+    $(function() {
+        $('#selectTitle').initList();
+
+        $('.select select').on('change', function() {
+            if($(this).val() == '1') {
+                $('.crowdGroup').removeClass('hidden');
+                $('.aloneGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            } else {
+                $('.aloneGroup').removeClass('hidden');
+                $('.crowdGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            }
+        });
+    })
+
+
+    $('.tijiao').click(function () {
+        var formData = new FormData($('#addserver')[0]);
+        $.ajax({
+            url: "{:url('product/savesms')}",
+            type: "post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                if (data['code'] == 1) {
+                    alert(data.msg);
+                    window.location.href = "{:url('product/sms')}";
+                }else {
+                    alert(data.msg);
+                    window.history.back(-1);
+                }
+            },
+        });
+
+        return false;
+    })
+</script>
+{/block}

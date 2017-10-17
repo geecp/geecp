@@ -1,0 +1,237 @@
+{extend name="index/index"}
+{block name="content"}
+				<!--<div class="page-lastmenu wht">
+					<div class="page-header">
+						<h5>安全中心</h5>
+					</div>
+					<ul class="list-unstyled">
+						<li class="active">
+							<a href="">封禁记录</a>
+						</li>
+						<li>
+							<a href="">操作记录</a>
+						</li>
+					</ul>
+				</div>
+				<div class="page-header">
+					<ul class="nav nav-tabs line">
+						<li class="active">
+							<a href="#nav1" data-toggle="tab">选项一</a>
+						</li>
+						<li>
+							<a href="#nav2" data-toggle="tab">选项二</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">选项三</a>
+						</li>
+					</ul>
+				</div>-->
+				<div class="page-header">
+					<h5>发票审核</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="table-responsive">
+							<div class="tool-box">
+								<form class="form-inline" action="{:url('finance/ticketapply')}" method="get">
+									<div class="btn-group">
+										<div class="col-md-12">
+											<select name="fstatus" class="form-control">
+												<option value="">全部</option>
+												<option value="1" {if condition="$Request.session.fstatus eq 1"} selected="selected"{/if} >审核通过</option>
+												<option value="2" {if condition="$Request.session.fstatus eq 2"} selected="selected"{/if} >待寄出</option>
+												<option value="4" {if condition="$Request.session.fstatus eq 4"} selected="selected"{/if} >审核失败</option>
+											</select>
+										</div>
+									</div>
+									<div class="input-group pull-right">
+										<span><input type="text" name="invoice_header" placeholder="请输入发票抬头查询" value="{$Request.session.invoice_header}"  class="form-control">
+										<input type="submit" value="点击查询" class="btn btn-ces"></span>
+									</div>
+								</form>
+
+							</div>
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock">ID</th>
+										<th class="lock">申请人</th>
+										<th class="lock">申请时间</th>
+										<th class="lock">发票金额</th>
+										<th class="lock">发票类型</th>
+										<th class="lock">发票号码</th>
+										<th class="lock">发票抬头</th>
+										<th class="lock">状态</th>
+										<th class="lock">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								{foreach $res as $val}
+									<tr>
+										<td>{$val.id}</td>
+										<td>{$val.userid}</td>
+										<th>{$val.create_time}</th>
+										<td><span class="money">{$val.money}</span></td>
+										<td>{if condition="$val.type eq 1"}增值税{else/}普通{/if}</td>
+										<td scope="row">{$val.number}</td>
+										<td>{$val.invoice_header}</td>
+										<td><span {if condition="$val.status eq 1"}  class="round text-info" {elseif condition="$val.status eq 2"} class="round text-danger" {elseif condition="$val.status eq 3"} class="round text-success" {elseif condition="$val.status eq 2"} class="round text-warning"  {else} class="round text-muted" {/if}>
+											{if condition="$val.status eq 1"} 审核中
+											{elseif condition="$val.status eq 2"/}待寄出
+											{elseif condition="$val.status eq 3"/}已寄出
+											{elseif condition="$val.status eq 4"/}审核失败
+											{else/}已签收
+											{/if}</span></td>
+										<td>
+											{if condition="$val.status eq 1"}
+											<a href="{:url('finance/applyInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="1"  nid="{$val.id}" class="btn btn-success btn-xs js-save">通过</a>
+											<a href="javascript:;" val="4"   nid="{$val.id}"  class="btn btn-danger btn-xs js-save">不通过</a>
+											{elseif condition="$val.status eq 2"/}
+											<a href="{:url('finance/applyInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="3" nid="{$val.id}"  class="btn btn-success btn-xs sendoff js-save">确认寄出</a>
+											<a href="javascript:;" val="4"   nid="{$val.id}"  class="btn btn-danger btn-xs js-save">取消</a>
+											{elseif condition="$val.status eq 3"/}
+											<a href="{:url('finance/applyInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="4"   nid="{$val.id}"  class="btn btn-danger btn-xs js-save">取消</a>
+											{else/}
+											<a href="{:url('finance/applyInfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a>
+											<a href="javascript:;" val="1"   nid="{$val.id}"  class="btn btn-success btn-xs js-save">通过</a>
+											{/if}
+										</td>
+									</tr>
+								{/foreach}
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination pull-left">
+									{$res->render()}
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+		<div class="modal fade" id="ticketCont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">发票内容</h4>
+					</div>
+					<div class="modal-body">
+						<div class="modal-cont"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="ticketRemark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">发票备注</h4>
+					</div>
+					<div class="modal-body">
+						<div class="modal-cont"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="ticketNum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">订单编号</h4>
+					</div>
+					<div class="modal-body">
+						<form id="userinfo" class="form-horizontal" action="">
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="">快递单号：</label>
+								<div class="col-md-9">
+									<input type="text" name="" class="form-control line nickname" placeholder="请输入快递单号" />
+									<label class="line-label"></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-3 col-md-9">
+									<button type="submit" class="btn btn-ces btn-sm">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/block}
+{block name="script"}
+<script>
+			$('.callCont').on('click', function() {
+				$('#ticketCont .modal-cont').html($(this).data('cont'));
+				$('#ticketCont').modal('show');
+			});
+			$('.callRemark').on('click', function() {
+				$('#ticketRemark .modal-cont').html($(this).data('cont'));
+				$('#ticketRemark').modal('show');
+			});
+			$('.sendoff').on('click', function() {
+				$('#ticketNum').modal('show');
+			});
+			$(".js-save").click(function () {
+				var id = $(this).attr('nid');
+				var status =$(this).attr('val');
+
+				if(status == 3){
+					$(".btn-sm").click(function () {
+						//订单编号
+						var expnum = $(".nickname").val();
+						if(expnum == ''){
+							alert('请填写快递单号');
+							window.location.reload();
+						}
+						$.ajax({
+							type: 'POST',
+							url:"{:url('finance/saveostatus')}",
+							data: {id: id, status: status,expnum:expnum},
+							dataType: "json",
+							success: function (data) {
+								if (data['msg'] == 1) {
+									alert('修改成功!');
+									window.location.reload();
+								}else if(data['msg'] == 2){
+									alert('您没有操作权限!');
+								}else{
+									alert('修改失败');
+									window.location.reload();
+								}
+								/*else if(data['msg'] == 2){
+								 alert('您没有操作权限!');*/
+							}
+						})
+					})
+				}else{
+					$.ajax({
+						type: 'POST',
+						url:"{:url('finance/saveostatus')}",
+						data: {id: id, status: status},
+						dataType: "json",
+						success: function (data) {
+							if (data['msg'] == 1) {
+								alert('修改成功!');
+								window.location.reload();
+							}else if(data['msg'] == 2){
+								alert('您没有操作权限!');
+							} else{
+								alert('修改失败');
+								window.location.reload();
+							}
+						}
+					})
+				}
+				//alert(status);
+				/**/
+			})
+		</script>
+{/block}

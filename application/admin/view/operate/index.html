@@ -1,0 +1,180 @@
+{extend name="index/index"}
+{block name="content"}
+        <div class="page-header">
+            <h5><span>工单列表</span></h5>
+        </div>
+        <div class="main">
+            <div class="mixbox">
+                <div class="table-responsive">
+                    <p class="pull-right">每页显示<span class="ml10 mr10">{$count}</span>条数据</p>
+                    <!--<div class="tool-box">
+                        <a href="" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增</a>
+                        <a href="" class="btn btn-danger"><i class="iconfont icon-del	 r"></i>删除</a>
+                    </div>
+                    <hr />-->
+                    <div class="tool-box">
+                        <a href="{:url('operate/index')}" {if condition="$Request.session.status eq NULL"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >全部</a>
+                        <a href="{:url('operate/index',['status'=>1])}" {if condition="$Request.session.status eq 1"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >待处理</a>
+                        <a href="{:url('operate/index',['status'=>2])}"  {if condition="$Request.session.status eq 2"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >待客户反馈</a>
+                        <a href="{:url('operate/index',['status'=>3])}" {if condition="$Request.session.status eq 3"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >待客户确认</a>
+                        <a href="{:url('operate/index',['status'=>4])}" {if condition="$Request.session.status eq 4"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >待评价</a>
+                        <a href="{:url('operate/index',['status'=>5])}" {if condition="$Request.session.status eq 5"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >已完成</a>
+                        <a href="{:url('operate/index',['status'=>6])}" {if condition="$Request.session.status eq 6"}class="btn btn-ces btn-sm" {else} class="btn btn-default btn-sm" {/if} >已取消</a>
+                    </div>
+                    <hr />
+                    <table class="table tools">
+                        <thead>
+                        <tr class="sortmix">
+                            <th class="lock">
+                                <input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+                                <label class="vba-chekbox" for="checkboxf"></label>
+                            </th>
+                            <th class="lock">工单编号</th>
+                            <th class="lock">工单标题</th>
+                            <th class="lock">工单类型</th>
+                            <th class="lock">问题特征</th>
+                            <th class="lock">提交用户</th>
+                            <th class="lock">指派人员</th>
+                            <th class="lock">工单状态</th>
+                            <th class="lock">发起时间</th>
+                            <th class="lock control">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $res as $val}
+                        <tr>
+                            <td>
+                                <input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+                                <label class="vba-chekbox" for="checkboxf"></label>
+                            </td>
+                            <th scope="row">{$val['workorderid']}</th>
+                            <td><span>{$val['questiontitle']}</span></td>
+                            <td>{$val['type']}</td>
+                            <td>{$val['describe']}</td>
+                            <td>{$val['coustom']}</td>
+                            <td>{$val['workid']}</td>
+                            <td><span {if condition="$val['status'] eq 1"} class="round text-info" {elseif condition="$val['status'] eq 2"} class="round text-danger"
+                                      {elseif condition="$val['status'] eq 3"} class="round text-success"
+                                      {elseif condition="$val['status'] eq 4"} class="round text-warning"
+                                      {elseif condition="$val['status'] eq 5"} class="round text-muted"
+                                      {else} class="round text-muted"
+                                      {/if} >
+                                {if condition="$val['status'] eq 1"} 处理中
+                                {elseif condition="$val['status'] eq 2"/}待客户反馈
+                                {elseif condition="$val['status'] eq 3"/}待客户确认
+                                {elseif condition="$val['status'] eq 4"/}待评价
+                                {elseif condition="$val['status'] eq 5"/}已完成
+                                {else/}已注销
+                                {/if}
+                                </span>
+                            </td>
+                            <td>{$val['time']}</td>
+                            <td class="control">
+                                <a class="control btn btn-ces btn-xs" href="{:url('operate/workInfo',['id'=>$val['id']])}">详情</a>
+                                <a data-id="100322" href="javascript:;" username="{$val.workid}" id="{$val.id}" class="control btn btn-success btn-xs change">更换指派人</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+
+                        </tbody>
+                    </table>
+                    <div class="vba-pagination">
+                        <ul class="pagination">
+                            {$res->render()}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">更换指派人</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="workinfo" action="{:url('operate/doSaveWork')}">
+                    <input class="changeId" name="changeId" type="hidden" />
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-2">更换给：</label>
+                        <div class="col-md-10">
+                            <div class="select">
+                                <select name="username" class="form-control line">
+                                </select>
+                                <label class="line-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-ces tijiao" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $('.change').on('click', function() {
+        $('#changeModal').modal('show');
+        $('#changeModal').find('.changeId').val($(this).data('id'));
+        var username = $(this).attr('username');
+        var id = $(this).attr('id');
+        $(".line").empty();
+        var temp ='';
+        $.ajax({
+            type: 'POST',
+            url:"{:url('operate/saveWorkID')}",
+            data: {username: username,id:id},
+            dataType: "json",
+            success: function (data) {
+                /*console.log(data);*/
+               /* for(var i = 0;i < data.length; i++) {
+                    var str = "<option value='"+ data[i].id +"'>"+ data[i].username +"</option>";
+                    $(".line").append(str);
+                }*/
+                $.each(data, function(i) {
+                    var str = "<option name='workID'  value='"+ data[i].id +"'>"+ data[i].username +"</option>";
+                    $(".changeId").val(data[i].wid);
+                    $(".line").append(str);
+                });
+            }
+        });
+
+    });
+    $('.tijiao').click(function () {
+
+        var formData = new FormData($('#workinfo')[0]);
+        $.ajax({
+            url: "{:url('operate/doSaveWork')}",
+            type: "post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data['msg'] == 1) {
+                    alert('修改成功');
+                    window.location.reload();
+                }else if(data['msg'] == 2){
+                    alert('您没有操作权限!');
+                    window.location.reload();
+                }else{
+                    alert('修改失败');
+                    window.location.reload();
+                }
+            },
+        });
+
+        return false;
+    })
+</script>
+{/block}

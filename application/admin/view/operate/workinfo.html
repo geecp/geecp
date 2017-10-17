@@ -1,0 +1,197 @@
+{extend name="index/index"}
+{block name="content"}
+
+				<div class="page-header">
+					<h5>工单详情</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<ul class="nav nav-pills nav-justified step unhover step-square">
+							<li class="active">
+								<a>建立工单</a>
+							</li>
+							<li class="active">
+								<a>处理中</a>
+							</li>
+							<li {if condition="$res['status'] gt 4"}  class="active" {else} class="" {/if}>
+								<a>已完成</a>
+							</li>
+						</ul>
+						<hr />
+						<div class="form-horizontal worderinfo clearfix">
+							<label class="col-md-1 control-label">工单编号:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res['workorderid']}</p>
+							</div>
+							<label class="col-md-1 control-label">工单状态:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">
+									<span {if condition="$res['status'] eq 1"} class="round text-info"
+									  {elseif condition="$res['status'] eq 2"} class="round text-danger"
+									  {elseif condition="$res['status'] eq 3"} class="round text-success"
+									  {elseif condition="$res['status'] eq 4"} class="round text-warning"
+									  {elseif condition="$res['status'] eq 5"} class="round text-muted"
+									  {else} class="round text-muted"
+										  {/if} >
+									{if condition="$res['status'] eq 1"} 处理中
+									{elseif condition="$res['status'] eq 2"/}待客户反馈
+									{elseif condition="$res['status'] eq 3"/}待客户确认
+									{elseif condition="$res['status'] eq 4"/}待评价
+									{elseif condition="$res['status'] eq 5"/}已完成
+									{else/}已注销
+									{/if}</span></p>
+							</div>
+							<label class="col-md-1 control-label">提交时间:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res['time']}</p>
+							</div>
+							<label class="col-md-1 control-label">工单标题:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res['questiontitle']}</p>
+							</div>
+							<label class="col-md-1 control-label">工单类型:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res['type']}</p>
+							</div>
+							<label class="col-md-1 control-label">问题特征:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res['describe']}</p>
+							</div>
+							<label class="col-md-1 control-label">提交用户:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">吴彦祖</p>
+							</div>
+							<label class="col-md-1 control-label">指派人员:</label>
+							<div class="col-md-5">
+								<p class="form-control-static info">{$res['workid']}</p>
+							</div>
+							<label class="col-md-1 control-label">工单描述:</label>
+							<div class="col-md-11">
+								<p class="form-control-static info">{$res['content']} </p>
+							</div>
+						</div>
+						<hr />
+						<div class="page-header bold">
+							<h4><b>沟通记录</b></h4>
+						</div>
+						<div class="chatlog clearfix">
+							<div class="mix clearfix">
+								<ul class="media-list chat">
+									{foreach $chatlist as $val}
+									{if condition="$val['status'] eq 1"}
+									<li class="media">
+										<div class="media-left"><img src="{$val['img']}" class="media-object">
+											<p class="type">{$val['writer']}</p>
+
+											<!---->
+										</div>
+
+										<div class="media-body">
+											<p class="clearfix"><span class="name"></span><span class="time">{$val['reply_time']}</span></p>
+											<div>
+												{$val['content']}
+											</div>
+											{notempty name="$val['attac']"}
+
+
+											<!---->
+											<a href="{$val['attac']}">文件</a>
+											{/notempty}
+										</div>
+
+										<!---->
+									</li>
+									{else /}
+									<li class="media guest">
+										<div class="media-left">
+											<!---->
+										</div>
+										<div class="media-body">
+											<p class="clearfix"><span class="name"></span><span class="time">{$val['reply_time']}</span></p>
+											<div>
+												{$val['content']}
+											</div>
+											<!---->
+										</div>
+										<div class="media-right"><img src="{$val['img']}" class="media-object">
+											<p class="type">{$val['writer']}</p>
+											<!---->
+										</div>
+									</li>
+									{/if}
+									{/foreach}
+								</ul>
+							</div>
+							<form id="chatform" class="form-horizontal" method="post" action="{:url('operate/workInfo')}">
+								<div class="form-group">
+									<div class="col-xs-8">
+										<textarea placeholder="请输入您的沟通内容" name="content" rows="3" class="form-control unline"></textarea>
+									</div>
+								</div>
+								<input type="hidden" name="wid" value="{$res['id']}">
+								<div class="form-group">
+									<div class="col-xs-8">
+										<!--<p class="pull-left">
+											<input multiple="multiple" type="file" name="attac" id="upfile" accept="application/x-zip-compressed,image/jpeg,image/pjpeg,image/bmp,image/x-windows-bmp,image/png,image/gif,text/plain,application/x-rar-compressed" class="hide">
+											<label for="upfile" class="btn btn-default">上传附件</label>
+											<span></span>
+										</p>-->
+										<div class="form-group">
+											<label class="col-sm-1 control-label">上传附件：</label>
+											<div class="col-sm-4">
+												<input type="file" class="form-control pull-left" name="file" id='img' onchange="upperCase(this)" />
+											</div>
+										</div>
+										<a class="btn btn-ces pull-right ml15 tijiao">提交</a>
+										<a class="btn btn-default pull-right">取消</a>
+									</div>
+									<div class="col-xs-8">
+										<p></p>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			{/block}
+{block name="script"}
+<script>
+
+	function upperCase(e) {
+		var thiss = $(e);
+		var file = $(e).context.files[0];
+		//判断类型是不是图片
+		if(!/image\/\w+/.test(file.type)){
+			alert("请确保文件为图像类型");
+			return false;
+		}
+
+	}
+
+	$(".tijiao").click(function () {
+		var formData = new FormData($('#chatform')[0]);
+		$.ajax({
+			url: "{:url('operate/addchat')}",
+			type: "post",
+			data: formData,
+			async: false,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				if (data['msg'] == 1) {
+					alert('发送成功');
+					window.location.reload();
+				}
+				else
+				{
+					alert('发送失败');
+					window.location.reload();
+				}
+			},
+		});
+
+	})
+</script>
+{/block}

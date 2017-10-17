@@ -1,0 +1,201 @@
+{extend name="index/index"}
+{block name="content"}
+    <div class="page-header">
+        <h5>附件存储</h5>
+    </div>
+    <div class="mixbox box mt15 main">
+        <div class="box-content tab-pane J-check-box">
+            <form id="edit"  action="{:url('Setting/save_att')}" method="post">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">启用远程附件：</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="radio-inline"><input type="radio" name="status"  value="1" {if condition="$res['status'] eq 1"} checked {/if} >是</label>
+                                <label class="radio-inline"><input type="radio" name="status" value="0" {if condition="$res['status'] eq 0"} checked {/if} >否</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="js-local">
+                            <label class="control-label" >本地附件保存位置：</label>
+                            <div class="row" >
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="local" id="local" value="{$res['local']}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="help-block">服务器路径，属性 777，必须为 web 可访问到的目录，结尾不加 "/"，相对目录务必以 "./" 开头</span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <input type="hidden" value="{$res['id']}" name="id">
+                        <div id="js-localUrl">
+                            <label class="control-label"  >本地附件 URL 地址：</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="localUrl" id="localUrl" value="{$res['localUrl']}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="help-block">可为当前 URL 下的相对地址或 http:// 开头的绝对地址，结尾不加 "/"，不能把这个设为远程附件URL地址</span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div id="js-bucket">
+                            <label class="control-label" >存放地址：</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="bucket" id="bucket" value="{$res['bucket']}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div id="js-domain">
+                            <label class="control-label" >域名：</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="domain" id="domain" value="{$res['domain']}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div id="js-ak">
+                            <label class="control-label" >Access Key ID：</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="ak" id="ak" value="{$res['ak']}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div id="js-sk">
+                            <label class="control-label" >Secret Access Key：</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="sk" id="sk" value="{$res['sk']}" />
+                                </div>
+                                <div class="col-md-8">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="control-label">允许的附件扩展名：</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <textarea class="form-control" style="border: solid 1px gray" name="cname" cols="50" rows="5">{$res['cname']}</textarea>
+                            </div>
+                            <div class="col-md-8">
+                                <span class="help-block">只允许这些扩展名结尾的附件使用远程附件功能，拓展名用逗号分隔，不区分大小写，留空为不限制</span>
+                            </div>
+
+                        </div>
+                        <br>
+                        <label class="control-label">禁止的附件扩展名：</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <textarea class="form-control" style="border: solid 1px gray" name="dname" cols="50" rows="5">{$res['dname']}</textarea>
+                            </div>
+                            <div class="col-md-8">
+                                <span class="help-block">禁止这些扩展名结尾的附件使用远程附件功能，拓展名用逗号分隔，不区分大小写，留空为不限制</span>
+                            </div>
+
+                        </div>
+                        <br>
+                        <label class="control-label">附件尺寸上限：</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="number"  class="form-control" name="size" value="{$res['size']}">
+                            </div>
+                            <div class="col-md-8">
+                                <span class="help-block">单位：KB，只有尺寸大于当前设置的附件才使用远程附件功能，0 或留空为不限制</span>
+                            </div>
+                            <br>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-ces">确认提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+<script>
+    $(function () {
+        var type =$("input[type='radio']:checked").val();
+        if (type ==1){
+            $("#js-localUrl").hide();
+            $("#js-local").hide();
+            $("#js-ak").show();
+            $("#js-sk").show();
+            $("#js-bucket").show();
+            $("#js-domain").show();
+        }else if(type == 0) {
+            $("#js-localUrl").show();
+            $("#js-local").show();
+            $("#js-ak").hide();
+            $("#js-sk").hide();
+            $("#js-bucket").hide();
+            $("#js-domain").hide();
+        }
+        $("input[type='radio']").on('click',function () {
+            console.log($(this).val());
+            type=$(this).val();
+            if (type ==1){
+                $("#js-localUrl").hide();
+                $("#js-local").hide();
+                $("#js-ak").show();
+                $("#js-sk").show();
+                $("#js-bucket").show();
+                $("#js-domain").show();
+            }else if(type == 0) {
+                $("#js-localUrl").show();
+                $("#js-local").show();
+                $("#js-ak").hide();
+                $("#js-sk").hide();
+                $("#js-bucket").hide();
+                $("#js-domain").hide();
+            }
+        })
+
+        option1 = ({
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                var data = eval('(' + data + ')');
+                if(data.status == 1) {
+                    alert("提交成功！");
+                    window.location.href="{:url('setting/attachment')}";
+                }else if(data.status == 2){
+                    alert('您没有操作权限!')
+                } else {
+                    alert("提交出错");
+                }
+            }
+        });
+        $("#edit").ajaxForm(option1);
+
+    })
+</script>
+
+{/block}

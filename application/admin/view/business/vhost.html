@@ -1,0 +1,82 @@
+{extend name="index/index"}
+{block name="content"}
+    <div class="page-header">
+        <h5>虚拟主机列表</h5>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <div class="table-responsive">
+                <p class="pull-right">每页显示<span class="ml10 mr10">{$count}</span>条数据</p>
+                <div class="tool-box">
+                    <a href="{:url('business/addvhost')}" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增</a>
+                </div>
+
+                <table class="table tools">
+                    <thead>
+                    <tr class="sortmix">
+                        <th class="lock">产品型号</th>
+                        <th class="lock">所有者</th>
+                        <th class="lock">上传地址</th>
+                        <th class="lock">购买时间</th>
+                        <th class="lock">到期时间</th>
+                        <th class="lock">状态</th>
+                        <th class="lock control">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $res as $val}
+                    <tr>
+                        <td style="text-align: center">{$val.name}</td>
+                        <td>{$val.username}</td>
+                        <td>{$val.ftpaddr}</td>
+                        <td>{$val.create_time}</td>
+                        <td>{$val.last_time}</td>
+                        <td>{if condition="$val['last_time'] gt $date"} 运行中
+                            {else/}已到期
+                            {/if}</td>
+                        <td class="control">
+                            <a class="control btn btn-ces btn-xs" href="{:url('business/vhost_edit',['id'=>$val['id']])}">编辑</a>
+                            <a class="control btn btn-ces btn-xs js-del" nid="{$val['id']}" href="javascript:;">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+
+                    </tbody>
+                </table>
+                <div class="vba-pagination">
+                    <ul class="pagination">
+                        {$res->render()}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+<script>
+    $('.js-del').click(function () {
+
+        var thiss = $(this);
+        var id = $(this).attr('nid');
+        $.ajax({
+            type: 'POST',
+            url:"{:url('business/vhostdelete')}",
+            data: {id: id},
+            dataType: 'json',
+            success: function (data) {
+                if (data['msg'] == 1) {
+                    alert('删除成功');
+                    thiss.parent().parent().remove();
+                }else if(data['msg'] == 2){
+                    alert('您没有操作权限!');
+                }else if(data['msg'] == 3){
+                    alert('系统错误!');
+                }else{
+                    alert("删除失败");
+                }
+            }
+        })
+    });
+</script>
+{/block}

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/lib/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/lib/summernote.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/lib/fileinput.css" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--<link rel="stylesheet" href="css/style.css?v0.001" />-->
+    <link rel="stylesheet/less" type="text/css" href="__PUBLIC__/admin/css/less/style.less?1.00" />
+    <script type="text/javascript" src="__PUBLIC__/admin/js/lib/less.js"></script>
+    {block name="topscript"}
+    {/block}
+</head>
+
+<body>
+<!--顶部导航开始-->
+<nav class="navbar navbar-default navbar-fixed-top" id="topNav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img  src="__PUBLIC__/admin/img/qdlogo-wh.png"></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">管理控制台</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li>
+                    <a href="#">Link</a>
+                </li>
+                <li>
+                    <a href="#">Link</a>
+                </li>-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$admin.username}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{:url('login/zhuxiao')}">退出</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--顶部导航结束-->
+<div class="full-width">
+    <!--左侧导航开启-->
+    <div class="left-group">
+        <a class="slideCtr iconfont icon-zheqi"></a>
+        <!--<div class="side">-->
+            <!--<div class="side-tit">-->
+                <!--<span class="iconfont icon-arrow"></span>-->
+                <!--<span>门户管理</span>-->
+                <!--<span class="iconfont icon-shezhi"></span>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<ul class="side-menu list-unstyled">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li data-toggle="tooltip" title="域名注册">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a href="www/www.html"><span class="iconfont menuicon icon-yumingzhuce"></span>门户管理</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<li>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<a href="massagemodel.html"><span class="iconfont menuicon icon-duanxin"></span>短信服务</a>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</li>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<li>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<a href="server/server.html"><span class="iconfont menuicon icon-yunfuwuqi"></span>云服务器ECS</a>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</li>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;<li>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<a href=""><span class="iconfont menuicon icon-dns"></span>dns</a>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</li>&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--</div>-->
+        <div class="side">
+            <!--<div class="side-tit">-->
+                <!--<span class="iconfont icon-arrow"></span>-->
+                <!--<span>用户中心</span>-->
+                <!--<span class="iconfont icon-shezhi"></span>-->
+            <!--</div>-->
+            <ul class="side-menu list-unstyled">
+                {foreach $menu as $vo}
+                <li data-toggle="tooltip" title="{$vo.munu}">
+                    <a href="{:url($vo.url)}"><span class="iconfont menuicon {$vo.icon}"></span>{$vo.munu}</a>
+                </li>
+                {/foreach}
+                <!--<li data-toggle="tooltip" title="用户管理">
+                    <a href="{:url('member/index')}"><span class="iconfont menuicon icon-yonghu"></span>用户管理</a>
+                </li>
+                <li data-toggle="tooltip" title="站点设置">
+                    <a href="{:url('setting/index')}"><span class="iconfont menuicon icon-setting"></span>站点设置</a>
+                </li>-->
+
+
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-jiankong"></span>监控</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-beian"></span>备案</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-money"></span>财务</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-gongdanzhongxin"></span>工单中心</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-xuniji"></span>虚拟机</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-cdn"></span>cdn</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-fuzaijunheng"></span>负载均衡</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-yuncunchu"></span>云存储</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-kuaizhaobeifen"></span>快照备份</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-code3"></span>code</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-shipin"></span>视频</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-yonghu"></span>用户</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-anquan"></span>安全</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-yanzhengma"></span>验证码</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href=""><span class="iconfont menuicon icon-setting ft22"></span>设置</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+    <!--左侧导航结束-->
+    {block name="content"}
+    <div class="right-group product">
+        <div class="product-nav">
+            <div class="side">
+                <div class="side-tit">短信服务</div>
+                <ul class="side-menu list-unstyled">
+                    <li>
+                        <a href="massagemodel.html">短信模板</a>
+                    </li>
+                    <li class="active">
+                        <a href="massageapps.html">短信应用</a>
+                    </li>
+                    <li>
+                        <a href="massageinfo.html">数据统计</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="product-main">
+            <div class="nav nav-tit">
+                <h4 class="border-left"><span>发布文章</span></h4>
+            </div>
+            <!--<div class="alert alert-danger">
+                提示:请完善以下信息,方便我们更好的为您服务
+                <a class="close" data-dismiss="alert"><span>&times;</span></a>
+            </div>-->
+            <div class="mixbox box mt15">
+                <div class="box-content tab-pane J-check-box">
+                    <div>
+                        <a class="btn btn-primary" href="contentaddarticle.html">添加文章</a>
+                        <a class="btn btn-primary J-reqChecked">批量启用</a>
+                        <a class="btn btn-primary J-reqChecked">批量禁用</a>
+                        <a class="btn btn-primary J-reqChecked">批量删除</a>
+                        <a href="#realNameModal" data-toggle="modal" class="btn btn-primary">启用modal</a>
+                        <p class="pull-right">共<span class="ml10 mr10">9</span>条数据</p>
+                    </div>
+                    <div class="mt20">
+                        <div class="tab-content">
+                            <div class="bs-example mt20" data-example-id="striped-table">
+                                <table class="table table-hover table-checked-color">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" name="checkedArticle" id="checkedArticle-all" /></th>
+                                        <th>id</th>
+                                        <th>标题</th>
+                                        <th>类型</th>
+                                        <th>最后更新</th>
+                                        <th>浏览</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td scope="row"><input type="checkbox" name="checkedArticle" /></td>
+                                        <td>1003</td>
+                                        <td>英国406斤男子因过胖无法玩过山车 怒减一半体重</td>
+                                        <td>主题</td>
+                                        <td>2016年08月31日 09:14:55 </td>
+                                        <td>113</td>
+                                        <td>正常</td>
+                                        <td>
+                                            <a href="contentaddarticle.html">编辑</a>
+                                            -
+                                            <a href="#">禁用</a>
+                                            -
+                                            <a href="#">删除</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-center" colspan="11">没有需要显示的数据!</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <ul class="pagination">
+                                    <li class="disabled">
+                                        <a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">1 <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" aria-label="Next"><span aria-hidden="true">»</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block}
+</div>
+{block name="modal"}
+<div class="modal fade" id="realNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">实名资料</h4>
+            </div>
+            <form action="" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">注册人（所有者）：</label>
+                        <div class="col-sm-4 stbox">
+                            <p class="form-control">刘德华<i class="info"></i></p>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">注册邮箱：</label>
+                        <div class="col-sm-4">
+                            <p class="form-control">liudehua@qq.com</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">当前状态：</label>
+                        <div class="col-sm-4">
+                            <p class="form-control">待提交资料</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">注册类型：</label>
+                        <div class="col-sm-4">
+                            <div class="etype-box">
+                                <label class="radio-inline">
+                                    <input type="radio" name="etype" id="" placeholder="" checked="checked"> 个人
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="etype" id="" placeholder=""> 组织
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">联系人：</label>
+                        <div class="col-sm-4">
+                            <p class="form-control">张学友<i class="info"></i></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">联系人证明类型：</label>
+                        <div class="col-sm-4">
+                            <select name="" class="form-control">
+                                <option value="">身份证</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">联系人证明号码：</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control pull-left" name="" id="" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">联系人证明图片：</label>
+                        <div class="col-sm-4">
+                            <input type="file" name="" id="" value="" />
+                            <span class="help-block">只允许JPG格式</span>
+                        </div>
+                    </div>
+                    <div class="J-priv"></div>
+                    <div class="hidden J-firm">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">组织证明类型：</label>
+                            <div class="col-sm-4">
+                                <select name="" class="form-control">
+                                    <option value="">身份证</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">组织证明编号：</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control pull-left" name="" id="" placeholder="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">组织证明图片：</label>
+                            <div class="col-sm-4">
+                                <input type="file" name="" id="" value="" />
+                                <span class="help-block">只允许JPG格式</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="imgbox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="__PUBLIC__/admin/img/header.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+<script type="text/javascript" src="__PUBLIC__/admin/js/lib/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/lib/jquery.form.js"></script>
+<!--<script type="text/javascript" src="__PUBLIC__/admin/js/app.js"></script>-->
+{block name="script"}
+<script>
+    $(function() {
+        $(".etype-box").find('input').click(function() {
+            if($(".etype-box").find('input').eq(0).prop("checked") == 1) {
+                $(".J-priv").removeClass("hidden");
+                $(".J-firm").addClass("hidden");
+            } else {
+                $(".J-priv").addClass("hidden");
+                $(".J-firm").removeClass("hidden");
+            }
+        })
+        $(".ctype-box").find('input').click(function() {
+            if($(".ctype-box").find('input').eq(0).prop("checked") == 1) {
+                $(".J-set").removeClass("hidden");
+                $(".J-sep").addClass("hidden");
+            } else {
+                $(".J-set").addClass("hidden");
+                $(".J-sep").removeClass("hidden");
+            }
+        })
+//        checkedAll($("#checkedArticle-all"));
+    })
+</script>
+{/block}
+
+</body>
+
+</html>

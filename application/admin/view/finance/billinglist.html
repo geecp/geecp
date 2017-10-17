@@ -1,0 +1,295 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<h5>财务操作</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="add">
+							<div class="row">
+								<div class="col-md-8">
+									<form id="operation" class="form-horizontal" action="{:url('finance/adddetail')}" method="post">
+										<div class="form-group col-md-4">
+											<label class="col-md-5 control-label" for="">用户：</label>
+											<div class="col-md-7">
+												<input type="text" id="userid" name="userid" class="form-control line nickname" placeholder="请输入用户id" />
+												<label class="line-label"></label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<label class="col-md-5 control-label" for="">金额：</label>
+											<div class="col-md-7">
+												<input type="text" id="money" name="money" class="form-control line nickname" placeholder="请输入金额" />
+												<label class="line-label"></label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<label class="col-md-5 control-label" for="">凭证：</label>
+											<div class="col-md-7">
+												<input type="text" id="voucher" name="voucher" class="form-control line nickname" placeholder="请输入凭证信息" />
+												<label class="line-label"></label>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-label" for="" style="width: 12.9%;">类型：</label>
+											<div class="col-md-10" style="width: 86.7%;">
+												<div class="radio inline">
+													<span>[加]</span>
+													<input class="vba-rd rk" type="radio" name="transaction_type" id="rd1" value="4">
+													<label class="vba-ridbox" for="rd1">入款</label>
+													<input class="vba-rd" type="radio" name="transaction_type" id="rd2" value="3">
+													<label class="vba-ridbox" for="rd2">退款</label>
+													<input class="vba-rd" type="radio" name="transaction_type" id="rd3" value="6">
+													<label class="vba-ridbox" for="rd3">优惠虚增</label>
+													<span class="ml15">[减]</span>
+													<input class="vba-rd" type="radio" name="transaction_type" id="rd4" value="7">
+													<label class="vba-ridbox" for="rd4">直接扣费</label>
+													<input class="vba-rd" type="radio" name="transaction_type" id="rd5" value="8">
+													<label class="vba-ridbox" for="rd5">消费扣款</label>
+												</div>
+											</div>
+											<div class="billinglist-hide hidden">
+												<div class="form-group col-md-12">
+													<label class="col-md-2 control-label" for="" style="width: 13.3%;">相关银行：</label>
+													<div class="col-md-10" style="width: 86.7%;">
+														<div class="radio inline">
+															<input class="vba-rd" type="radio" name="receivables" id="bk1" value="中行">
+															<label class="vba-ridbox" for="bk1">中行</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk2" value="工行">
+															<label class="vba-ridbox" for="bk2">工行</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk3" value="建行">
+															<label class="vba-ridbox" for="bk3">建行</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk4" value="农行">
+															<label class="vba-ridbox" for="bk4">农行</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk5" value="招行">
+															<label class="vba-ridbox" for="bk5">招行</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk6" value="交行">
+															<label class="vba-ridbox" for="bk6">交行</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk7" value="邮政">
+															<label class="vba-ridbox" for="bk7">邮政</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk8" value="现金">
+															<label class="vba-ridbox" for="bk8">现金</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk9" value="公司帐号">
+															<label class="vba-ridbox" for="bk9">公司帐号</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk10" value="在线支付">
+															<label class="vba-ridbox" for="bk10">在线支付 </label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk11" value="其他">
+															<label class="vba-ridbox" for="bk11">其他</label>
+															<input class="vba-rd" type="radio" name="receivables" id="bk12" value="实收">
+															<label class="vba-ridbox" for="bk12">实收(自动设置为到帐)</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group col-md-12">
+													<label class="col-md-2 control-label" for="" style="width: 13.3%;">是否到帐：</label>
+													<div class="col-md-10" style="width: 86.7%;">
+														<div class="radio inline">
+															<input class="vba-rd" type="radio" name="status" id="ar1" value="4">
+															<label class="vba-ridbox" for="ar1">已到账</label>
+															<input class="vba-rd" type="radio" name="status" id="ar2" value="5">
+															<label class="vba-ridbox" for="ar2">未到账</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-label" for="" style="width: 12.9%;">公开原因：</label>
+											<div class="col-md-10" style="width: 87.1%;">
+												<textarea type="text" name="public" class="form-control line idiograph" placeholder="请输入公开原因" rows="3"></textarea>
+												<label class="line-label"></label>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<label class="col-md-2 control-label" for="" style="width: 12.9%;">内部记录：</label>
+											<div class="col-md-10" style="width: 87.1%;">
+												<textarea type="text" name="inside" class="form-control line idiograph" placeholder="请输入内部记录" rows="3"></textarea>
+												<label class="line-label"></label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="col-md-8 col-md-offset-4">
+												<button type="submit" class="btn btn-ces btn-sm tijiao">添加</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<div class="table-responsive">
+							<div class="tool-box">
+								<!--<a href="" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增</a>-->
+								<form class="form-inline" action="{:url('finance/billinglist')}" method="get">
+									<div class="form-group">
+										<div class="col-md-12">
+											<select name="dstatus" class="form-control">
+												<option value="">全部</option>
+												<option value="4" {if condition="$Request.session.dstatus eq 4"} selected="selected"{/if} >入款</option>
+												<option value="3" {if condition="$Request.session.dstatus eq 3"} selected="selected"{/if} >退款</option>
+												<option value="6" {if condition="$Request.session.dstatus eq 6"} selected="selected"{/if} >优惠虚增</option>
+												<option value="8" {if condition="$Request.session.dstatus eq 8"} selected="selected"{/if} >消费</option>
+												<option value="7" {if condition="$Request.session.dstatus eq 7"} selected="selected"{/if} >其他</option>
+											</select>
+										</div>
+									</div>
+									<input type="text" name="" class="form-control datetime" />
+									<div class="input-group pull-right">
+									<span><input type="submit" value="点击查询" class="btn btn-ces"></span>
+									</div>
+								</form>
+							</div>
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock">序号</th>
+										<th class="lock">订单号</th>
+										<th class="lock">客户</th>
+										<th class="lock">交易类型</th>
+										<th class="lock">支付方式</th>
+										<th class="lock">总金额</th>
+										<th class="lock">执行者</th>
+										<th class="lock">状态</th>
+										<th class="lock">时间</th>
+										<th class="lock">详情</th>
+									</tr>
+								</thead>
+								<tbody>
+								{foreach $res as $val}
+									<tr>
+										<th>{$val.id}</th>
+										<th scope="row">{$val.order_id}</th>
+										<td>{$val.userid}</td>
+										<td>{if condition="$val.transaction_type eq 4"}入款
+											{elseif condition="$val.transaction_type eq 3"/}退款
+											{elseif condition="$val.transaction_type eq 6"/}优惠虚增
+											{elseif condition="$val.transaction_type eq 7"/}其他
+											{else/}消费
+											{/if}
+										</td>
+										<td><i class="iconfont icon-zhuanzhang"></i></td>
+										<td><span class="money">{$val.money}</span></td>
+										<td>{$val.auditor}</td>
+										<td><span {if condition="$val.status eq 4"}  class="round text-info" {elseif condition="$val.status eq 5"} class="round text-danger" {else} class="round text-info" {/if}>
+											{if condition="$val.status eq 4"} 已到账
+											{elseif condition="$val.status eq 5"/}未到账
+											{else/}已完成
+											{/if}</span></td>
+										<td>{$val.creat_time}</td>
+										<td><a href="{:url('finance/detailinfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a></td>
+									</tr>
+								{/foreach}
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination pull-left">
+									{$res->render()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+{/block}
+{block name="script"}
+		<script>
+			$(document).ready(function() {
+				//选择入款
+				$('[name="transaction_type"]').on('click', function() {
+					console.log($(this).hasClass('rk'))
+					if($(this).hasClass('rk')) {
+						$(this).parent().parent().next().removeClass('hidden');
+					} else {
+						$(this).parent().parent().next().addClass('hidden');
+					}
+				})
+				//时间
+				$('.datetime').val(moment().subtract('days', 6).format('YYYY/MM/DD') + '-' + moment().format('YYYY/MM/DD'));
+				$('.datetime').daterangepicker({
+					opens: 'left',
+					showButtonPanel: false,
+					startDate: moment().subtract('days', 6),
+					endDate: moment(),
+					maxDate: moment().endOf('day'),
+					buttonClasses: 'btn-sm btn btn-default',
+					applyClass: 'btn-sm btn btn-ces',
+					cancelClass: 'btn-sm btn btn-default',
+					ranges: {
+						'昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+						'最近7日': [moment().subtract('days', 6), moment()],
+						'最近30日': [moment().subtract('days', 29), moment()],
+						'最近90日': [moment().subtract('days', 89), moment()]
+					},
+					locale: {
+						applyLabel: '确定',
+						cancelLabel: '取消',
+						fromLabel: '起始时间',
+						toLabel: '结束时间',
+						customRangeLabel: '自定义',
+						daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+						monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+							'七月', '八月', '九月', '十月', '十一月', '十二月'
+						],
+						firstDay: 1
+					}
+				});
+				$('.datetime').on('apply.daterangepicker', function(ev, picker) {
+
+						console.log(picker.startDate.format('YYYY/MM/DD'));
+
+						console.log(picker.endDate.format('YYYY/MM/DD'));
+
+					});
+
+				});
+			$('.tijiao').click(function () {
+
+				//提交时间后获取所有内容 判断
+				if ($('#userid').val() == '') {
+					alert('请输入用户id!');
+					return false;
+				}
+				if ($('#phone').val() == '') {
+					alert('请输入金额!');
+					return false;
+				}
+				if ($('#voucher').val() == '') {
+					alert('请输入凭证信息!');
+					return false;
+				}
+
+				var formData = new FormData($('#operation')[0]);
+				$.ajax({
+					url: "{:url('finance/adddetail')}",
+					type: "post",
+					data: formData,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						console.log(data);
+						if (data['msg'] == 1) {
+							alert('添加成功');
+							window.location.href = "{:url('finance/billinglist')}";
+						}else if(data['msg'] == 3){
+						 alert('请把数据填写完整');
+						 }else if(data['msg'] == 4){
+						 alert('请选择交易类型');
+						 }else if(data['msg'] == 5){
+						 alert('该用户不存在');
+						 }else if(data['msg'] == 6){
+						 alert('您没有操作权限!');
+						 }else if(data['msg'] == 7){
+						 alert('非法操作');
+						 }
+						else
+						{
+							alert('添加失败');
+							window.location.href = "{:url('finance/billinglist')}";
+						}
+					},
+				});
+				return false;
+			});
+		</script>
+{/block}

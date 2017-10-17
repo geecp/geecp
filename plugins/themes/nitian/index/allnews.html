@@ -1,0 +1,177 @@
+{extend name="index/index"}
+{block name="content"}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>新闻中心 - 逆天科技</title>
+<link rel="shortcut icon" href="__PUBLIC__/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/idangerous.swiper.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css">
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/nav.js"></script>
+<script src="__PUBLIC__/js/index-banner-js.js"></script>
+<script src="__PUBLIC__/js/index-floatright.js"></script>
+<script src="__PUBLIC__/js/zzidcsolu.js"></script>
+<script src="__PUBLIC__/js/win.js"></script>
+<script src="__PUBLIC__/js/idangerous.swiper.min.js"></script>
+<script src="__PUBLIC__/js/gainet.core.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/auth.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/news.css">
+<style type="text/css">
+.hidden{display: none;}
+
+</style>
+</head>
+
+<body>
+	
+	<!--导航 start-->
+	
+  <!--新闻搜索 start-->
+   
+
+<div class="vps-nav-bg vps"></div>
+   <div class="searchbox prelative2">
+   		<form action="{:url('showAllNews')}" method="post" id="hotSearchForm" >
+                <div class="searchleft">
+                    <i></i>新闻动态
+                </div>
+                <div class="searchright">
+                    <div class="search">
+                          <input id="searchKey" name="pageList.queryCondition.xwbt" type="text" value="" placeholder="请输入您要查询的内容">
+		                  <input id="hotKeyId" name="pageList.queryCondition.hotKeyId" type="hidden"/>
+		                  <a href ="javascript:" class="ssbtn"><i></i></a>
+                    </div>
+                    <div class="hotsearch clearfix">
+                        <span>热搜关键词：</span>
+                        
+		                  <a href="javascript:void(0)" id="1" class="hotKey">云服务器</a>
+		                
+		                  <a href="javascript:void(0)" id="3" class="hotKey">CDN</a>
+		                
+		                  <a href="javascript:void(0)" id="7" class="hotKey">快云VPS</a>
+		                
+                    </div>
+                </div>
+        </form>
+         </div>
+   <!--新闻搜索 end-->
+<div class="zzidc-auto" style="margin-top:-100px">
+	<div class="newscontainer">
+    	<div class="news-tabnav">
+
+    		<a  href="{:url('index/Allnews')}"  class="current"  >全部</a>
+        	<a  href="{:url('index/News')}"  >新闻动态</a>
+        	<a  href="{:url('index/Productnews')}"  >产品动态</a>
+
+        </div>
+        
+        <ul class='newslist'>
+	        {foreach $res2 as $vo2}
+		        <li><a href="{:url('news')}">{$vo2.title}</a><span>{$vo2.createtime}</span></li>
+			{/foreach}
+		 </ul>
+	
+
+
+
+
+
+    <form action="{:url('news')}" method="post" id="pageForm">
+    	<div class="pagebtnbox">
+        	<form id="pageForm" method="post" style="display:none;" >
+			<input id="current" type="hidden" value="1" name="pageList.currentPageIndex" />
+			</form>
+ 			<div class="pagebtnbox">
+	  			<div class="pagebtn">
+					<span>{$all}</span>
+
+					<a  class="disabled">上一页</a>
+					<a href="?page=1">&laquo;</a>
+					{foreach $res3 as $vo4}
+					<a class="current " hidefocus href="?page={$vo4}">{$vo4}</a>
+					{/foreach}
+				    <a  class=""><span>&raquo;</a>
+					<span style="margin-right:3px">转到</span>
+					
+
+					<input type="text" class="pageipt" id="jumpPage_id" value="1"/>
+					<a href="javascript:;" class="page-abtn" id="tjajax">确定</a>
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+
+
+<!--分页信息-->
+<script type="text/javascript">
+	function gotoPage(pageNum){
+		window.location.href='__URL__/news?page='+pageNum;
+			
+	}
+	function goPage2(){
+		p=document.getElementById("jumpPage_id").value;
+		var ex = /^\d+$/;
+		if(isNaN(p)||p>{$allpage}||p<1||!ex.test(p)){
+			p=1;
+				
+			
+		}
+		gotoPage(p);
+	}
+	$('#tjajax').on('click',function(){
+		goPage2();
+	});
+	$("#jumpPage_id").bind('keyup', function(event){
+		var currentindex = $("#pageForm").find("#current").val();
+		var totalPages = Number("41");
+		var nu =$(this);
+		if(isNaN(nu.val())){
+			nu.val(currentindex);
+		}
+	   if (event.keyCode == "13"){
+	   		if(nu.val()<=0||nu.val()>totalPages){
+				nu.val(currentindex);
+			}
+			if(nu.val()-currentindex!=0){
+			    gotoPage(nu.val());
+			}
+		}
+	 });
+</script>
+
+        	</div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$(".ssbtn").click(function(){
+			document.forms[0].submit();
+		});
+		$(".hotKey").click(function(){
+			var o = $(this).text().toString();
+			var hotId = $(this).attr("id").toString();
+			$("#searchKey").val(o);
+			$("#hotKeyId").val(hotId);
+			$("#hotSearchForm").submit();
+		});
+
+	$('[data-to]').on('click',function(){
+      		$('[data-cont]').addClass('hidden');
+      		$('[data-cont="'+$(this).data('to')+'"]').removeClass('hidden');
+      		$('[data-to]').removeClass('current');
+      		$(this).addClass('current');
+      });
+
+
+	});
+</script>
+
+{/block}

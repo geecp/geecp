@@ -1,0 +1,212 @@
+{extend name="index/index"}
+{block name="content"}
+    <div class="page-header">
+        <h5>客户列表</h5>
+    </div>
+    <div class="main">
+        <div class="mixbox">
+            <div class="table-responsive">
+                <p class="pull-right">每页显示<span class="ml10 mr10">{$count}</span>条数据</p>
+                <div class="tool-box">
+                    <a href="{:url('user/adduser')}" class="btn btn-ces btn-add"><i class="iconfont icon-plus r"></i>新增</a>
+                    <a class="btn btn-danger"><i class="iconfont icon-del r" ></i>删除</a>
+                </div>
+                <table class="table tools">
+
+                    <thead>
+                    <tr class="sortmix">
+                        <th class="lock">
+                            <input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+                           <label class="vba-chekbox" for="checkboxf"></label>
+                        </th>
+                        <th class="lock">用户id</th>
+                        <th class="lock">客户名称</th>
+                        <th class="lock">手机</th>
+                        <th class="lock">邮箱</th>
+                        <th class="lock">余额</th>
+                        <th class="lock">代理等级</th>
+                        <th class="lock">代理帐户</th>
+                        <th class="lock">状态</th>
+                        <th class="lock">操作</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {foreach $data as $v}
+                    <tr>
+                        <td>
+                            <input class="vba-ck" type="checkbox" name="ckf" id="{$v.id}" value="{$v.id}">
+                            <label class="vba-chekbox" for="{$v.id}"></label>
+                        </td>
+                        <td>
+                            {$v.userid}
+                        </td>
+                        <td>
+                            {$v.username}
+                        </td>
+                        <td>
+                            {$v.phone}
+                        </td>
+                        <td>
+                            {$v.email}
+                        </td>
+                        <td>
+                           {$v.balance}
+                        </td>
+                        <td>
+                            {empty name="v.agent"}
+                                普通用户
+                            {else /}
+                            {foreach $agent as $val}
+                            {switch $v.agent}
+                            {case $val.id}<a>{$val.name}</a>{/case}
+                            {/switch}
+                            {/foreach}
+                            {/empty}
+                        </td>
+                        <td>
+                            {$v.enterprise}
+                        </td>
+                        <td>
+                            <a href="javascript:;" class="updatestatus btn {eq name='$v.state' value='1'} btn-success {else/} btn-default {/eq} btn-xs" nid="{$v.id}" nstatus="{$v.state}">
+                                {if condition="$v['state'] eq 1"} 启用
+                                {else /} 禁用
+                                {/if}
+                            </a>
+                        </td>
+                        <td class="control">
+                            <a class="control" href="{:url('User/edituser',['id'=>$v.id])}"><span>编辑</span></a>
+                            <a class="control" href=""><span nid="{$v.id}">删除</span></a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+
+                </table>
+                <div class="vba-pagination">
+                    <ul class="pagination">
+                        {$data->render()}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{/block}
+
+{block name="script"}
+<script>
+  /*  var arr =$.session.get('arr');*/
+    //console.log(arr);
+       /* for(var i = 0; arr.length; i++){
+            $('#'+arr[i]).attr('checked','checked');
+        }*/
+    //全选按钮
+    $('thead th input[type="checkbox"].vba-ck').on('click', function() {
+        if($(this).is(':checked')) {
+            $('input[name="' + $(this).attr('name') + '"]').prop('checked', true);
+        } else {
+            $('input[name="' + $(this).attr('name') + '"]').prop('checked', false);
+        }
+
+    });
+  //多选删除
+  $(".btn-danger").click(function () {
+      var str = '';
+      $.each($('input:checkbox:checked'), function () {
+          if ($(this).val() != '') {
+              str += $(this).val() + ",";
+          }
+      });
+      /*$.each($('input:checkbox:checked'),function(){
+       window.alert("你选了："+
+       $('input[type=checkbox]:checked').length+"个，其中有："+$(this).val());
+       });*/
+      //去掉最后一个逗号(如果不需要去掉，就不用写)
+      if (str.length > 0) {
+          str = str.substr(0, str.length - 1);
+      }
+      console.log(str);
+      var id = str;
+      $.ajax({
+          type: 'POST',
+          url: "{:url('user/delete')}",
+          data: {id: id},
+          dataType: 'json',
+          success: function (data) {
+              if (data['msg'] == 1) {
+                  alert('删除成功');
+                  window.location.reload();
+              } else if (data['msg'] == 2) {
+                  alert('您没有操作权限!');
+              } else if (data['msg'] == 3) {
+                  alert('	非法操作!');
+              } else {
+                  alert("删除失败");
+              }
+          }
+      })
+  })
+
+    //显示隐藏
+    $('.updatestatus').click(function () {
+        var id = $(this).attr('nid');
+        var thiss = $(this);
+        var stat = $(this).attr('nstatus');
+        if (stat == 1) {
+            stat = 0;
+        } else {
+            stat = 1;
+        }
+        $.ajax({
+            type: 'POST',
+            url:"{:url('user/savestatus')}",
+            data: {id: id, status: stat},
+            dataType: "json",
+            success: function (data) {
+                if (data['msg'] == 1) {
+                    if (data['status'] == 1) {
+                        thiss.removeClass('btn-default');
+                        thiss.addClass('btn-success');
+                        thiss.html('启用');
+                    } else {
+                        thiss.removeClass('btn-success');
+                        thiss.addClass('btn-default');
+                        thiss.html('禁用');
+                    }
+                    thiss.attr('nid', data['id']);
+                    thiss.attr('nstatus', data['status']);
+                }else if(data['msg'] == 2){
+                    alert('您没有操作权限!');
+                }
+            }
+        })
+    });
+
+
+    $('.icon-del').click(function () {
+        var thiss = $(this);
+        var id = $(this).attr('nid');
+        $.ajax({
+            type: 'POST',
+            url: "{:url('user/delete')}",
+            data: {id: id},
+            dataType: 'json',
+            success: function (data) {
+                if (data['msg'] == 1) {
+                    alert('删除成功');
+                    thiss.parent().parent().remove();
+                }else if(data['msg'] == 2){
+                    alert('您没有操作权限!');
+                }else{
+                    alert("删除失败");
+                }
+            }
+        })
+    });
+</script>
+{/block}
+
+

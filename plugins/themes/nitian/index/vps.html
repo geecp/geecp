@@ -1,0 +1,217 @@
+{extend name="index/index"}
+{block name="content"}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="/favicon.ico" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>快云VPS_VPS主机_VPS租用_VPS服务器-逆天科技</title>
+<meta name="keywords" content="快云VPS,VPS主机,VPS租用,VPS服务器" />
+<meta name="description" content="快云VPS是一款基于快云平台研发的固定计算能力的服务。作为国内成熟的云计算系统，快云平台由千台高性能服务器集群组成超大的资源池，每个快云VPS的运行和管理完全独立，可分配独立公网IP地址。并配备专用云数据库，站库分离，访问速度提高40%以上。高速带宽接入，让您的网站更快速。" />
+<link rel="shortcut icon" href="__PUBLIC__/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/__PUBLIC__/css/idangerous.swiper.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css">
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/nav.js"></script>
+<script src="__PUBLIC__/js/index-banner-js.js"></script>
+<script src="__PUBLIC__/js/index-floatright.js"></script>
+<script src="__PUBLIC__/js/zzidcsolu.js"></script>
+<script src="__PUBLIC__/js/win.js"></script>
+<script src="__PUBLIC__/js/idangerous.swiper.min.js"></script>
+<script src="__PUBLIC__/js/gainet.core.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/auth.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/vps.css">
+</head>
+<style>
+.sj-table{margin-left:30px}
+.sj-table tr{line-height:46px;color:#333}
+.sj-input1{outline:none;width:100px;padding-left:12px;height:32px;border:1px solid #ccc;border-radius:3px;line-height:32px;}
+.sj-input1:focus{border:1px solid #4251b6}
+</style>
+<body>
+	<!--导航 start-->
+	
+	<!--快云vps banner start-->
+	<div class="vps-bg">
+		<div class="zzidc-auto padd40">
+			<div class="vps-tit">
+				快云VPS
+			</div>
+			<div class="fwq-detail m-top20">
+				一款基于快云平台研发的固定计算能力的服务。作为国内成熟的云计算系统，快云平台由千台<br>
+				高性能服务器集群组成超大的资源池，每个快云VPS的运行和管理完全独立，可分配独立公网<br>
+				IP地址。配合专用云数据库，站库分离，访问速度提高40%以上。高速带宽接入，让您的网站<br>
+				更快速。高速带宽接入，让您的网站更快速。
+			</div>
+			</div>
+	</div>
+	<!--快云vps banner end-->
+<div class="vpscontainerbg">
+	<div class="zzidc-auto">
+    	<div class="vps-contianer">
+            <div class="vps-col clearfix">
+			
+            <!-- 列表开始 -->
+                 {foreach $res1 as $vo}
+				 	<form id="form1629" action="vps/kybuy" method="get" target="_blank">
+				 	<div class="xinghao" mc={$vo.name} >
+				 	
+				 		<div class="modelbox">
+		                    <span class="modelicon icon-item1"></span>
+		                    <span class="model-tit">{$vo.name}</span>
+		                 </div>
+				 	
+				 	    <input type="hidden" name="cpbh" value="1629">
+						<input type="hidden" name="lbbh" value="63">
+						<input type="hidden" name="kyb" id="kyb" value="0"/>
+						<input type="hidden" id="dqbh1629" name="dqbh" value="4001">
+						
+							<input type="hidden" id="gmqx1629" name="gmqx" value="1">
+						
+						
+						<ul class="config-numb">
+		                      <li>
+		                          <p class="numb-he" name="cpu">{$vo.cpu}核</p>
+		                          <p class="g999">CPU</p>
+		                      </li>
+		                      <li>
+		                          <p class="numb-he">
+		                                
+										
+											{$vo.memory}
+										
+								  </p>
+		                          <p class="g999">内存</p>
+		                      </li>
+		                      <li style="border:none">
+		                          <p class="numb-he">{$vo.bandwidth}Mbps</p>
+		                          <p class="g999">带宽</p>
+		                      </li>
+		                  </ul>
+		                  <ul class="config-row">
+		                      <li>
+		                          <div class="vpsinfoleft">硬盘：</div>
+		                          <div class="vpsinforight">
+		                             {$vo.systemdisk}G&nbsp;系统盘+{$vo.datadisk}G&nbsp;数据盘
+		                          </div>
+		                      </li>
+		                      <li>
+		                          <div class="vpsinfoleft">IP地址：</div>
+		                          <div class="vpsinforight">
+		                             {$vo.ip}个独享IP<a href="http://vps.zzidc.com/changjianwenti/113.html" target="_blank" class="g425">（独享IP优势）</a>
+		                          </div>
+		                      </li>
+		                      <li style="height:90px">
+		                          <div class="vpsinfoleft">操作系统：</div>
+		                          <div class="vpsinforight">
+		                             <div class="checkbox" id="os1629">
+		                              <input type="hidden" name="xtlx" value="0">
+										{foreach $vo['systemname'] as $vo1 }
+			                                <div class="xt-radio checked" for="">
+			                                    <span class="xt-radio-icon"></span>
+			                                    <input type="radio" name="xt" value="{$vo1.id}"><span>
+			                                    {$vo1['name']}
+												{$vo1['version']}
+			                                    </span>
+			                                </div>
+			                            {/foreach}
+			                                 <div class="xt-radio gff8 fsize14" for="" style="line-height:20px;font-size:12px">
+			                                    <span  id="jfdiy1629">基础型只能满足win2008系统的最低配置要求，为了更好地满足您的需要，建议您选择其他系统或开通完毕后升级配置。</span>
+			                                </div>
+		                            </div>
+		                          </div>
+		                      </li>
+		                      <li style="height:90px">
+		                          <div class="vpsinfoleft">机房：</div>
+		                          <div class="vpsinforight"  mc=基础型 lbbh= 63>
+		                             <div class="checkbox" id="dq1629">
+		                               
+			                                <div class="xt-radio checked" for="">
+			                                    <span class="xt-radio-icon"></span>
+			                                    {foreach $vo['productgroup'] as $vo2}
+			                                    <input type="radio" name="zonejf1" bh="1629" value="4001"><span>{$vo2['name']}</span>
+			                                	{/foreach}
+			                                </div>
+			                           
+									   
+		                            </div>
+		                          </div>
+		                      </li>
+		                      
+							
+									<li class="gff8" style="font-size:12px">购VPS即赠送1000元快云数据库代金劵</li>
+							
+		                      <li>
+		                          <div class="vpsinfoleft">价格：</div>
+		                          <div class="vpsinforight">
+		                          
+		                             <select class="pricelist" value="zzPriceList" id="gmqx">
+		                                   {foreach $vo.productprice as $vo3}
+										         <option id="14515" gmqx="1" bh="1629" value="">{$vo3.price}元/{$vo3.term}个月</option>
+										   {/foreach}
+									 </select>
+		                          
+		                          
+		                          </div>
+		                      </li>
+		                       
+                       </ul>
+                  <div class="dashline"></div>
+                  <div class="buybtnbox">
+                        <a href="javascript:;" class="tryout" id="test1629" bh="1629"><i></i>试用</a>
+                        <a href="javascript:;" class="buy" id="buy1629" bh="1629"><i></i>
+	                        
+							            
+							     
+							     
+							   		  购买
+							     
+							
+							
+					    </a>
+						     <a href="javascript:;" class="detail" id="detail1629" bh="1629">详情</a>
+                  </div>
+                  
+                  
+              <!-- 列表结束 -->
+            </div>
+            
+            </form>
+            {/foreach}
+            
+        </div>
+    </div>
+ </div>
+</div>
+
+	<!--vps四大特性 start-->
+	<div class="fuwu-box">
+		<div class="ky-container">
+			<div class="d-tbc-vps d-tbc-first">
+				<a target="_blank" href="{:url('system')}" class="service-item-vps first-service-item">
+					<span class="term term-1"></span>
+				</a>
+			</div>
+			<div class="d-tbc-vps">
+				<a target="_blank" href="{:url('system')}" class="service-item-vps">
+					<span class="term term-2"></span>
+				</a>
+			</div>
+			<div class="d-tbc-vps">
+				<a target="_blank" href="{:url('system')}" class="service-item-vps">
+					<span class="term term-3"></span>
+				</a>
+			</div>
+			
+			<div class="d-tbc-vps">
+				<a target="_blank" href="{:url('system')}" class="service-item-vps">
+					<span class="term term-4 last-vps"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div id="msg" style="display: none;"></div>
+    <!--vps四大特性 end  -->
+{/block}

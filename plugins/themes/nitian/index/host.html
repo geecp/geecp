@@ -1,0 +1,493 @@
+{extend name="index/index"}
+{block name="content"}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>国内虚拟主机_企业主机_个人虚拟主机_免费虚拟主机-逆天科技</title>
+<meta name="keywords" content="国内虚拟主机,免费虚拟主机,企业主机,个人虚拟主机" />
+<meta name="description" content="逆天科技有13年国内虚拟主机，企业主机，个人虚拟主机，免费虚拟主机运营经验，采用高速优质带宽，安全稳定可靠，7*24小时不间断服务，20万用户的共同选择。" />
+<link rel="shortcut icon" href="__PUBLIC__/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/idangerous.swiper.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css">
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/nav.js"></script>
+<script src="__PUBLIC__/js/index-banner-js.js"></script>
+<script src="__PUBLIC__/js/index-floatright.js"></script>
+<script src="__PUBLIC__/js/zzidcsolu.js"></script>
+<script src="__PUBLIC__/js/win.js"></script>
+<script src="__PUBLIC__/js/idangerous.swiper.min.js"></script>
+<script src="__PUBLIC__/js/gainet.core.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/auth.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base-productnav.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/virtualhost.css">
+<style type="text/css">
+	.hidden{
+		display: none!important;
+	}
+</style>
+
+
+</head>
+<body>
+<!--导航 start-->
+
+<!--虚拟主机 banner start-->
+<div class="vh-bg">
+
+
+<div class="zzidc-auto padd40">
+	<div class="vh-tit">
+		国内主机
+	</div>
+	<div class="fwq-detail m-top20">
+		逆天虚拟主机采用软硬件技术，依托自建机房多线骨干网支撑，低成本高利用率，为中小微企<br>
+		业提供便利。 逆天虚拟主机具有单独的域名、IP（或共享IP），拥有完成的Internet服务器功<br>
+		能，自主研发管理平台，单站点自主环境配置简单便捷，防病毒、防攻击等功能一应俱全。<br>
+		
+		<p class="gff8 fsize12">
+			国内主机产品只允许绑定在我司备案接入的域名，如果您的域名不在我司备案，请于15天内访问我司备案网<br> 
+			站<a href="http://beian.zzidc.com/" class="host-link">http://beian.zzidc.com/</a>进行备案接入，否则域名将无法访问，另外，企业主机只允许绑定企业备案的域名。
+		</p>
+	</div>
+	<div class="btnbox">
+	</div>
+	</div>
+
+
+
+
+
+
+</div>
+<!--虚拟主机 banner end-->
+<div class="ssl-nav-container">
+	<div class="ssl-nav clearfix">
+
+	{foreach $res1 as $k=>$vo}
+        <a data-to="nav{$k+1}" class='ssl-nav-item {if condition="$k<1" }current{/if}'>{$vo.name}</a>
+	{/foreach}
+	</div>
+</div>
+<div class="bgf5">
+
+
+		{foreach $res1 as $i=>$vo1}
+	 	<div class='zzidc-auto {if condition="$i>=1" }hidden{/if}' data-cont="nav{$i+1}" style="padding-top:20px;padding-bottom:40px">
+		
+		{foreach $vo1.vhostproduct as $vo2}
+		<div class="vh-col clearfix mt40">
+		
+		<div name="div_select_" class="xinghao mr30 h502">
+			<input type="hidden" name="cpbh" value="1645" id="cpbh"/>
+			<input type="hidden" name="czxt" value="0" id="czxt1645"/>
+			
+		 		
+					<input type="hidden" name="jgbh" value="15816" id="jgbh1645"/>
+				
+			
+			<div class="xh-tit">{$vo2.name}</div>
+			<ul class="config-numb">
+				<li>
+					 <p class="numb-he">
+	                        
+							{$vo2.flow}G
+					  </p>
+					<p class="numb-note">月流量</p>
+				</li>
+				<li>
+					<p class="numb-he">{$vo2.space}</p>
+					<p class="numb-note">空间容量</p>
+				</li>
+				
+				
+					<li style="border:none">
+						<p class="numb-he">{$vo2.bandwidth}</p>
+						<p class="numb-note">带宽</p>
+					</li>	
+				
+			</ul>
+			<ul class="config-row">
+				
+				
+					
+				
+				<li id="db_y_1645">
+					<div class="vpsinfoleft g425">快云数据库共享版容量：</div>
+					<div class="vpsinforight g425">100M</div>
+				</li>
+				<li id="db_1645" style="display:none">
+					<div class="vpsinfoleft g999">数据库容量：</div>
+					<div class="vpsinforight"> 0</div>
+				</li>
+				<li>
+					<div class="vpsinfoleft g999">脚本语言：</div>
+					<div class="vpsinforight">
+						<div class="checkbox">
+							<label onclick="changCzxt('1645','0');" id="label_1645_0" class="xt-radio checked" > 
+								<span class="xt-radio-icon"></span> 
+								<input type="radio" name="use_db_1645" value="0" checked="checked">php
+							</label>
+							<label onclick="changCzxt('1645','1');" id="label_1645_1" class="xt-radio">
+								<span class="xt-radio-icon"></span>
+								<input type="radio" name="use_db_1645" value="1">ASP
+							</label>
+							
+						</div>
+					</div>
+				</li>
+				<li class="m-top10">
+					<div class="vpsinfoleft g999">价格：</div>
+					<div class="vpsinforight">
+						<select class="pricelist" value="zzPriceList" id="gmqx">
+		            			  {foreach $vo1.productprice as $vo3}
+										 <option id="14515" gmqx="1" bh="1629" value="">{$vo3.price}元/{$vo3.term}个月</option>
+									{/foreach}                     
+							</select>
+					</div>
+				</li>
+				
+					<li>
+						<div class="vpsinfoleft g999">&nbsp;</div>
+						该产品有备案接入要求，<a class="host-link" href="javascript:void(0);" onclick="javascript:beiantishi();return false;" >点击查看详情</a>
+					</li>
+				
+			</ul>
+			<div class="line"></div>
+			<div class="buybtnbox">
+				
+					<a class="buy"  style="margin-left:0;width:154px;" href="javascript:void(0);" onclick="javascript:saleOrTest(1645,1);return false;">立即购买</a> 
+					<a class="detail"  style="width: 153px;" href="javascript:void(0);" onclick="javascript:vhostDetail(1645);return false;" >详情</a>
+				
+				
+			</div>
+		</div>
+		
+	</div>
+	{/foreach}
+
+</div>
+{/foreach}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div>
+	<div class="zzidc-auto fsize14">
+		<div class="product-title-box mt40">
+			<span class="product-title" style="width:137px">特别声明</span>
+			<span class="product-title-english">Important&nbsp;Statements</span>
+		</div>
+		<p class="m-top20 gff8">以下三类网站不得使用我公司各款虚拟主机产品，一经发现，我公司有权不经任何通知，第一时间关闭站点！</p>
+		<p class="m-top10">1、违法违规类网站：仿站、游戏外挂、博彩类、法轮功、黄赌毒、木马、病毒、色情、非法售药、黑客盗号、钓鱼网站、私服、手机窃听、网络诈骗、反动信息、管制刀具、军警用品等包含但不限于以上类型的所有违法违规类网站；此类网站一经发现，直接删除业务、不提供程序与数据库文件下载、余额不予退还，同时我司会将网站开办者信息上报至国家公共信息网络安全监察支队！</p>
+		<p class="m-top10">
+			2、易受攻击类网站：低俗（含擦边球网站）、成人用品、游戏外挂、彩票、仿品站、减肥丰胸、TXT小说等不限于以上类型的所有易受攻击网站；网站如若遭受CC或DDOS攻击，我司将直接关闭，不再开启，用户可更换为独享资源产品（云空间、快云VPS、云服务器、独立服务器等）并使用我司快云安全产品；
+		</p>
+		<p class="m-top10">
+			3、占系统资源多的程序网站：聊天室、江湖、挂机类（如挂QQ、QQ秒赞等）、采集类等网站；发现3次占用服务器CPU或内存20%以上的网站，不再开启，用户可下载程序及数据库文件，更换为独享资源产品（云空间、快云VPS、云服务器、独立服务器等）；
+		</p>
+		<p class="m-top10 gff8">
+			若有违规或频繁受攻击，则域名将被拉黑。
+		</p>
+		<p class="m-top10 gff8 mbottom20" style="padding-bottom:20px">
+			为了营造良好的互联网环境，请大家遵守上述规定，否则后果自负，谢谢合作！
+		</p>
+	</div>
+</div>
+
+
+  <script src="__PUBLIC__/js/layer.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript">
+  //包含确定按钮的弹框
+  /*参数：标题   ：title,
+		内容  ：content,
+		方法名：fun
+		参数：param(原样传递给方法，如有多参数 ，请自定义json格式)
+		备注：fun(index,param)方法中的index。操作层时使用（例：关闭此弹框 layer.close(index);）
+  */
+	function alertMsg(title,content,fun,param){
+		layer.open({
+			  title: [
+			    title,'font-size:14px;color:#fff'
+			  ]
+			  ,anim: 'up'
+			  ,content: content
+			  ,btn: ['确认', '取消']
+			  ,yes:function(index){
+				  if(fun){
+					  fun(index,param); 
+				  }else{
+					  layer.close(index);
+				  }
+			  },
+			  no:function(){
+				  layer.close();
+			  }
+			});
+	}
+	
+	function showAlert(json){
+		showMsg(json.msg,json.func,json.param);
+	}
+	//仅有确定按钮,无最大最小化
+	function showMsg(content,fun,param){
+	    layer.open({
+	        title: [
+	            '操作提示',
+	            'font-size:14px;color:#fff'
+	        ], maxmin: false
+	        ,anim: 'up'
+	        ,content: content
+	        ,btn: ['确认']
+	        ,end:function(index){
+	            if(fun){
+	            	if(index){
+		                fun(index,param); 
+	            	}else{
+	            		fun(param); 
+	            	}
+	            }else{
+	                layer.close(index);
+	            }
+	        }
+	    });
+	}
+  //仅提示无按钮的弹框
+  function alerttip(content){
+	  layer.open({
+		  content: content
+		  ,style: 'color:#fff; border:none;' //自定风格
+		  ,time: 3
+		});
+  }
+  //无按钮的弹框----触发某方法
+  function alerttips(content,fun,param){
+	  layer.open({
+		  content: content
+		  ,style: 'color:#fff; border:none;' //自定风格
+		  ,time: 5
+		  ,end:function(index){
+			 fun(param); 
+		  }
+		});
+  }
+  
+  function alertNoButton(msg,func,param){//无按钮弹框 并在弹框结束后执行func
+  	layer.open({
+			  content: msg
+			  ,style: 'color:#fff; border:none;' //自定风格
+			  ,time: 3,
+			  end:function(index){
+			  	if(func){
+			  		if(index){
+						func(index,param);
+			  		}else{
+			  			func(param);
+			  		}
+			  	}
+			  }
+		});
+  }
+  
+  function showConfirm(content,fun,param){
+	    layer.open({
+	        title: [
+	            '操作提示',
+	            'font-size:14px;color:#fff'
+	        ], maxmin: false
+	        ,anim: 'up'
+	        ,content: content
+	        ,btn: ['确认','取消']
+	        ,yes:function(index){
+	            if(fun){
+	            	if(index){
+		                fun(index,param); 
+	            	}else{
+	            		fun(param); 
+	            	}
+	            }
+	        },no:function(){
+	        	 layer.close();
+	        }
+	    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+//打开某个层的弹框，两个按钮
+  function divMsg(title,content,fun,param,width,height,sure,cancle){
+	  //如果传入宽高样式
+	  var heights='auto';
+	  var widths='auto';
+	  if(height!=null){
+		  heights=height;
+	  }
+	  if(width!=null){
+		  widths=width;
+	  }
+	  if(!sure){
+	  	sure = "确定";
+	  }
+	  if(!cancle){
+	  	cancle = "取消";
+	  }
+// 	    alert("widths:"+widths+",heights:"+heights)
+	  //打开弹框
+	  layer.open({
+	         type: 1,
+	         title: [title,'font-size:14px;color:#fff'],
+	         maxmin: false,
+	         shadeClose: false,
+	         area: [widths, heights],
+	         content:content,
+	         btn: [sure, cancle],
+	         yes:function(index){
+	        	 if(fun){
+	        		 fun(param,index) 
+	        	 }
+			  },
+			  no:function(){
+				  layer.close();
+			  }
+	});
+  }
+  
+//打开某个层的弹框，一个确定按钮
+  function divMsgOne(title,content,fun,param,width,height){
+	  //如果传入宽高样式
+	  var heights='auto';
+	  var widths='auto';
+	   if(height!=null){
+		  heights=height;
+	  }
+	  if(width!=null){
+		  widths=width;
+	  }
+	  //打开弹框
+	  layer.open({
+	         type: 1,
+	         title: [title,'font-size:14px;color:#fff'],
+	         maxmin: false,
+	         shadeClose: false,
+	         area: [widths, heights],
+	         content:content,
+	         btn: ['确认'],
+	         yes:function(index){
+	        	 if(fun){
+	        		 fun(param,index) 
+	        	 }
+			  }
+	});
+  }
+  function JumpURL(content,url){
+	    layer.open({
+	        title: [
+	            '操作提示',
+	            'font-size:14px;color:#fff'
+	        ], maxmin: false
+	        ,anim: 'up'
+	        ,content: content
+	        ,btn: ['确认','取消']
+	        ,yes:function(index){
+	            if(url){
+	            	window.location.href=url;
+	            }
+	        },no:function(){
+	        	 layer.close();
+	        }
+	    });
+  }
+	</script>
+
+<script type="text/javascript">
+$(function(){
+
+$('[data-to]').on('click',function(){
+      		$('[data-cont]').addClass('hidden');
+      		$('[data-cont="'+$(this).data('to')+'"]').removeClass('hidden');
+      		$('[data-to]').removeClass('current');
+      		$(this).addClass('current');
+      });
+
+
+
+})
+
+
+
+</script>
+
+
+
+<script src="__PUBLIC__/js/divselect.js"></script>
+<script src="__PUBLIC__/js/layer.js"></script>
+{/block}

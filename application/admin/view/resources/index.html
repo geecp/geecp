@@ -1,0 +1,157 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<ul class="nav nav-tabs line">
+						<li class="active">
+							<a href="#nav1" data-toggle="tab">概览</a>
+						</li>
+						<li>
+							<a href="#nav2" data-toggle="tab">客户资料</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">联系方式</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">产品服务</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">域名</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">交易记录</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">邮件</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">备注</a>
+						</li>
+						<li>
+							<a href="#nav3" data-toggle="tab">操作日志</a>
+						</li>
+					</ul>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="table-responsive">
+							<div class="tool-box">
+								<form class="form-inline" action="" method="post">
+									<a href="" class="btn btn-ces">发送信息</a>
+									<div class="input-group pull-right">
+										<input type="" name="" placeholder="请输入查询内容" class="form-control">
+										<span class="input-group-addon input-group-btn"><a class="btn btn-ces">点击查询</a></span>
+									</div>
+								</form>
+							</div>
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock">
+											<input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+											<label class="vba-chekbox" for="checkboxf"></label>
+										</th>
+										<th class="lock">编号</th>
+										<th><button type="button" class="btn">姓名</button></th>
+										<th><button type="button" class="btn">公司名</button></th>
+										<th><button type="button" class="btn">邮件地址</button></th>
+										<th><button type="button" class="btn">服务</button></th>
+										<th><button type="button" class="btn">创建时间</button></th>
+										<th><button type="button" class="btn">状态</button></th>
+										<th class="lock control">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<input class="vba-ck" type="checkbox" name="ckf" id="checkboxf" value="">
+											<label class="vba-chekbox" for="checkboxf"></label>
+										</td>
+										<th scope="row">100322</th>
+										<td>taofu</td>
+										<td>qiduocloud</td>
+										<td>taofu@123.com</td>
+										<td>1(1)</td>
+										<td>2017/6/26 11:11:28</td>
+										<td>
+											<a href="" class="btn btn-success btn-xs">有效</a>
+										</td>
+										<td class="control">
+											<a class="control btn btn-ces btn-xs" href="">查看</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination pull-left">
+									<li class="active">
+										<span>1</span>
+									</li>
+									<li>
+										<a href="#">2</a>
+									</li>
+									<li>
+										<a href="#">3</a>
+									</li>
+									<li>
+										<a href="#">4</a>
+									</li>
+									<li>
+										<a href="#">5</a>
+									</li>
+								</ul>
+								<div class="btn-group pnmix pull-left">
+									<button class="btn btn-default disabled prev"><span class="iconfont icon-arrow-left-thin"></span>上一页</button>
+									<button class="btn btn-default next">下一页<span class="iconfont icon-arrow-right-thin"></span></button>
+								</div>
+								<div class="btn-group countmix pull-right">
+									<input type="radio" name="count" id="count1" value="10" checked="checked">
+									<label for="count1">10</label>
+									<input type="radio" name="count" id="count2" value="25">
+									<label for="count2">25</label>
+									<input type="radio" name="count" id="count3" value="50">
+									<label for="count3">50</label>
+									<input type="radio" name="count" id="count4" value="100">
+									<label for="count4">100</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+{/block}
+{block name="script"}
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.datetime').val(moment().format('YYYY/MM/DD'));
+		$('.datetime').daterangepicker({
+			singleDatePicker: true,
+			opens: 'left',
+			showButtonPanel: false,
+			buttonClasses: 'btn-sm btn btn-default',
+			applyClass: 'btn-sm btn btn-ces',
+			cancelClass: 'btn-sm btn btn-default',
+			locale: {
+				applyLabel: '确定',
+				cancelLabel: '取消',
+				fromLabel: '起始时间',
+				toLabel: '结束时间',
+				customRangeLabel: '自定义',
+				daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+				monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+					'七月', '八月', '九月', '十月', '十一月', '十二月'
+				],
+				firstDay: 1
+			},
+			drops: 'up'
+		});
+		$('.datetime').on('apply.daterangepicker', function(ev, picker) {
+
+			console.log(picker.startDate.format('YYYY/MM/DD'));
+
+			console.log(picker.endDate.format('YYYY/MM/DD'));
+
+		});
+	});
+</script>
+{/block}

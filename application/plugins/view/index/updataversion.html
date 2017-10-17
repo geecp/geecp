@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {include file="plugins@publicfile/header"   title='x' /}
+</head>
+<body>
+    <div class="container">
+        <form  class="form-horizontal" action="{:url('pluginupdate')}" enctype="multipart/form-data" method="post">
+          <div class="form-group">
+            <label for="modulename">插件唯一标识名，仅限英文字符</label>
+            <input type="text" class="form-control"  disabled="disabled" id="modulename" placeholder="module name" name="name">
+            <input type="hidden" class="form-control" id="modulenameh" placeholder="module name" name="name">
+            <input type="hidden" class="form-control" id="pid" placeholder="module name" name="pid">
+          </div>
+          <div class="form-group">
+            <label for="moduleversion">插件版本</label>
+            <input type="text" class="form-control" id="moduleversion" placeholder="" name="version">
+          </div>
+          <div class="form-group">
+            <label for="moduleamemo">插件更新简述</label>
+            <input type="text" class="form-control" id="moduleamemo" placeholder="" name="memo">
+          </div>
+          <div class="form-group">
+            <label for="modulefile">插件zip安装包</label>
+            <input type="file" id="modulefile" name="modulefile">
+          </div>
+          <button type="submit" class="btn btn-default">提交</button>
+          {:token()}
+        </form>
+    </div>
+    <script type="text/javascript">
+        // layer.alert("as");
+        $(function(){
+          $('#pid').val("{$pinfo.id}");
+          $('#modulename').val("{$pinfo.name}");
+          $('#modulenameh').val("{$pinfo.name}");
+          $('#moduletitle').val("{$pinfo.title}");
+          $('#moduleversion').val("{$pinfo.version}");
+          $('#moduleamemo').val("");
+          // $('#modulefile').val("C:\fakepath\bce.zip");
+        });
+    </script>
+</body>
+</html>

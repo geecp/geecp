@@ -1,0 +1,349 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*共用产品滑动导航*/
+@font-face {
+	font-family: 'Helvetica35-Thin';
+	src: url('../fonts/helveticathn.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/helveticathn.eot') format('embedded-opentype'), /* IE6-IE8 */
+             url('../fonts/helveticathn.woff') format('woff'), /* Modern Browsers */
+             url('../fonts/helveticathn.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('../fonts/helveticathn.svg') format('svg'); /* Legacy iOS */
+	  font-weight: normal;
+	  font-style: normal;
+   }
+.ky-sever-nav{
+	width: 100%;
+	height: 74px;
+	background-color: #2e303f;
+	min-width: 1200px;
+}
+.ky-sever-content{
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto;
+}
+.float-nav-list0{
+	width: 210px;
+	height: 45px;
+	padding-top: 15px;
+	padding-bottom: 14px;
+	display: none;
+	position: relative;
+	cursor: default;
+}
+.float-nav-fixednav .float-nav-list0{
+	display: block;
+}
+.float-nav-list-text{
+	width: 158px;
+	height: 100%;
+	font-size: 16px;
+	line-height: 45px;
+	position:relative;
+	padding-left:52px
+}
+.float-nav-menu-tb{
+	width: 19px;
+	height: 19px;
+	display: block;
+	float: left;
+	margin-top: 13px;
+	margin-left: 14px;
+	margin-right: 18px;
+	background: url(../images/ky-sever-nav-menu.png) no-repeat 0 0;
+}
+.float-nav-list{
+	width: 25%;
+	height: 100%;
+}
+.float-nav-list:hover{
+	background-color: #1d1e2c;
+}
+.float-nav-list-active{
+	background-color: #1d1e2c;
+}
+.float-nav-list.width20{
+	width: 20%;
+	height: 100%;
+}
+.float-nav-list.width33{
+	width:33.3%;
+	height: 100%;
+}
+.float-nav-list.width50{
+	width: 50%;
+	height: 100%;
+}
+.float-nav-fixednav .float-nav-list{
+	width: 217px;
+}
+.float-nav-fixednav .float-nav-list.width172{
+	width: 172px;
+}
+.float-nav-fixednav .float-nav-list.width289{
+	width: 289px;
+}
+.float-nav-fixednav .float-nav-list.width433{
+	width: 433px;
+}
+.float-nav-list>a{
+	display: inline-block;
+	width: 100%;
+	height: 45px;
+	padding-top: 15px;
+	padding-bottom:14px;
+}
+.float-nav-list-text1{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.float-nav-fixednav .float-nav-list-text1{
+	width: 100%;
+	border-left:none;
+}
+.float-nav-list-text2{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.float-nav-list2{
+	display: none;
+}
+.float-nav-fixednav .float-nav-list2{
+	display: block;
+	width: 122px;
+	height: 100%;
+}
+.float-nav-buy-now{
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #4251b6;
+	line-height: 74px;
+	color:#fff;
+}
+.float-nav-buy-now:hover{
+	background-color: #3545ac;
+	color:#fff;
+}
+.float-nav-menu-list{
+	width: 100%;
+	position: absolute;
+	top: 74px;
+	overflow: hidden;
+	background-color: #2e303f;
+	display: none;
+}
+.float-nav-menu-list-item{
+	width: 100%;
+	border-top: 1px solid #50525f;
+	border-bottom: 1px solid #50525f;
+	margin-top: -1px;
+}
+.float-nav-menu-list-item-warp{
+	width: 100%;
+	height: 100%;
+	display: block;
+	line-height: 54px;
+	padding-left:52px;
+	padding-right:15px;
+	color: #fff;
+	font-size: 14px;
+	background:url(../images/ky-sever-nav-list.png) no-repeat 14px 16px;
+}
+.float-nav-menu-list-item-warp:hover{
+	background-color: #1d1e2c;
+	color: #fff;
+}
+.float-nav-menu-list-item-warp.bgnone{background:none;text-align:center;padding-left:0}
+.float-nav-menu-list-item-warp.bgnone:hover{background-color: #1d1e2c}
+.bgimg-position-y0{
+	background-position-y: -37px
+}
+.bgimg-position-y1{
+	background-position-y: -93px
+}
+.bgimg-position-y2{
+	background-position-y: -146px
+}
+.bgimg-position-y3{
+	background-position-y: -202px
+}
+.bgimg-position-y4{
+	background-position-y: -254px
+}
+.bgimg-position-y5{
+	background-position-y: -407px;
+}
+.bgimg-position-y6{
+	background-position-y: -356px;
+}
+
+.bgimg-position-y7{
+	background-position-y: -299px;
+}
+.bgimg-position-y8{
+	background-position-y: -462px;
+}
+.bgimg-position-y9{
+	background-position-y: -515px;
+}
+.bgimg-position-y10{
+	background-position-y: -568px;
+}
+
+.bgimg-position-y11{
+	background-position-y: -621px;
+}
+.bgimg-position-y12{
+	background-position-y: -668px;
+}
+.float-nav-seize{
+	width: 100%;
+	height: 74px;
+	display: none;
+}
+
+.float-nav-fixednav{
+ 	position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 9999;
+}
+.float-nav-text0{font-size:16px}
+.float-nav-text1{font-family: "Helvetica35-Thin";font-size:12px;color:#fff;
+filter:alpha(opacity=30); /*IE滤镜，透明度50%*/
+-moz-opacity:0.3; /*Firefox私有，透明度50%*/
+opacity:0.3;/*其他，透明度50%*/
+-khtml-opacity: 0.3;
+}
+/*托管租用二级菜单*/
+.float-item-tit{display:inline-block;width:130px}
+.arrow-down{background:url(../images/ky-nav-arrow-down.png) no-repeat;display:inline-block;width:14px;height:9px;vertical-align:middle;margin-bottom:1px}
+.float-nav-open .arrow-down{
+	background:url(../images/ky-nav-arrow-up.png) no-repeat;
+}
+.float-nav-menu-list-item-list{
+	width: 100%;
+	background-color: #2e303f;
+	display: none;
+}
+.float-nav-menu-list-item-list-item{
+	width: 100%;
+	height: 38px;
+}
+.float-nav-menu-list-item-list-item>a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	color: #fff;
+	line-height: 38px;
+	padding-left: 50px;
+}
+.float-nav-menu-list-item-list-item>a:hover{
+	color: #fff;
+	background-color: #1d1e2c;
+}
+.dis{display:block}
+.undis{display:none}
+
+/*动态方块*/
+	#loading-center-absolute {
+        position:absolute;
+		left:12px;
+		top:10px;
+		height: 30px;
+		width: 30px;
+
+	}
+
+	.object{
+		width: 6px;
+		height: 6px;
+		background-color: #FFF;
+		margin-right: 4px;
+		float: left;
+		margin-bottom: 4px;
+		-moz-border-radius: 50% 50% 50% 50%;
+		-webkit-border-radius: 50% 50% 50% 50%;
+		border-radius: 50% 50% 50% 50%;
+		}
+	.object:nth-child(3n+0) {
+		margin-right: 0px;
+	}
+	#object_one {
+		-webkit-animation: animate 1s -0.9s ease-in-out infinite ;
+		animation: animate 1s -0.9s ease-in-out infinite ;
+		}
+	#object_two {
+	    -webkit-animation: animate 1s -0.8s ease-in-out infinite ;
+		animation: animate 1s -0.8s ease-in-out infinite ;
+		}
+	#object_three {
+	    -webkit-animation: animate 1s -0.7s ease-in-out infinite ;
+		animation: animate 1s -0.7s ease-in-out infinite ;
+		}
+	#object_four {
+	    -webkit-animation: animate 1s -0.6s ease-in-out infinite ;
+		animation: animate 1s -0.6s ease-in-out infinite ;
+		}
+	#object_five {
+	    -webkit-animation: animate 1s -0.5s ease-in-out infinite ;
+		animation: animate 1s -0.5s ease-in-out infinite ;
+		}
+	#object_six {
+	    -webkit-animation: animate 1s -0.4s ease-in-out infinite ;
+		animation: animate 1s -0.4s ease-in-out infinite ;
+		}
+	#object_seven {
+	    -webkit-animation: animate 1s -0.3s ease-in-out infinite ;
+		animation: animate 1s -0.3s ease-in-out infinite ;
+		}
+	#object_eight {
+	    -webkit-animation: animate 1s -0.2s ease-in-out infinite ;
+		animation: animate 1s -0.2s ease-in-out infinite ;
+		}
+	#object_nine {
+	    -webkit-animation: animate 1s -0.1s ease-in-out infinite ;
+		animation: animate 1s -0.1s ease-in-out infinite ;
+		}
+
+	@-webkit-keyframes animate {
+	  50% {
+		-ms-transform: scale(0.8,0.8); 
+	   	-webkit-transform: scale(0.8,0.8); 
+	    transform: scale(0.8,0.8); 
+		  }
+	 
+	  100% {
+		-ms-transform: scale(1,1); 
+	   	-webkit-transform: scale(1,1); 
+	    transform: scale(1,1); 
+		  }
+
+	}
+
+	@keyframes animate {
+	  50% {
+		-ms-transform: scale(0.8,0.8); 
+	   	-webkit-transform: scale(0.8,0.8); 
+	    transform: scale(0.8,0.8); 
+		  }
+	 
+	  100% {
+		-ms-transform: scale(1,1); 
+	   	-webkit-transform: scale(1,1); 
+	    transform: scale(1,1); 
+		  }
+	  
+	}
+
+.product-title-box{height:50px;line-height:50px;border-bottom:1px solid #d8d8d8;position:relative}
+.product-title{width:106px;border-bottom:3px solid #4251b6;position:relative;bottom:3px;font-size:22px;display:inline-block}
+.product-title-english{font-size:28px;font-family: "Helvetica35-Thin";color:#d8d8d8}
+
+
+

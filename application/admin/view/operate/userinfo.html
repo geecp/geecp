@@ -1,0 +1,288 @@
+{extend name="index/index"}
+{block name="content"}
+
+				<div class="page-header">
+					<ul class="nav nav-tabs line">
+						<li>
+							<a href="{:url('operate/platform',['id'=>$userid])}">概览</a>
+						</li>
+						<li class="active">
+							<a href="javascript:;">客户资料</a>
+						</li>
+						<li>
+							<a href="#nav3">联系方式</a>
+						</li>
+						<li>
+							<a href="#nav3">产品服务</a>
+						</li>
+						<li>
+							<a href="#nav3">域名</a>
+						</li>
+						<li>
+							<a href="{:url('operate/transaction',['id'=>$userid])}">交易记录</a>
+						</li>
+						<li>
+							<a href="#nav3">邮件</a>
+						</li>
+						<li>
+							<a href="#nav3">备注</a>
+						</li>
+						<li>
+							<a href="#nav3">操作日志</a>
+						</li>
+					</ul>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<form method="post" action="/admin/clientsprofile.php?save=true&amp;userid=1">
+							<input type="hidden" name="token" value="6c89153b7f0020440ca6df10a6709b79c87b6d63">
+
+							<table class="form-inline" width="100%" border="0" cellspacing="2" cellpadding="3">
+								<tbody>
+									<tr>
+										<td width="15%" class="fieldlabel">名字：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-250" name="firstname" value="taofu" tabindex="1"></td>
+										<td class="fieldlabel" width="15%">地址 1：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-250" name="address1" value="china home" tabindex="8"></td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">姓氏：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-250" name="lastname" value="fu" tabindex="2"></td>
+										<td class="fieldlabel">地址 2：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-250 input-inline" name="address2" value="" tabindex="9">
+											<font color="#cccccc"><small>(选填项)</small></font>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">公司名：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-250 input-inline" name="companyname" value="qiduocloud" tabindex="3">
+											<font color="#cccccc"><small>(选填项)</small></font>
+										</td>
+										<td class="fieldlabel">国家：</td>
+										<td class="fieldarea">
+											<select name="country" id="country" class="form-control select-inline" tabindex="13">
+												<option value="PRC">中华人民共和国</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">邮件地址：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-300" name="email" value="taofu@123.com" tabindex="4"></td>
+										<td class="fieldlabel">省份：</td>
+										<td class="fieldarea">
+											<input type="text" class="form-control input-250" data-selectinlinedropdown="1" value="Alaska" tabindex="11" id="stateinput" style="display: none;">
+											<select name="province" class="form-control input-250 select-inline" id="provinceselect" tabindex="11">
+												<option value="0">请选择</option>
+												{foreach $province as $val}
+												<option value="{$val['id']}">{$val['name']}</option>
+												{/foreach}
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">密码：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-150 input-inline" name="password" value="更改密码在此输入" onfocus="if(this.value=='更改密码在此输入')this.value=''" tabindex="5">
+											<a href="clientsprofile.php?userid=1&amp;resetpw=true&amp;token=6c89153b7f0020440ca6df10a6709b79c87b6d63"> 重设并发送密码</a>
+										</td>
+										<td class="fieldlabel">城市：</td>
+										<td class="fieldarea">
+											<select name="city" class="form-control input-250 select-inline" id="cityselect" tabindex="11">
+												<option value="0">请选择</option>
+											</select></td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">密保问题：</td>
+										<td class="fieldarea">
+											<select name="securityqid" class="form-control select-inline" tabindex="6">
+												<option value="" selected="">无</option>
+											</select>
+										</td>
+										<td class="fieldlabel">邮编：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-150" name="postcode" value="20000" tabindex="12"></td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">密保答案：</td>
+										<td class="fieldarea"><input type="text" name="securityqans" class="form-control input-250" value="" tabindex="7"></td>
+										<td class="fieldlabel">电话号码：</td>
+										<td class="fieldarea"><input type="text" class="form-control input-150" name="phonenumber" value="13816141440" tabindex="14"></td>
+									</tr>
+									<tr>
+										<td class="fieldlabel"><br></td>
+										<td class="fieldarea"></td>
+										<td class="fieldlabel"></td>
+										<td class="fieldarea"></td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">滞纳金：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="latefeeoveride" id="latefeeoveride" value="">
+												<label class="vba-chekbox" for="latefeeoveride">不添加滞纳金</label>
+											</div>
+											<td class="fieldlabel">付款方式：</td>
+											<td class="fieldarea">
+												<select name="paymentmethod" class="form-control select-inline" tabindex="22">
+													<option value="">默认</option>
+													<option value="alipay">Alipay 支付宝全能接口 v1.0</option>
+												</select>
+											</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">逾期通知：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="overideduenotices" id="overideduenotices" value="">
+												<label class="vba-chekbox" for="overideduenotices">不发送逾期通知</label>
+											</div>
+										</td>
+										<td class="fieldlabel">财务联系人：</td>
+										<td class="fieldarea">
+											<select name="billingcid" class="form-control select-inline" tabindex="23">
+												<option value="0">默认</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">免附加税：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="taxexempt" id="taxexempt" value="">
+												<label class="vba-chekbox" for="taxexempt">免交附加税</label>
+											</div>
+										</td>
+										<td class="fieldlabel">语言：</td>
+										<td class="fieldarea">
+											<select name="language" class="form-control select-inline" tabindex="24">
+												<option value="">默认</option>
+												<option value="chinese">Chinese</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">拆分账单：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="separateinvoices" id="separateinvoices" value="">
+												<label class="vba-chekbox" for="separateinvoices">拆分服务账单</label>
+											</div>
+										</td>
+										<td class="fieldlabel">状态：</td>
+										<td class="fieldarea">
+											<select name="status" class="form-control select-inline" tabindex="25">
+												<option value="Active" selected="">已激活</option>
+												<option value="Inactive">已停用</option>
+												<option value="Closed">已关闭</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">禁用信用卡支付：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="disableautocc" id="disableautocc" value="">
+												<label class="vba-chekbox" for="disableautocc">禁用信用卡自动支付</label>
+											</div>
+										</td>
+										<td class="fieldlabel">币种：</td>
+										<td class="fieldarea">
+											<select name="currency" class="form-control select-inline" tabindex="26">
+												<option value="1" selected="">USD</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">取消发送营销邮件：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="emailoptout" id="emailoptout" value="">
+												<label class="vba-chekbox" for="emailoptout">不要发送营销邮件</label>
+											</div>
+										</td>
+										<td class="fieldlabel">客户组：</td>
+										<td class="fieldarea">
+											<select name="groupid" class="form-control select-inline" tabindex="27">
+												<option value="0">无</option>
+											</select>
+										</td>
+									</tr>
+									<tr height="40">
+										<td class="fieldlabel">状态更新：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="overrideautoclose" id="overrideautoclose" value="">
+												<label class="vba-chekbox" for="overrideautoclose">禁用自动状态更新</label>
+											</div>
+										</td>
+										<td class="fieldlabel">双重验证：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="twofaenabled" id="twofaenabled" value="">
+												<label class="vba-chekbox" for="twofaenabled">已启用 - 取消勾选以禁用</label>
+											</div>
+										</td>
+									</tr>
+									<tr height="40">
+										<td class="fieldlabel">允许单点登录：</td>
+										<td class="fieldarea">
+											<div class="checkbox inline">
+												<input class="vba-ck" type="checkbox" name="allowsinglesignon" id="allowsinglesignon" value="" checked="checked">
+												<label class="vba-chekbox" for="allowsinglesignon">勾选允许单点登录</label>
+											</div>
+										</td>
+										<td class="fieldlabel"></td>
+										<td class="fieldarea"></td>
+									</tr>
+									<tr>
+										<td class="fieldlabel">管理员备注：</td>
+										<td class="fieldarea" colspan="3"><textarea name="notes" rows="4" class="form-control unline" style="width: 100%;"></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="btn-container text-center">
+								<input type="submit" value="保存更改" class="btn btn-primary" tabindex="30">
+								<input type="reset" value="取消更改" class="button btn btn-default" tabindex="31">
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+
+			{/block}
+	{block name="script"}
+		<script type="text/javascript">
+			$("#provinceselect").change(function(){
+				//当前选中项的value值
+				var val = $(this).val();
+				//console.log(val);  // 1  2
+
+				var arr = getCitysByParentId(val);
+				console.log(arr);
+
+				//清除所有选项，留下第一个("请选择")
+
+				/*$("#cityselect option:gt(0)").remove();
+
+				for(var i=0;i<arr.length();i++){
+					var option = '<option value="'+ arr[i].id +'">'+ arr[i].name +'</option>';
+					$("#cityselect").append(option);
+				}
+*/
+			});
+
+			function getCitysByParentId(id){
+				$.ajax({
+					type: "POST",
+					url: "{:url('operate/getCitysByParentId')}",
+					data: {"pid":id},
+					dataType: "json",
+					success: function (data) {
+						return data;
+					},
+				});
+			}
+
+
+		</script>
+{/block}

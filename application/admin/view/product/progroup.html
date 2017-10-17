@@ -1,0 +1,122 @@
+{extend name="index/index"}
+{block name="content"}
+
+				<div class="page-header">
+					<h5>产品组列表</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="table-responsive">
+							<p class="pull-right">每页显示<span class="ml10 mr10">{$count}</span>条数据</p>
+							<div class="tool-box">
+								<a href="{:url('product/addgroup',['num'=>2])}" class="btn btn-ces"><i class="iconfont icon-plus r"></i>新增</a>
+							</div>
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock">序号</th>
+										<th class="lock">组名称</th>
+										<th class="lock">一级标识</th>
+										<th class="lock">二级级标识</th>
+										<!--<th class="lock">服务器设置</th>-->
+										<th class="lock">状态</th>
+										<th class="lock">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								{foreach $data as $val}
+									<tr>
+										<td class="text-center">{$val.id}</td>
+										<td>{$val.name}</td>
+										<td>{$val.identify}</td>
+										<td>{$val.erji}</td>
+										<!--<td scope="row">vestacp</td>-->
+										<td>
+											<a href="javascript:;" class="updatestatus btn {eq name='$val.status' value='1'} btn-success {else/} btn-danger {/eq} btn-xs" nid="{$val.id}" nstatus="{$val.status}">
+												{if condition="$val['status'] eq 1"} 启用
+												{else /} 禁用
+												{/if}
+											</a>
+										</td>
+										<td>
+											<a href="{:url('product/group_edit',['id'=>$val.id])}" class="btn btn-ces btn-xs">修改</a>
+											<a href="javascript:;" nid="{$val.id}" class="btn btn-danger btn-xs js-del">删除</a>
+										</td>
+									</tr>
+								{/foreach}
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination">
+									{$data->render()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		{/block}
+{block name="script"}
+<script>
+
+	//删除
+	$('.js-del').click(function () {
+
+		var thiss = $(this);
+		var id = $(this).attr('nid');
+		$.ajax({
+			type: 'POST',
+			url:"{:url('product/deletegroup')}",
+			data: {id: id},
+			dataType: 'json',
+			success: function (data) {
+				if (data['msg'] == 1) {
+					alert('删除成功');
+					thiss.parent().parent().remove();
+				}else if(data['msg'] == 2){
+					alert('您没有操作权限!');
+				}else if(data['msg'] == 4){
+					alert('请把子级服务器删除以后再执行该操作!');
+				}else{
+					alert("删除失败");
+				}
+			}
+		})
+	});
+
+	//显示隐藏
+	$('.updatestatus').click(function () {
+		var id = $(this).attr('nid');
+		var thiss = $(this);
+		var stat = $(this).attr('nstatus');
+		if (stat == 1) {
+			stat = 0;
+		} else {
+			stat = 1;
+		}
+		$.ajax({
+			type: 'POST',
+			url:"{:url('product/savegrostatus')}",
+			data: {id: id, status: stat},
+			dataType: "json",
+			success: function (data) {
+				if (data['msg'] == 1) {
+					if (data['status'] == 1) {
+						thiss.removeClass('btn-danger');
+						thiss.addClass('btn-success');
+						thiss.html('启用');
+					} else {
+						thiss.removeClass('btn-success');
+						thiss.addClass('btn-danger');
+						thiss.html('禁用');
+					}
+					thiss.attr('nid', data['id']);
+					thiss.attr('nstatus', data['status']);
+				}else if(data['msg'] == 2){
+					alert('您没有操作权限!');
+				}
+			}
+		})
+	});
+</script>
+{/block}

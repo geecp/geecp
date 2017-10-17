@@ -1,0 +1,161 @@
+{extend name="index/index"}
+{block name="content"}
+				<div class="page-header">
+					<h5>流水记录</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox">
+						<div class="table-responsive">
+							<div class="tool-box">
+								<form class="form-inline" action="{:url('finance/flowrecord')}" method="get">
+									<div class="btn-group">
+										<div class="col-md-12">
+											<select name="t_type" class="form-control">
+												<option value="">全部</option>
+												<option value="1" {if condition="$Request.session.t_type eq 1"} selected="selected"{/if} >充值</option>
+												<option value="2" {if condition="$Request.session.t_type eq 2"} selected="selected"{/if} >购买</option>
+												<option value="3" {if condition="$Request.session.t_type eq 3"} selected="selected"{/if} >退款</option>
+												<option value="4" {if condition="$Request.session.t_type eq 4"} selected="selected"{/if} >入款</option>
+												<option value="6" {if condition="$Request.session.t_type eq 6"} selected="selected"{/if} >优惠虚增</option>
+												<option value="7" {if condition="$Request.session.t_type eq 7"} selected="selected"{/if} >其他</option>
+												<option value="8" {if condition="$Request.session.t_type eq 8"} selected="selected"{/if} >消费</option>
+											</select>
+										</div>
+									</div>
+									<div class="input-group pull-right">
+										<span><input type="text" name="product" placeholder="请输入产品服务查询" value="{$Request.session.product}"  class="form-control">
+										<input type="submit" value="点击查询" class="btn btn-ces"></span>
+									</div>
+								</form>
+
+							</div>
+							<table class="table tools">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock tal">序号</th>
+										<th class="lock">订单编号</th>
+										<th class="lock">产品服务</th>
+										<th class="lock">客户</th>
+										<th class="lock">截至帐期</th>
+										<th class="lock">交易类型</th>
+										<th class="lock">交易方式</th>
+										<th class="lock">总金额</th>
+										<th class="lock">实付金额</th>
+										<th class="lock">支付状态</th>
+										<th class="lock">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								{foreach $res as $val}
+									<tr>
+										<td>{$val.id}</td>
+										<td>{$val.order_id}</td>
+										<td scope="row">{$val.product}</td>
+										<td scope="row">{$val.userid}</td>
+										<td>{$val.creat_time}</td>
+										<td>{if condition="$val.transaction_type eq 1"}充值
+											{elseif condition="$val.transaction_type eq 2"/}购买
+											{elseif condition="$val.transaction_type eq 3"/}退款
+											{elseif condition="$val.transaction_type eq 4"/}入款
+											{elseif condition="$val.transaction_type eq 5"/}退款
+											{elseif condition="$val.transaction_type eq 6"/}优惠虚增
+											{elseif condition="$val.transaction_type eq 8"/}消费
+											{else/}其他
+											{/if}
+										</td>
+										<td><i {if condition="$val.channel_type eq 1"} class="iconfont icon-zhifubao"    {elseif condition="$val.channel_type eq 2"} class="iconfont icon-weixinzhifu" {else} class="iconfont icon-zhuanzhang"{/if}></i></td>
+										<td><span class="money">{$val.money}</span></td>
+										<td><span class="money">{$val.money}</span></td>
+										<td><span {if condition="$val.status eq 1"}  class="round text-info" {elseif condition="$val.status eq 2"} class="round text-danger" {elseif condition="$val.status eq 3"} class="round text-muted" {elseif condition="$val.status eq 4"} class="round text-success"  {elseif condition="$val.status eq 5"} class="round text-danger" {elseif condition="$val.status eq 6"} class="round text-success"  {else} class="round text-success" {/if}>
+											{if condition="$val.status eq 1"} 支付成功
+											{elseif condition="$val.status eq 2"/}未支付
+											{elseif condition="$val.status eq 3"/}已取消
+											{elseif condition="$val.status eq 4"/}已到账
+											{elseif condition="$val.status eq 5"/}未到账
+											{else/}已完成
+											{/if}</span></td>
+										<td><a href="{:url('finance/flowreinfo',['id'=>$val.id])}" class="btn btn-ces btn-xs">详情</a></td>
+									</tr>
+								{/foreach}
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination pull-left">
+									{$res->render()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+{/block}
+{/block name="script"}
+		<script type="text/javascript" src="js/lib/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/lib/echarts.min.js"></script>
+		<script type="text/javascript">
+			var myChart = echarts.init(document.getElementById('main'));
+			myChart.title = '堆叠柱状图';
+
+			option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+					data: ['短信使用情况', 'BCE使用情况', '其他使用情况1', '其他使用情况2', '其他使用情况3']
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+						name: '短信使用情况',
+						type: 'bar',
+						stack: '短信使用情况',
+						barWidth: '20%',
+						data: [320, 332, 301, 334, 390, 330, 320]
+					},
+					{
+						name: 'BCE使用情况',
+						type: 'bar',
+						stack: '短信使用情况',
+						barWidth: '20%',
+						data: [120, 132, 101, 134, 90, 230, 210]
+					},
+					{
+						name: '其他使用情况1',
+						type: 'bar',
+						stack: '短信使用情况',
+						barWidth: '20%',
+						data: [220, 182, 191, 234, 290, 330, 310]
+					},
+					{
+						name: '其他使用情况2',
+						type: 'bar',
+						stack: '短信使用情况',
+						barWidth: '20%',
+						data: [150, 232, 201, 154, 190, 330, 410]
+					},
+					{
+						name: '其他使用情况3',
+						type: 'bar',
+						stack: '短信使用情况',
+						barWidth: '20%',
+						data: [862, 1018, 964, 1026, 1679, 1600, 1570]
+					}
+				]
+			};
+			myChart.setOption(option);
+		</script>
+{/block}

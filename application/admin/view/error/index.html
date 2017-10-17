@@ -1,0 +1,38 @@
+{extend name="index/index"}
+{block name="mie"}
+<div class="page-container">
+	<div class="page-lastmenu wht">
+		<div class="page-header">
+			<h5>{$name}</h5>
+		</div>
+		<ul class="list-unstyled">
+			<li class="active" {/if}>
+			<a href="">维护中</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{/block}
+{block name="content"}
+			<div class="">
+				<div class="page-lastmenu wht">
+					<div class="page-header">
+						<h5>{$name}</h5>
+					</div>
+					<ul class="list-unstyled">
+						<li class="active">
+							<a href="">开发中</a>
+						</li>
+					</ul>
+				</div>
+				<div class="page-header">
+					<h5>开发中</h5>
+				</div>
+				<div class="main">
+					<div class="mixbox un">
+						<h4><i class="iconfont icon-nodata"></i><span>对不起！当前版本暂无此功能，请耐心等待~</span></h4>
+					</div>
+				</div>
+			</div>
+{/block}
+

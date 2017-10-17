@@ -1,0 +1,59 @@
+{extend name="index/index"}
+{block name="content"}
+	<div class="page-header">
+		<h5>插件配置</h5>
+	</div>
+	<div class="main">
+		<div class="mixbox">
+			<form class="form-horizontal" action="{:url('cloud/saveconfig')}" id="save"  method="post">
+				<div class="form-group">
+					<label for="" class="control-label col-md-2">接口配置：{$result.title}</label>
+				</div>
+				<div class="">
+					<input type="hidden" name="id" value="{$id}">
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="nav1">
+							{notempty name="$result.options"}
+								{foreach $result.options as $k => $v}
+								<div class="form-group">
+									<label for="" class="control-label col-md-2">{$v.title}：</label>
+									<div class="col-md-3">
+										<input  type="text" name="{$k}" class="form-control" value="{$v.value}" />
+									</div>
+									<div class="col-md-6">
+										<span class="help-block">{$v.tip}</span>
+									</div>
+								</div>
+								{/foreach}
+							{/notempty}
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 col-sm-offset-1">
+						<button type="submit" class="btn btn-ces" id="tijiao">确认提交</button>
+						<button class="btn btn-ces" onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="__ROOT__/static/admin/js/lib/jquery.form.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+		option2 = ({
+			success: function(data) {
+				if(data == 1) {
+					alert('提交成功');
+					window.history.back(-1);
+				} else {
+					alert('提交成功');
+				}
+			}
+		});
+		$("#save").ajaxForm(option2);
+
+</script>
+{/block}

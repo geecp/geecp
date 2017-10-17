@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="HandheldFriendly" content="True">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__ROOT__/static/login/css/lib/bootstrap.min.css" type="text/css">
+	<!--[if lt IE 9]> <script>location.href="old.html"</script> <![endif]-->
+	<!--<link rel="stylesheet" href="__ROOT__/static/login/css/less/style.css?v0.001" />-->
+	<link rel="stylesheet/less" type="text/css" href="__ROOT__/static/login/css/less/style.less?1.00" />
+	<script type="text/javascript" src="__ROOT__/static/login/js/lib/less.js"></script>
+	<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_n82t7dpj70evcxr.css" />
+	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<link rel="stylesheet" href="https://api.qiduo.net/css.css">
+</head>
+
+<body class="log-bg">
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><img src="__ROOT__/static/login/img/qiduo.png" class="img-responsive" /></a>
+		</div>
+		<div class="navbar-right">
+			<a href="" class="btn btn-link">返回主站</a>
+		</div>
+	</div>
+</nav>
+<div class="container login-box">
+	<div class="row">
+		<div class="col-md-8">
+			<img src="__ROOT__/static/admin/img/banner/banner_1.png" class="img-responsive" />
+		</div>
+		<div class="col-md-4">
+			<div class="log-cont">
+				<!--<div class="logo">
+        <img src="__ROOT__/static/login/img/qiduo.png" />
+    </div>-->
+				<div class="box login">
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active">
+							<a href="#passlog" role="tab" data-toggle="tab">密码登录</a>
+						</li>
+						<li role="presentation">
+							<a href="#qdlog" role="tab" data-toggle="tab">扫码登录</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="passlog">
+							<form id="log" class="form-horizontal" action="{:url('Login/go')}" method="post">
+								<div class="form-group">
+									<input type="text" name="username" class="form-control" placeholder="手机/邮箱" />
+								</div>
+								<div class="form-group">
+									<input type="password" name="password" class="form-control" placeholder="密码" />
+								</div>
+								<button type="submit" class="btn btn-ces">立即登录</button>
+								<div class="clearfix">
+									<a href="javascript:;" class="callforget">忘记密码？</a>
+									<a href="javascript:;" class="callregist">注册账号</a>
+								</div>
+							</form>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="qdlog">
+							<div class="qd-box">
+								<div id="wxlogin">
+
+								</div>
+							</div>
+							<p class="text-center">使用微信扫描登录</p>
+						</div>
+						<div class="hint">
+							<p class="text-center small">推荐使用先进浏览器获得最佳体验</p>
+							<p class="text-center small">
+								<a href="http://rj.baidu.com/soft/detail/14744.html" target="_blank"><img style="width:25px;margin-right:5px;" src="https://stor.weixinhost.com/3/wxhost-images/ar_766e9d8fc25580e98ff4416d62f06e2a5423e3a8"> 下载Chrome浏览器</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="box reset hidden">
+					<div class="page-header">
+						<h4>重置密码</h4>
+					</div>
+					<form id="reset" class="reset-box" action="{:url('Login/reset')}" method="post">
+						<div class="form-group">
+							<input type="text" name="phone" id="resphone" class="form-control" placeholder="手机号" />
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" name="yzm" class="form-control" placeholder="验证码" />
+								<span class="input-group-btn" id="hqdx2">
+				        		<button class="btn btn-default" type="button" onclick="timeedCount2(60,1)">发送验证码</button>
+				    		</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="password" name="password" class="form-control" placeholder="新密码" />
+						</div>
+						<div class="form-group">
+							<input type="password" name="password1" class="form-control" placeholder="重复密码" />
+						</div>
+
+						<button type="submit" class="btn btn-ces">重置密码</button>
+					</form>
+					<a href="javascript:;" class="calllogin"><i class="iconfont icon-fanhui"></i>返回登录</a>
+				</div>
+				<div class="box regist hidden">
+					<div class="page-header">
+						<h4>注册账号</h4>
+					</div>
+					<form id="regist" class="reset-box" action="{:url('Login/add')}" method="post">
+						<div class="form-group">
+							<input type="text" name="username" class="form-control" placeholder="用户名" />
+						</div>
+						<div class="form-group">
+							<input type="text" name="email" class="form-control" placeholder="邮箱" />
+						</div>
+						<div class="form-group">
+							<input type="text" name="phone" class="form-control" id="regTel" placeholder="手机号" />
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" name="yzm" class="form-control" placeholder="验证码" />
+								<span class="input-group-btn" id="hqdx">
+				        		<button class="btn btn-default" type="button" onclick="timeedCount(60,1)">发送验证码</button>
+				    		</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="password" name="password" class="form-control" placeholder="密码" />
+						</div>
+						<div class="form-group">
+							<input type="password" name="password1" class="form-control" placeholder="重复密码" />
+						</div>
+
+						<button type="submit" class="btn btn-ces">注册账号</button>
+					</form>
+					<a href="javascript:;" class="calllogin"><i class="iconfont icon-fanhui"></i>返回登录</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright container text-center">
+		<p><span>© 2016-2018  安徽万合互动科技有限公司 - 沪ICP备15037701号-12</span></p>
+	</div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/static/login/js/lib/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="__ROOT__/static/login/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="__ROOT__/static/login/js/lib/jquery.form.js"></script>
+<script>
+	function GetQueryString(name)
+	{
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+	//call login
+	$('.calllogin').on('click', function() {
+		$('.login').removeClass('hidden');
+		$(this).parents('.box').addClass('hidden');
+	});
+	//call reset
+	$('.callforget').on('click', function() {
+		$('.reset').removeClass('hidden');
+		$(this).parents('.box').addClass('hidden');
+	});
+	//call regist
+	$('.callregist').on('click', function() {
+		$('.regist').removeClass('hidden');
+		$(this).parents('.box').addClass('hidden');
+	});
+	if(GetQueryString("num") == 1){
+		$('.regist').removeClass('hidden');
+		$('.login').addClass('hidden');
+	} else {
+		$('.login').removeClass('hidden');
+		$('.regist').addClass('hidden');
+	}
+	//验证码操作
+	var yzm;
+	var t = 1;
+
+	function timeedCount(time, type) {
+		times = time;
+		//            $("#getVerfiyKey").val(times+'秒');
+		var text = $("#regTel").val();
+		if(!(/^(1[3-9][0-9])\d{8}$/.test($("#regTel").val()))) {
+			$("#hqdx").html('<button class="btn btn-default" onclick="timeedCount(60,1)">发送验证码</button>');
+			alert('电话号码输入有误！');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('login/phonetext')}",
+			data: {
+				'phone': text
+			},
+			asyn: false,
+			type: 'post',
+			success: function(d) {
+				if(d == 1) {
+					alert('电话号码已注册！');
+				} else {
+					if(type == 1) {
+						var phone = text;
+						if(t == 1) {
+							$.ajax({
+								url: "{:url('login/bcesms')}",
+								data: {
+									'phone': phone
+								},
+								type: 'post',
+								success: function(d) {
+									if(d != 1) {
+										yzm = d;
+									}
+								}
+							});
+						};
+
+						$("#hqdx").html('<button class="btn btn-default">' + times + '秒</button>');
+						if(times > 0) {
+							times = times - 1;
+							t = setTimeout("timeedCount(times,1)", 1000);
+						} else {
+							clearTimeout(t);
+							$("#hqdx").html('<button class="btn btn-default" onclick="timeedCount(60,1)">发送验证码</button>');
+						}
+					}
+				}
+			}
+		});
+
+	}
+
+	var yzm2;
+	var t2 = 1;
+
+	function timeedCount2(time, type) {
+		times = time;
+		var text = $("#resphone").val();
+		if(!(/^(1[3-9][0-9])\d{8}$/.test($("#resphone").val()))) {
+			$("#hqdx2").html('<button class="btn btn-default" onclick="timeedCount2(60,1)">发送验证码</button>');
+			alert('电话号码输入有误！');
+			return false;
+		}
+		$.ajax({
+			url: "{:url('login/phonetext')}",
+			data: {
+				'phone': text
+			},
+			asyn: false,
+			type: 'post',
+			success: function(d) {
+				var phone = text;
+				if(t2 == 1) {
+					$.ajax({
+						url: "{:url('login/bcesms')}",
+						data: {
+							'phone': phone
+						},
+						type: 'post',
+						success: function(d) {
+							if(d != 1) {
+								yzm2 = d;
+							}
+						}
+					});
+				};
+				$("#hqdx2").html('<button class="btn btn-default">' + times + '秒</button>');
+				if(times > 0) {
+					times = times - 1;
+					t2 = setTimeout("timeedCount2(times,1)", 1000);
+				} else {
+					clearTimeout(t2);
+					$("#hqdx2").html('<button class="btn btn-default" onclick="timeedCount2(60,1)">发送验证码</button>');
+				}
+
+			}
+
+		});
+
+	}
+	//表单验证
+	option1 = ({
+		beforeSend: function() {
+			if($("#log [name='username']").val() == '') {
+				alert('请输入登录账号！');
+				return false;
+			}
+			if((!(/^(1[3-9][0-9])\d{8}$/.test($("#log [name='username']").val()))) && (!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test($("#log [name='username']").val())))) {
+				alert('登录账号有误！');
+				return false;
+			}
+			if($("#log [name='password']").val() == '') {
+				alert('请输入密码！');
+				return false;
+			}
+		},
+		success: function(data) {
+			console.log(data);
+			if(data == 1) {
+				window.location.href = "{:url('member/index/index')}";
+			} else {
+				alert('账号或密码错误！');
+			}
+		}
+	});
+	$("#log").ajaxForm(option1);
+	option2 = ({
+		beforeSend: function() {
+			if($("#regist [name='username']").val() == '') {
+				alert('请输入用户名！');
+				return false;
+			}
+			if(!(/^[\u4e00-\u9fa5]+$/i.test($("#regist [name='username']").val()))) {
+				alert('用户名必须为中文！');
+				return false;
+			}
+			if($("#regist [name='password']").val() == '') {
+				alert('请输入密码！');
+				return false;
+			}
+			if($("#regist [name='password']").val().length < 6) {
+				alert('密码不能少于6位！');
+				return false;
+			}
+			if(!(/^[a-zA-Z][a-zA-Z0-9]{5,19}/.test($("#regist [name='password']").val()))) {
+				alert('密码必须为中英文以英文字母开头最低6位！');
+				return false;
+			}
+			if($("#regist [name='password1']").val() == '') {
+				alert('请输入确认密码！');
+				return false;
+			}
+			if($("#regist [name='password']").val() != $("#regist [name='password1']").val()) {
+				alert('输入的密码与确认密码不同！');
+				return false;
+			}
+			if($("#regist [name='email']").val() == '') {
+				alert('请输入邮箱地址！');
+				return false;
+			}
+			if(!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test($("#regist [name='email']").val()))) {
+				alert('邮箱地址输入有误！');
+				return false;
+			}
+			if($("#regist [name='phone']").val() == '') {
+				alert('请输入电话号码！');
+				return false;
+			}
+			if(!(/^(1[3-9][0-9])\d{8}$/.test($("#regist [name='phone']").val()))) {
+				alert('电话号码输入有误！');
+				return false;
+			}
+			if($("#regist [name='yzm']").val() == '') {
+				alert('请输入手机验证码！');
+				return false;
+			}
+			if($("#regist [name='yzm']").val() != yzm) {
+				alert('手机验证码不正确！');
+				return false;
+			}
+		},
+		success: function(data) {
+			if(data == 1) {
+				alert("网页将会刷新！");
+				window.location.href = "/member/index/index.html";
+			} else {
+				alert('提交失败');
+			}
+		}
+	});
+	$("#regist").ajaxForm(option2);
+	option3 = ({
+		beforeSend: function() {
+			if($("#reset [name='phone']").val() == '') {
+				alert('请输入您的手机号！');
+				return false;
+			}
+			if($("#reset [name='password']").val() == '') {
+				alert('请输入密码！');
+				return false;
+			}
+			if($("#reset [name='password']").val().length < 6) {
+				alert('密码不能少于6位！');
+				return false;
+			}
+			if(!(/^[a-zA-Z][a-zA-Z0-9]{5,19}/.test($("#reset [name='password']").val()))) {
+				alert('密码必须为中英文以英文字母开头最低6位！');
+				return false;
+			}
+			if($("#reset [name='password1']").val() == '') {
+				alert('请输入确认密码！');
+				return false;
+			}
+			if($("#reset [name='password']").val() != $("#reset [name='password1']").val()) {
+				alert('输入的密码与确认密码不同！');
+				return false;
+			}
+			if($("#reset [name='yzm']").val() == '') {
+				alert('请输入手机验证码！');
+				return false;
+			}
+			if($("#reset [name='yzm']").val() != yzm2) {
+				alert('手机验证码不正确！');
+				return false;
+			}
+		},
+		success: function(data) {
+			if(data == 1) {
+				alert('密码重置成功,请返回登录');
+				$('.login').removeClass('hidden');
+				$(this).parents('.box').addClass('hidden');
+			} else {
+				alert('提交失败');
+			}
+		}
+	});
+	$("#reset").ajaxForm(option3);
+</script>
+<script>
+	var obj = new WxLogin({
+		id: "wxlogin",
+		appid: "wx73edafaf3103c67d",
+		scope: "snsapi_login",
+		redirect_uri: "http://v1.qiduo.net/member/Login/access_token",
+		state: "",
+		style: "white",
+		href: "https://api.qiduo.net/css.css"
+	});
+</script>
+</body>
+
+</html>

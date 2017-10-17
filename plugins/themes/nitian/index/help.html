@@ -1,0 +1,334 @@
+{extend name="index/index"}
+{block name="content"}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>产品帮助中心-逆天科技</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/help.css">
+<link rel="shortcut icon" href="__PUBLIC__/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/idangerous.swiper.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css">
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__PUBLIC__/js/nav.js"></script>
+<script src="__PUBLIC__/js/index-banner-js.js"></script>
+<script src="__PUBLIC__/js/index-floatright.js"></script>
+<script src="__PUBLIC__/js/zzidcsolu.js"></script>
+<script src="__PUBLIC__/js/win.js"></script>
+<script src="__PUBLIC__/js/idangerous.swiper.min.js"></script>
+<script src="__PUBLIC__/js/gainet.core.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/auth.css">
+<style type="text/css"></style>
+</head>
+<body>
+	
+	<!--导航 start-->
+	
+	<div class="vps-nav-bg vps"></div>
+    <div class="searchbox prelative2">
+           <div class="searchleft">
+               <i></i>帮助中心
+           </div>
+           <div class="searchright">
+               <div class="search">
+                  <form action="help/searchHelp" method="post">
+                   
+                   
+                    <input type="text" name="pageList.queryCondition.queryValue" value="" placeholder="请输入您想了解的问题、关键词或产品名称"   AUTOCOMPLETE="off">
+                   
+                    <a href="javascript:" class="ssbtn"><i></i></a>
+                   </form>
+               </div>
+                <div class="hotsearch clearfix">
+                   <span>热搜关键词：</span>
+                    
+						<a href="{:url('help')}" >云服务器</a>
+			    	
+						<a href="{:url('help')}" >CDN</a>
+			    	
+						<a href="{:url('help')}" >快云VPS</a>
+			    	
+						<a href="{:url('help')}" >云数据库</a>
+			    	
+						<a href="{:url('help')}" >云存储</a>
+			    	
+						<a href="{:url('help')}" >ssl</a>
+			    	 
+               </div>
+           </div>
+    </div>
+  
+    <script type="text/javascript">
+	//搜索提交
+	$(function(){
+		$(".ssbtn").click(function(){
+			document.forms[0].submit();
+		});
+	});
+
+  </script> 
+	<!--头部导航end-->
+ <div class="width1200" style="margin-top:-180px">
+   <div class="quest-tit">
+   		常见热点问题
+   </div>
+   <div class="questionbox">
+   		
+	   
+	   	
+	     
+	     	<ul class="wentilist">
+				
+					<li><i></i><a href="{:url('help')}">云VPS怎么升级流程</a></li>
+				
+					<li><i></i><a href="{:url('help')}">迎圣诞，.top首年注册仅需9元</a></li>
+				
+					<li><i></i><a href="{:url('help')}">如何修改数据库实例大小</a></li>
+				
+					<li><i></i><a href="{:url('help')}">第三方数据库管理工具Navicat使用教程</a></li>
+				
+					<li><i></i><a href="{:url('help')}">常用程序连接数据库安装步骤</a></li>
+				
+	        </ul>
+			 <ul class="wentilist" style="float:right;margin-right:65px">
+	        	
+					<li><i></i><a href="{:url('help')}">云数据库VS普通3306数据库</a></li>
+				
+					<li><i></i><a href="{:url('help')}">访问网站出现“当前访问可能对网站安全造成威胁，已被网站卫士拦截”</a></li>
+				
+					<li><i></i><a href="{:url('help')}">什么是远程端口</a></li>
+				
+					<li><i></i><a href="{:url('help')}">访问网站出现“Warning: chmod() has been disabled for security reasons in…..”错误信息</a></li>
+				
+					<li><i></i><a href="{:url('help')}">访问网站首页出现“404 Not Found，nginx”</a></li>
+				 
+	        </ul>
+	     
+	   
+   </div>
+ </div>
+ <div class="bgf4">
+ 	<div class="width1200">
+    	<div class="quest-tit">
+   			新手自助服务
+       </div>
+       <div class="server-item">
+       	 
+	      
+	      	 
+	       		
+	       		
+	       		 <a href="{:url('help')}" class="iconlist">
+	            	<span class="servericon icon1 icon-trans"></span>
+	                <span class="icon-txt">申请测试</span>
+	           	 </a>
+	       		
+	       
+	       		
+	       		
+	       		 <a href="{:url('help')}" class="iconlist">
+	            	<span class="servericon icon2 icon-trans"></span>
+	                <span class="icon-txt">产品购买</span>
+	           	 </a>
+	       		
+	       
+	       		
+	       		
+	       		 <a href="{:url('help')}" class="iconlist">
+	            	<span class="servericon icon3 icon-trans"></span>
+	                <span class="icon-txt">产品续费</span>
+	           	 </a>
+	       		
+	       
+	       		
+	       		
+	       		 <a href="{:url('help')}" class="iconlist">
+	            	<span class="servericon icon4 icon-trans"></span>
+	                <span class="icon-txt">产品介绍</span>
+	           	 </a>
+	       		
+	       
+	       		
+	       		
+	       		 <a href="{:url('help')}" class="iconlist">
+	            	<span class="servericon icon5 icon-trans"></span>
+	                <span class="icon-txt">会员充值</span>
+	           	 </a>
+	       		
+	       
+	      
+       </div>
+    </div>
+ </div>
+ <div class="width1200">
+ 	<div class="quest-tit" style="margin-top:75px">
+   			产品问题分类
+       </div>
+       <div class="pro-wrap">
+       
+	       	
+	       		
+	       		<div class="pro-unit"  >
+	                <div class="pro-icon uniticon1"></div>
+	                <div class="procontent">
+	                	<p class="pro-tit">虚拟主机</p>
+	                    
+	                    	<a href="{:url('help')}">虚拟主机使用教程</a>
+	                    
+	                    	<a href="{:url('help')}">两款云空间产品，主要的区别是什么？</a>
+	                    
+	                    	<a href="{:url('help')}">虚拟主机图片云加速功能使用教程</a>
+	                    
+	                    	<a href="{:url('help')}">在网站后台更新了网站图片、文章等，但网站不显示这些更新过的资源</a>
+	                    
+	                    	<a href="{:url('help')}">常见的MIME类型</a>
+	                    
+	                    	<a href="{:url('help')}">常用程序连接数据库安装步骤</a>
+	                    
+	                </div>
+	            </div>
+	      	    
+	       		<div class="pro-unit"  >
+	                <div class="pro-icon uniticon2"></div>
+	                <div class="procontent">
+	                	<p class="pro-tit">快云VPS</p>
+	                    
+	                    	<a href="{:url('help')}">如何判断快云VPS可支持网站同时多少人在线？</a>
+	                    
+	                    	<a href="{:url('help')}">网站打不开，重启一下就好，到底为什么？</a>
+	                    
+	                    	<a href="{:url('help')}">重启后数据盘不见了？别担心，只是磁盘脱机</a>
+	                    
+	                    	<a href="{:url('help')}">VPS/服务器环境部署与网站程序安装</a>
+	                    
+	                    	<a href="{:url('help')}">快云vps使用范围</a>
+	                    
+	                    	<a href="{:url('help')}">请问快云vps不能放哪些内容的网站？</a>
+	                    
+	                </div>
+	            </div>
+	      	    
+	       		<div class="pro-unit" style='width:350px' >
+	                <div class="pro-icon uniticon3"></div>
+	                <div class="procontent">
+	                	<p class="pro-tit">云主机II代</p>
+	                    
+	                    	<a href="{:url('help')}">云二代怎样修改程序池名称？</a>
+	                    
+	                    	<a href="{:url('help')}">怎样为我的资源池增值？</a>
+	                    
+	                    	<a href="{:url('help')}">怎样为我的资源池续费？</a>
+	                    
+	                    	<a href="{:url('help')}">如何查看我的虚拟机？</a>
+	                    
+	                    	<a href="{:url('help')}">怎样管理我的资源池</a>
+	                    
+	                    	<a href="{:url('help')}">云主机中的虚拟机设置</a>
+	                    
+	                </div>
+	            </div>
+	      	    
+	       		<div class="pro-unit"  >
+	                <div class="pro-icon uniticon4"></div>
+	                <div class="procontent">
+	                	<p class="pro-tit">托管租用</p>
+	                    
+	                    	<a href="{:url('help')}">如何选择IDC服务商</a>
+	                    
+	                    	<a href="{:url('help')}">服务器托管/租用售后包含哪些？</a>
+	                    
+	                    	<a href="{:url('help')}">win2003系统配置ipv6教程</a>
+	                    
+	                    	<a href="{:url('help')}">linux操作系统配置IPv6教程</a>
+	                    
+	                    	<a href="{:url('help')}">最完美的服务器配置单 别玩坏了服务器</a>
+	                    
+	                    	<a href="{:url('help')}">服务器宕机怎么办？</a>
+	                    
+	                </div>
+	            </div>
+	      	    
+	       		<div class="pro-unit"  >
+	                <div class="pro-icon uniticon5"></div>
+	                <div class="procontent">
+	                	<p class="pro-tit">企业邮局</p>
+	                    
+	                    	<a href="{:url('help')}">免费版SSL证书如何做DNS域名验证</a>
+	                    
+	                    	<a href="{:url('help')}">如何作邮件交换记录(MX)?</a>
+	                    
+	                    	<a href="{:url('help')}">邮箱收到大量垃圾邮件该如何处理</a>
+	                    
+	                    	<a href="{:url('help')}">为什么邮箱能发不能收?</a>
+	                    
+	                    	<a href="{:url('help')}">我的邮箱不能收发邮件怎么办？</a>
+	                    
+	                    	<a href="{:url('help')}"> 如何登录我的邮局？</a>
+	                    
+	                </div>
+	            </div>
+	      	    
+	       		<div class="pro-unit" style='width:350px' >
+	                <div class="pro-icon uniticon6"></div>
+	                <div class="procontent">
+	                	<p class="pro-tit">域名注册</p>
+	                    
+	                    	<a href="{:url('help')}">关于 .com/.net域名实名认证通知</a>
+	                    
+	                    	<a href="{:url('help')}">关于中国数据溢价域名无法注册说明</a>
+	                    
+	                    	<a href="{:url('help')}">域名转入转出教程</a>
+	                    
+	                    	<a href="{:url('help')}">如何解析域名？ </a>
+	                    
+	                    	<a href="{:url('help')}">如何申请域名？</a>
+	                    
+	                    	<a href="{:url('help')}">如何进行CNAME别名解析？</a>
+	                    
+	                </div>
+	            </div>
+	      	    
+	       	
+       
+      </div>
+       <div class="quest-tit" style="margin-top:0">
+   			在线帮助
+       </div>
+       <div class="help-item">
+       		<div class="onlinebox">
+            	<div class="helpcontent">
+                	<span class="help-left-icon1"></span>
+                    <div class="help-right-txt">
+                      	<p class="helptit">24h客服</p>
+                        <p>及时响应，24小时，全年无休！</p>
+                        <p>客服热线：0371-9618961</p>
+                        <p style="margin-left:60px">4006-598-598</p>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" onclick="javascript:window.open('http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzkzODA2MzQ0OV8yMjQ1OTFfNDAwNjU5ODU5OF8yXw&cref=www.kuaiyun.cn&ref=&pt=&f=1&ty=1&ap=&as=&aty=2&a=3&dm=qq.com&sv=4&sp=&ref='+document.location, '_blank', 'height=544, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');" class="zixunbtn"><i></i>QQ咨询</a>
+            </div>
+            <div class="onlinebox">
+            	<div class="helpcontent">
+                	<span class="help-left-icon2"></span>
+                    <div class="help-right-txt">
+                      	<p class="helptit">提交工单</p>
+                        <p>为您提供7*24小时技术服务</p>
+                    </div>
+                </div>
+                <a href="http://support.kuaiyun.cn" class="zixunbtn">提交工单</a>
+            </div>
+            <div class="onlinebox" style="margin-right:0">
+            	<div class="helpcontent">
+                	<span class="help-left-icon3"></span>
+                    <div class="help-right-txt">
+                      	<p class="helptit">投诉建议</p>
+                        <p>您的意见将使我们更加完善</p>
+                    </div>
+                </div>
+                <a href="{:url('advice')}" class="zixunbtn">立即反馈</a>
+            </div>
+       </div>
+ </div>
+{/block}

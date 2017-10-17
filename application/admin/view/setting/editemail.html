@@ -1,0 +1,81 @@
+{extend name="index/index"}
+{block name="content"}
+<div class="page-header" xmlns="http://www.w3.org/1999/html">
+    <h5>编辑邮件模板</h5>
+</div>
+<div class="main">
+    <div class="mixbox">
+        <form id="addserver" class="form-horizontal" action="{:url('setting/saveemail')}" method="post">
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="">模板类型：</label>
+                <div class="checkbox col-md-4">
+                    <select class="form-control line" name="type">
+                        <option value="998" {notempty name="data.type"}{in name="998" value="$data.type"} selected {/in}{/notempty}>邮箱绑定</option>
+                        {foreach $product as $key=>$val}
+                        <option value="{$val.id}" {notempty name="data.type"}{in name="val.id" value="$data.type"} selected {/in}{/notempty}>{$val.name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="">邮件内容：</label>
+                <div class="col-md-4">
+                    <textarea cols="80" rows="10" name="content" class="form-control unline title" placeholder="请输邮件模板内容，例：" />{notempty name="data.content"}{$data.content}{/notempty}</textarea>
+                    <label class="unline-label"></label>
+                </div>
+            </div>
+            <input type="hidden" name="id" {notempty name="data.id"} value={$data.id} {/notempty}>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                    <button type="submit" class="btn btn-ces tijiao">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $(function() {
+        $('#selectTitle').initList();
+
+        $('.select select').on('change', function() {
+            if($(this).val() == '1') {
+                $('.crowdGroup').removeClass('hidden');
+                $('.aloneGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            } else {
+                $('.aloneGroup').removeClass('hidden');
+                $('.crowdGroup').addClass('hidden');
+                $('.aloneGroup').find('#hideSel').val('');
+            }
+        });
+    })
+
+
+    $('.tijiao').click(function () {
+        var formData = new FormData($('#addserver')[0]);
+        $.ajax({
+            url: "{:url('setting/saveemail')}",
+            type: "post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+//                console.log(data);
+                if (data['code'] == 1) {
+                    alert(data.msg);
+                    window.location.href = "{:url('setting/email')}";
+                }else {
+                    alert(data.msg);
+                    window.history.back(-1);
+                }
+            },
+        });
+
+        return false;
+    })
+</script>
+{/block}

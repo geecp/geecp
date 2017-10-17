@@ -1,0 +1,120 @@
+{extend name="index/index"}
+{block name="content"}
+<div class="page-header">
+	<ul class="nav nav-tabs line">
+		<li {eq name="pname" value="sms" }class="active"{/eq}>
+		<a href="{:url('cloud/alread',['pname'=>'sms'])}">短信</a>
+		</li>
+		<li {eq name="pname" value="domain" }class="active"{/eq}>
+		<a href="{:url('cloud/alread',['pname'=>'domain'])}">域名</a>
+		</li>
+		<li {eq name="pname" value="vhost" }class="active"{/eq}>
+		<a href="{:url('cloud/alread',['pname'=>'vhost'])}">虚拟主机</a>
+		</li>
+		<li {eq name="pname" value="server" }class="active"{/eq}>
+		<a href="{:url('cloud/alread',['pname'=>'server'])}">云服务器</a>
+		</li>
+		<li {eq name="pname" value="mail" }class="active"{/eq}>
+		<a href="{:url('cloud/alread',['pname'=>'mail'])}">邮箱</a>
+		</li>
+	</ul>
+</div>
+			<div class="">
+
+
+				<div class="main">
+					<div class="mixbox">
+						<div class="table-responsive">
+
+							<table class="table tools table-center table-hover thg mt15">
+								<thead>
+									<tr class="sortmix">
+										<th class="lock" style="width: 20%;">应用名称</th>
+										<th class="lock" style="width: 10%;">作者</th>
+										<th class="lock" style="width: 10%;">状态</th>
+										<th class="lock" style="width: 10%;">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								{foreach $data as $key => $v}
+
+									<tr  data-trid="">
+										<td scope="row">
+											<div class="open">
+												{$v.title}
+											</div>
+											<div class="form-group hidden">
+												<input type="text" class="form-control line" value="{$v.title}">
+												<label class="line-label"></label>
+											</div>
+										</td>
+										<td scope="row">
+											<div class="open">
+												{$v.author}
+											</div>
+											<div class="form-group hidden">
+												<input type="text" class="form-control line" value="{$v.author}">
+												<label class="line-label"></label>
+											</div>
+										</td>
+										<td>
+		  									<div class="open">
+												<input type="checkbox" class="toggle" name="status" id="{$v.id}" nid="{$v.id}" nstate="{$v.status}" value=""{if condition="$v['status'] eq 1"} checked="checked" {/if} >
+												<label class="toggle-round" for="{$v.id}"></label>
+											</div>
+										</td>
+										<td class="control">
+											<div class="form-group">
+												<a href="{:url('cloud/setting',['appid'=>$v.id])}" class="control"><span class="js-right">设置</span></a>
+												<a href="javascript:qdJsGetUrl('{:url('cloud/update',['appid'=>$v.id])}')" class="control"><span class="js-right">更新</span></a>
+											</div>
+										</td>
+										{/foreach}
+									</tr>
+								</tbody>
+							</table>
+							<div class="vba-pagination">
+								<ul class="pagination">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{/block}
+{block name="script"}
+<script>
+	//更改状态按钮
+	$(".toggle").on('click',function () {
+		var id=$(this).attr('nid');
+		var stat = $(this).attr('nstate');
+		if (stat == 1) {
+			stat = 0;
+		} else {
+			stat = 1;
+		}
+		$.ajax({
+			type: 'POST',
+			url:"{:url('cloud/savestatus')}",
+			data: {id: id, status: stat},
+			dataType: "json",
+			success: function (data) {
+				if (data['msg'] == 1) {
+
+				}else if(data['msg'] == 2){
+					alert('您没有操作权限!');
+				}
+			}
+		});
+
+	});
+
+	function qdJsGetUrl(url)
+	{
+		$.post(url, {}, function(data, textStatus, xhr) {
+			alert(data.msg);
+		},'json');
+	}
+</script>
+{/block}
