@@ -1,0 +1,106 @@
+{
+	"userinfo": [
+		{
+			"userchatid": "sh20161024112131000001",
+			"usermac": "pc",
+			"userarea": "上海",
+			"usermsg": "aaaa",
+			"userindate": "9:35",
+			"usermsgct": "1",
+			"userlable": [
+				{
+					"ltype": "default",
+					"lname": "标签1"
+				}, {
+					"ltype": "primary",
+					"lname": "标签2"
+				}, {
+					"ltype": "success",
+					"lname": "标签3"
+				}, {
+					"ltype": "warning",
+					"lname": "标签4"
+				}, {
+					"ltype": "danger",
+					"lname": "标签5"
+				}
+			],
+			"userim": "客服1",
+			"useros": "windows",
+			"userbrow": "chrome",
+			"userip": "192.168.1.1",
+			"username": "萝卜",
+			"userage": "33",
+			"usersex": "男",
+			"usertel": "13090909600",
+			"userqq": "12345678",
+			"userwechat": "1234567",
+			"usermblog": "1@1.com",
+			"useradress": "上海市周浦",
+			"usermail": "1@1.com",
+			"usercontent": "这是一个可能有购买倾向的用户",
+			"userid": "asdasd8asd91asdsdfsdf",
+			"chattpdate": "10:10:10",
+			"chattptype": "1",
+			"chatinurl": {
+				"tit": "web title 内容",
+				"iurl": "http://www.baidu.com"
+			},
+			"chatingurl": {
+				"tit": "bootstrap是最简单易用的css框架之一 没有最",
+				"iurl": "http://www.bsfans.com"
+			},
+			"chatmsg": [
+				{
+					"chat": true,
+					"chatmaster": true,
+					"system": false,
+					"date": "2012-10-10 18:56:56",
+					"username": "如花1",
+					"content": "【系统消息】您好，有什么需要帮助的？您好，有什么需要帮助的？您好，有什么需要帮助的？您好，有什么需要帮助的？您好，有什么需要帮助的？"
+				}, {
+					"chat": true,
+					"chatmaster": false,
+					"system": false,
+					"date": "2012-10-10 18:56:56",
+					"username": "上海",
+					"content": "您好"
+				},{
+					"chat": false,
+					"system": true,
+					"date": "2012-10-10 18:56:56",
+					"dtype": "2",
+					"username": "如花1",
+					"evaluate": false,
+					"evtype": "1"
+				}, {
+					"chat": false,
+					"system": true,
+					"date": "2012-10-10 18:56:56",
+					"dtype": "3",
+					"username": "如花1",
+					"evaluate": true,
+					"evtype": "2"
+				}
+			]
+		}
+	],
+	"userlabel": [
+		{
+			"ltype": "default",
+			"lname": "标签1"
+		}, {
+			"ltype": "primary",
+			"lname": "标签2"
+		}, {
+			"ltype": "success",
+			"lname": "标签3"
+		}, {
+			"ltype": "warning",
+			"lname": "标签4"
+		}, {
+			"ltype": "danger",
+			"lname": "标签4"
+		}
+	]
+}

@@ -1,0 +1,25 @@
+.badge {
+    position: relative;
+    top: -2px;
+    &.imp {
+        background-color: @cre;
+    }
+    &.ces {
+        background-color: @ces;
+    }
+    &.top {
+        position: absolute;
+        right: 0;
+        top: 15%;
+    }
+    .navbar & {
+        @size: 2*@mpb;
+        min-width: @size;
+        height: @size;
+        line-height: @size;
+        border-radius: @size;
+        .mgl(5px);
+        .pd(0);
+        top: -3px;
+    }
+}

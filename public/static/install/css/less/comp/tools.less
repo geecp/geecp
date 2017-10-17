@@ -1,0 +1,44 @@
+.mouse {
+    @c: #999;
+    position: relative;
+    width: 34px;
+    height: 50px;
+    border-radius: 15px;
+    margin: 0 auto;
+    .bdr(@cr:@c);
+    &:before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 10px;
+        border-radius: 2px;
+        margin: 5px auto;
+        background: @c;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        animation: mwheel 0.4s linear infinite alternate;
+        -webkit-animation: mwheel 0.4s linear infinite alternate;
+        -ms-animation: mwheel 0.4s linear infinite alternate;
+    }
+}
+@-webkit-keyframes mwheel {
+    from {
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+    }
+    to {
+        transform: translateY(2px);
+        -webkit-transform: translateY(2px);
+    }
+}
+@keyframes mwheel {
+    from {
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+    }
+    to {
+        transform: translateY(2px);
+        -webkit-transform: translateY(2px);
+    }
+}

@@ -1,0 +1,134 @@
+@idc: rgba(255,255,255,.5);
+@ces: rgb(0,153,204); //颜色网站基础色
+@ces1:rgb(0, 143, 191);
+@ces2:rgb(0, 135, 180);
+@ces3:rgb(0,162,202);
+@cun: transparent;
+@cwh: rgb(255, 255, 255); //白色
+//颜色
+@blue:rgb(49, 94, 182);
+@blue1:rgb(33, 75, 137);
+@blued:rgb(42, 80, 155);
+//定义蓝色
+@ces:rgb(15, 136, 235);
+//定义蓝色1
+@ces1: #0072d0;
+//定义灰色 ddd
+@cgy1:#ddd;
+
+//
+@cor: rgb(230, 126, 34); //橙色
+@cor1: rgb(211, 84, 0);
+@cor2:rgb(255, 153, 0);
+@cbl: rgb(52, 152, 219); //蓝色
+@cbl1: rgb(41, 128, 185);
+@cgr: rgb(46, 204, 113); //绿色
+@cgr1: rgb(39, 174, 96);
+@cye: rgb(241, 196, 15); //黄色
+@cye1: rgb(243, 156, 18);
+@cre: rgb(231, 76, 60); //红色
+@cre1: rgb(192, 57, 43);
+@cgy: rgb(236, 240, 241); //灰色
+@cgy1: rgb(189, 195, 199);
+@cbla: rgb(0,0,0); //
+@cc: rgb(51,51,51); //文字主要颜色
+@cc1: rgb(153,153,153);
+@cc2: rgb(204,204,204);
+@cc3:rgb(102,102,102);
+@cc4:rgb(225,225,225);
+@ffmix: "微软雅黑","microsoft yahei";
+@rem: 12px; //
+@hack: ~"\9"; //
+.bdr(@w:1px, @cr:@cgy) {
+    border: @w solid @cr;
+}
+.bdrt(@w:1px, @cr:@cgy) {
+    border-top: @w solid @cr;
+}
+.bdrr(@w:1px, @cr:@cgy) {
+    border-right: @w solid @cr;
+}
+.bdrb(@w:1px, @cr:@cgy) {
+    border-bottom: @w solid @cr;
+}
+.bdrl(@w:1px, @cr:@cgy) {
+    border-left: @w solid @cr;
+}
+.flmm {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+//
+.textoh {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+//
+.btn-bd(@c:@white) {
+    border: 1px solid @c;
+}
+//
+.trs(@t:.5s, @b: ease-in-out) {
+    transition: all @t @b;
+    -webkit-transition: all @t @b;
+    -ms-transition: all @t @b;
+}
+.amid {
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.blod {
+    font-weight: bold;
+}
+//
+.unbg {
+    background: transparent;
+}
+.unbdr {
+    border-radius: 0;
+}
+.unbd {
+    border: none;
+}
+.unbs {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.round {
+    border-radius: 50%;
+}
+.bgimix {
+    background: @cgy*0.2;
+    color: @cwh;
+}
+.ohd {
+    overflow: hidden;
+}
+//
+.bds1(@c:rgba(0, 0, 0, 0.15)) {
+    -webkit-box-shadow: 0 10px 15px 0 @c;
+    -ms-box-shadow: 0 10px 15px 0 @c;
+    box-shadow: 0 10px 15px 0 @c;
+}
+.text-justify {
+    text-align: justify;
+}
+//flex center
+.fc {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}

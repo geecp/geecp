@@ -1,0 +1,246 @@
+.btn {
+    .unbdr;
+    .trs;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 25px;
+    .label {
+        border-radius: 20px;
+        margin-left: 5px;
+        &.label-top {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+    }
+    &.btn-danger {
+        .label {
+            .bdr(@cr:@cwh);
+        }
+    }
+    &-xs {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    &-round {
+        border-radius: 80px;
+    }
+    &:active,
+    &:focus {
+        outline: none;
+        .unbs;
+    }
+}
+
+.btn-unbg {
+    .unbg!important;
+    .unbd;
+    &:hover {
+        background: @cgy!important;
+    }
+}
+.btn-ces {
+    background-color: @ces;
+    color: @cwh;
+    &:focus,
+    &:hover,
+    &.active{
+        background-color: @ces*1.2;
+        color: @cwh!important;
+        box-shadow: none;
+    }
+}
+.btn-default {
+    &.active {
+        &,
+        &:hover {
+            background-color: @ces;
+            color: @cwh;
+        }
+    }
+    &.disabled {
+        &,
+        &:hover {
+            .unbg;
+            color: inherit;
+        }
+    }
+}
+.bg-black,
+.btn-black,
+.label-black {
+    background-color: @cbla;
+    color: @cwh;
+    &:hover {
+        color: @cwh;
+    }
+}
+.bg-primary,
+.btn-primary,
+.label-primary {
+    background-color: @cbl1;
+}
+.bg-success,
+.btn-success,
+.label-success {
+    background-color: @cgr;
+}
+.bg-info,
+.btn-info,
+.label-info {
+    background-color: @cbl;
+}
+.bg-warning,
+.btn-warning,
+.label-warning {
+    background-color: @cye;
+}
+.bg-danger,
+.btn-danger,
+.label-danger {
+    background-color: @cre;
+}
+//
+.label-white,
+.text-white {
+    color: @cwh!important;
+}
+.btn-unbg.btn-default,
+.text-muted {
+    color: @cc1;
+}
+.btn-border.btn-primary,
+.btn-unbg.btn-primary,
+.text-primary {
+    color: @cbl1;
+}
+.btn-border.btn-success,
+.btn-unbg.btn-success,
+.text-success {
+    color: @cgr;
+}
+.btn-border.btn-info,
+.btn-unbg.btn-info,
+.text-info {
+    color: @cbl;
+}
+.btn-border.btn-warning,
+.btn-unbg.btn-warning,
+.text-warning {
+    color: @cye;
+}
+.btn-border.btn-danger,
+.btn-unbg.btn-danger,
+.text-danger {
+    color: @cre;
+}
+.btn-border.btn-white,
+.btn-unbg.btn-white,
+.text-white {
+    color: @cwh;
+}
+.btn-border.btn-white{
+    .bdr;
+    border-color: @cwh;
+    &:hover{
+        background-color: @cwh;
+        color: inherit;
+    }
+}
+.btn-border.btn-ces,
+.text-ces {
+    color: @ces;
+}
+.btn-border.btn-ces {
+    border-color: @ces;
+}
+.btn-border {
+    .unbg;
+    &:hover {
+        color: @cwh;
+    }
+}
+a.more {
+    position: relative;
+    width: 150px;
+    height: 31px;
+    text-decoration: none;
+    color: @cwh;
+    display: block;
+    line-height: 31px;
+    padding: 0;
+    background-color: @cc1;
+    border-color: @cc1;
+    text-align: center;
+    .iconfont {
+        .trs;
+        margin-left: -12px;
+        color: @cwh;
+        opacity: 0;
+    }
+    &:hover {
+        background-color: @ces;
+        border-color: @ces;
+        .iconfont {
+            margin-left: 18px;
+            opacity: 1;
+        }
+    }
+    &.more-lg {
+        width: 200px;
+        height: 45px;
+        line-height: 45px;
+        font-size: 16px;
+    }
+}
+.btn-lg {
+    font-size: 16px;
+    .pdt;
+    .pdb;
+}
+//inputgroup
+.close-btn {
+    .tac;
+    .trs;
+    background-color: @ces;
+    .iconfont {
+        color: @cwh;
+        opacity: 0.7;
+        .trs(@t:.3s);
+        .blod;
+        display: block;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    &:hover {
+        text-decoration: none;
+        .iconfont {
+            opacity: 1;
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+}
+//
+.btn {
+    &.icon {
+        .iconfont {
+            .trs;
+            opacity: 0;
+            .mgl(-@mpb);
+        }
+        &:hover {
+            .iconfont {
+                opacity: 1;
+                .mgl;
+            }
+        }
+    }
+
+}

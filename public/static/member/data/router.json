@@ -1,0 +1,92 @@
+[
+	{
+		"label": "用户中心",
+		"iconname": "home",
+		"path": {
+			"path": "/ucenter"
+		}
+	},{
+		"label": "产品服务",
+		"iconname": "product",
+		"path": {
+			"path": "/product"
+		},
+		"crouter": [
+					{
+				"label": "短信服务",
+				"path": {
+					"path": "/product/sms"
+				}
+			}, 
+			{
+				"label": "域名管理",
+				"path": {
+					"path": "/product/domain"
+				}
+			}, {
+				"label": "云服务器",
+				"path": {
+					"path": "/product/cserver"
+				}
+			}, {
+				"label": "云数据库",
+				"path": {
+					"path": "/product/cdata"
+				}
+			}, {
+				"label": "SSL证书",
+				"path": {
+					"path": "/product/ssl"
+				}
+			}, {
+				"label": "授权管理",
+				"path": {
+					"path": "/product/manager"
+				}
+			}
+		]
+	}, {
+		"label": "财务管理",
+		"iconname": "billing",
+		"path": {
+			"path": "/billing"
+		},
+		"crouter": [ {
+				"label": "收支明细",
+				"path": {
+					"path": "/billing/listinfo"
+				}
+			}, {
+				"label": "订单管理",
+				"path": {
+					"path": "/billing/order"
+				}
+			}, {
+				"label": "发票管理",
+				"path": {
+					"path": "/billing/ticket"
+				}
+			}, {
+				"label": "优惠管理",
+				"path": {
+					"path": "/billing/coupon"
+				}
+			}
+		]
+	}, {
+		"label": "代理管理",
+		"iconname": "agent",
+		"path": {
+			"path": "/agent"
+		}
+	}, {
+		"label": "工单支持",
+		"iconname": "worder",
+		"hasmsg": true,
+		"msg": 3,
+		"imp": true,
+		"path": {
+			"path": "/worder"
+		}
+	}
+]

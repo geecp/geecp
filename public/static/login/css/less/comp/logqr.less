@@ -1,0 +1,117 @@
+.log-qr {
+    background: transparent;
+    background-size: 100% 100%;
+    .qr-box {
+        text-align: center;
+        width: 400px;
+        height: 440px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        .qr-title {
+            img{
+                width: 320px;
+            }
+            h4 {
+                font-size: 18px;
+                font-variant: 100;
+                letter-spacing: 5px;
+                margin-top: 30px;
+                color: #b4b4b4;
+            }
+        }
+        .qr {
+            position: relative;
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            .slide-top {
+                border-top: 1px solid @cgy1;
+                border-left: 1px solid @cgy1;
+                position: absolute;
+                top: 20px;
+                left: 0;
+                width: 80px;
+                height: 80px;
+            }
+            .slide-bottom {
+                border-bottom: 1px solid @cgy1;
+                border-right: 1px solid @cgy1;
+                position: absolute;
+                bottom: -20px;
+                right: 0;
+                width: 80px;
+                height: 80px;
+            }
+        }
+        .caption {
+            height: 200px;
+            .mg(0 auto);
+            .pd(50px);
+            .mgt(20px);
+            h5 {
+                .mg(0);
+                .pd(15px 20px);
+                color: @cwh;
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50px;
+                    top: 0;
+                    left: 0;
+                    background-color: @ces;
+                    z-index: -1;
+                    zoom: -1;
+                }
+            }
+            p {
+                .mgt(30px);
+                .mlr {
+                    .mg(0 5px);
+                }
+                a {
+                    cursor: pointer;
+                    &:active,
+                    &:focus,
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+.txt-log,
+.txt-find,
+.txt-reg {
+    display: none;
+    .form-horizontal {
+        width: 70%;
+        .mg(0 auto);
+        .pd(10px 0);
+        .form-group {
+            .mg(15px 0);
+            .btn {
+                width: 100%;
+            }
+        }
+        .form-control {
+            .unbdr;
+        }
+    }
+    .caption {
+        .pd(0)!important;
+        height: auto!important;
+    }
+}
+.txt-find,.txt-reg {
+    display: none;
+    .form-horizontal {}
+}

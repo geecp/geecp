@@ -1,0 +1,41 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: @ffmix;
+    position: relative;
+    overflow: auto;
+    color: @cc*0.8;
+}
+
+label,
+th {
+    font-weight: normal;
+}
+
+.full-width {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.nav-mix {
+    @media (max-width: 767px) {
+        .col-md-12 {
+            .ohd;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+        .nav.list {
+            .mgb(2*@mpb);
+            &.list-child {
+                .mgt(0);
+            }
+        }
+    }
+}

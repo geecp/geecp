@@ -1,0 +1,53 @@
+{
+	"clear":"1",
+	"user": [
+		{
+			"qgname": "常用问候语",
+			"qgmix": [
+				{
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}, {
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}
+			]
+		},{
+			"qgname": "提醒用户",
+			"qgmix": [
+				{
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}, {
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}
+			]
+		}
+	],
+	"group": [
+		{
+			"qgname": "公司业务",
+			"qgmix": [
+				{
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}, {
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}
+			]
+		},{
+			"qgname": "公司地址",
+			"qgmix": [
+				{
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}, {
+					"quicktit": "回复标题",
+					"quickmsg": "回复内容"
+				}
+			]
+		}
+	]
+}

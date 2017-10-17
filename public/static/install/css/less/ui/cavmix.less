@@ -1,0 +1,24 @@
+.cavmix {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    .mask {
+        z-index: 2;
+    }
+    &-heading,
+    &-body,
+    &-footer {
+        position: relative;
+        z-index: 3;
+    }
+    &-heading {
+        z-index: 4;
+        h1,h2,h3,h4,h5{
+            .mgt(0);
+        }
+    }
+    &-body {
+        .amid;
+    }
+    &-footer {}
+}

@@ -1,0 +1,244 @@
+//
+.table>thead>tr>th {
+    .blod;
+    .bdrb;
+}
+
+.table.thg>thead>tr>th {
+    background-color: @cgy;
+}
+
+.table {
+    @c: @ces*4.5; //定义tr 背景颜色
+    &:only-of-type {
+        .mgb(0);
+        .bdrb;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    tbody,
+    tfoot,
+    thead {
+        tr {
+            th {
+                &,
+                td {
+                    &:first-child {
+                        //                      .pdl(2*@mpb);
+                        .tac;
+                    }
+                }
+            }
+            td,
+            th {
+                .pd;
+                .trs;
+            }
+        }
+    }
+    thead {
+        .blod;
+        border-bottom: 1px solid #ddd;
+        .table-striped& {
+            th {
+                .unbd;
+            }
+        }
+        tr.sortmix {
+            th:not(.lock) {
+                .pd(0);
+                .btn {
+                    line-height: 20px;
+                    width: 100%;
+                    .tal;
+                    .unbd;
+                    .unbg;
+                    .pd;
+                    .blod;
+                    &:hover {
+                        background-color: @cgy*1.05;
+                    }
+                    &.active {
+                        .unbs;
+                    }
+                    &:active,
+                    &:focus {
+                        outline: none;
+                    }
+                    .iconfont;
+                    font-size: 14px;
+                    &:before {
+                        content: "\e626";
+                        position: absolute;
+                        right: 5px;
+                        color: @cc2;
+                    }
+                    &.unicon {
+                        &:before {
+                            content: "";
+                        }
+                    }
+                }
+                &:first-child {
+                    .btn {
+                        .pdl(2*@mpb)
+                    }
+                }
+            }
+        }
+    }
+    tbody {
+        tr,
+        th,
+        td {
+            .trs;
+        }
+        th,
+        td {
+            &.control {
+                .pd(0);
+                vertical-align: middle;
+                .tac;
+            }
+        }
+        a,
+        button {
+            &.control {}
+        }
+    }
+    tr.filter,
+    tr.edit {
+        td,
+        th {
+            .pd(8px @mpb);
+            vertical-align: middle;
+        }
+        .form-control {
+            height: auto;
+            &.line {
+                padding-right: 24px;
+                &+.line-label {
+                    .mgb(0)
+                }
+            }
+        }
+    }
+    tr.edit {
+        td,
+        th {
+            .form-control {
+                .pdl(0);
+            }
+        }
+        background-color: @cbsw;
+        .control {
+            //          background-color: @cgr;
+        }
+    }
+    tr.filter {
+        .form-control {
+            font-weight: normal;
+            &.line {
+                &+.line-label {
+                    &:before {
+                        .iconfont;
+                        content: "\e662";
+                        color: @cc2;
+                        position: absolute;
+                        top: -15px;
+                        right: 12px;
+                        -webkit-transform: translateY(-50%);
+                        -moz-transform: translateY(-50%);
+                        ;
+                        -ms-transform: translateY(-50%);
+                        -o-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+            &:focus+.line-label {
+                &:before {
+                    content: "";
+                }
+            }
+        }
+    }
+    .form-group {
+        .mgb(0);
+    }
+    &.ces {
+        >tbody {
+            >tr {
+                .table-striped& {
+                    &:nth-of-type(odd) {
+                        background-color: @c;
+                    }
+                }
+                .table-hover& {
+                    &:hover {
+                        background-color: @c;
+                    }
+                }
+            }
+        }
+    }
+    &.tools {
+        min-width: 1000px;
+    }
+    &:not(&-bordered) {
+        .bdrb
+    }
+}
+
+.table+.table {
+    margin-top: @mpb;
+}
+
+.w-80px {
+    width: 80px;
+}
+
+.w-120px {
+    width: 120px;
+}
+
+.checkbox {
+    .unbd!important;
+    .table {
+        font-size: 12px;
+        td,
+        th {
+            white-space: normal;
+            vertical-align: top!important;
+            label {
+                width: 170px;
+                font-size: 12px;
+                padding: 0 10px;
+                display: inline-block;
+                .mg(0);
+                input[type=checkbox] {
+                    position: static;
+                    top: 0;
+                    .mgl(0);
+                }
+            }
+            &.menus {
+                border-right: 0;
+                padding-right: 0;
+                width: 210px !important;
+                &+td {
+                    border-left: 0;
+                }
+            }
+        }
+        th {
+            vertical-align: middle!important;
+            .tac;
+            label {
+                width: 80px;
+                padding: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+.nav-pills {
+    &.list {
+        position: relative;
+        margin-bottom: 50px;
+        li {
+            a {
+                .trs;
+                .unbdr;
+                padding: 5px 30px;
+                color: @cc;
+                .bdr(@cr:@cgy1);
+                &:hover {
+                    background-color: @ces;
+                    color: @cwh;
+                    border-color: @ces;
+                }
+            }
+            &.active {
+                a {
+                    background-color: @ces;
+                    color: @cwh;
+                    border-color: @ces;
+                }
+            }
+        }
+        >li+li {
+            margin-left: 10px;
+        }
+    }
+    &.list-child{
+        margin-top: -25px;
+        li{
+            a{
+                border-color: transparent;
+                &:hover{
+                    background: @cc1;
+                    border-color: @cc1;
+                }
+            }
+            &.active{
+                a{
+                    background: @cc1;
+                    border-color: @cc1;
+                }
+            }
+        }
+    }
+}

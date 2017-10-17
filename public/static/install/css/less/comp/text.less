@@ -1,0 +1,145 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: @cc1;
+}
+
+h1 {
+    font-size: 34px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    font-size: 12px;
+}
+
+//
+.en {
+    font-family: robote;
+}
+
+.cn {
+    font-family: webfont;
+}
+
+//
+.blod {
+    font-weight: bolder;
+}
+
+//
+.money {
+    &:before {
+        content: "￥";
+    }
+}
+
+span.baifen {
+    &:after {
+        content: "%";
+    }
+}
+
+//
+.help {
+    color: @cgy1;
+    label {
+        color: inherit;
+    }
+}
+
+.info,
+.copy {
+    color: @cc2;
+    .footer & {
+        .mgt;
+    }
+}
+
+.pabs {
+    position: absolute;
+}
+
+a {
+    cursor: pointer;
+    color: @ces;
+    .trs(@t: .2s);
+}
+
+.form-control {
+    .unbdr;
+}
+
+.checkbox input[type=checkbox],
+.checkbox-inline input[type=checkbox],
+.radio input[type=radio],
+.radio-inline input[type=radio] {
+    top: -2px;
+}
+
+.round {
+    display: block;
+    position: relative;
+    padding-left: 15px
+}
+
+.round:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    margin-top: 5px;
+    border-radius: 15px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.text-ces.round:after {
+    background-color: #3498db
+}
+
+.text-info.round:after {
+    background-color: #3498db
+}
+
+.text-danger.round:after {
+    background-color: #e74c3c
+}
+
+.text-success.round:after {
+    background-color: #2ecc71
+}
+
+.text-warning.round:after {
+    background-color: #f1c40f
+}
+
+.text-muted.round:after {
+    background-color: #bdc3c7
+}
+
+.round.mix {
+    width: 60px;
+    margin: 27px auto 0
+}
+.text-muted {
+    color: @cc2;
+}

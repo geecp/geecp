@@ -1,0 +1,42 @@
+.navbar {
+    &.unbg {
+        background-color: @cwh;
+        .unbd;
+    }
+    .navbar-header{
+        margin: 5px 15px;
+        .mgr(0);
+    }
+    .navbar-right{
+        margin-right: 15px;
+    }
+    .nav {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        li {
+            &.active {
+                a {
+                    background-color: @ces;
+                    color: @cwh;
+                    &:hover {
+                        background-color: @ces;
+                        color: @cwh;
+                    }
+                }
+            }
+            a {
+                .trs;
+                padding: 10px 30px;
+                &:hover {
+                    background-color: @ces;
+                    color: @cwh;
+                }
+            }
+        }
+        &.navbar-nav{
+            >li+li{
+                margin-left: 3px;
+            }
+        }
+    }
+}

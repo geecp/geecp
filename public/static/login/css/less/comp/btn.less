@@ -1,0 +1,136 @@
+.btn {
+    .unbdr;
+    .trs;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 25px;
+    .label {
+        border-radius: 20px;
+        margin-left: 5px;
+        &.label-top {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+    }
+    &.btn-danger {
+        .label {
+            .bdr(@cr:@cwh);
+        }
+    }
+}
+.btn-unbg {
+    .unbg!important;
+    .unbd;
+    &:hover {
+        background: @cgy!important;
+    }
+}
+.btn-default {}
+.btn-primary,
+.bg-primary,
+.label-primary {
+    background: @cbl1;
+}
+.btn-success,
+.bg-success,
+.label-success {
+    background: @cgr;
+}
+.btn-info,
+.bg-info,
+.label-info {
+    background: @cbl;
+}
+.btn-warning,
+.bg-warning,
+.label-warning {
+    background: @cye;
+}
+.btn-danger,
+.bg-danger,
+.label-danger {
+    background: @cre;
+}
+.btn-ces,
+.bg-ces,
+.label-ces{
+    background: @ces*0.9;
+    color: @cwh;
+    &:hover,&:focus{
+        background: @ces;
+        color: @cwh;
+    }
+}
+//
+.text-white {
+    color: @cwh;
+}
+.text-muted,
+.btn-unbg.btn-default {
+    color: @cc1;
+}
+.text-primary,
+.btn-unbg.btn-primary,
+.btn-border.btn-primary {
+    color: @cbl1;
+}
+.text-success,
+.btn-unbg.btn-success,
+.btn-border.btn-success {
+    color: @cgr;
+}
+.text-info,
+.btn-unbg.btn-info,
+.btn-border.btn-info {
+    color: @cbl;
+}
+.text-warning,
+.btn-unbg.btn-warning,
+.btn-border.btn-warning {
+    color: @cye;
+}
+.text-danger,
+.btn-unbg.btn-danger,
+.btn-border.btn-danger {
+    color: @cre;
+}
+.btn-border {
+    .unbg;
+    &:hover {
+        color: @cwh;
+    }
+}
+a.more {
+    position: relative;
+    width: 150px;
+    height: 31px;
+    text-decoration: none;
+    color: @cwh;
+    display: block;
+    line-height: 31px;
+    padding: 0;
+    background-color: @cc1;
+    border-color: @cc1;
+    text-align: center;
+    .iconfont {
+        .trs;
+        margin-left: -12px;
+        color: @cwh;
+        opacity: 0;
+    }
+    &:hover {
+        background-color: @ces;
+        border-color: @ces;
+        .iconfont {
+            margin-left: 18px;
+            opacity: 1;
+        }
+    }
+    &.more-lg{
+        width: 200px;
+        height: 45px;
+        line-height: 45px;
+        font-size: 16px;
+    }
+}

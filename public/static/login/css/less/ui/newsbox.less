@@ -1,0 +1,99 @@
+.newsbox {
+    margin-bottom: 30px;
+    .page-header {
+        margin-bottom: 15px;
+    }
+    counter-reset: flag;
+    &.hasdate {
+        .news {
+            .list-group-item {
+                padding-left: 25px;
+                position: relative;
+                &:nth-child(1) {
+                    &:before {
+                        background: @cre;
+                        color: @cwh;
+                    }
+                }
+                &:nth-child(2) {
+                    &:before {
+                        background: @cye;
+                        color: @cwh;
+                    }
+                }
+                &:nth-child(3) {
+                    &:before {
+                        background: @cgr;
+                        color: @cwh;
+                    }
+                }
+                &:before {
+                    content: counter(flag);
+                    counter-increment: flag;
+                    position: absolute;
+                    left: 0;
+                    top: 10px;
+                    width: 19px;
+                    height: 19px;
+                    text-align: center;
+                    background: @cgy;
+                }
+            }
+        }
+    }
+    &.round {
+        .news {
+            .list-group-item {
+                padding-left: 25px;
+                position: relative;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    top: 15px;
+                    left: 10px;
+                    border-radius: 50%;
+                    background: #d6d6d6;
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    background: #d6d6d6;
+                    top: 15px;
+                    bottom: -15px;
+                    left: 15px;
+                }
+                &:last-child {
+                    &:after {
+                        content:;
+                        background: none;
+                    }
+                }
+            }
+        }
+    }
+    .news{
+        a:hover{
+            color: @ces;
+        }
+    }
+    .news {
+    .list-group-item {
+        .unbd;
+        .unbg;
+        .unbdr;
+        padding-left: 0;
+        padding-right: 0;
+        a {
+            .trs(@t:.3s);
+            color: @cc2;
+            text-decoration: none;
+            &:hover{
+                color: @ces;
+            }
+        }
+    }
+}
+}

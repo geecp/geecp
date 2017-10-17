@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>bce-bos-uploader MoE demo</title>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <!--[if lt IE 8]><script src="../bower_components/json3/lib/json3.min.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="../bower_components/js-polyfills/es5.js"></script><![endif]-->
+    <!--[if lt IE 10]><script src="../bower_components/moxie/bin/js/moxie.min.js"></script><![endif]-->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/humanize/humanize.js"></script>
+    <script src="../bce-bos-uploader.bundle.js"></script>
+    <style type="text/css">
+    .table {
+      table-layout: fixed;
+    }
+    .empty,
+    .f-status {
+        text-align: center;
+    }
+    .f-progress {
+        text-align: right;
+    }
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+    table th,
+    .f-progress,
+    .f-mediaId,
+    .f-size {
+        white-space: nowrap;
+    }
+    .f-name .alert-danger {
+        padding: 0 5px;
+        margin: 0;
+    }
+    tr.ignored {
+      text-decoration: line-through;
+      color: gray;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>bce-bos-uploader demo</h2>
+          <div class="alert alert-warning" role="alert">
+            文件自动上传到 vod-gauddsywyhn713kc 这个bucket，后台会定期清理，请勿上传重要文件。
+          </div>
+          <form class="form-inline">
+            <div class="form-group">
+              <span class="btn btn-default btn-file">
+                <span class="glyphicon glyphicon-paperclip"></span> 选择1G以内的文件
+                <input type="file" id="file" />
+              </span>
+              <button type="submit" class="btn btn-success" disabled>上传媒资</button>
+            </div>
+          </form>
+          <br />
+          <table class="table table-bordered">
+            <colgroup>
+              <col width="50px" />
+              <col width="50px" />
+              <col width="80px" />
+              <col width="80px" />
+              <col width="80px" />
+              <col width="180px" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>状态</th>
+                <th>进度</th>
+                <th>大小</th>
+                <th>耗时(s)</th>
+                <th>媒资ID</th>
+                <th>文件名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="7" class="empty">请选择文件...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="utils.js"></script>
+    <script src="moe.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,126 @@
+.thumbnail.vba {
+    .thumbnail-object {
+        height: inherit;
+        position: relative;
+        .ohd;
+        .title {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: @cwh;
+            .pd(@mpb 2*@mpb);
+            .mg(0);
+            display: block;
+            .trs;
+        }
+        img {
+            width: 100%;
+        }
+        .mask& {
+            &:before {
+                content: "";
+                .mask;
+                background-color: rgba(0, 0, 0, .5);
+            }
+        }
+        .absh& {
+            height: inherit;
+            img {
+                width: auto;
+                height: inherit;
+            }
+        }
+        .trs;
+    }
+    &.hover {
+        .title {
+            bottom: -3.5*@mpb
+        }
+        &:hover {
+            .title {
+                bottom: 0;
+            }
+        }
+    }
+    .caption {
+        .pd(@mpb 2*@mpb);
+        .info {
+            text-indent: 2em;
+        }
+        .tool {
+            .pdt(10px);
+            .bdrt;
+        }
+        .abs&,
+        .absh& {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 2*@mpb;
+            &.amid {
+                .amid;
+                width: 100%;
+            }
+        }
+        .trs;
+    }
+    &.abs {
+        .ohd;
+    }
+    &.bottom {
+        .caption {
+            top: initial;
+            bottom: 0;
+        }
+    }
+    &.left {
+        .caption {
+            right: initial;
+            left: 0;
+        }
+    }
+    &.rigth {
+        .caption {
+            left: initial;
+            right: 0;
+        }
+    }
+}
+
+.thumbnail-list {
+    .mgb;
+    .clear;
+    &.pro {
+        .thumbnail {
+            .unbg;
+            &-object {
+                .pd(@mpb 3*@mpb);
+            }
+        }
+    }
+}
+
+.media.vba {
+    background-color: @bgc1;
+    .mgb;
+    .media-left {
+        .pdr(0);
+    }
+    .media-body {
+        .pd(2*@mpb);
+        .label-list {
+            li {
+                .pd(ceil(@mpb*0.7) @mpb);
+                .mgt(ceil(@mpb*0.3));
+                .iconfont {
+                    .mgr(ceil(@mpb*0.3));
+                }
+            }
+        }
+        .btn {
+            .pdl(3*@mpb);
+            .pdr(3*@mpb);
+        }
+    }
+}

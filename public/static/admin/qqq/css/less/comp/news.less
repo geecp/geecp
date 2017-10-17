@@ -1,0 +1,280 @@
+.news-mix {}
+.cesbg {
+    display: block;
+    background-color: @ces;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    .trs;
+    &:hover {
+        opacity: 0.3;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+    }
+}
+.imgnews-box {
+    .pdb;
+    .bdrb;
+    .mix {
+        position: relative;
+        z-index: 1;
+        img {
+            width: 100%;
+        }
+    }
+    .tit {
+        a {
+            color: inherit;
+            text-decoration: none;
+            .taj;
+            &:hover {
+                color: @ces;
+            }
+        }
+    }
+}
+.news-list,
+.videos-list {
+    .media {
+        padding: 2*@mpb 0;
+        .bdrb;
+    }
+    .media+.media {
+        .mgt(0);
+    }
+    .media-left {
+        position: relative;
+        z-index: 1;
+        &.video {
+            .iconfont {
+                width: 30px;
+                height: 25px;
+                line-height: 25px;
+                display: block;
+                position: absolute;
+                left: 0;
+                bottom: 1px;
+                text-align: center;
+                background-color: @ces;
+                color: @cwh;
+                z-index: 3;
+            }
+        }
+    }
+    .media-object {
+        width: 120px;
+        position: relative;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .tit {
+        display: block;
+        color: @cc2;
+        font-size: 16px;
+        text-decoration: none;
+        font-weight: 600;
+        &:hover {
+            color: @ces;
+        }
+    }
+    p.info {
+        margin-bottom: 0;
+    }
+    &-sm {
+        .unst;
+        .news-item {
+            height: 30px;
+            background: url("../../img/navbar/sprite.png") no-repeat;
+            background-position: 0 0;
+            margin: 12px 0 0;
+            line-height: 31px;
+            a {
+                display: block;
+                padding: 0 10px 0 62px;
+                position: relative;
+                background: url("../../img/navbar/sprite.png") no-repeat;
+                background-position: 26px -689px;
+                text-decoration: none;
+                .textoh;
+                color: @cc;
+                .trs;
+                &:hover {
+                    color: @ces;
+                }
+            }
+        }
+    }
+}
+.videos-list {
+    .media {
+        .unbd;
+    }
+    .tit {
+        color: @cwh;
+    }
+    .media-object {
+        width: 190px;
+        img {
+            .unbdr;
+            .pd(1px);
+        }
+    }
+    .media-body {
+        .date,
+        .info,
+        .iconfont {
+            color: @cc2;
+        }
+        .info {
+            margin: 10px 0 5px;
+        }
+        .date {
+            display: block;
+            .mgb(5px);
+        }
+    }
+}
+.pline {
+    position: relative;
+    color: @cc;
+    .taj;
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 1px;
+        background-color: @ces;
+    }
+    &.pline-lg {
+        text-indent: 70px;
+        &:before {
+            top: 7px;
+            width: 50px;
+        }
+    }
+    &.pline-md {
+        text-indent: 45px;
+        &:before {
+            top: 7px;
+            width: 30px;
+        }
+    }
+}
+.news-days {
+    .news-day {
+        position: relative;
+        &.today {}
+        .time {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: block;
+            line-height: 31px;
+        }
+        ul {
+            .unst;
+            .pdl(5*@mpb);
+            .mgb(0);
+            li {
+                height: 30px;
+                background: url("../../img/navbar/sprite.png") no-repeat;
+                background-position: 0 0;
+                margin: 15px 0 0;
+                line-height: 30px;
+                position: relative;
+                z-index: 1;
+                .pdr(0.5*@mpb);
+                .textoh;
+                a {
+                    .pdl(60px);
+                    color: @cc;
+                    text-decoration: none;
+                    font-weight: 700;
+                    &:hover {
+                        color: @ces;
+                    }
+                }
+                .iconfont {
+                    position: absolute;
+                    .mgl(2.5*@mpb);
+                    z-index: 2;
+                    color: @ces;
+                    &:before {
+                        content: "\e602";
+                    }
+                }
+                &.video {
+                    .iconfont {
+                        &:before {
+                            content: "\e600";
+                        }
+                    }
+                }
+                &.img {
+                    .iconfont {
+                        &:before {
+                            content: "\e601";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.newspagination {
+    .mgt(4*@mpb);
+    .pager {
+        >li {
+            >a {
+                .unbd;
+                .unbdr;
+                padding: 0 @mpb*1.2;
+                color: @cgy*0.8;
+                .trs;
+                .iconfont {
+                    font-size: 32px;
+                    color: @cgy*0.8;
+                    .trs;
+                }
+                &:hover,
+                &:focus {
+                    .unbg;
+                    color: @cc;
+                    .iconfont {
+                        color: @cc;
+                    }
+                }
+            }
+        }
+    }
+}
+//
+@media (max-width: 767px) {
+    .news-list {
+        .media-left {
+            vertical-align: middle;
+            .iconfont {
+                bottom: 0;
+            }
+        }
+    }
+    .video-list {
+        .mgl(-15px);
+        .mgr(-15px);
+        .pdl(2*@mpb);
+    }
+    .videos-list {
+        .media-object {
+            width: 120px;
+        }
+        .tit {
+            font-size: 14px;
+        }
+    }
+}

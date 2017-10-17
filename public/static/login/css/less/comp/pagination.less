@@ -1,0 +1,41 @@
+.pagination {
+    &.mp{
+        margin-bottom: 0;
+    }
+    &.line {
+        li {
+            a {
+                .unbg;
+                color: @cc;
+                border-color: transparent;
+                border-bottom-color: @cc2;
+                margin: 0 5px;
+                &:hover {
+                    background: none;
+                    border-bottom-color: @ces;
+                }
+                &.prev,
+                &.next {
+                    .unbdr;
+                    .trs;
+                    border-color: transparent;
+                    &:hover{
+                        color: @cwh;
+                        background-color: @ces;
+                    }
+                }
+            }
+            &.active {
+                a {
+                    color: @ces;
+                    border-bottom-color: @ces;
+                    &:hover {
+                        border-color: transparent;
+                        background: none;
+                        border-bottom-color: @ces;
+                    }
+                }
+            }
+        }
+    }
+}

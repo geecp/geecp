@@ -1,0 +1,296 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*快云服务器banner*/
+.ky-fwq-bg{background:#1d1e2c url(../images/fuwuqi-bg.png) no-repeat top center;width:100%;min-width:1200px;height:405px}
+.fwq-tit{background:url(../images/fwq-pro.png) no-repeat 0 16px;padding-left:95px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+.padd40{padding-top:40px}
+.fwq-detail{font-size:14px;color:#97a0b4;line-height:30px}
+.btnbox{overflow:hidden;margin-top:45px}
+.buybtn{width:142px;height:35px;color:#213152;text-align:center;background:#fff;line-height:35px;font-size:14px;float:left}
+.buybtn:hover{color:#213152}
+.checkbtn{width:140px;height:33px;border:1px solid #fff;color:#fff;text-align:center;line-height:33px;font-size:14px;float:left;margin-left:25px}
+.checkbtn:hover{color:#213152;background:#fff;-webkit-transition: all .3s;
+-moz-transition: all .3s;
+-ms-transition: all .3s;
+-o-transition: all .3s}
+/*快云服务器产品特性*/
+.tx{margin-top:40px;overflow:hidden}
+.tx-table{width:299px;border-left:1px solid #d8d8d8;border-top:1px solid #d8d8d8;float:left;margin-top:18px}
+.tx-table th{background:#f3f3f3;font-size:18px;height:98px;font-weight:normal;border-bottom:1px solid #d8d8d8}
+.tx-table td{font-size:14px;height:98px;border-bottom:1px solid #d8d8d8;text-align:center}
+.tx-table-mid{width:598px;border:1px solid #4251b6;float:left}
+.tx-table-mid th{height:116px;font-size:18px;background:#ecedf8;color:#4251b6;border-bottom:1px solid #005baa;font-weight:normal}
+.tx-table-mid td{font-size:14px;height:98px;border-bottom:1px solid #d8d8d8;text-align:center}
+.tx-table-right{width:299px;border-right:1px solid #d8d8d8;border-top:1px solid #d8d8d8;float:left;margin-top:18px}
+.tx-table-right th{background:#f3f3f3;font-size:18px;height:98px;font-weight:normal;border-bottom:1px solid #d8d8d8}
+.tx-table-right td{font-size:14px;height:98px;border-bottom:1px solid #d8d8d8;text-align:center}
+.width246{width:240px;color:#888;line-height:24px;text-align:left;display:inline-block}
+.width505{width:480px;line-height:24px;text-align:left;display:inline-block}
+/*快云服务器应用场景*/
+.scene-container{position:relative;margin-top:40px;padding-bottom:60px}
+.changjin-col{float:left;width:19%;border:1px solid #eee;height:384px;margin-right:1%;
+ -webkit-transition: all .2s linear;
+transition: all .2s linear}
+.changjin-col:hover{border:1px solid #4251b6; -webkit-box-shadow: 0 3px 20px rgba(0,0,0,.1);
+box-shadow: 0 3px 20px rgba(0,0,0,.1);
+-webkit-transform: translate3d(0,-2px,0);
+transform: translate3d(0,-2px,0)}
+.changjin-col-last{margin-right:0 !important}
+.changjin-col-top{background:#f5f6f6;height:175px}
+.changjin-col-top p{margin-top:15px}
+.col-top-icon{display:inline-block;margin-top:35px}
+.col-top-icon img{display:block}
+.changjin-peizhi{padding:10px 20px;}
+.changjin-peizhi h4{padding-bottom:10px}
+.changjin-bottom{padding:0 20px}
+.changjin-bottom{border-top:1px solid #eee}
+.changjin-bottom p{padding-top:10px;line-height:24px}
+/*快云服务器价格预览*/
+.bgf5{background:#f5f5f5;width:100%;min-width:1200px;padding-top:30px;padding-bottom:50px}
+.jg-left-tit{float:left}
+.zz-jg-tit{width:42px;height:228px;background:#4251b6;color:#fff;font-size:16px;text-align:center}
+.zz-jg-txt{width:20px;line-height:22px;display:inline-block;margin-top:52px}
+.tx-table2{float:left;width:1128px;margin-left:30px}
+.tx-table2 table{width:100%}
+.tx-table2 table tr:hover{background:#ecedf8}
+.tx-table2 table tr th{background:#ecedf8;font-size:14px;color:#777;border:1px solid #d8d8d8;height:37px;line-height:37px}
+.tx-table2 table tr td{border:1px solid #d8d8d8;height:37px;line-height:37px}
+/*快云服务器常见问题*/
+.new-box{overflow:hidden;padding-bottom:70px}
+.new-row{width:32%;float:left;border-right:1px solid #d8d8d8}
+.new-mright{margin-right:1%}
+.new-ul{padding-right:5%}
+.new-ul li{line-height:32px;color:#888;overflow:hidden}
+.new-ul li a{color:#888;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;max-width:82%;float:left}
+.new-ul li a:hover{color:#4251b6;text-decoration:underline}
+.new-ul li span{float:right}
+.qa-title{font-size:16px;color:#333;line-height:20px;margin-bottom:12px}
+.new-ul li a.qa-more{font-size:14px;color:#4251b6}
+/*快云抗Dbanner*/
+.ky-kangd-bg{background:#1d1e2c url(../images/kangd-bg.png) no-repeat top center;width:100%;min-width:1200px;height:405px}
+.kd-tit{background:url(../images/kangd-pro.png) no-repeat 0 16px;padding-left:75px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+/*快云抗D产品特性*/
+.tx-table3{width:100%;border-left:1px solid #d8d8d8;border-top:1px solid #d8d8d8}
+.tx-table3 th{background:#f3f3f3;font-size:16px;height:66px;font-weight:normal;border-right:1px solid #d8d8d8;border-bottom:1px solid #d8d8d8}
+.tx-table3 td{font-size:14px;height:86px;border-right:1px solid #d8d8d8;border-bottom:1px solid #d8d8d8}
+.pad-left52{padding-left:52px}
+.pad-right120{padding-right:150px}
+/*快云抗D产品价格*/
+.bd-box{width:100%;height:158px;background:#fff;padding:15px 0}
+.bd-box ul li{line-height:40px;font-size:14px}
+.bd-pz-tit{color:#666;display:inline-block;width:110px;text-align:right}
+.product-buy{background:#ff8800;width:102px;height:30px;line-height:30px;font-size:14px;color:#fff;display:inline-block;text-align:center;margin:10px 0}
+.product-buy:hover{background:#ff6600;color:#fff}
+/*快云抗D产品优势*/
+.advan-item{width:216px;float:left}
+.mr30{margin-right:30px}
+.advan-iconbox{border:1px solid #d8d8d8;height:123px;text-align:center;padding-top:35px}
+.advan-txt{font-size:14px;line-height:24px;text-align:left;margin-top:15px;word-break:break-all}
+/*快云抗D应用场景*/
+.changjin-col-fangfu{float:left;width:24%;border:1px solid #eee;padding-bottom:20px;margin-right:1%;height:320px;
+ -webkit-transition: all .2s linear;
+transition: all .2s linear}
+.changjin-col-fangfu:hover{border:1px solid #4251b6; -webkit-box-shadow: 0 3px 20px rgba(0,0,0,.1);
+box-shadow: 0 3px 20px rgba(0,0,0,.1);
+-webkit-transform: translate3d(0,-2px,0);
+transform: translate3d(0,-2px,0)}
+/*快云数据库*/
+.data-tit{background:url(../images/data-pro.png) no-repeat 0 16px;padding-left:95px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+.ky-data-bg{background:#1d1e2c url(../images/data-bg.png) no-repeat top center;width:100%;min-width:1200px;height:405px}
+.changjin-col-data{float:left;width:32.5%;border:1px solid #eee;padding-bottom:20px;margin-right:1%;height:280px;
+ -webkit-transition: all .2s linear;
+transition: all .2s linear}
+.changjin-col-data:hover{border:1px solid #4251b6; -webkit-box-shadow: 0 3px 20px rgba(0,0,0,.1);
+box-shadow: 0 3px 20px rgba(0,0,0,.1);
+-webkit-transform: translate3d(0,-2px,0);
+transform: translate3d(0,-2px,0)}
+.zz-jg-tit2{height:191px}
+.zz-jg-tit2 .zz-jg-txt{margin-top:30px}
+.ky-data-span{margin-top:10px;display:inline-block;margin-left:20px}
+/*快云存储*/
+.ky-cunchu-bg{background:#1d1e2c url(../images/cunchu-bg.png) no-repeat top center;width:100%;min-width:1200px;height:405px}
+.cunchu-tit{background:url(../images/cunchu-pro.png) no-repeat 0 15px;padding-left:70px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+.tx-table4 table{width:100%}
+.tx-table4 table tr:hover{background:#ecedf8}
+.tx-table4 table tr th{background:#ecedf8;font-size:14px;border:1px solid #d8d8d8;height:40px;line-height:40px}
+.tx-table4 table tr td{padding-left:30px;padding-right:30px;line-height:24px;padding-top:10px;padding-bottom:10px;border:1px solid #d8d8d8;text-align:center}
+/*负载均衡*/
+.ky-fzjh-bg{width:100%;height:405px;min-width:1200px;background:#1d1e2c url(../images/fzjh-bg.png) top center no-repeat}
+.fzjh-tit{background:url(../images/m20170330img2.png) no-repeat 0 16px;padding-left:95px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+.fzjh-icon1{width:23px;height:23px;background:url(../images/m20170330img3.png) no-repeat}
+.fzjh-icon2{width:23px;height:23px;background:url(../images/m20170330img3.png) 0 -33px no-repeat}
+.fzmethod-one{width:276px;height:342px;border:1px solid #dddddd;transition: all .2s linear}
+.top-fzfs{height:162px;background:#f5f7f6;width:100%;text-align:center;border-bottom:1px solid #dddddd}
+.display-inline{display:inline-block}
+.hover-icon1{width:230px;height:128px;background:url(../images/20161229img4.png) center center no-repeat;margin-top:17px;transition:transform .6s ease-out}
+.hover-icon1:hover{transform:scale(0.9,0.9)}
+.hover-icon2:hover{transform:scale(0.9,0.9)}
+.hover-icon3:hover{transform:scale(0.9,0.9)}
+.hover-icon4:hover{transform:scale(0.9,0.9)}
+.hover-icon2{width:169px;height:137px;background:url(../images/20161229img6.png) center center no-repeat;margin-top:12px;transition:transform .3s ease-out}
+.hover-icon3{width:176px;height:135px;background:url(../images/20161229img7.png) center center no-repeat;margin-top:13px;transition:transform .3s ease-out}
+.hover-icon4{width:170px;height:141px;background:url(../images/20161229img8.png) center center no-repeat;margin-top:10px;transition:transform .3s ease-out}
+.bottom-fzfs{padding:0 20px;color:#666;font-size:12px}
+.ft1633{font-size:16px;color:#333;line-height:40px;text-align:center}
+.mright30{margin-right:29px}
+.pbottom20{padding-bottom:20px}
+.fzmethod-one:hover{border:1px solid #4251b6;box-shadow:0 3px 20px rgba(0,0,0,.1);transform:translate3d(0,-2px,0)}
+.tx-table5 table{width:100%}
+.tx-table5 table tr th{background:#ecedf8;font-size:16px;border:1px solid #d8d8d8;height:44px;line-height:44px}
+.tx-table5 table tr td{padding-left:30px;padding-right:30px;line-height:24px;padding-top:10px;padding-bottom:10px;border:1px solid #d8d8d8}
+.mtop40{margin-top:40px}
+.fzjh-nav{width:33.3%}
+.float-nav-fixednav .fzjh-nav{width:289px}
+/*快云cdn*/
+.ky-cdn-bg{width:100%;height:405px;min-width:1200px;background:#1d1e2c url(../images/cdn-bg.png) top center no-repeat}
+.cdn-tit{background:url(../images/cdn-pro.png) no-repeat 0 15px;padding-left:70px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+.free-link{font-size:14px;color:#888}
+.free-link a{color:#4251b6}
+.free-link a:hover{text-decoration:underline}
+.buy-table{width:1198px;border-top:1px solid #dddddd;border-left:1px solid #dddddd;margin:0 auto;margin-top:30px;margin-bottom:58px}
+.buy-table th,.buy-table td{border-right:1px solid #dddddd;border-bottom:1px solid #dddddd}
+.buy-table th{font-size:30px;color:#333;padding:30px 0}
+.buy-table td{text-align:center;word-wrap:break-word;word-break:break-all;}/*new*/
+.col1{font-size:18px;color:#333}
+.free-long{font-size:18px;color:#ff8800}
+.color333{color:#333}
+.liji-use{display:block;width:130px;height:36px;background:#4251b6;font-size:14px;color:#fff;text-align:center;line-height:36px;margin:0 auto;margin-top:6px}
+.liji-use:hover{background:#4f5ec3;color:#fff}
+.color999{font-size:18px;color:#999}
+.ft143{font-size:14px;color:#333}
+.bcd9f0fa td{background:#d9f0fa}
+.nullgrey{background:#f7f7f7}
+.vertical-middle{vertical-align:middle}
+.buy-table .pad-no{padding:0;cursor:default}
+.pad1612 td{padding:16px 0 12px 0}
+.pad12 td{padding:12px}
+.col1{position:relative}
+.tc333{position:absolute;display:none}
+.col1:hover .tc333{display:block}
+.ft143:hover .tc333{display:block}
+.tc3331{top:-62px;left:10px}
+.tc3332{top:-59px;left:10px}
+.tc3334{top:-62px;left:10px}
+.ft143{position:relative}
+.tc-content{background:#333;color:#fff;text-align:center;padding:10px;max-width:200px;font-size:12px}
+.absolute-arrow{display:block;width:9px;height:5px;background:url(../images/20170224img1.png) no-repeat;position:relative;left:50%;margin-left:-4px}
+.height40{height:40px}
+.cdn-linka{color:#97a0b4;text-decoration:underline;margin-left: 20px;line-height:35px;}
+.cdn-linka:hover{text-decoration:underline}
+/*托管租用banner*/
+.lease-bg{background:#1d1e2c url(../images/lease-bg.png) no-repeat top center;width:100%;min-width:1200px;height:405px}
+.lease-tit{font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+/*托管租用产品推荐*/
+.tj-left{float:left;width:375px;height:380px;border:1px solid #d8d8d8}
+.tj-pz{padding-top:22px;padding-bottom:10px;font-size:14px;width:100%}
+.tj-pz li{line-height:40px;width:100%}
+.tj-pz-l{width:40%;display:inline-block;color:#666;text-align:right}
+.tj-pz-r{width:60%;display:inline-block;text-align:left}
+.tj-pz-mid{height:114px;background:#f5f6f6;font-size:14px;overflow:hidden}
+.font-pri{font-size:36px;color:#ff8800}
+.zixunbtn{width:90%;height:35px;line-height:35px;font-size:14px;background:#ff8800;color:#fff;text-align:center;display:block;margin:20px auto}
+.zixunbtn:hover{background:#ff6600;color:#fff}
+.dx-sele{width:25%;display:inline-block;border:1px solid #ccc;padding:3px 5px;height:30px;vertical-align:middle;margin-bottom:2px;outline:none}
+.width380{width:378px}
+.width350{width:350px}
+/*托管租用产品增值*/
+.zztable{width:100%;border-left:1px solid #d8d8d8;border-top:1px solid #d8d8d8}
+.zztable tr th{background:#dfe9f1;font-size:14px;color:#777;border-right:1px solid #d8d8d8;border-bottom:1px solid #d8d8d8;height:45px;line-height:45px}
+.zztable tr td{border-right:1px solid #d8d8d8;border-bottom:1px solid #d8d8d8;height:45px;line-height:45px;text-align:center;background:#fff;font-size:14px}
+/*托管租用企业托管优势*/
+.idc-advan-item{width:170px;float:left;text-align:center;font-size:14px}
+.idc-advan-txt{margin-top:10px}
+/*托管租用机房介绍*/
+.jfang-col{float:left;width:275px;border:1px solid #eee;height:426px;
+ -webkit-transition: all .2s linear;
+transition: all .2s linear}
+.jfang-col:hover{border:1px solid #4251b6; -webkit-box-shadow: 0 3px 20px rgba(0,0,0,.1);
+box-shadow: 0 3px 20px rgba(0,0,0,.1);
+-webkit-transform: translate3d(0,-2px,0);
+transform: translate3d(0,-2px,0)}
+.jfang-col-top{background:#f5f6f6;height:196px}
+.jfang-col-top p{margin-top:15px}
+/*托管租用客户案例*/
+.anli-contain{width:100%;background:#e6e6e6}
+/*.anlilist{position:relative;padding-top:32px;height:240px}*/
+.slidesjs-previous{background:#e6e6e6 url(../images/20170313img8.png) no-repeat 7px 20px;width:26px;height:60px;position:absolute;left:0;top:102px;z-index:999;font-size:0}
+.slidesjs-next{background:#e6e6e6 url(../images/20170313img9.png) no-repeat 8px 20px;width:26px;height:60px;position:absolute;right:0;top:102px;z-index:999;font-size:0}
+.slidesjs-previous:hover{background-color:#c2c2c2}
+.slidesjs-next:hover{background-color:#c2c2c2}
+.anli-item{width:283px;height:175px;padding-top:25px;border:1px solid #dbdbdb;background:#fff;float:left;text-align:center}
+.anli-logo{width:283px;height:72px}
+.anli-logo img{display:block}
+.anli-tit{font-size:18px;line-height:46px}
+.anli-txt{width:200px;font-size:14px;color:#999;display:inline-block}
+.slidesjs-pagination{overflow:hidden;position:absolute;left:50%;bottom:13px;margin-left:-20px;top: 430px;}
+.slidesjs-pagination li{float:left}
+.slidesjs-pagination li a{float:left;width:10px;height:10px;border-radius:50%;background:#c2c2c2;margin:0 5px;font-size:0}
+.slidesjs-pagination li a.active{background:#4251b6}
+.slidesjs-play,.slidesjs-stop{display:none !important}
+
+/*双机热备*/
+.demoltimg{display:block;height:100%;width:100%;background:url(../images/160327img2.png) no-repeat 50% 50%;margin:0 auto}
+.demoltimg:hover{background:#f5f6f6 url(../images/160327img2.gif) no-repeat 50% 50%;}
+.demortimg{display:block;height:100%;width:100%;background:url(../images/160327img3.png) no-repeat 50% 50%;margin:0 auto}
+.demortimg:hover{background:#f5f6f6 url(../images/160327img3.gif) no-repeat 50% 50%;}
+.rosedemolt p{display:block;font-size:14px;color:#666;width:360px;margin-left:auto;margin-right:auto}
+.rosedemolt p span{color:#4251b6}
+.pbottom10{padding-bottom:10px}
+.width20{width:20%}
+.zysx-210{height:210px !important}
+/*安全存储开始*/
+.safe-cunchu-bg{background:#1d1e2c url(../images/m20170713img1.png) no-repeat top center;width:100%;min-width:1200px;height:402px}
+.ptop45{padding-top:45px;}
+.safe-cunchu-tit{background:url(../images/m20170713img2.png) no-repeat 0 15px;padding-left:75px;font-size:52px;line-height:78px;font-weight:lighter;color:#fff}
+.mtop40{margin-top:40px;}
+.safe-storicon{display:inline-block;width:20px;height:18px;background:url(../images/m20170713img3.png) no-repeat;vertical-align:middle;margin:-3px 10px 0 48px}
+.safe-storicon2{background-position:0 -23px}
+.safe-storicon3{background-position:0 -46px}
+.safe-storicon4{background-position:0 -69px}
+.safe-storicon5{background-position:0 -92px}
+.safe-storage-tb table tr td{text-align:left}
+.changjing-box .height265{height:265px;padding-bottom:0}
+.safe-cj-icon{display:inline-block;width:70px;height:70px;margin-top:30px;margin-bottom:10px}
+.safesg-col-top{background:#f5f6f6;padding-bottom:30px;height:auto;}
+/*安全存储结束*/
+
+/*20170721cdn*/
+.tx-table-cdn table{width:100%}
+.tx-table-cdn table tr:hover{background:#ecedf8}
+.tx-table-cdn table tr th{background:#f5f6f6;font-size:16px;border:1px solid #eee;height:44px;line-height:44px}
+.tx-table-cdn table tr td{padding-left:30px;padding-right:30px;line-height:24px;padding-top:10px;padding-bottom:10px;border:1px solid #eee}
+.cdn-ft-icon{display:inline-block;vertical-align:middle;width:30px;height:38px;margin-top:-3px;}
+.cdn-ft-icon1{background:url(../images/20170524img1.png) center no-repeat}
+.cdn-ft-icon2{background:url(../images/20170524img2.png) center no-repeat}
+.cdn-ft-icon3{background:url(../images/20170524img3.png) center no-repeat}
+.cdn-ft-icon4{background:url(../images/20170524img4.png) center no-repeat}
+.scene-container{position:relative;margin-top:40px}
+.changjin-col-data{float:left;width:32.5%;border:1px solid #eee;padding-bottom:20px;margin-right:1%;height:280px;-webkit-transition:all .2s linear;transition:all .2s linear}
+.changjin-col-data:hover{border:1px solid #4251b6;-webkit-box-shadow:0 3px 20px rgba(0,0,0,.1);box-shadow:0 3px 20px rgba(0,0,0,.1);-webkit-transform:translate3d(0,-2px,0);transform:translate3d(0,-2px,0)}
+.height260{height:260px}
+.widthper24{width:24%}
+.changjin-col-top .mtop0{margin-top:0;}
+.height142{height:142px}
+.col-top-icon{display:inline-block;width:80px;height:80px;margin-top:30px;margin-bottom:10px}
+.changjin-bottom{padding:0 20px}
+.changjin-bottom{border-top:1px solid #eee}
+.changjin-bottom p{padding-top:10px;line-height:24px}
+.mtop13{margin-top:13px;}
+.add-tit-line1{line-height:60px;font-size:28px;font-weight:lighter}
+.add-con-p1{font-size:16px;color:#333;text-align:left;padding-left:16px;line-height:24px}
+.buy-table td{text-align:center;padding:11px 0;word-wrap:break-word;word-break:break-all}
+.buy-table th{font-size:18px;color:#333;padding:18px 0}
+.ft12999{font-size:12px;color:#999;}
+.mtop40{margin-top:40px;}
+.widthper24 .changjin-col-top{padding-bottom:30px}
+/*20170721cdn*/
+
+
+
+
+
+
+
+
+
+

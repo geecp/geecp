@@ -1,0 +1,6 @@
+node_modules
+bower_components
+.idea
+512M.bin
+reserved.json
+x.js

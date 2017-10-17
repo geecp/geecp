@@ -1,0 +1,60 @@
+.vba-footer {
+    
+    .clear;
+    .logo {
+        opacity: 0.8;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    .footer {
+        .clear;
+        background-color: @bgc1;
+        &-body,
+        &-footer,
+        &-heading {
+            .clear;
+        }
+        &-body,
+        &-footer {
+            .pdl(3*@mpb);
+            .pdr(3*@mpb);
+        }
+        &-body {
+            .mgb(2*@mpb);
+        }
+        &-footer {
+            .bdrt;
+            .pdt(2*@mpb);
+            p,
+            ul {
+                .mgb(0)
+            }
+        }
+    }
+    .list {
+        li {
+            line-height: ceil(2.5*@mpb);
+        }
+        a {
+            color: @cc;
+        }
+    }
+    .sns {
+        a {
+            color: @cc;
+            font-size: ceil(2.5*@mpb);
+            &:hover {
+                .unl;
+            }
+        }
+    }
+}
+.footer-inverse{
+    .footer{
+        background-color: @bgc;
+        .navbar{
+            background-color: @bgc;
+        }
+    }
+}

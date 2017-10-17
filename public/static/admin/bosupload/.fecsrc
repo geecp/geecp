@@ -1,0 +1,10 @@
+{
+  "eslint": {
+    "rules": {
+      "fecs-camelcase": 0
+    },
+    "globals": {
+      "mOxie": true
+    }
+  }
+}

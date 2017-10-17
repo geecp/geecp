@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>bce-bos-uploader advanced demo</title>
+    <!--[if lt IE 8]><script src="../bower_components/json3/lib/json3.min.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="../bower_components/js-polyfills/es5.js"></script><![endif]-->
+    <!--[if lt IE 10]><script src="../bower_components/moxie/bin/js/moxie.js"></script><![endif]-->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!--
+    <script src="../bower_components/humanize/humanize.js"></script>
+    <script src="../bce-bos-uploader.bundle.js"></script>
+    -->
+  </head>
+  <body>
+    <input type="file" id="file" />
+    <script>
+      // var auth = new baidubce.sdk.Auth('ak', 'sk');
+      // alert(auth.hash('hello world', 'sk'));
+      var fileInput = new mOxie.FileInput({
+        swf_url: '../bower_components/moxie/bin/flash/Moxie.swf',
+        runtime_order: 'flash',
+        browse_button: 'file'
+      });
+      fileInput.onchange = function (e) {try{
+        var file = e.target.files[0];
+        var blob = file.slice(0, 1);
+
+        // var formData = new mOxie.FormData();
+        // formData.append('x', x);
+
+        var xhr = new mOxie.XMLHttpRequest();
+        var url = 'http://leeight.bj.bcebos.com/' + file.name + '?.x=' + Math.random(); // + '?append&offset=1';
+        console.log(url);
+        xhr.onload = function () {
+          console.log(xhr.status);
+          console.log(xhr.response);
+        };
+        xhr.onerror = function (e) {
+          console.log(e);
+        };
+        xhr.bind('Error', function (e) {
+          console.log(e);
+        });
+        xhr.open('HEAD', url, true);
+        // xhr.setRequestHeader('Content-Type', 'text/plain; charset=utf-8');
+        xhr.send(null, {
+          swf_url: '../bower_components/moxie/bin/flash/Moxie.swf'
+        });
+        return;
+
+        var reader = new mOxie.FileReader();
+        reader.on('loadend', function (e) {
+          console.log(e);
+        });
+        reader.readAsText(blob);
+      }catch(ex){ console.log(ex); }}
+      fileInput.init();
+    </script>
+  </body>
+</html>

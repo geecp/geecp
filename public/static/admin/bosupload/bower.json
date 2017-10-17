@@ -1,0 +1,34 @@
+{
+  "name": "bce-bos-uploader",
+  "description": "Baidu Cloud Engine BOS Uploader",
+  "main": "bce-bos-uploader.bundle.js",
+  "authors": [
+    "leeight <leeight@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bce",
+    "bos",
+    "uploader"
+  ],
+  "moduleType": [],
+  "homepage": "https://github.com/leeight/bce-bos-uploader",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "demo",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.12.2",
+    "js-polyfills": "^0.1.19",
+    "moxie": "^1.4.1"
+  },
+  "devDependencies": {
+    "humanize": "^0.0.9",
+    "bootstrap": "^3.3.6",
+    "json3": "^3.3.2"
+  }
+}

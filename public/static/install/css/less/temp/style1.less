@@ -1,0 +1,555 @@
+body {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.amid {
+    .amid;
+}
+
+a,
+button {
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        outline: none!important;
+    }
+    i {
+        font-size: 14px!important;
+        &.l {
+            .mgl(5px);
+        }
+        &.r {
+            .mgr(5px);
+        }
+        &.lr {
+            .mg(0 5px);
+        }
+    }
+}
+
+.cre {
+    color: @cre;
+}
+
+.icon-weixinzhifu {
+    color: #2ecc71;
+}
+
+.icon-zhuanzhang {
+    color: rgb(255, 177, 102);
+}
+
+.icon-zhifubao {
+    color: #3498db;
+}
+
+.icon-yue {
+    color: #e74c3c
+}
+
+.tal {
+    .tal!important;
+}
+
+.ml15 {
+    .mgl(@mpb);
+}
+
+.mr5 {
+    .mgr(5px);
+}
+
+.mr15 {
+    .mgr(@mpb);
+}
+
+.unmt {
+    .mgt(0);
+}
+
+.mt10 {
+    .mgt(10px);
+}
+
+.mt15 {
+    .mgt(@mpb);
+}
+
+.mt30 {
+    .mgt(@mpb*2);
+}
+
+.mt45 {
+    .mgt(@mpb*3);
+}
+
+.mb10 {
+    .mgb(10px);
+}
+
+.mb15 {
+    .mgb(@mpb);
+}
+
+.pl15 {
+    .pdl(@mpb);
+}
+
+.pt10 {
+    .pdt(10px);
+}
+
+.pb10 {
+    .pdb(10px);
+}
+
+.rmb:after {
+    content: " 元";
+    font-size: 12px;
+}
+
+.btn-group {
+    .dropdown-menu {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+.input-group {
+    &-addon {
+        .pd(0);
+    }
+}
+
+.daterangepicker {
+    .calendar {
+        display: block;
+    }
+    .ranges {
+        .pd(0 8px);
+        width: 100%;
+        >ul {
+            float: left;
+            >li {
+                color: @cbl;
+                display: inline-block;
+                line-height: 30px;
+                .mg(0 8px 0 0);
+                .pd(0);
+                background-color: transparent;
+                .unbd;
+                .unbdr;
+                &.active,
+                &:hover {
+                    color: @cc;
+                    background-color: transparent;
+                    .unbd;
+                    .unbdr;
+                }
+                &:last-child {
+                    display: none;
+                }
+                &:nth-last-child(2) {
+                    &:after {
+                        content: "";
+                    }
+                }
+                &:after {
+                    content: "|";
+                    color: @cc;
+                    .pdl(5px);
+                }
+            }
+        }
+    }
+    .range_inputs {
+        float: right;
+        .daterangepicker_end_input,
+        .daterangepicker_start_input {
+            display: none;
+        }
+    }
+    .table-condensed {
+        td {
+            .unbdr;
+        }
+    }
+}
+
+.login-body {
+    background: #393946;
+    min-width: 1200px;
+    height: auto;
+    .login-box {
+        width: 640px;
+        padding: 35px 15px;
+        background: #fff;
+        border-radius: 5px;
+        .amid;
+        .tac;
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: #6D6D6D;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 14px;
+            text-align: center;
+            color: #7DA2CD;
+            margin: 12px auto 0;
+        }
+    }
+    .login-form {
+        width: 450px;
+        margin: 30px auto;
+        text-align: center;
+        .input-group {
+            width: 380px;
+            height: 45px;
+            margin: 25px auto 0;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px;
+            position: relative;
+            transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            &.on {
+                border-color: @ces;
+            }
+            input {
+                .unbd;
+                margin-top: 5px;
+                font-size: 14px;
+                box-shadow: none;
+            }
+            &-addon {
+                .pdl(@mpb);
+            }
+        }
+        .btn-lg {
+            width: 300px;
+            height: 50px;
+            margin: 30px auto 0;
+            padding: 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+        }
+    }
+    .login-footer {
+        position: absolute;
+        bottom: @mpb*2;
+        width: 100%;
+        color: @cc2;
+        .tac;
+        p {
+            .mg(0);
+        }
+        a {
+            color: @cc2;
+        }
+        img {
+            .mg(0 10px);
+        }
+    }
+}
+
+.tabs {
+    .nav {
+        &-tabs {
+            .unbd;
+            .mgb(@mpb*2);
+            .tac;
+            >li {
+                float: none;
+                display: inline-block;
+                >a {
+                    .bdr;
+                    .mgl(@mpb/3);
+                    .mgr(@mpb/3);
+                    .pd(8px 50px);
+                    &:hover {
+                        .bdr;
+                        background-color: @ces;
+                        color: @cwh;
+                        border-color: @ces;
+                    }
+                }
+                &.active {
+                    >a {
+                        position: relative;
+                        .bdr;
+                        background-color: @ces;
+                        color: @cwh;
+                        border-color: @ces;
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            bottom: -10px;
+                            left: 0;
+                            right: 0;
+                            .mg(auto);
+                            width: 0;
+                            height: 0;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-top: 10px solid @ces;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.install {
+    .thumbnail {
+        border-radius: 5px;
+        overflow: hidden;
+        -moz-box-shadow: 0 0 30px rgba(0, 0, 34, 0.2);
+        -webkit-box-shadow: 0 0 30px rgba(0, 0, 34, 0.2);
+        box-shadow: 0 0 30px rgba(0, 0, 34, 0.2);
+        .header-box {
+            width: 700px;
+            height: 380px;
+            display: block;
+            position: relative;
+            background: url('../../img/bj.png') no-repeat;
+            background-position: center center;
+            background-size: cover;
+            h2 {
+                color: @cwh;
+                font-size: 22px;
+                .mgt(@mpb*2);
+            }
+        }
+        .body-box {
+            .pd(@mpb*3 0);
+            background-color: rgb(240, 246, 251);
+            .tac;
+            .btn-lg {
+                .pd(@mpb @mpb*3);
+                font-size: 20px;
+            }
+            .vba-chekbox {
+                display: inline-block;
+                cursor: pointer;
+                .mgb(-5px);
+                &:after {
+                    width: 16px;
+                    height: 16px;
+                }
+                &:before {
+                    content: '\e62e';
+                    color: #ccc;
+                    top: 3px;
+                    left: 3px;
+                    background-color: transparent;
+                    font-size: 12px;
+                    font-family: "iconfont" !important;
+                    font-style: normal;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+            }
+            .vba-ck:checked+label:before,
+            .vba-rd:checked+label:before {
+                color: @ces;
+            }
+            .vba-ck+label:hover:before,
+            .vba-rd+label:hover:before {
+                color: @ces;
+            }
+            div {
+                a {
+                    color: @cc;
+                    .mgr(@mpb);
+                    &.btn-ces {
+                        color: @cwh;
+                    }
+                }
+                .vba-chekbox {
+                    .mgr(0);
+                    .pdl(@mpb);
+                }
+            }
+        }
+        .copyright {
+            .bdrt;
+            .pd(@mpb);
+            .tac;
+            background-color: rgb(240, 246, 251);
+            color: @cc2;
+        }
+    }
+    .install-step {
+        width: 700px;
+        .mg(15px auto 0);
+        .media {
+            .mgt(@mpb*10);
+            color: @cwh;
+            &-left {
+                font-size: 82px;
+                font-family: '宋体';
+                .pdr(0);
+            }
+            &-body {
+                .tal;
+                h2 {
+                    .mgt(0);
+                    font-size: 44px;
+                }
+                p {
+                    .mg(0);
+                }
+            }
+        }
+        .nav {
+            position: absolute;
+            bottom: 0;
+            color: @cwh;
+        }
+    }
+    .step1 {
+        .media {
+            width: 260px;
+        }
+        .panel {
+            .mg(0);
+            .unbd;
+            .tal;
+            .pd(0 @mpb*4);
+            font-size: 12px;
+            background-color: transparent;
+            .unbs;
+            &-heading {
+                font-weight: bold;
+                .unbd;
+            }
+        }
+        .table {
+            .unbd;
+            td,
+            th,
+            tr,
+            thead {
+                .unbd;
+                .tal;
+                .pd(5px @mpb);
+                .icon-dui {
+                    color: @cgr;
+                    .mgr(10px);
+                }
+            }
+            th {
+                color: @ces;
+            }
+        }
+    }
+    .step2 {
+        .form-horizontal {
+            .pd(0 @mpb*5);
+        }
+        .radio {
+            .mg(0);
+            .pd(0 @mpb*5);
+            .tal;
+            color: @cc2;
+            line-height: 40px;
+            font-size: 16px;
+            .vba-ridbox {
+                height: auto;
+                position: relative;
+                &:before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 5px;
+                    margin: auto;
+                }
+                &:after {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+    }
+    .step3 {
+        .panel {
+            .mg(0);
+            .unbd;
+            .tal;
+            .pd(0 @mpb*4);
+            font-size: 12px;
+            background-color: transparent;
+            .unbs;
+            &-heading {
+                font-weight: bold;
+                .unbd;
+            }
+        }
+    }
+    .step4 {
+        .body-box {
+            .pd(@mpb*3 @mpb*4 @mpb);
+        }
+        .main {
+            height: 350px;
+            overflow: auto;
+            color: @cc2;
+            .pd(@mpb);
+            .bdr(1px,solid,#ccc);
+            &::-webkit-scrollbar {
+                width: 3px;
+                height: 15px;
+                background-color: @ces;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: @ces;
+            }
+            &::-webkit-scrollbar-track {
+                width: 3px;
+                background-color: @cgy;
+            }
+        }
+    }
+    .modal {
+        &-dialog {
+            .amid!important;
+            .mg(0)!important;
+        }
+        &-body {
+            .pd(0);
+            .main {
+                max-height: 350px;
+                overflow: auto;
+                .pd(@mpb);
+                &::-webkit-scrollbar {
+                    width: 3px;
+                    height: 15px;
+                    background-color: @ces;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: @ces;
+                }
+                &::-webkit-scrollbar-track {
+                    width: 3px;
+                    background-color: @cgy;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,208 @@
+.en {
+    font-family: robote;
+}
+.cn {
+    font-family: webfont;
+}
+//
+.blod {
+    font-weight: bolder;
+}
+//
+span.money {
+    &:before {
+        content: "￥";
+    }
+}
+span.baifen {
+    &:after {
+        content: "%";
+    }
+}
+
+span.md {
+    font-size: 16px;
+    li & {
+        position: relative;
+    }
+}
+span.lg {
+    font-size: 18px;
+}
+.inline-block {
+    display: inline-block!important;
+}
+p.more {
+    margin-bottom: 0;
+}
+p.help {
+    margin-top: 15px;
+}
+span.help {
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: @cwh;
+    background-color: @cye1*1.3;
+    cursor: pointer;
+    .trs;
+    &:hover{
+        background-color: @cgr1;
+    }
+    .form-group & {
+        top: 8px;
+        right: -20px;
+    }
+}
+.pabs {
+    position: absolute;
+}
+a {
+    cursor: pointer;
+}
+.msgbox {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: @cc;
+    }
+    p {
+        color: @cc1;
+    }
+}
+.btnbox {
+    p {
+        margin: 15px 0;
+    }
+}
+.form-control {
+    .unbdr;
+}
+.form-inline {
+    .btn {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+    .form-group+.form-group,
+    .form-group+.btn {
+        margin-left: 5px;
+    }
+    .dropdown {
+        .dropdown-toggle {
+            margin-left: 0;
+        }
+    }
+    .btn {
+        margin-left: 0;
+        margin-right: 15px;
+        font-size: 12px;
+        .caret {
+            margin-left: 5px;
+        }
+    }
+    .input-group {
+        .form-control {
+            height: 33px;
+        }
+    }
+    .form-control-static {
+        a {
+            margin: 0 5px;
+        }
+    }
+}
+//
+.pro-content {
+    .form-horizontal {}
+    .form-group {
+        .dropdown {
+            .btn {
+                .caret {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}
+//状态
+.buffer {
+    span {
+        position: relative;
+        &:before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background-color: @cgy;
+        }
+        &:after {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        &[data-type="0"] {
+            &:after {
+                content: "获取中";
+            }
+        }
+        &[data-type="1"] {
+            &:after {
+                content: "运行中";
+            }
+            &:before {
+                background-color: @cgr;
+            }
+        }
+        &[data-type="2"] {
+            &:after {
+                content: "已暂停";
+            }
+            &:before {
+                background-color: @cor;
+            }
+        }
+        &[data-type="3"] {
+            &:after {
+                content: "启动中";
+            }
+            &:before {
+                background-color: @cye;
+            }
+        }
+        &[data-type="4"] {
+            &:after {
+                content: "已过期";
+            }
+        }
+        &[data-type="5"] {
+            &:after {
+                content: "已欠费";
+            }
+            &:before {
+                background-color: @cre1;
+            }
+        }
+        &[data-type="6"] {
+            &:after {
+                content: "重装中";
+            }
+            &:before {
+                background-color: @cbl;
+            }
+        }
+        &[data-type="7"] {
+            &:after {
+                content: "升级中";
+            }
+            &:before {
+                background-color: @cgr1;
+            }
+        }
+    }
+}

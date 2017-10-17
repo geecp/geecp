@@ -1,0 +1,57 @@
+//
+.page-header {
+    position: relative;
+    margin: 40px 0 50px;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        position: relative;
+    }
+    small {
+        margin-left: 10px;
+    }
+    &.un {
+        .unbd;
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 1px;
+            background-color: @ces;
+        }
+    }
+    .nav {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+        li {
+            a {
+                .trs;
+                .unbdr;
+                padding: 5px 30px;
+                color: @cc;
+                .bdrb(@cr:@cgy1);
+                &.more {
+                    padding: 0;
+                    color: @cwh;
+                }
+            }
+            &.active,
+            &:hover {
+                a {
+                    background-color: @ces;
+                    color: @cwh;
+                    border-color: @ces;
+                }
+            }
+        }
+
+        > li+li {
+            margin-left: 10px;
+        }
+    }
+}

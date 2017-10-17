@@ -1,0 +1,228 @@
+body {
+    background-color: @cgy;
+}
+
+a {
+    &:focus,
+    &:hover {
+        text-decoration: none;
+        outline: none;
+    }
+}
+
+.log-bg {
+    background-color: @cwh;
+    .navbar {
+        background-color: transparent;
+        .navbar-brand {
+            .pd(0);
+            img {
+                height: 50px;
+            }
+        }
+        .navbar-right {
+            a {
+                margin-top: 12px;
+                color: @cc2;
+            }
+        }
+    }
+    .copyright{
+        .bdrt;
+        .pdt(@mpb);
+    }
+}
+
+.login-box {
+    .amid;
+    .col-md-8 {
+        height: 449px;
+        img {
+            //          .mg(0 auto);
+            .amid;
+        }
+    }
+    .col-md-4 {
+        .bdr;
+        .pd(@mpb @mpb*2);
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+.log-cont {
+    width: 300px;
+    .pd(0 @mpb);
+    .mg(0 auto);
+    //  height: 400px;
+    //  position: absolute;
+    //  top: 50%;
+    //  left: 50%;
+    //  .mgl(-@mpb*10);
+    //  .mgt(-250px);
+    .logo {
+        text-align: center;
+        img {
+            display: inline-block;
+        }
+    }
+}
+
+.login,
+.reset,
+.regist {
+    .nav-tabs {
+        .tac;
+        font-size: 0;
+        border-color: @bdrc;
+        li {
+            display: inline-block;
+            float: none;
+            font-size: 14px;
+            width: 50%;
+            a {
+                .unbs;
+                .unbdr;
+                .mg(0);
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                color: @cc;
+                &:hover,
+                &:focus {
+                    .bdr(1px, solid, transparent);
+                    background-color: transparent;
+                }
+            }
+            &.active {
+                a {
+                    border-bottom: 1px solid @ces;
+                    color: @ces;
+                }
+            }
+        }
+    }
+    #passlog {
+        .pdt(@mpb*3);
+    }
+    .btn {
+        .bdr(1px, solid, transparent);
+        .pd(10px);
+        .mg(@mpb 0);
+        width: 100%;
+        display: block;
+        font-size: 14px;
+        &:hover,
+        &:focus {
+            outline: none;
+            border-color: transparent;
+        }
+    }
+    .form-group {
+        .mgl(0);
+        .mgr(0);
+        overflow: hidden;
+        .form-control {
+            height: 40px;
+            position: relative;
+            border-color: @bdrc;
+            .unbs;
+            .trs;
+            .unbdr;
+            &:focus {
+                border-color: @ces;
+                z-index: 9;
+            }
+        }
+    }
+    .callforget {
+        color: @cc2;
+        float: right;
+    }
+    .callregist {
+        color: @cc;
+        float: left;
+    }
+    #qdlog {
+        .pd(@mpb @mpb 0);
+        .qd-box {
+            background-color: @cwh;
+            .pd(10px @mpb @mpb);
+            p {
+                .mg(0);
+                background-color: transparent;
+            }
+            img {
+                max-width: 100%;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        p {
+            .mg(0);
+            background-color: @cgy1;
+            line-height: 30px;
+            color: @cc1;
+        }
+    }
+    .hint {
+        .mgt(@mpb*2);
+    }
+}
+
+.reset,
+.regist {
+    .page-header {
+        .tac;
+        .unbd;
+        .mg(@mpb);
+        h4 {
+            color: @ces;
+            .mg(0);
+        }
+    }
+    .input-group {
+        .form-control {
+            border-right: none;
+        }
+        .input-group-btn {
+            .btn {
+                .mg(0);
+                height: 40px;
+                background-color: @ces;
+                color: @cwh;
+                width: 92px;
+            }
+        }
+    }
+    .btn-ces {
+        .mgt(@mpb*3);
+    }
+    .calllogin {
+        color: @cc2;
+        i {
+            .mgr(5px);
+        }
+    }
+    .btn-group {
+        display: block;
+        font-size: 0;
+        .btn-ces {
+            .mg(0);
+            .bdr(1px, solid, @ces);
+            font-size: 14px;
+            height: 40px;
+            background-color: @ces;
+            color: @cwh;
+            width: 50%;
+            display: inline-block;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            float: none;
+            z-index: 0;
+            &.active {
+                background-color: @ces*0.8;
+            }
+        }
+    }
+}

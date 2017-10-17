@@ -1,0 +1,52 @@
+.thumbnail {
+    position: relative;
+    .unbdr;
+    .pd(0);
+    .unbd;
+    .mask {
+        z-index: 2;
+    }
+    &&-bg {
+        height: inherit;
+        position: relative;
+        .caption:only-child {
+            width: 100%;
+            height: 100%;
+            display: table;
+            .mix.amid {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+        .caption{
+            position: absolute;
+            width: 100%;
+            .pd(2*@mpb);
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+    }
+    &.lrmix{
+        .pd(0);
+        .ohd;
+        .thumbnail-object,.caption{
+            width: 50%;
+            display: block;
+            float: left;
+        }
+        .thumbnail-object{
+            
+        }
+        .caption{
+            position: relative;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+    .mixbox &{
+        .mgb(0);
+    }
+}

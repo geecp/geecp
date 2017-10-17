@@ -1,0 +1,213 @@
+//状态
+.buffer {
+  span {
+    position: relative;
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background-color: @cgy;
+    }
+    &:after {
+      display: inline-block;
+      margin-left: 5px;
+      font-size: 12px;
+    }
+    &[data-type="0"] {
+      &:after {
+        content: "获取中";
+      }
+    }
+    &[data-type="1"] {
+      &:after {
+        content: "已通过";
+      }
+      &:before {
+        background-color: @cgr;
+      }
+    }
+    &[data-type="2"] {
+      &:after {
+        content: "审核中";
+      }
+      &:before {
+        background-color: @cor*1.2;
+      }
+    }
+    &[data-type="3"] {
+      &:after {
+        content: "启动中";
+      }
+      &:before {
+        background-color: @cye;
+      }
+    }
+    &[data-type="4"] {
+      &:after {
+        content: "已过期";
+      }
+    }
+    &[data-type="5"] {
+      &:after {
+        content: "已处理";
+      }
+      &:before {
+        background-color: @cgr;
+      }
+    }
+    &[data-type="6"] {
+      &:after {
+        content: "未处理";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="7"] {
+      &:after {
+        content: "已拒绝";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="8"] {
+      &:after {
+        content: "待客户反馈";
+      }
+      &:before {
+        background-color: @cgr;
+      }
+    }
+    &[data-type="9"] {
+      &:after {
+        content: "待客户确认";
+      }
+      &:before {
+        background-color: @cye;
+      }
+    }
+    &[data-type="10"] {
+      &:after {
+        content: "待评价";
+      }
+      &:before {
+        background-color: @cbl;
+      }
+    }
+    &[data-type="11"] {
+      &:after {
+        content: "已注销";
+      }
+      &:before {
+        background-color: @cgy;
+      }
+    }
+    &[data-type="12"] {
+      &:after {
+        content: "已禁用";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="13"] {
+      &:after {
+        content: "启用";
+      }
+      &:before {
+        background-color: @cgr;
+      }
+    }
+    &[data-type="14"] {
+      &:after {
+        content: "禁用";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="15"] {
+      &:after {
+        content: "待邮寄发票";
+      }
+      &:before {
+        background-color: @cgr;
+      }
+    }
+    &[data-type="16"] {
+      &:after {
+        content: "已删除";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="17"] {
+      &:after {
+        content: "未删除";
+      }
+      &:before {
+        background-color: @cgr;
+      }
+    }
+    &[data-type="18"] {
+      &:after {
+        content: "待上传资料";
+      }
+      &:before {
+        background-color: @cgy1;
+      }
+    }
+    &[data-type="19"] {
+      &:after {
+        content: "资料审核中";
+      }
+      &:before {
+        background-color: @cye1;
+      }
+    }
+    &[data-type="20"] {
+      &:after {
+        content: "资料被拒绝";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="21"] {
+      &:after {
+        content: "域名审核中";
+      }
+      &:before {
+        background-color: @cye1;
+      }
+    }
+    &[data-type="22"] {
+      &:after {
+        content: "域名被拒绝";
+      }
+      &:before {
+        background-color: @cre;
+      }
+    }
+    &[data-type="23"] {
+      &:after {
+        content: "等待备案";
+      }
+      &:before {
+        background-color: @cye1;
+      }
+    }
+    &[data-type="24"] {
+      &:after {
+        content: "正常使用";
+      }
+      &:before {
+        background-color: @cgr1;
+      }
+    }
+  }
+}
