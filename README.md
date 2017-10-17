@@ -9,3 +9,15 @@
 采用thinkphp 5.0开发，用户中心采用Vuejs开发
 
 具有很好的模版扩展机制，插件扩展机制。
+
+
+产品支持功能
+<br>
+短信<br>
+域名：西部数码、百度云、Resellerclub<br>
+虚拟主机：西部数码、百度云、景安、vestacp、directadmin、cpanel、plesk<br><br>
+VPS主机：景安、西数、solusvm<br>
+云服务器：百度云、睿江云、西部数码、Zstack<br>
+证书服务（即将支持）<br>
+租用托管<br>
+企业邮箱（即将支持）
