@@ -54,7 +54,7 @@
                         </td>
                         <td style="text-align:left;" class="control">
                             <a href="{:url('product/editfastcloud',['id'=>$v.id])}" class="btn btn-ces btn-xs">修改</a>
-                            <a href="javascript:;" nid="{$v.id}" class="btn btn-danger btn-xs js-del">删除</a>
+                            <a nid="{$v.id}" class="btn btn-danger btn-xs js-del" >删除</a>
                         </td>
                     </tr>
                     {/foreach}
@@ -106,14 +106,15 @@
 
     $('.js-del').click(function () {
 
-        var thiss = $(this);
         var id = $(this).attr('nid');
+        console.log(id);
         $.ajax({
             type: 'POST',
             url:"{:url('product/deletepro')}",
             data: {id: id},
             dataType: 'json',
             success: function (data) {
+                console.log(data)
                 if (data['msg'] == 1) {
                     alert('删除成功');
                     window.location.reload();
@@ -142,15 +143,6 @@
                 str += $(this).val() + ",";
             }
         });
-        /*$.each($('input:checkbox:checked'),function(){
-         window.alert("你选了："+
-         $('input[type=checkbox]:checked').length+"个，其中有："+$(this).val());
-         });*/
-        //去掉最后一个逗号(如果不需要去掉，就不用写)
-        if (str.length > 0) {
-            str = str.substr(0,str.length - 1);
-        }
-        console.log(str);
         var id = str;
         $.ajax({
             type: 'POST',

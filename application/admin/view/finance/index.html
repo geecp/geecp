@@ -49,29 +49,29 @@
 						<div class="table-responsive">
 							<div class="tool-box">
 								<form class="form-inline" action="{:url('finance/index')}" method="get">
-									<!--<div class="btn-group">-->
-										<!--&lt;!&ndash;<button type="button" class="btn btn-default">全部</button>-->
-										<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>-->
-										<!--<ul class="dropdown-menu">-->
-											<!--<li class="active">-->
-												<!--<a>全部</a>-->
-											<!--</li>-->
-											<!--<li class="">-->
-												<!--<a>审核中</a>-->
-											<!--</li>-->
-											<!--<li class="">-->
-												<!--<a>待寄出</a>-->
-											<!--</li>-->
-											<!--<li class="">-->
-												<!--<a>已寄出</a>-->
-											<!--</li>-->
-										<!--</ul>&ndash;&gt;-->
-										<!--<select class="" name="" id="">-->
-											<!--<option value="">全部</option>-->
-											<!--<option value="">审核中</option>-->
-											<!--<option value="">待寄出</option>-->
-											<!--<option value="">已寄出</option>-->
-										<!--</select>-->
+									<!--<div class="btn-group">
+										&lt;!&ndash;<button type="button" class="btn btn-default">全部</button>
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+										<ul class="dropdown-menu">
+											<li class="active">
+												<a>全部</a>
+											</li>
+											<li class="">
+												<a>审核中</a>
+											</li>
+											<li class="">
+												<a>待寄出</a>
+											</li>
+											<li class="">
+												<a>已寄出</a>
+											</li>
+										</ul>&ndash;&gt;
+										<select class="" name="" id="">
+											<option value="">全部</option>
+											<option value="">审核中</option>
+											<option value="">待寄出</option>
+											<option value="">已寄出</option>
+										</select>-->
 									<!--</div>-->
 									<div class="form-group">
 										<div class="col-md-12">
@@ -142,7 +142,6 @@
 		<script>
 			var myChart = echarts.init(document.getElementById('main'));
 			myChart.title = '堆叠柱状图';
-
 			option = {
 				tooltip: {
 					trigger: 'axis',
@@ -151,7 +150,7 @@
 					}
 				},
 				legend: {
-					data: ['短信使用情况', 'BCE使用情况', '其他使用情况1', '其他使用情况2', '其他使用情况3']
+					data: {$legend}
 				},
 				grid: {
 					left: '3%',
@@ -161,47 +160,12 @@
 				},
 				xAxis: [{
 					type: 'category',
-					data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+					data: {$timezone}
 				}],
 				yAxis: [{
 					type: 'value'
 				}],
-				series: [{
-						name: '短信使用情况',
-						type: 'bar',
-						stack: '短信使用情况',
-						barWidth: '20%',
-						data: [320, 332, 301, 334, 390, 330, 320]
-					},
-					{
-						name: 'BCE使用情况',
-						type: 'bar',
-						stack: '短信使用情况',
-						barWidth: '20%',
-						data: [120, 132, 101, 134, 90, 230, 210]
-					},
-					{
-						name: '其他使用情况1',
-						type: 'bar',
-						stack: '短信使用情况',
-						barWidth: '20%',
-						data: [220, 182, 191, 234, 290, 330, 310]
-					},
-					{
-						name: '其他使用情况2',
-						type: 'bar',
-						stack: '短信使用情况',
-						barWidth: '20%',
-						data: [150, 232, 201, 154, 190, 330, 410]
-					},
-					{
-						name: '其他使用情况3',
-						type: 'bar',
-						stack: '短信使用情况',
-						barWidth: '20%',
-						data: [862, 1018, 964, 1026, 1679, 1600, 1570]
-					}
-				]
+				series: {$rest}
 			};
 			myChart.setOption(option);
 		</script>

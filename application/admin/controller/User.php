@@ -96,12 +96,19 @@ class User extends Base
         if (Db::name('userlist')->where('phone',$data['phone'])->find()){
             return json(['msg'=>6]);
         }
-
+        $data['phone']='+86'.$data['phone'];
         $data['state']=1;
-        $data['userid']=$this->rand();
-
+        $data['userid']=$this->trand();
+        $data['password']=md5($data['password']);
+        $data['email']='';
+        $data['creat_ip']='';
+        $data['balance']='';
+        $data['enterprise']='';
+        $data['hisamount']='';
+        $data['openid']='';
+        $data['unionid']='';
         unset($data['repassword']);
-        $data['creat_time']=time();
+        $data['creat_time']=date('Y-m-d H:i:s',time());
         $res=Db::name('userlist')->insert($data);
         if ($res){
             return json(['msg'=>1]);
@@ -137,11 +144,10 @@ class User extends Base
     //-----------------------------------------------------------------------------------------
 
     //随机生成uid
-    public function rand()
+    public function trand()
     {
         $uid='8001'.mt_rand(0001,9999);
-        $r=Db::name('userlist')->where('uid',$uid)->find();
-
+        $r=Db::name('userlist')->where('userid',$uid)->find();
         if ($r){
             $this->rand();
         }
@@ -187,6 +193,7 @@ class User extends Base
             return json(['msg'=>1]);
         }
     }
+
     public function delete()
     {
         //获取当前控制器和方法

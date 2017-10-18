@@ -103,10 +103,6 @@
 		 $('input[type=checkbox]:checked').length+"个，其中有："+$(this).val());
 		 });*/
 		//去掉最后一个逗号(如果不需要去掉，就不用写)
-		if (str.length > 0) {
-			str = str.substr(0,str.length - 1);
-			$.session.set('str', 'str');
-		}
 		console.log(str);
 		var id = str;
 		$.ajax({

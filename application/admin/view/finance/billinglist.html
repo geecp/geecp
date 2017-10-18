@@ -12,7 +12,11 @@
 										<div class="form-group col-md-4">
 											<label class="col-md-5 control-label" for="">用户：</label>
 											<div class="col-md-7">
-												<input type="text" id="userid" name="userid" class="form-control line nickname" placeholder="请输入用户id" />
+												<select name="userid" class="form-control unline">
+													{foreach $userlist as $k =>$v}
+													<option value="{$v['id']}" >{$v['username']}</option>
+													{/foreach}
+												</select>
 												<label class="line-label"></label>
 											</div>
 										</div>

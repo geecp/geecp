@@ -16,7 +16,7 @@
 
 									<th class="lock">短信类型</th>
 									<th class="lock">价格</th>
-									<th class="lock">等级状态</th>
+									<th class="lock">销售状态</th>
 									<th class="lock control">操作</th>
 								</tr>
 								</thead>
@@ -87,7 +87,7 @@
 		var id = $(this).attr('nid');
 		$.ajax({
 			type: 'POST',
-			url:"{:url('product/delsms')}",
+			url:"{:url('product/deletesms')}",
 			data: {id: id},
 			dataType: 'json',
 			success: function (data) {

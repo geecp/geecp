@@ -87,9 +87,14 @@ class Business extends Base
 
     public function adddomain()
     {
+        $userlist=Userlist::all();
+        $this->assign('userlist',$userlist);
         //插件表
         $addons=Db::name("addons")->where('range','domain')->select();
         $this->assign('addons',$addons);
+        //域名模板
+        $temp=Db::name("domain_temp")->select();
+        $this->assign('templist',$temp);
         return view();
     }
 

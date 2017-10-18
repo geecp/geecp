@@ -7,11 +7,13 @@
  */
 namespace app\admin\controller;
 
+use app\admin\model\Coupon;
 use app\admin\model\Finance_detailed;
 use app\admin\model\Finance_invoicelist;
 use app\admin\model\Finance_operation;
 use app\admin\model\Finance_order;
 use app\admin\model\Invoice_info;
+use app\admin\model\Userlist;
 use think\Db;
 use think\Session;
 
@@ -62,6 +64,19 @@ class Finance extends Base
             //余额
             $ye = $cz - $xf;
             $this->assign('ye', round($ye,2));
+            //消费概览，获取最近的六个月
+            $timezone=getLastTimeArea(date('Y',time()),date('m',time()),6);
+            $timezone=array_reverse($timezone);
+            $rest=Finance_detailed::getSixFinance($timezone);
+            $where['status']=1;
+            $where2=['充值','其他'];
+            $legend=Finance_detailed::where($where)->whereNotIn('product',$where2)->group('product')->field('product')->select();
+            $this->assign('legend',json_encode(array_column($legend,'product'),JSON_UNESCAPED_UNICODE));
+            $this->assign('timezone',json_encode(array_reverse(getLastTimeFirst(date('Y',time()),date('m',time()),6)),JSON_UNESCAPED_UNICODE));
+            $this->assign('rest',$rest);
+            //代金券总额
+
+
 
             //左侧菜单
             $name = Db::name('right')->where('id', 5)->field('munu')->find()['munu'];
@@ -187,6 +202,9 @@ class Finance extends Base
                 $val['auditor'] = Db::name("admmember")->where("id", $val['auditor'])->find()['username'];
             }
             $this->assign('res', $res);
+            //获取所有的客户
+            $userlist=Userlist::all(['state'=>1]);
+            $this->assign('userlist',$userlist);
             return view();
         }
     }
@@ -216,7 +234,7 @@ class Finance extends Base
             if (input('post.transaction_type') == '') {
                 return json(['msg' => 4]);
             }
-            $user = Db::name("userlist")->where('userid', input('post.userid'))->find();
+            $user = Db::name("userlist")->where('id', input('post.userid'))->find();
             if (!$user) {
                 return json(['msg' => 5]);
             }
@@ -467,7 +485,7 @@ class Finance extends Base
             $this->assign('right',$right);
             Session::set('num', 4);
             $finance = new Finance_invoicelist();
-            $res = $finance->where($where)->paginate(10);
+            $res = $finance->where($where)->order('create_time desc')->paginate(10);
             foreach ($res as $val) {
                 $val['userid'] = Db::name("userlist")->where('id', $val['userid'])->find()['username'];
             }
@@ -497,7 +515,7 @@ class Finance extends Base
             if (input('post.expnum') != '') {
                 $where['id'] = input('post.id');
                 $data['status'] = 3;
-                $data['expnum'] = input('post.expnum');
+                $data['listnum'] = input('post.expnum');
                 $res = Db::name("finance_invoicelist")->where($where)->update($data);
 
                 if ($res) {
@@ -602,7 +620,7 @@ class Finance extends Base
             }
 
             $finance = new Finance_detailed();
-            $res = $finance->where($where)->paginate(10);
+            $res = $finance->where($where)->order('creat_time desc')->paginate(10);
 
 
             foreach ($res as $val) {
@@ -670,6 +688,7 @@ class Finance extends Base
     //编辑代理级别
     public function editAgent()
     {
+        Session::set('num',7);
         $id['id']=input('id');
         if($id['id']){
             //修改操作
@@ -728,5 +747,14 @@ class Finance extends Base
         }
     }
 
+    //查询所有的代金券
+    public function coupon()
+    {
+        $res=Coupon::getOver();
+        $current_time=date('Y-m-d H:i:s',time());
+        $this->assign('current',$current_time);
+        $this->assign('res',$res);
+        return view();
+    }
 
 }

@@ -44,11 +44,11 @@ class Order extends Base
             $order=new Finance_order();
             $where = [];
             if (input('status')){
-                $res=$order->where('status',input('status'))->paginate(10);
+                $res=$order->where('status',input('status'))->order('create_time desc')->paginate(10);
 
                 Session::set('status',input('status'));
             }else{
-                $res=$order->paginate(10);
+                $res=$order->order('create_time desc')->paginate(10);
 
             }
             foreach ($res as $val) {
@@ -101,10 +101,18 @@ class Order extends Base
                             'name'=>$v['suffix'],
                             'allocation'=>$v['domain'],
                             'price'=>$v['price'],
-                            'term'=>$v['year'],
+                            'term'=>$v['year'].'年',
                             'pays'=>$v['pays']
                         ];
                     }
+                }else{
+                    $product[0]=[
+                        'name'=>$res['product'],
+                        'allocation'=>$res['allocation']['text'],
+                        'price'=>$res['allocation']['price'],
+                        'term'=>'',
+                        'pays'=>''
+                    ];
                 }
 
 

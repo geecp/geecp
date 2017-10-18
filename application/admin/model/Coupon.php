@@ -9,9 +9,15 @@ namespace app\admin\model;
 use think\Model;
 class Coupon extends Model
 {
+
+    public function userq()
+    {
+        return $this->hasOne('userlist','id','userid',['coupon'=>'c','userlist'=>'u']);
+    }
+
     public static function getOver()
     {
-        $res=Coupon::paginate(15);
+        $res=Coupon::with('userq')->order('create_time desc')->paginate(15);
         return $res;
     }
 

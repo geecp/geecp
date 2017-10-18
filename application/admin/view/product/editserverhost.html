@@ -48,7 +48,7 @@
                     <label class="col-md-2 control-label" for="">操作系统：</label>
                     <div class="col-md-4">
                         {foreach $system as $k=>$v}
-                        <input class="vba-ck" type="checkbox" name="system[]" id="checkbox.{$k}" value="{$v.id}" {notempty name="res.system"}{in name="v.id" value="$res.system"} checked="checked" {/in}{/notempty}/>
+                        <input class="vba-ck" type="checkbox" name="system[]" id="checkbox.{$k}" value="{$v.id}" {notempty name="data.system"}{in name="v.id" value="$data.system"} checked="checked" {/in}{/notempty}/>
                         <label class="vba-chekbox" for="checkbox.{$k}">{$v.name} {$v.version}</label>
                         {/foreach}
                     </div>
@@ -180,13 +180,12 @@
             contentType: false,
             processData: false,
             success: function (data) {
-//                console.log(data);
                 if (data['code'] == 1) {
                     alert(data.msg);
-                    //window.location.href = "{:url('product/serverhost')}";
+                    window.location.href = "{:url('product/serverhost')}";
                 }else {
                     alert(data.msg);
-                    //window.history.back(-1);
+                    window.history.back(-1);
                 }
             },
         });

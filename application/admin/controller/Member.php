@@ -120,7 +120,7 @@ class Member extends Base
         if ($resu) {
             return json(['msg'=>6]);
         }
-        $data['password']=md5(md5($data['password'].'qiduo'));;
+        $data['password']=md5(md5($data['password'].'qiduo'));
         $data['creat_time']=date('Y/m/d H:i:s',time());
 
         $result=Db::name('attachment')->find();
@@ -408,7 +408,6 @@ class Member extends Base
             return view();
         }
     }
-
     //添加用户组
     public function addgroup()
     {

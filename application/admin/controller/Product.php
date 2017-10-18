@@ -15,7 +15,7 @@ use app\admin\model\System;
 use app\admin\model\Serverhost;
 use think\Db;
 use think\Session;
-
+use app\admin\model\Sms;
 class Product extends Base
 {
     public function index()
@@ -583,7 +583,7 @@ class Product extends Base
             if (input('post.id')){
                 //删除域名
                 $id = input('post.id');
-                $res=Db::name('vhostproduct')->delete($id);
+                $res=VpsProduct::destroy($id);
                 if ($res){
                     return json(['msg'=>1]);
                 }
@@ -633,7 +633,7 @@ class Product extends Base
         //拿到当前登录人的权限
         $adm_group=Db::name('admgroup')-> where('id',Session::get('admin')['adm_group'])->find()['authority'];
         $adm_group=explode(',',$adm_group);
-
+        Session::set('num',6);
         if (!in_array($res,$adm_group)){
             $this->error('您还没有获取操作权限');
         }else{
@@ -681,7 +681,7 @@ class Product extends Base
         }else{
             if (input('id')){
                 //处理左侧菜单
-                $name=Db::name('right')->where('id',10)->field('munu')->find()['munu'];
+                $name=Db::name('right')->where('id',3)->field('munu')->find()['munu'];
                 $this->assign('name',$name);
                 Session::set('id',3);
                 $right=Session::get("right");
@@ -822,6 +822,7 @@ class Product extends Base
             'status'=>1
         );
         $room=Productgroup::all($whe);
+        Session::set('num',4);
         $this->assign('room',$room);
         unset($whe);
         //获取所有的操作系统
@@ -894,7 +895,7 @@ class Product extends Base
         //接收id
         $where['id']=input('post.id');
         $data['status']=input('post.status');
-        $res=Db::name('fast_cloud')->where($where)->update($data);
+        $res=VpsProduct::update($data);
         if($res){
             return json(['msg'=>'1','status'=>$data['status']]);
         }else{
@@ -905,8 +906,8 @@ class Product extends Base
     //删除vps
     public function delvps()
     {
-        $where['id']=input('post.id');
-        $res=Db::name('vps')->delete($where);
+        $id=input('post.id');
+        $res=VpsProduct::destroy($id);
         if($res){
             return json(['msg'=>'1']);
         }else{
@@ -917,7 +918,7 @@ class Product extends Base
     //短信
     public function sms()
     {
-        $res=Db::name('sms')->paginate(15);
+        $res=Sms::paginate(15);
         $this->assign('res',$res);
         return view();
     }
@@ -928,7 +929,7 @@ class Product extends Base
         $where['id']=input('id');
         if($where['id']!=""){
             //修改
-            $res=Db::name('sms')->where($where)->find();
+            $res=Sms::where($where)->find();
             $this->assign('data',$res);
         }
         return view();
@@ -939,10 +940,9 @@ class Product extends Base
     {
         $where['id']=input('id');
         $data=input('post.');
-        unset($data['id']);
         if($where['id']!=""){
             //修改
-            $res=Db::name('sms')->where($where)->update($data);
+            $res=Sms::update($data);
             if($res){
                 return json(['msg'=>'修改成功','code'=>'1']);
             }else{
@@ -951,7 +951,7 @@ class Product extends Base
         }else{
             //新增
             $data['create_time']=date('Y-m-d H:i:s',time());
-            $res=Db::name('sms')->insert($data);
+            $res=Sms::create($data);
             if($res){
                 return json(['msg'=>'添加成功','code'=>'1']);
             }else{
@@ -964,9 +964,9 @@ class Product extends Base
     public function statussms()
     {
         //接收id
-        $where['id']=input('post.id');
+        $data['id']=input('post.id');
         $data['status']=input('post.status');
-        $res=Db::name('sms')->where($where)->update($data);
+        $res=Sms::update($data);
         if($res){
             return json(['msg'=>'1','status'=>$data['status']]);
         }else{
@@ -977,8 +977,8 @@ class Product extends Base
     //删除短信
     public function deletesms()
     {
-        $where['id']=input('post.id');
-        $res=Db::name('sms')->delete($where);
+        $id=input('post.id');
+        $res=Sms::destroy($id);
         if($res){
             return json(['msg'=>'1']);
         }else{
@@ -1053,7 +1053,7 @@ class Product extends Base
             unset($data['id']);
             $data['create_time']=date('Y-m-d H:i:s',time());
             $data['status']=1;
-            $res=Db::name('serverhost')->insert($data);
+            $res=Serverhost::create($data);
             $price1=new ProductPrice;
             $price1->saveAll($price);
             if($res){
@@ -1088,15 +1088,16 @@ class Product extends Base
             'status'=>1
         );
         $room=Productgroup::all($whe);
+        Session::set('num',5);
         $this->assign('room',$room);
         if($where['id']!=''){
             //修改
-            $res=Db::name('serverhost')->where($where)->find();
+            $res=Serverhost::where($where)->find();
             $res['system']=json_decode($res['system'],true);
             $this->assign('data',$res);
             unset($whe);
             $whe['p_id']=$res['title'];
-            $price=Db::name('product_price')->where($whe)->order('id')->select();
+            $price=ProductPrice::where($whe)->order('id')->select();
 
             if($price){
                 foreach($price as $k=>$v){
@@ -1113,9 +1114,17 @@ class Product extends Base
     }
 
     //修改租用服务器状态
-    public function statusserver()
+    public function statusserverhost()
     {
-
+        //接收id
+        $data['id']=input('post.id');
+        $data['status']=input('post.status');
+        $res=Serverhost::update($data);
+        if($res){
+            return json(['msg'=>'1','status'=>$data['status']]);
+        }else{
+            return $data['status'];
+        }
     }
 
 
