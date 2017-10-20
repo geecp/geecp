@@ -101,12 +101,12 @@
 				$.ajax({
 					async: false,
 					type: 'POST',
-					url:"install.php?s=/index/verifyWebId.html",
+					url:"{:url('/install/index/verifyWebId')}",
 					data: {webid: id},
 					dataType: "json",
 					success: function (data) {
 						if(data == 1){
-							window.location.href='install.php?s=/index/install_step3.html';
+							window.location.href="{:url('/install/index/install_step3')}";
 						}else {
 							alert('请填写正确的站点ID！');
 						}

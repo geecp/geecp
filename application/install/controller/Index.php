@@ -63,7 +63,8 @@ class Index extends Controller
             echo 0;
         }else{
             echo 1;
-            /*header('location:install.php?s=/index/install_step3.html');*/
+            // echo "<script>parent.location='".url("index/install_step3")."';</script>";
+            header('location:'.url("index/install_step3"));
         }
     }
 
@@ -122,6 +123,9 @@ class Index extends Controller
         $url = (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ? 'https://' : 'http://';
         $url .= $_SERVER['HTTP_HOST'];
 
+        $indexurl=url('/index/template/index/index');
+        $adminurl=url('/index/admin/index/index');
+
         $html=<<<html
         {extend name="index/base"}
         {block name="content"}
@@ -168,8 +172,8 @@ class Index extends Controller
 						}
 					</script>
 					<div class="mt45">
-						<a href="$url/index.php/template/index/index" class="btn btn-ces">登录前台</a>
-						<a href="$url/index.php/admin/index/index" class="btn btn-ces">登录后台</a>
+						<a href="$indexurl" class="btn btn-ces">登录前台</a>
+						<a href="$adminurl" class="btn btn-ces">登录后台</a>
 					</div>
 				</div>
 				<div class="copyright">
