@@ -27,6 +27,22 @@ lnmp vhost add
 
 修改/usr/local/nginx/conf/vhost/yourdomain.conf文件内的yourdomain.com为yourdomain.com/public
 
+在 include enable-php.conf; 之后添加
+
+        location ^~ /install.php/ {
+        if (!-e $request_filename) {
+            rewrite  ^/install.php/(.*)$  /install.php?s=$1  last;
+             break;
+             }
+         }
+
+        location ~ /
+        {
+                try_files $uri $uri/ /index.php?s=$uri&$args;
+        }
+
+
+
 修改/usr/local/php/etc/php.ini 引入Geecp的扩展文件
 
 删除/usr/local/nginx/conf/fastcgi.conf中fastcgi_param  REDIRECT_STATUS    200; 下面内容
@@ -46,7 +62,7 @@ lnmp vhost add
 
 六、	开始安装
 
-打开浏览器输入https://www.yourdomain.com进入安装流程
+打开浏览器输入https://www.yourdomain.com 进入安装流程
 
 检测环境
 赋予权限
