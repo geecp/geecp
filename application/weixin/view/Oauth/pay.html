@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <link href="https://act.weixin.qq.com/static/cdn/css/wepayui/0.1.1/wepayui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__ROOT__/static/member/weixin/css/index.css">
+    <title>确认缴费</title>
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest',
+                    {$jsApiParameters},
+            function(res){
+                WeixinJSBridge.log(res.err_msg);
+                if(res.err_msg=='get_brand_wcpay_request:ok'){
+                    alert("支付成功");
+                }else if(res.err_msg=='get_brand_wcpay_request:cancel'){
+                    alert("支付取消");
+                }else{
+                    alert("支付失败");
+                }
+
+            }
+        );
+        }
+
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+    </script>
+</head>
+<!--
+	通用说明：
+	1.模块的隐藏添加class:hide;
+	2.body标签默认绑定ontouchstart事件，激活所有按钮的:active效果
+-->
+<body ontouchstart>
+
+<!-- 确认缴费[[ -->
+<!--
+	交互说明，控制.confirm
+	1.显示【打折】，添加class:show-discount
+	2.显示【打折后金额为0元】，添加class:show-discount-free
+	3.显示【超时提示】，在此添加class:show-overtime
+	4.显示【无需缴费】，在此添加class:show-free
+	5.显示【此卡未入场】，在此添加class:show-unin
+-->
+<article class="confirm">
+    <div class="info-area">
+        <dl class="totle">
+            <dt class="totle-title">
+            <h2>确认订单</h2>
+            </dt>
+            <!-- 如果打折后金额为0，.totle-discount strong内容修改为：无需缴费 -->
+            <dd class="totle-num">
+                <strong>￥{$data.price}</strong>
+
+                <p class="overtime-tips"></p>
+            </dd>
+        </dl>
+        <ul class="info-list">
+            <li class="list ">
+                <span class="list-title">产品类型</span>
+                <span class="list-content">{$data.product}</span>
+            </li>
+            <li class="list">
+                <span class="list-title">产品名称</span>
+                <span class="list-content">{$data.title}</span>
+            </li>
+            <li class="list last-time">
+                <span class="list-title">过期时间</span>
+                <span class="list-content">{$data.time}</span>
+            </li>
+            <li class="list in-time">
+                <span class="list-title">自动续费是时长</span>
+                <span class="list-content">1年</span>
+            </li>
+            <li class="list">
+                <span class="list-title">购买人</span>
+                <span class="list-content">{$data.user}</span>
+            </li>
+            <li class="list">
+                <span class="list-title">暂留位置</span>
+                <span class="list-content">暂留位置</span>
+            </li>
+        </ul>
+    </div>
+    <div class="info-btn">
+        <button class="weui-btn weui-btn_primary" type="button" onclick="callpay()" >立即支付</button>
+    </div>
+    <div class="weui-wepay-logos weui-wepay-logos_ft">
+        <img src="https://act.weixin.qq.com/static/cdn/img/wepayui/0.1.1/wepay_logo_default_gray.svg" alt="" height="16">
+    </div>
+</article>
+<!-- 确认缴费]] -->
+
+<!-- 计费方式弹出层[[ -->
+
+<!-- 计费方式弹出层]] -->
+<script type="text/javascript" src="__ROOT__/static/member/weixin/js/zepto.min.js"></script>
+<script type="text/javascript">
+    $("#icoTips").on('click',function() {
+        $("#billingMask").removeClass("hide")
+    })
+    $("#billingMaskClose").on('click',function() {
+        $("#billingMask").addClass("hide")
+    })
+</script>
+</body>
+</html>
+

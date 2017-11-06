@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="HandheldFriendly" content="True">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" type="text/css" href="__ROOT__/static/member/bootstrap.min.css" />
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<style type="text/css">
+			html,body{
+				height: 100%;
+			}
+			.container{
+				position: relative;
+				overflow: hidden;
+				height: 100%;
+			}
+			.row{
+				margin: 0;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 50%;
+				margin-top: -260px;
+			}
+			.text-center{
+				margin-top: 0;
+			}
+			p{
+				margin-bottom: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<h3 class="text-center">官方微信公众号</h3>
+				<div class="col-md-4 col-md-offset-4">
+					<img class="img-responsive" src="{$url}" />
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-6 col-md-offset-3">
+					<p class="text-center">建议使用微信扫描上方二维码或搜索公众号七朵云关注我司公众号，便于接收续费提醒、授权码等微信通知！请注意：取消关注公众号，不会解除微信与账号的绑定！</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="__ROOT__/static/login/js/lib/jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+		var timer = null;
+		var flag = false;
+		var userid="{$userid}";
+		var op = {
+			url: "{:url('index/followed')}",
+			type: 'post',
+			data: {
+				userid:userid
+			},
+			dataType:'json',
+			success: function(data) {
+				console.log(data)
+				if(data==1){
+					alert('关注成功！');
+					window.location.href="{$durl}";
+				}else{
+					window.clearInterval(ti);
+					ti = setInterval(function() {
+						if(flag) {
+							window.clearInterval(ti);
+						} else {
+							$.ajax(op);
+						}
+					}, '3000');
+				}
+			}
+		}
+		var ti = setInterval(function() {
+			if(flag) {
+				window.clearInterval(ti);
+			} else {
+				$.ajax(op);
+			}
+		}, '3000');
+	</script>
+</html>
