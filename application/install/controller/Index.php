@@ -45,7 +45,9 @@ class Index extends Controller
     {
         //将数据发送到开发者中心
         $id=input('post.webid/s','','htmlspecialchars');
-        $website=$_SERVER['SERVER_NAME'];
+        $website=isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+        $ip=gethostbyname($_SERVER['SERVER_NAME']);
+
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, 'https://www.geecp.com/index.php?s=Api/WebApi/webid');
         curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -53,7 +55,8 @@ class Index extends Controller
         curl_setopt($curl, CURLOPT_POST, 1);
         $post_data = array(
             "key" => $id,
-            "website" => 'https://www.jd.com'
+            "website" => $website,
+            "ip"=>$ip
         );
         curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
         $data = curl_exec($curl);
@@ -63,8 +66,6 @@ class Index extends Controller
             echo 0;
         }else{
             echo 1;
-            // echo "<script>parent.location='".url("index/install_step3")."';</script>";
-            header('location:'.url("index/install_step3"));
         }
     }
 
@@ -123,9 +124,6 @@ class Index extends Controller
         $url = (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ? 'https://' : 'http://';
         $url .= $_SERVER['HTTP_HOST'];
 
-        $indexurl=url('/index/template/index/index');
-        $adminurl=url('/index/admin/index/index');
-
         $html=<<<html
         {extend name="index/base"}
         {block name="content"}
@@ -172,8 +170,8 @@ class Index extends Controller
 						}
 					</script>
 					<div class="mt45">
-						<a href="$indexurl" class="btn btn-ces">登录前台</a>
-						<a href="$adminurl" class="btn btn-ces">登录后台</a>
+						<a href="$url" class="btn btn-ces">登录前台</a>
+						<a href="$url/admin" class="btn btn-ces">登录后台</a>
 					</div>
 				</div>
 				<div class="copyright">

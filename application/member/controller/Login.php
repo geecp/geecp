@@ -11,10 +11,17 @@ use think\Db;
 use think\Session;
 use app\member\controller\BaiduSmsClient;
 use traits\controller\Jump;
+use app\member\model\Settingsite;
 class Login extends Controller  {
 
     public function index()
     {
+        //二维码登录的appid
+        $app=Settingsite::get(1);
+        $url="https://".$_SERVER['SERVER_NAME']."/member/Login/access_token";
+        $this->assign('url',$url);
+        $this->assign('css_href',"https://".$_SERVER['SERVER_NAME']."/css.css");
+        $this->assign('appid',$app->appid);
         //生成6为的随机数
         $sign=(string)mt_rand(100000,999999);
         Session::set('sign',$sign);
@@ -218,10 +225,10 @@ class Login extends Controller  {
     public function access_token()
     {
         $code=$_GET['code'];
-        $app_id="";
-        $app_secret="";
-        $redirect_uri="..";
-        $token_url = "ns/oauth2/access_token?appid=".$app_id."&secret=".$app_secret."&code=".$code."&grant_type=authorization_code";
+        $site=Settingsite::get(1);
+        $app_id=$site->appid;
+        $app_secret=$site->appsecret;
+        $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$app_id."&secret=".$app_secret."&code=".$code."&grant_type=authorization_code";
         $curl = curl_init();
         //设置抓取的url
         curl_setopt($curl, CURLOPT_URL, $token_url);
@@ -258,7 +265,7 @@ class Login extends Controller  {
             $rest['username']=$data['nickname'];
             $rest['creat_time']=date('Y-m-d H:i:s',time());
             $rest['userid']=$this->rand();
-
+            $rest['creat_ip']=$_SERVER["REMOTE_ADDR"];
             $res=Db::name('userlist')->insertGetId($rest);
             $this->redirect('member/Login/pvalidate',array('id'=>$res));
 
@@ -290,6 +297,9 @@ class Login extends Controller  {
     //手机验证
     public function pvalidate()
     {
+        //获取logo
+        $logo=Settingsite::get(1);
+        $this->assign('logo',$logo->pic);
         //接受id
         $id=input('id');
         $this->assign('id',$id);

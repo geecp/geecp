@@ -64,7 +64,7 @@
 						</div>
 					</div>
 					<div class="mt45">
-						<a href="install.php?s=/index/install_step1.html" class="btn btn-ces">上一步</a>
+						<a href="{:url('index/install_step1')}" class="btn btn-ces">上一步</a>
 						<button class="btn btn-ces verify">下一步</button>
 					</div>
 				</div>
@@ -101,12 +101,12 @@
 				$.ajax({
 					async: false,
 					type: 'POST',
-					url:"{:url('/install/index/verifyWebId')}",
+					url:"{:url('index/verifyWebId')}",
 					data: {webid: id},
 					dataType: "json",
 					success: function (data) {
 						if(data == 1){
-							window.location.href="{:url('/install/index/install_step3')}";
+							window.location.href="{:url('index/install_step3')}";
 						}else {
 							alert('请填写正确的站点ID！');
 						}

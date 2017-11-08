@@ -17,7 +17,7 @@
 	<link rel="stylesheet/less" type="text/css" href="__ROOT__/static/login/css/less/style.less?1.00" />
 	<script type="text/javascript" src="__ROOT__/static/login/js/lib/less.js"></script>
 	<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_n82t7dpj70evcxr.css" />
-	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<link rel="stylesheet" href="https://api.qiduo.net/css.css">
 </head>
 
@@ -428,12 +428,12 @@
 <script>
 	var obj = new WxLogin({
 		id: "wxlogin",
-		appid: "wx73edafaf3103c67d",
+		appid: "{$appid}",
 		scope: "snsapi_login",
-		redirect_uri: "http://v1.qiduo.net/member/Login/access_token",
+		redirect_uri: "{$url}",
 		state: "",
 		style: "white",
-		href: "https://api.qiduo.net/css.css"
+		href: "{$css_href}"
 	});
 </script>
 </body>
