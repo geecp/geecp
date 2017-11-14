@@ -1,6 +1,6 @@
 <?php
 return array(
      'template' => array(
-            'view_path'    => '../plugins/themes/nitian/',
+            'view_path'    => '../plugins/themes/qiduo/',
         )
 );

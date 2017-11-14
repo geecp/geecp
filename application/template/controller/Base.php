@@ -10,7 +10,7 @@ class Base extends Controller
     {
 
         parent::__construct($request);
-        $this->view->replace(['__PUBLIC__' => '/static/plugins/themes/nitian',]);
+        $this->view->replace(['__PUBLIC__' => '/static/plugins/themes/qiduo',]);
 
         define('FRAMEWORK_PATH',__DIR__.'/tp/');
     }
