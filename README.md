@@ -1,8 +1,8 @@
 # geecp
 
-demo：https://v1.qiduo.net
+demo：http://demo.geecp.com
 
-随时更新进度，做到每日一更新。<br>
+随时更新进度，<br>
 产品存在BUG请商用的用户考虑自己有没有技术能力维护。<br>
 原内置逆天模板已经移除，我司不负责后续的版权及相关商业使用服务，稍后GEECP将为用户提供官方开发的模板。<br>
 
@@ -16,7 +16,7 @@ demo：https://v1.qiduo.net
 
 
 软件名称： GeeCP<br>
-当前版本：V1.0<br>
+当前版本：V1.0.1<br>
 运行平台：windows/linux/macos...(支持PHP运行环境)<br>
 硬件要求：普通配置<br>
 支持软件：<br>
