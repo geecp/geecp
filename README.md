@@ -45,4 +45,4 @@ All rights reserved。http://www.geecp.com
 
 著作权所有者为宿州七朵信息技术有限公司。
 
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
+更多细节参阅 [LICENSE](LICENSE)
