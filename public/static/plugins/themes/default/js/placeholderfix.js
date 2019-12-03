@@ -1,1 +1,0 @@
-$(function(){$('input,textarea').placeholder();});

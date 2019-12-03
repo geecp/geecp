@@ -1,35 +1,48 @@
-Gee Control Panel （简称“Geecp”）是宿州七朵信息技术有限公司开发的一款企业级产品计费管理系统。</br>
-它并不是一款免费的软件，当你将Geecp用于商业化用途时，您需要向我们购买授权许可。</br>
-</br>
-演示网址：http://demo.geecp.com</br> 
-使用交流QQ群：730868267</br> 
-</br>
-本次更新的版本是由以下合作伙伴共同努力为大家带来的功能体验。</br>
-</br>
-特别鸣谢;</br>
-</br>
-安徽极栈科技有限公司提供基于 OPENSTACK® Stein 版本的云平台，让GeeCP支持云服务器和裸金属服务器功能。</br>
-感谢几何云、电联通信、华数网络、纵横网络对资源节点的支持。</br>
-</br>
-</br>
-目前支持的功能：</br>
-</br>
-VPS主机（使用插件开通星外VPS产品和纵横网络VPS产品）</br>
-物理主机租用服务（支持自定义增值服务项）</br>
-</br>
-即将支持的功能：</br>
-</br>
-DNS云解析服务（感谢几何云提供的节点支持），永久免费的DNS服务！</br>
-云WAF和CDN网络服务</br>
-</br>
-插件列表：</br>
-</br>
-星外Hyper-v主机插件（已支持）</br>
-纵横VPS主机插件（已支持）</br>
-GeePublicDNS 服务（即将支持）</br>
-Rstack插件（即将支持）</br>
-Nokvm插件（即将支持）</br>
-美橙科技域名插件（即将支持）</br>
-西部数码域名插件（即将支持）</br>
+Gee Control Panel v1.0.1
+===============
+
+> 运行环境要求PHP7.1+。
+
+## 主要新特性
+
+* 支持插件机制
+* 支持模板标签
+
+## 支持的功能
+
+* Hyper-v VPS主机
+* 物理机租用
 
 
+## 安装
+
+~~~
+https://download.geecp.com/geecp-v1.0.1.zip（12月12日开放下载）
+~~~
+
+## 使用交流
+~~~
+QQ群：730868267
+~~~
+
+## 文档
+
+[开发指南](http://doc.geecp.com)
+
+## 参与开发
+
+请参阅 [ThinkPHP 5.0.24 ](https://www.kancloud.cn/manual/thinkphp5)。
+
+## 版权信息
+
+Gee Control Panel（简称“Geecp”）它并不是一款免费软件，当您用于商业用途时请您先取得商用许可。
+
+本项目包含的第三方源码和二进制文件之版权信息另行标注。
+
+版权所有Copyright © 2018-2019 by GeeStack (http://www.geecp.com)
+
+All rights reserved。http://www.geecp.com
+
+著作权所有者为宿州七朵信息技术有限公司。
+
+更多细节参阅 [LICENSE.txt](LICENSE.txt)
