@@ -1,0 +1,224 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t bg-white">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto mb-0 form-inline">
+        <li class="list-inline-item border-right">
+          <a href="{:url('index/Server/index')}" class="px-3">&lt返回 </a>
+        </li>
+        <li class="list-inline-item px-3">
+          <span class="fs-16">详情</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="page-header l-line">
+      <h4>基本信息</h4>
+    </div>
+    <div class="cont-box row">
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">区域：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.groupname}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">使用产品：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.proname}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">主机名：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.name}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">状态：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.statuss}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">备注：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext remake">
+              <span class="remaketext">{$info.remake?$info.remake:'无'}</span>
+              <a href="javascript:;" onclick="calledit()">修改</a>
+              <div class="cont-box editremake d-none p-3">
+                <textarea class="form-control mb-3" name="remake" rows="5">{$info['remake']}</textarea>
+                <button class="btn btn-sm btn-primary mr-3" onclick="subremake()">确定</button>
+                <button class="btn btn-sm btn-light" onclick="closes()">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-header l-line">
+      <h4>支付信息</h4>
+    </div>
+    <div class="cont-box row">
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">支付方式：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">预付费</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">创建时间：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.create_time}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">到期时间：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.end_time|date='Y-m-d H:i:s',###}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-header l-line">
+      <h4>账号信息</h4>
+    </div>
+    <div class="cont-box row">
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">公网IP：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.ip}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">内网IP：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.intranetip}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">用户名：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.username}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">密码：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext"><a href="javascript:;" data-pass="">查看</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-header l-line">
+      <h4>配置信息</h4>
+    </div>
+    <div class="cont-box row">
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">配置介绍：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.config}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-header l-line">
+      <h4>增值服务</h4>
+    </div>
+    <div class="cont-box row">
+      <?php
+        $added = json_decode($info['added'],true);
+      ?>
+      {if $added}
+      {foreach name="$added" item="v"}
+      <div class="col-4 ">
+          <div class="form-group form-row">
+            <label for="" class="col-form-label col-5">{$v[0]}：</label>
+            <div class="col">
+              <div class="form-control-sm form-control-plaintext">{$v[1]}</div>
+            </div>
+          </div>
+        </div>
+      {/foreach}
+      {/if}
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<style>
+  .form-control-plaintext.remake{
+    position: relative;
+    z-index: 999;
+  }
+  .editremake{
+    position: absolute;
+    z-index: 999999;
+    top: 10px;
+    right: -15px;
+    box-shadow: 1px 1px 8px rgba(0,0,0,.2);
+    width: 320px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+</style>
+<script>
+  let id = getQueryString('id');
+  // console.log(id)
+    $('[data-pass]').click(function () {
+      let t = $(this);
+      ajax('{:url("index/Server/getpass")}', {
+        id: id
+      }, 'post').then(e => {
+        if (e.status == 200) {
+          t.text(e.data);
+        } else {
+          alert(e.msg);
+        }
+      });
+    });
+  function subremake(){
+    ajax('{:url("index/Server/edits")}',{
+      id: id,
+      remake: $('[name="remake"]').val()
+    },'post').then(e=>{
+      if(e.status == 200){
+        $('.remaketext').text($('[name="remake"]').val());
+        closes();
+      } else {
+        alert(e.msg);
+      }
+    })
+  }
+  function calledit(){
+    $('.editremake').removeClass('d-none')
+  }
+  function closes(){
+    $('.editremake').addClass('d-none')
+  }
+</script>
+{/block}

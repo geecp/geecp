@@ -1,0 +1,75 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header clearfix">
+                    <div class="box-tools pull-left form-inline">
+                        <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+                        <button class="btn btn-primary btn-sm serchBtn">查询</button>
+                        <div class="pull-right">
+                            <a href="javascript:;" class="btn btn-primary btn-sm" onclick="sync()">同步</a>
+                            <a href="{:url('admin/Vpsmanager/add')}" class="btn btn-primary btn-sm">新增</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered table-hover tableData">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>服务器名称</th>
+                                <th>所属用户</th>
+                                <th>产品ID</th>
+                                <th>IP地址</th>
+                                <th>状态</th>
+                                <th>到期时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if !empty($list)} {foreach name="list" item="v"}
+                            <tr data-id="{$v.id}">
+                                <td>{$v.id}</td>
+                                <td>{$v.name}</td>
+                                <td>{$v.user_id}</td>
+                                <td>{$v.product_id}</td>
+                                <td>{$v.ip}</td>
+                                <td>{$v.status}</td>
+                                <td>{$v.end_time}</td>
+                                <td>
+                                    <a href="javascript:;">修改密码</a>
+                                    <a href="javascript:;">续费</a>
+                                    <a href="javascript:;">升级</a>
+                                </td>
+                            </tr>
+                            {/foreach} {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script>
+    function sync() {
+        ajax("{:url('admin/Vpsmanager/sync')}").then((e) => {
+            console.log(e);
+        })
+    }
+
+
+    $('.tableData').DataTable({
+        'paging': true,
+        'fixedHeader': true,
+        'lengthChange': false,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'deferRender': true,
+        'processing': true,
+    });
+</script>
+{/block}

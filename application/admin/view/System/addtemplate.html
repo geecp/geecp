@@ -1,0 +1,96 @@
+{extend name='Common/index' /}
+{block name='content'}
+<section class="content">
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">{$info?'修改':'新增'}用户</h3>
+    </div>
+    <div class="box-body">
+      <div class="form">
+        <div class="form-group">
+          <label for="type" class="col-sm-2 control-label">模板类型</label>
+          <div class="col-sm-10">
+            <select name="type" id="type" class="form-control">
+              <option value="0" {$info?$info['type'] == '0'?'selected':'':''}>短信验证码</option>
+              <option value="1" {$info?$info['type'] == '1'?'selected':'':''}>短信通知</option>
+              <option value="2" {$info?$info['type'] == '2'?'selected':'':''}>邮件验证码</option>
+              <option value="3" {$info?$info['type'] == '3'?'selected':'':''}>邮件通知</option>
+            </select>
+            <input type="hidden"  name="id" value="{$info?$info['id']:''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mark" class="col-sm-2 control-label">模板标识</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="mark" name="mark" placeholder="请输入模板标识" value="{$info?$info['mark']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">模板名称</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name="name" placeholder="请输入名称" value="{$info?$info['name']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="content" class="col-sm-2 control-label">模板内容</label>
+          <div class="col-sm-10">
+            <textarea name="content" id="content" class="form-control" cols="30" rows="10" placeholder="请输入模板内容">{$info?$info['content']:''}</textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="status" class="col-sm-2 control-label">模板状态</label>
+          <div class="col-sm-10">
+            <select name="status" id="status" class="form-control">
+              <option value="0" {$info?$info['status'] == '0'?'selected':'':''}>可用</option>
+              <option value="1" {$info?$info['status'] == '1'?'selected':'':''}>禁用</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary sub">提交</button>
+            <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+          </div>
+        </div>
+      </div>
+      <div class="">
+<pre>
+<b>可使用的公共变量</b>
+{basic_name}                          基本信息 - 网站名称
+{basic_email}                         基本信息 - 联系邮箱
+{basic_url}                           基本信息 - 网站首页域名
+{basic_logo}                          基本信息 - logo图片路径
+{basic_icp}                           基本信息 - ICP备案
+{basic_beian}                         基本信息 - 网安备案
+{basic_idc}                           基本信息 - IDC备案
+{basic_isp}                           基本信息 - ISP备案
+{email_code}                          邮件随机验证码
+{sms_code}                            短信随机验证码
+</pre>
+      </div>
+    </div>
+  </div>
+</section>
+{/block}
+{block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<script>
+$('.sub').click(function(){
+  let names = document.querySelectorAll('.form-group > div > [name]'),
+      vals = {};
+  names = [].slice.call(names);
+  names.map((e)=>{
+    vals[e.name] = e.value;
+  });
+  ajax('{:url("admin/System/addtemplateAuth")}',vals,'post').then(e=>{
+    if(e.status === 200){
+      alert(e.msg);
+      location.href="{:url('admin/System/template')}";
+    } else {
+      alert(e.msg);
+    }
+  });
+});
+</script>
+{/block}
+ 

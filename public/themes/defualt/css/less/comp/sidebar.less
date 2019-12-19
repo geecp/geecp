@@ -1,0 +1,92 @@
+//sidebar 基础样式
+.iconRotate{
+  transform:rotate(90deg);
+  transition:transform .5s;
+  // transform-origin: 0 0 0;
+}
+.sidebar{
+  .pr;
+  height: 100%;
+  overflow-y: auto;
+  ul{
+    .mg(0);
+  }
+  &-item{
+    transition:background-color .5s;
+    .pr;
+    .clear;
+    >i{
+      -webkit-transition: -webkit-transform .3s;
+      transition: -webkit-transform .3s;
+      transition: transform .3s;
+      transition: transform .3s,-webkit-transform .3s;
+    }
+    &-child{
+      .dn;
+    }
+  }
+//nav-sidebar
+  &.nav-side{
+    &.bg-dark{
+      .pdb(0)!important;
+      &::-webkit-scrollbar{
+        width: 0;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background: @ces;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background: @cgy;
+      }
+      a,i,span{
+        .cr(@cwh);
+      }
+      .sidebar-item.active{
+        .bgc(@bgc * 0.993);
+      }
+      .sidebar-item.active + .sidebar-item-child{
+        .bgc(@bgc * 0.993);
+        .sidebar-item{
+          transition:background-color .5s;
+          &:hover{
+            .bgc(@bgc * 0.6);
+          }
+        }
+      }
+      .sidebar-item{
+        .db;
+        &:hover{
+          .bgc(@bgc * 0.997);
+        }
+      }
+    }
+    .sidebar-ul{
+      list-style: none;
+      .pd(0);
+    }
+    .sidebar-item{
+      .pd(@mpb);
+      .cp;
+      &:hover{
+        // .bgc(@bgc * 0.997);
+      }
+      &-child{
+        list-style: none;
+        // .pdl(@mpb);
+        .pdl(0);
+        span{
+          .dib;
+          text-indent: 15px;
+        }
+        a.sidebar-item{
+          span{
+            .dib;
+            text-indent: 30px;
+          }
+        }
+      }
+    }
+  }
+}

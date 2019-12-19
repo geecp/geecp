@@ -1,0 +1,166 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t pb-0" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto  m-0">
+                <li class="list-inline-item p-2">
+                    <a href="{:url('index/Invoice/list')}" class="fs-16">
+                        <h4>发票列表</h4>
+                    </a>
+                </li>
+                <li class="list-inline-item p-2" style="border-bottom:3px solid #108cee;">
+                    <h4 style="color: #108cee;">发票信息管理</h4>
+                </li>
+                <li class="list-inline-item p-2">
+                    <a href="{:url('index/Invoice/addresslist')}" class="fs-16">
+                        <h4>寄送地址</h4>
+                    </a>
+                </li>
+            </ul>
+            <!-- <ul class="list-inline m-0">
+                <li class="list-inline-item p-2">
+                    <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="bg-f5 p-2 form-group">
+                <ul class="list-inline m-0">
+                    <li class="list-item ">温馨提示： 开具发票前，需先设置发票模板</li>
+                </ul>
+            </div>
+            <div class="px-5">
+                <form>
+                    <div class="col-12">
+                        <div class="form-group form-row">
+                            <label for="" class="col-form-label-sm col-1">发票类型：</label>
+                            <div class="col col-form-label-sm">
+                              <div class="pay-list">
+                                  <div class="rc-group">
+                                      <input type="radio" name="type" value="0" autocomplete="off" id="invType1" <?php echo $iinfo?$iinfo['type']==0?'checked':'': 'checked'; ?>>
+                                      <label class="rc-group-item px-1 mb-0" for="invType1">增值税普通发票</label>
+                                      {if !empty($cinfo) && $cinfo['status'] == 1}
+                                      <input type="radio" name="type" value="1" autocomplete="off" id="invType2" <?php echo $iinfo?$iinfo['type']==1?'checked':'': ''; ?>>
+                                      <label class="rc-group-item px-1 mb-0" for="invType2">增值税专用发票</label>
+                                      {else /}
+                                        <span class="color-orange"><span class="iconfont iconwarning"></span>如果您是具有一般纳税人资格的用户，可在依次通过 <a href="{:url('Index/Iam/ccompany')}">企业或组织的实名认证</a>和 <a href="{:url('Index/Iam/ccompany')}">专票认证</a>后，申请增值税专用发票</span>
+                                      {/if}
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 ">
+                        <div class="form-group form-row">
+                            <label class="col-form-label-sm col-1">普票类型：</label>
+                            <div class="col">
+                                <div class="pay-list">
+                                    <div class="rc-group">
+                                        <input type="radio" name="n_type" value="0" autocomplete="off" id="individual_invoice" <?php echo $iinfo?$iinfo['n_type']==0?'checked':'': 'checked'; ?>>
+                                        <label class="rc-group-item px-1 mb-0 wh-90" for="individual_invoice"> 个人普票</label>
+                                        <input type="radio" name="n_type" value="1" autocomplete="off" id="corporate_invoice" <?php echo $iinfo?$iinfo['n_type']==1?'checked':'': ''; ?>>
+                                        <label class="rc-group-item px-1 mb-0 wh-90" for="corporate_invoice">企业类普票</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="form-group form-row">
+                            <label for="" class="bef-red col-form-label-sm col-1">发票抬头：</label>
+                            <div class="col-3">
+                                <input type="text" class="form-control form-control-sm" name="title" value="<?php echo $iinfo?$iinfo['title']:''; ?>">
+                            </div>
+                        </div>
+                        <div class="individual_invoice  <?php echo $iinfo?$iinfo['n_type']==0?'d-none':'': 'd-none'; ?>">
+                            <div class="form-group form-row">
+                                <label for="" class="bef-red col-form-label-sm col-1">纳税人识别号：</label>
+                                <div class="col-3">
+                                    <input type="text" class="form-control form-control-sm" name="taxpayerno" value="<?php echo $iinfo?$iinfo['taxpayerno']:''; ?>">
+                                </div>
+                                <div class="col-12 form-row">
+                                    <label for="" class="col-form-label-sm col-1"></label>
+                                    <div class="col-10">
+                                        <span class="text-secondary">请填写纳税人识别号或统一社会信用代码号，若您是其他组织机构，请填写组织机构代码证上的编号</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="" class="bef-red col-form-label-sm col-1">开户银行名称：</label>
+                                <div class="col-2">
+                                    <input type="text" class="form-control form-control-sm" name="bank" value="<?php echo $iinfo?$iinfo['bank']:''; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="" class="bef-red col-form-label-sm col-1">开户帐号：</label>
+                                <div class="col-2">
+                                    <input type="text" class="form-control form-control-sm" name="bankuser" value="<?php echo $iinfo?$iinfo['bankuser']:''; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="" class="bef-red col-form-label-sm col-1">地址：</label>
+                                <div class="col-2">
+                                    <input type="text" class="form-control form-control-sm" name="address" value="<?php echo $iinfo?$iinfo['address']:''; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="" class="bef-red col-form-label-sm col-1">电话：</label>
+                                <div class="col-2">
+                                    <input type="text" class="form-control form-control-sm" name="tel" value="<?php echo $iinfo?$iinfo['tel']:''; ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group form-row">
+                            <label for="" class="col-form-label-sm col-1"></label>
+                            <div class="col-2">
+                                <button class="btn btn-primary btn-sm subin">保存修改</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+    $("#individual_invoice").click(function() {
+        if (this.checked) {
+            $(".individual_invoice").addClass("d-none")
+        }
+    })
+    $("#corporate_invoice").click(function() {
+        if (this.checked) {
+            $(".individual_invoice").removeClass("d-none")
+        }
+    })
+    window.onload = function() {
+        $(".invoice_list").addClass("border-left");
+    }
+
+    $('.subin').click(function(){
+      ajax('{:url("Index/Invoice/subtemp")}',{
+        type: $('[name="type"]:checked').val(),
+        n_type: $('[name="n_type"]:checked').val(),
+        title: $('[name="title"]').val(),
+        taxpayerno: $('[name="taxpayerno"]').val(),
+        bank: $('[name="bank"]').val(),
+        bankuser: $('[name="bankuser"]').val(),
+        address: $('[name="address"]').val(),
+        tel: $('[name="tel"]').val(),
+      },'post').then(e=>{
+        if(e.status == 200){
+          window.location.reload();
+        } else {
+          alert(e.msg);
+        }
+      })
+    });
+</script>
+{/block}

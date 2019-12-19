@@ -1,0 +1,189 @@
+.panel {
+    .unbdr;
+    &.unbd{
+        .unbd;
+        box-shadow: none;
+    }
+    &.panel-xs{
+        .panel-body{
+            .pd(@mpb)!important;
+        }
+    }
+    &.unmg{
+        .mg(0);
+    }
+    &-body {
+        .pr;
+        .pd(ceil(@mpb*2));
+        &.unpd {
+            .pd(0);
+        }
+        &.unpdx {
+            .pdx(0);
+        }
+        &.unpdy {
+            .pdy(0);
+        }
+    }
+    &.vba {
+        &.unbd{
+            .unbd;
+            box-shadow: none;
+        }
+        &.vlog {
+            h3,
+            h4{
+                .mgt(0);
+            }
+            .panel-body {
+                .pd(@mpb*2);
+            }
+            .thumbnail {
+                .mg(0);
+            }
+            .img-circle {
+                .mg(0 auto);
+                background-color: @cgy;
+                width: 120px;
+                height: 120px;
+                .mgb(@mpb*2);
+            }
+            .caption {
+                div+div {
+                    .btn-vreg {
+                        .pr;
+                        top: 25px;
+                        left: 25px;
+                    }
+                }
+            }
+        }
+        .panel-heading {
+            .unbd;
+            .pdt(0);
+            .pdb(0);
+            min-height: 50px;
+            line-height: 50px;
+            &.unbg{
+                .unbg;
+            }
+            &.vnav {
+                .pd(0);
+                .nav-tabs {
+                    .mg(0);
+                }
+            }
+            >h4,
+            >h3 {
+                .pdt;
+                .pdb;
+                .mgy(0);
+                &:before {
+                    content: '';
+                    .bdrl(3px, solid, @ces);
+                    .mgr(@mpb);
+                }
+            }
+            .nav-tabs {
+                .mgx(-@mpb);
+                .unbd;
+                >li {
+                    >a {
+                        .bdrb(2px, solid, transparent);
+                        .mgr(0);
+                        &:hover {
+                            .unbg;
+                            color: @ces;
+                            border-color: transparent;
+                        }
+                    }
+                }
+                >li.active {
+                    >a,
+                    >a:focus,
+                    >a:hover {
+                        border-color: transparent;
+                        .bdrb(3px, solid, @ces);
+                        color: @ces;
+                        .unbg;
+                    }
+                }
+            }
+            .thumbnail.vba {
+                .tac;
+                .mg(0);
+                h3,
+                h4 {
+                    .mgt(0);
+                }
+                p {
+                    .mg(0);
+                    span+span {
+                        .mgl(@mpb);
+                    }
+                }
+                .caption{
+                    .pd(@mpb);
+                }
+            }
+        }
+        .panel-heading,
+        .panel-footer {
+            .pdy(0);
+            .unbd;
+            &.vlist {
+                li {
+                    .pd(0);
+                    min-height: 50px;
+                    line-height: 50px;
+                }
+            }
+            div[class*="col"] {
+                .pd(0);
+                &+div[class*="col"] {
+                    .bdrl(1px, solid, @cgy);
+                }
+            }
+        }
+        .panel-body {
+            .tool {
+                .input-group {
+                    max-width: 340px;
+                    .form-control {
+                        .unbdr;
+                    }
+                    &-addon {
+                        .pd(0);
+                        .pdl(@mpb);
+                    }
+                }
+            }
+        }
+        .form-horizontal .checkbox,
+        .form-horizontal .checkbox-inline,
+        .form-horizontal .radio,
+        .form-horizontal .radio-inline {
+            .pdt(0);
+        }
+        .form-horizontal .btn+.btn {
+            .mgl(@mpb);
+        }
+    }
+    &.palert {
+        .panel-heading {
+            .unbdr;
+            background-color: @cwh;
+        }
+        .panel-footer {
+            .unbdr;
+            .pd(0);
+        }
+    }
+}
+
+.modal {
+    .panel {
+        .mgy(@mpb*2);
+        .unbd;
+    }
+}

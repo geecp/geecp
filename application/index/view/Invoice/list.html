@@ -1,0 +1,277 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2" style="border-bottom:3px solid #108cee;">
+          <h4 style="color: #108cee;">发票列表</h4>
+        </li>
+        <li class="list-inline-item p-2">
+          <a href="{:url('index/Invoice/template')}" class="fs-16">
+            <h4>发票信息管理</h4>
+          </a>
+        </li>
+        <li class="list-inline-item p-2">
+          <a href="{:url('index/Invoice/addresslist')}" class="fs-16">
+            <h4>寄送地址</h4>
+          </a>
+        </li>
+      </ul>
+      <!-- <ul class="list-inline m-0">
+        <li class="list-inline-item p-2">
+          <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <!-- <div class="bg-f5 p-3 form-group">
+                <ul class="list-inline m-0">
+                    <li class="list-item">温馨提示：</li>
+                    <li class="list-item">收支明细按时间记录了账户流入和流出的交易流水，与账单的记账时间不同。所以同一时间范围内消费账单与消费类型收支可能存在差异。</li>
+                    <li class="list-item">例如：您有一笔100元的3月31日23：00到23:59的后付费账单，系统在4月1日0点后支付这笔账单。此时，您3月将有一笔100元账单记录，这笔账单对应的收支记录在4月。</li>
+                </ul>
+            </div> -->
+      <div class="form-row form-inline form-group">
+        <div class="col-2 border-right pl-0">
+          <div><span class="color-orange fs-20 mr-1">￥{$cimoney|to_double}</span>元</div>
+          <div>
+            <button class="btn btn-link btn-sm text-dark p-0 px-1 fs-12" data-container="body" data-toggle="popover"
+              data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+              data-html="true" data-content="可开票总金额=消费类可开票金额+其他类可开票金额" data-original-title="" title="">
+              可开票总金额<span class="iconfont iconwenhao px-1"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-2 m-lf">
+          <div><span class="color-orange fs-20 mr-1">￥{$cimoney|to_double}</span>元</div>
+          <div>
+            <button class="btn btn-link btn-sm text-dark p-0 px-1 fs-12" data-container="body" data-toggle="popover"
+              data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+              data-html="true" data-content="按照消费总额开具发票" data-original-title="" title="">
+              消费类<span class="iconfont iconwenhao px-1"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="py-3">
+        {if session('_userInfo')['realverify'] != "2" || empty($hasii)}
+        <div class="bg-orange p-2 mb-3">
+          <h5 class="mb-0 color-orange fs-12">完成实名认证并且设置发票信息后才可进行申请发票</h5>
+        </div>
+        {/if}
+        <div class="form-row m-0">
+          <ul class="list-inline mr-auto mb-0 form-inline">
+            <li class="list-inline-item ">
+              <div class="">
+                {if (session('_userInfo')['realverify'] != 2 || empty($hasii))}
+                <button type="button" class="btn btn-primary disabled btn-sm" data-toggle="modal" data-target="#add"
+                  disabled><span class="iconfont icon-icon_tianjia">发票申请</span></button>
+                {else /}
+                <a href="{:url('index/Invoice/applyinvoice')}" class="btn btn-primary btn-sm"><span
+                    class="iconfont icon-icon_tianjia">发票申请</span></a>
+                {/if}
+              </div>
+            </li>
+            <li class="list-inline-item ">
+              <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off"
+                  value="">
+                <span class="c-datepicker-range-separator">-</span>
+                <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off"
+                  value="">
+              </div>
+            </li>
+
+          </ul>
+          <ul class="list-inline  m-0 form-inline">
+            <li class="list-inline-item">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control form-control-sm" placeholder="请输入实例ID进行搜索">
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-primary btn-sm">
+                    <span class="iconfont icon-icon_sousuo-xian mr-0"></span>
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li class="list-inline-item m-0"><button class="btn  btn-light btn-sm"><i
+                  class="iconfont icon-icon_shuaxin"></i></button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ml-nge">
+        <div>
+          <table class="table table-border">
+            <thead class="bg-fB p-2">
+              <tr class="font-weight-light">
+                <th>申请开票时间</th>
+                <th>发票号</th>
+                <th>发票抬头</th>
+                <th>发票金额</th>
+                <th>发票内容</th>
+                <th>发票类型</th>
+                <th>状态</th>
+                <th>快递单号</th>
+                <th>备注</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list) && !empty($list[0])} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                <td>{$v.create_time}</td>
+                <td>{$v.number}</td>
+                <td>{$v.title}</td>
+                <td>{$v.money|to_double}</td>
+                <td>{$v.content}</td>
+                <td>{$v.types}</td>
+                <td>{$v.statuss}</td>
+                <td>{$v.express}</td>
+                <td>{$v.remark}</td>
+                <td>
+                  <a href="javascript:;" onclick="seeAll($(this))">发票详情</a>
+                  {if ($v['status'] == '0')}<a href="javascript:;" onclick="cancelInvoice($(this))">取消申请</a>{/if}
+                </td>
+              </tr>
+              {/foreach}{else /}
+              <tr>
+                <td colspan="11" rowspan="1" class="text-center">暂无数据</td>
+              </tr>
+              {/if}
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between pt-3 pl-3">
+          <ul class="mr-auto"></ul>
+          <div class="pagination mb-0">
+            {$list->render()}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'}
+<div class="modal fade" id="configInfo" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">发票详情</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="page-header l-line mb-3">
+          <h5>申请信息</h5>
+        </div>
+        <div class="row fs-12">
+          <div class="col-4 mb-3">
+            <div>申请类目：消费类</div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>申请金额：<span data-name="money"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>申请时间：<span data-name="create_time"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>备注：<span data-name="remark"> - </span></div>
+          </div>
+        </div>
+        <div class="page-header l-line mb-3">
+          <h5>发票信息</h5>
+        </div>
+        <div class="row fs-12">
+          <div class="col-4 mb-3">
+            <div>发票类型：<span data-name="type"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>普票类型：<span data-name="n_type"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>发票抬头：<span data-name="title"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>纳税人识别号：<span data-name="taxpayerno"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>开户银行名称：<span data-name="bank"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>开户账号：<span data-name="bankuser"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>地址：<span data-name="address"> - </span></div>
+          </div>
+          <div class="col-4 mb-3">
+            <div>电话：<span data-name="tel"> - </span></div>
+          </div>
+        </div>
+        <div class="page-header l-line mb-3">
+          <h5>收取地址</h5>
+        </div>
+        <div class="row fs-12">
+            <div class="col-6 mb-3">
+              <div>收取人姓名：<span data-name="addr_name"> - </span></div>
+            </div>
+            <div class="col-6 mb-3">
+              <div>所在地区：<span data-name="addr_region"> - </span></div>
+            </div>
+            <div class="col-6 mb-3">
+              <div>街道地址：<span data-name="addr_address"> - </span></div>
+            </div>
+            <div class="col-6 mb-3">
+              <div>邮政编码：<span data-name="addr_code"> - </span></div>
+            </div>
+            <div class="col-6 mb-3">
+              <div>联系电话：<span data-name="addr_tel"> - </span></div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='js'}
+
+<script>
+  function seeAll(t) {
+    let _c = t.parents('tr').data('config');
+    console.log(_c)
+    for(let v in _c){
+      console.log(v,_c[v],(!!_c[v] || _c[v] == 0))
+      if(v == 'type'){
+        $('#configInfo [data-name="'+v+'"]').text(_c[v] == '0' ? '增值税普通发票' : '增值税专用发票');
+      } else if(v == 'n_type'){
+        $('#configInfo [data-name="'+v+'"]').text(_c[v] == '0' ? '个人普票' : '企业类普票');
+      } else if(v == 'money'){
+        $('#configInfo [data-name="'+v+'"]').text(_c[v] ? _c[v].toFixed(2) : '0.00');
+      } else {
+        $('#configInfo [data-name="'+v+'"]').text((!!_c[v] || _c[v] == 0) ? _c[v] : ' - ');
+      }
+    }
+    $('#configInfo').modal('show');
+  }
+
+  function cancelInvoice(id){
+    if(confirm('确认要取消本次申请吗?')){
+      ajax('{:url("Index/Invoice/cancelInvoice")}', {
+        id: id.parents('tr').data('id')
+      }, 'post').then(e => {
+        if (e.status == 200) {
+          window.location.reload()
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  }
+</script>
+{/block}

@@ -1,0 +1,130 @@
+.nav {
+    >li {
+        a {
+            .pd(@mpb @mpb);
+            color: @cc2;
+            .unbdr;
+            &:hover {
+                color: @cc;
+            }
+            .ces& {
+                &:hover {
+                    border-bottom-color: @ces;
+                }
+            }
+        }
+        &.active {
+            a {
+                .ces& {
+                    background-color: @ces;
+                    color: @cwh;
+                }
+            }
+        }
+    }
+    &&-tabs {
+        &.ces {
+            border-color: @ces;
+        }
+        &-left,
+        &-right {
+            >li {
+                float: none;
+            }
+        }
+    }
+    &&-pills {
+        >li {
+            &.active {
+                >a {
+                    background-color: @ces;
+                }
+            }
+        }
+    }
+    &.line {
+        &.nav-tabs {
+            >li {
+                >a {
+                    .bdrt(@w: 2px, @cr: @cun);
+                }
+                &.active {
+                    >a {
+                        &,
+                        &:focus,
+                        &:hover {
+                            border-top-color: @ces;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nav-hmix {
+    &,
+    .tab-content {
+        .ohd;
+        zoom: 1;
+    }
+    .tab-content {
+        display: table-cell;
+        width: 10000px;
+        overflow: hidden;
+        zoom: 1;
+    }
+    .nav-tabs {
+        display: table-cell;
+        min-width: 200px;
+        .unbd;
+        a {
+            background-color: @cgy;
+            .mgr(0);
+            .pdx(@mpb);
+            .tac;
+            &:hover {
+                border-color: transparent;
+            }
+            span {
+                .mgr(@mpb);
+                &:last-child {
+                    .mgr(0);
+                }
+            }
+        }
+        li {
+            .mgb(0);
+        }
+        &-left {
+            li {
+                .mgr(-1px);
+                &.active {
+                    .bdrl(3px, solid, @ces);
+                    a {
+                        color: @ces;
+                        border-color: transparent;
+                    }
+                }
+            }
+        }
+        &-right {
+            li {
+                .mgl(-1px);
+                &.active {
+                    .bdrl(3px, solid, @ces);
+                    a {
+                        color: @ces;
+                        border-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+    .tab-content {
+        //      .bdr;
+        .tab-pane {
+            .pd;
+        }
+    }
+}

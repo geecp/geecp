@@ -1,0 +1,904 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="cont">
+  <div class="card form-group">
+    <div class="card-header bg-white border-0 pt-3">
+      <h4 class="page-header float-left mb-0">基本信息</h4>
+      <div class=" float-right pr-3 pt-2">
+        <a href="{:url('Index/Iam/baseinfoedit')}">
+          <i class="iconfont icon-icon_xie1 fs-12">编辑</i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body pt-0 ">
+      <div class="form-inline">
+        <div class="form-inline">
+          <label for="" class="col-form-label"><span class="username">{$userinfo.name|strFirst}</span></label>
+          <div class="col">
+            <p class="mb-0 l-h1">您好</p>
+            <p class="mb-0 l-h1">{$userinfo.name}</p>
+          </div>
+        </div>
+        <div class="col px-5 mx-5">
+          <table class="table border-0">
+            <tbody class="">
+              <tr class="">
+                <th class="p-0">用户ID：</th>
+                <td class="p-0" style="min-width: 300px !important">{$userinfo.id} <i
+                    class="iconfont icon-meitiku btn-link"></i></td>
+                <!-- <th class="p-0">一级行业分类：</th>
+                                <td class="p-0">无</td>
+                                <th class="p-0">主营业务：</th>
+                                <td class="p-0">无</td> -->
+              </tr>
+              <!-- <tr>
+                                <th class="p-0">联系人：</th>
+                                <td class="p-0">xxxyyy</td>
+                                <th class="p-0">二级行业分类：</th>
+                                <td class="p-0">无</td>
+                                <th class="p-0">网站地址：</th>
+                                <td class="p-0">无</td>
+                            </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="card col p-0" style="height:260px">
+      <div class="card-header bg-white border-0">
+        <h4 class="page-header mb-0">实名认证</h4>
+      </div>
+      {if $userinfo.realverify == 0 || $userinfo.realverify == 3}
+
+      <div class="card-body pt-0 ">
+        <div class="form-inline">
+          <i class="iconfont icon-warning pr-3" style="font-size: 40px !important;"></i>
+          <div>
+            {if $userinfo.realverify == 3}
+            <h4>您的实名认证并未通过,请重新提交认证信息</h4>
+            <small class="text-muted">为了您的账号更加安全，我们建议您进行实名认证</small>
+            {else /}
+            <h4>您还未进行任何实名认证</h4>
+            <small class="text-muted">为了您的账号更加安全，我们建议您进行实名认证</small>
+            {/if}
+          </div>
+        </div>
+        <div class="form-inline">
+          <div class="col-sm-6 p-0">
+            <i class="iconfont icon-icon-" style="font-size: 40px !important;"></i>
+            <a href="{:url('Index/Iam/ccompany')}" class="fs-16">企业认证</a>
+            <i class="iconfont icon-wenhao fs-16" data-toggle="tooltip" data-placement="right"
+              title="适用于企业、个体工商户、事业单位、社会团体等，通过营业执照、组织机构代码证、法人身份证等相关资质进行认证。工作时间当天认证完成，非工作时间次日完成。"></i>
+          </div>
+          <div class="col-sm-6">
+            <i class="iconfont icon-Other-Marketplaceco" style="font-size: 40px !important;"></i>
+            <a href="{:url('Index/Iam/cpersonal')}" class="fs-16">个人认证</a>
+            <i class="iconfont icon-wenhao fs-16" data-toggle="tooltip" data-placement="right" title="适用于个人开发爱好者，通过个人身份证进行认证。工作时间当天认证完成，非工作时间次日完成。
+            注：无法开增值税专用发票"></i>
+          </div>
+        </div>
+      </div>
+      {else /}
+      {if $userinfo.realverify == 2}
+      <div class="card-body pt-0">
+        <div class="col-8">
+          <div class="form-row pb-2 ">
+            <label class="col-1"><i class="iconfont icon-icon_duihao-xian fs-20 color-green"></i></label>
+            <div class="col fs-16 form-inline">
+              <span class="fs-16">您已经成功完成初级实名认证</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="form-row pb-2">
+            <label class="col-1"></label>
+            <div class="col form-inline">
+              <span class="">您若是企业用户，可通过 <a href="{:url('Index/Iam/ccompany')}">企业信息认证</a>进行变更。</span>
+              <span class="">您若是个人用户，可通过 <a href="{:url('Index/Iam/ccompany')}">企业信息认证</a>进行认证信息变更。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {else /}
+      <div class="card-body pt-0">
+          <div class="col-8">
+            <div class="form-row pb-2 ">
+              <label class="col-1"><i class="iconfont icon-icon_duihao-xian fs-20 color-green"></i></label>
+              <div class="col fs-16 form-inline">
+                <span class="fs-16">您的认证信息正在审核中,审核结果将会在1-3个工作日内显示</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {/if}
+      {/if}
+    </div>
+    <div class="card col ml-4 p-0" style="height:260px">
+      <div class="card-header bg-white border-0">
+        <h4 class="page-header mb-0">安全信息</h4>
+      </div>
+      <div class="card-body pt-0">
+        <div class="form-inline form-group">
+          <label class="col-form-label">账号安全等级：</label>
+          <div class="progress l-h1" style="min-width: 30%">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="25"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <span class="px-1">较高</span>
+        </div>
+        <form action="" class="form">
+          <div class="">
+            <div class="col-12 form-row p-0">
+              <div class="col-10">
+                <div class="form-row">
+                  <label for="" class="col-form-label pb-0">手机绑定： </label>
+                  <div class="col col-form-label pb-0">
+                    {$userinfo.phone|hideStar}
+                  </div>
+                </div>
+              </div>
+              <div class="col-1">
+                <div class=" form-row">
+                  <label for="" class=" col-form-label-sm p-0">
+                    <button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal"
+                      data-target="#amend">修改</button>
+                  </label>
+                  <div class="col text-right col-form-label p-0">
+                    <button class="btn btn-link btn-sm text-dark py-0 px-1 fs-12" data-container="body"
+                      data-toggle="popover" data-placement="bottom" data-trigger="hover" data-boundaries="150"
+                      data-boundary="scrollParent" data-html="true"
+                      data-content="您填写的手机号码，可用于接收发送给您的各种通知，如实例创建成功提醒、实例到期提醒等。" data-original-title="" title=""
+                      type="button">
+                      <i class="iconfont icon-wenhao"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-row p-0">
+              <div class="col-10">
+                <div class="form-row">
+                  <label for="" class="col-form-label pb-0">邮箱绑定：</label>
+                  <div class="col col-form-label pb-0">
+                    {$userinfo.email|hideStar}
+                  </div>
+                </div>
+              </div>
+              <div class="col-1">
+                <div class=" form-row">
+                  <label for="" class=" col-form-label-sm p-0">
+                    <button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal"
+                      data-target="#amend">修改</button>
+                  </label>
+                  <div class="col text-right col-form-label-sm p-0">
+                    <button class="btn btn-link btn-sm text-dark py-0 px-1 fs-12" data-container="body"
+                      data-toggle="popover" data-placement="bottom" data-trigger="hover" data-boundaries="150"
+                      data-boundary="scrollParent" data-html="true"
+                      data-content="您填写的邮箱，可用于接收发送给您的各种通知，如实例创建成功提醒、实例到期提醒等。" data-original-title="" title=""
+                      type="button">
+                      <i class="iconfont icon-wenhao"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-row p-0">
+              <div class="col-10">
+                <div class="form-row">
+                  <label for="" class="col-form-label pb-0">登录密码：</label>
+                  <div class="col col-form-label pb-0" data-toggle="modal" data-target="#advanced_search">
+                    <span class="color-green">已设置</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1">
+                <div class=" form-row">
+                  <label for="" class=" col-form-label-sm p-0">
+                    <button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal"
+                      data-target="#">修改</button>
+                  </label>
+                  <div class="col text-right col-form-label-sm p-0">
+                    <button class="btn btn-link btn-sm text-dark py-0 px-1 fs-12" data-container="body"
+                      data-toggle="popover" data-placement="bottom" data-trigger="hover" data-boundaries="150"
+                      data-boundary="scrollParent" data-html="true"
+                      data-content="您可以更换密码和密保工具，建议您定期更换密码，设置一个包含字母，符号或数字中至少两项且长度超过6位的密码。" data-original-title=""
+                      title="" type="button">
+                      <i class="iconfont icon-wenhao"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-12 form-row p-0">
+                            <div class="col-10">
+                                <div class="form-row">
+                                    <label for="" class="col-form-label pb-0">登录保护：</label>
+                                    <div class="col col-form-label pb-0">
+                                        <span class="fc-red">未设置</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <div class=" form-row">
+                                    <label for="" class=" col-form-label-sm p-0">  <button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal" data-target="#Logbackinto">设置</button></label>
+                                    <div class="col text-right col-form-label-sm p-0">
+                                        <button class="btn btn-link btn-sm text-dark py-0 px-1 fs-12" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent" data-html="true" data-content="开启登录保护，登录时将进行身份验证，以保护账户安全"
+                                            data-original-title="" title="" type="button">
+                                            <i class="iconfont icon-wenhao"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+            <!-- <div class="col-12 form-row p-0">
+                            <div class="col-10">
+                                <div class="form-row">
+                                    <label for="" class="col-form-label pb-0">虚拟MFA：</label>
+                                    <div class="col col-form-label pb-0">
+                                        <span class="fc-red">未设置</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <div class=" form-row">
+                                    <label for="" class=" col-form-label-sm p-0"> <button type="button" class="btn btn-sm btn-link fs-12 p-0">绑定</button></label>
+                                    <div class="col text-right  col-form-label-sm p-0">
+                                        <button class="btn btn-link btn-sm text-dark py-0 px-1 fs-12" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent" data-html="true" data-content="开启登录保护，登录时将进行身份验证，以保护账户安全"
+                                            data-original-title="" title="" type="button">
+                                            <i class="iconfont icon-wenhao"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card mt-3">
+        <div class="card-header bg-white border-0">
+            <h4 class="page-header mb-0">联系人管理</h4>
+        </div>
+        <div class="card-body pt-0 ">
+            <ul class="nav nav-tabs mb-3 ml-nge " id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">联系人</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">联系人群组</a>
+                </li>
+            </ul>
+            <div class="tab-content " id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tool-list d-flex mb-3">
+                        <ul class="list-inline mr-auto mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#new_contact">新增联系人</button>
+                                <button class="btn btn-sm btn-light ml-1" disabled>删除联系人</button>
+                            </li>
+                        </ul>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn  btn-light btn-sm"><i class="iconfont icon-icon_shuaxin"></i></button>
+                            </li>
+                            <li class="list-inline-item">
+                                <select name="" id="" class="form-control form-control-sm">
+                                    <option value="">联系人名</option>
+                                    <option value="">手机号码</option>
+                                    <option value="">邮箱地址</option>
+                                </select>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" class="form-control form-control-sm" placeholder="请输入联系人名进行搜索">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-sm btn-primary">
+                                            <span class="iconfont icon-icon_sousuo-xian "></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ml-nge">
+                        <div>
+                            <table class="table table-border">
+                                <thead class="bg-fB p-2">
+                                    <tr class="font-weight-light">
+                                        <th class="text-left px-3">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="ckallhead" class="custom-control-input" id="ckallhead">
+                                                <label class="custom-control-label" for="ckallhead">姓名</label>
+                                            </div>
+                                        </th>
+                                        <th>手机</th>
+                                        <th>邮箱</th>
+                                        <th>所属群组</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="new_contact_list">
+                                    <tr>
+                                        <td colspan="5" rowspan="1" class="text-center fs-16 p-5">无相关消费数据！</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between pt-3 pl-3">
+                            <ul class="mr-auto"></ul>
+                            <ul class="list-inline form-inline px-2">
+                                <li class="list-inline-item">每页显示</li>
+                                <li>
+                                    <select name="" id="" class="form-control form-control-sm">
+                                    <option value="">10</option>
+                                    <option value="">20</option>
+                                    <option value="">30</option>
+                                    <option value="">40</option>
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="pagination mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">2
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">&gt;</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tool-list d-flex mb-3">
+                        <ul class="list-inline mr-auto mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-sm btn-primary " type="button" data-toggle="modal" data-target="#create_group">新增联系人群组</button>
+                            </li>
+                        </ul>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-light btn-sm"><i class="iconfont icon-icon_shuaxin"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ml-nge">
+                        <div>
+                            <table class="table table-border">
+                                <thead class="bg-fB p-2">
+                                    <tr class="font-weight-light">
+                                        <th class="text-left px-3">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="ckallhead1" class="custom-control-input" id="ckallhead1">
+                                                <label class="custom-control-label" for="ckallhead1">组名</label>
+                                            </div>
+                                        </th>
+                                        <th>描述</th>
+                                        <th width="300px">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left px-3">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="ckallhead1" class="custom-control-input" id="ckallhead1">
+                                                <label class="custom-control-label" for="ckallhead1">组名</label>
+                                            </div>
+                                        </td>
+                                        <td>描述</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-link p-0" type="button" data-toggle="modal" data-target="#edit_user">编辑联系人</button>
+                                            <button class="btn btn-sm btn-link p-0" type="button" data-toggle="modal" data-target="#updata-group">修改</button>
+                                            <button class="btn btn-sm btn-link p-0" type="button" data-toggle="modal" data-target="#contact_delete_group">删除</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between pt-3 pl-3">
+                            <ul class="mr-auto"></ul>
+                            <ul class="list-inline form-inline px-2">
+                                <li class="list-inline-item">每页显示</li>
+                                <li>
+                                    <select name="" id="" class="form-control form-control-sm">
+                                    <option value="">10</option>
+                                    <option value="">20</option>
+                                    <option value="">30</option>
+                                    <option value="">40</option>
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="pagination mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">2
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">&gt;</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+{/block} {block name='modal'} {/block} {block name='js'}
+
+<div class="modal fade" id="amend" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改手机</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <form class="">
+            <div class="form-group ">为了保证您的账号安全，更换绑定手机前请先进行安全验证</div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-3">验证方式：</label>
+                <div class="col">
+                  <select name="" id="" class="form-control form-control-sm">
+                    <option value="">密保手机</option>
+                    <option value="">密保邮箱</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-3">原手机：</label>
+                <div class="col">
+                  <div class="col-form-label">
+                      {$userinfo.phone|hideStar}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-3">验证码：</label>
+                <div class="col-3">
+                  <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-3" id="getauthencode">
+                  <button type="button" class="btn btn-success btn-sm">获取验证码</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="Logbackinto" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">登录保护设置</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body fs-12">
+        <div id="" class="p-3">
+          <form class="">
+            <div class="form-group  form-row">
+              <div class="color-orange bg-orange l-h1 px-2">
+                开启后，登录时将进行身份验证，以保证账户安全
+              </div>
+            </div>
+            <div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="allordertag1" name="ordertag" class="custom-control-input" checked>
+                <label class="custom-control-label" for="allordertag1">不开启</label></div>
+            </div>
+            <div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="allordertag2" name="ordertag" class="custom-control-input">
+                <label class="custom-control-label" for="allordertag2">开启短信验证</label></div>
+            </div>
+            <div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="allordertag3" name="ordertag" class="custom-control-input">
+                <label class="custom-control-label" for="allordertag3">开启虚拟MFA验证</label></div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="new_contact" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新建联系人</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <form class="">
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="bef-red col-form-label-sm col-3 mb-0">姓名：</label>
+                <div class="col-6">
+                  <input type="text" class="form-control form-control-sm name_value">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0 ">
+              <div class="form-row ">
+                <label class="col-form-label-sm col-3 mb-0">手机：</label>
+                <div class="col-6">
+                  <div class="col p-0">
+                    <input type="text" class="form-control form-control-sm contact_tel">
+                  </div>
+                  <div class="col mb-3 p-0 fs-12">
+                    <span class="op-5">手机长度11位，以13/14/15/17/18开头</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label-sm col-3 mb-0">邮箱：</label>
+                <div class="col-6">
+                  <input type="text" class="form-control form-control-sm contact_emil">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label-sm col-3 mb-0">所属群组：</label>
+                <div class="col-6">
+                  <select name="" id="" class="form-control form-control-sm contact_group">
+                    <option value="" selected>不选择群组</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="contact_delete" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">删除</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <span><i class="iconfont icon-warning"></i></span> 您是否确认要删除该联系人？
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updata" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改联系人</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <form class="">
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="bef-red col-form-label-sm col-3 mb-0">姓名：</label>
+                <div class="col-6">
+                  <input type="text" class="form-control form-control-sm name_value">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0 ">
+              <div class="form-row ">
+                <label class="col-form-label-sm col-3 mb-0">手机：</label>
+                <div class="col-6">
+                  <div class="col p-0">
+                    <input type="text" class="form-control form-control-sm contact_tel">
+                  </div>
+                  <div class="col mb-3 p-0 fs-12">
+                    <span class="op-5">手机长度11位，以13/14/15/17/18开头</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label-sm col-3 mb-0">邮箱：</label>
+                <div class="col-6">
+                  <input type="text" class="form-control form-control-sm contact_emil">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="create_group" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新增联系人群组</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <form class="">
+            <div class="col-12 p-0 ">
+              <div class="form-row ">
+                <label class="bef-red col-form-label-sm col-3 mb-0">名称：</label>
+                <div class="col-6">
+                  <div class="col p-0">
+                    <input type="text" class="form-control form-control-sm contact_tel">
+                  </div>
+                  <div class="col mb-3 p-0 fs-12">
+                    <span class="op-5">群组名称不允许重复</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label-sm col-3 mb-0">描述：</label>
+                <div class="col-6">
+                  <textarea class="form-control form-control-sm textarea-row-3"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="contact_delete_group" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">删除</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <span><i class="iconfont icon-warning"></i></span> 您是否确认要删除该群组？ 注：删除警报群组，该群组下的联系人不会被删除。
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updata-group" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新增联系人群组</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <form class="">
+            <div class="col-12 p-0 ">
+              <div class="form-row ">
+                <label class="bef-red col-form-label-sm col-3 mb-0">名称：</label>
+                <div class="col-6">
+                  <div class="col p-0">
+                    <input type="text" class="form-control form-control-sm contact_tel">
+                  </div>
+                  <div class="col mb-3 p-0 fs-12">
+                    <span class="op-5">群组名称不允许重复</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 p-0">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label-sm col-3 mb-0">描述：</label>
+                <div class="col-6">
+                  <textarea class="form-control form-control-sm textarea-row-3"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="edit_user" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">编辑联系人</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="" class="p-3">
+          <table class="table table-border">
+            <thead class="bg-fB p-2">
+              <tr class="font-weight-light">
+                <th class="text-left px-3">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="ckallhead" class="custom-control-input" id="ckallhead">
+                    <label class="custom-control-label" for="ckallhead">姓名</label>
+                  </div>
+                </th>
+                <th>手机</th>
+                <th>邮箱</th>
+                <th>所属群组</th>
+
+              </tr>
+            </thead>
+            <tbody id="new_contact_list">
+              <tr>
+                <td colspan="4" rowspan="1" class="text-center fs-16 p-5">无用户</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary into" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-sm btn-light " data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //计时器 button
+  var sendCode = {
+    init: function (t, n) {
+      sendCode.times(t, n);
+      //after('<label for="" class="col-form-label col-3">验证码发送成功</label>')
+    },
+    times: function (t, n) {
+      var time = n;
+      if (time == 0) {
+        t.removeClass('hidden');
+        t.next().remove();
+        time = n;
+      } else {
+        if (t.next().length) {
+          t.next().text(time + 's');
+        } else {
+          t.addClass('hidden');
+          t.html(
+            '<button class="btn btn-ces btn-sm px-0" type="button" style="background-color: #ddd;width:100%" disabled="disabled">' +
+            time + 's后重新获取</button>');
+
+        }
+        time--;
+        setTimeout(function () {
+          sendCode.times(t, time);
+        }, 1000)
+      }
+
+    }
+  };
+  $("#getauthencode").click(function () {
+    sendCode.init($(this), 30)
+  })
+
+  let new_contact = {}
+  $("#new_contact .into").click(function () {
+
+    const contact_list = {
+      "name": $("#new_contact .name_value").val(),
+      "tel": $("#new_contact .contact_tel").val(),
+      "emil": $("#new_contact .contact_emil").val(),
+      "group": $("#new_contact .contact_group option:checked").val()
+    };
+    $("#new_contact_list").after(`<tr>
+        <td>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="ckallhead" class="custom-control-input"
+                    id="ckallhead">
+                <label class="custom-control-label" for="ckallhead">${contact_list.name}</label>
+            </div>
+        </td>
+        <td>${contact_list.tel}</td>
+        <td>${contact_list.emil}</td>
+        <td>${contact_list.group}</td>
+        <td>
+            <button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal" data-target="#updata">修改</button>
+            <button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal" data-target="#contact_delete">删除</button>
+        </td>
+    </tr>`)
+  })
+  console.log();
+</script>
+{/block}

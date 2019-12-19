@@ -1,0 +1,89 @@
+{extend name='Common/index' /}
+{block name='content'}
+<section class="content">
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">邮件设置</h3>
+    </div>
+    <div class="box-body">
+      <div class="form">
+        <div class="form-group">
+          <label for="host" class="col-sm-2 control-label">SMTP服务器</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="host" name="host" placeholder="请输入SMTP服务器" value="{$info?$info['host']:''}" autocomplete="off">
+            <input type="hidden"  name="id" value="{$info?$info['id']:''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="port" class="col-sm-2 control-label">SMTP端口</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="port" name="port" placeholder="请输入SMTP端口" value="{$info?$info['port']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">SMTP用户名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" name="username" placeholder="请输入SMTP用户名" value="{$info?$info['username']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">SMTP密码</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" name="password" placeholder="请输入SMTP密码" value="{$info?$info['password']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="secure" class="col-sm-2 control-label">SMTP验证方式</label>
+          <div class="col-sm-10">
+            <select name="secure" id="secure" class="form-control">
+              <option value="" {$info?$info['secure'] == ''?'selected':'':''}>不加密</option>
+              <option value="ssl" {$info?$info['secure'] == 'ssl'?'selected':'':''}>SSL</option>
+              <option value="tls" {$info?$info['secure'] == 'tls'?'selected':'':''}>TLS</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">发件人信箱</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" name="email" placeholder="请输入发件人信箱" value="{$info?$info['email']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="emailname" class="col-sm-2 control-label">发件人姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="emailname" name="emailname" placeholder="请输入发件人姓名" value="{$info?$info['emailname']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary sub">提交</button>
+            <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block}
+{block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<script>
+$('.sub').click(function(){
+  let names = document.querySelectorAll('.form-group > div > [name]'),
+      vals = {};
+  names = [].slice.call(names);
+  names.map((e)=>{
+    vals[e.name] = e.value;
+  });
+  ajax('{:url("admin/System/emailAuth")}',vals,'post').then(e=>{
+    if(e.status === 200){
+      alert(e.msg);
+      location.href="{:url('admin/System/email')}";
+    } else {
+      alert(e.msg);
+    }
+  });
+});
+</script>
+{/block}
+ 

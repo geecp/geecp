@@ -1,0 +1,160 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t bg-white">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto mb-0 form-inline">
+        <li class="list-inline-item border-right">
+          <a href="{:url('index/Billing/dealrecord')}" class="px-3">&lt返回 </a>
+        </li>
+        <li class="list-inline-item px-3">
+          <span class="fs-16">订单详情</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="page-header l-line">
+      <h4>订单信息</h4>
+    </div>
+    <div class="cont-box row">
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">订单号：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.order_number}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">产品名称：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.proname}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">订单状态：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.statuss}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">订单类型：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.types}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">支付方式：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.channel}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">订单创建时间：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.create_time}</div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-3">支付时间：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.types}</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="page-header l-line">
+        <h4>订单配置</h4>
+      </div>
+    <div class="cont-box">
+      <table class="table table-border">
+        <thead class="bg-fB p-2">
+          <tr class="font-weight-light">
+            <th>产品名称</th>
+            <th>配置</th>
+            <th>数量</th>
+            <th>时长</th>
+            <th>单价</th>
+            <th>计费方式</th>
+            <th>产品金额</th>
+          </tr>
+        </thead>
+        <tbody>
+          {if !empty($info['prolist'][0])}
+          {foreach $info['prolist'] as $k => $v}
+          <tr>
+            <td>{$v.name}</td>
+            <td>
+              {$v.config|to_verticalbar}<br>
+              <?php 
+              if($v['added']){
+                $addeds = json_decode($v['added'],true);
+                $g = model('index/GeeServerAdded');
+                $ginfo = model('index/GeeServerAddedItems');
+                foreach($addeds as $k=>$vo){
+                  if($vo){
+                    if(strpos($vo,',')){
+                      $val = explode(',',$vo);
+                      // dump($vo);
+                      $gname = $g->where('name = "'.$k.'"')->find()['title'];
+                      $ginfoname = $ginfo->where('id = '.$val[0])->find()['title'];
+                      // dump($ginfoname);
+                      echo $gname.'：'.$val[1].$ginfoname.'<br>';
+                    } else {
+                      // dump($vo);
+                      $gname = $g->where('name = "'.$k.'"')->find()['title'];
+                      $ginfoname = $ginfo->where('id = '.$vo)->find()['title'];
+                      // dump($ginfoname);
+                      echo $gname.'：'.$ginfoname.'<br>';
+                    }
+                  }
+                }
+              }
+            ?>
+            </td>
+            <td>{$v.num}</td>
+            <td>{$v.years}个月</td>
+            <td>￥{$v.price|to_double} </td>
+            <td>包年包月</td>
+            <td>￥{:to_double($v.price * $v.num)}</td>
+          </tr>
+          {/foreach}
+          {else /}
+          <tr>
+            <td colspan="7" class="text-center">暂无数据</td>
+          </tr>
+          {/if}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull-right text-right mt-3">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col">订单金额：</label>
+          <div class="col-1">
+            <div class="form-control-sm form-control-plaintext">￥{$info.money|to_double}</div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<style>
+</style>
+<script>
+</script>
+{/block}

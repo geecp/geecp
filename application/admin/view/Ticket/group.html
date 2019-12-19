@@ -1,0 +1,76 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <table id="tableData" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>类型名称</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if !empty($list)} {foreach name="list" item="v"}
+                            <tr data-id="{$v.id}">
+                                <td>{$v.id}</td>
+                                <td>{$v.title}</td>
+                                <td>{$v.create_time}</td>
+                                <td>
+                                    <a href="{:url('admin/Ticket/list',['id'=>$v['id']])}">查看</a>
+                                    <a href="javascript:;" onclick="del($(this))">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach} {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script>
+    function del(t) {
+        if (confirm('确认要删除这个员工吗？')) {
+            ajax("{:url('admin/Staff/del')}", {
+                id: t.parents('tr').data('id')
+            }, 'delete').then((e) => {
+                t.parents('tr').remove();
+            })
+        }
+    }
+
+    function disabled(t, sta) {
+        if (confirm(`确认要${sta == '0'?'解禁':'禁用'}这个员工吗？`)) {
+            ajax("{:url('admin/Staff/disabled')}", {
+                id: t.parents('tr').data('id'),
+                status: sta
+            }, 'put').then((e) => {
+                if (sta == '0') {
+                    t.attr('onclick', 'disabled($(this),"1")');
+                    t.text('禁用');
+                } else {
+                    t.attr('onclick', 'disabled($(this),"0")');
+                    t.text('解禁');
+                }
+            })
+        }
+    }
+
+    $('#tableData').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'stateSave': true,
+        'deferRender': true,
+        'processing': true,
+    });
+</script>
+{/block}

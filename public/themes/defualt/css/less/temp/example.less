@@ -1,0 +1,462 @@
+body,
+html {
+    height: 100%;
+}
+
+.vba-box {
+    height: 100%;
+    background-color: @cwh;
+    position: relative;
+    .mgb(2*@mpb);
+    background: url("https://qmarket.bj.bcebos.com/PB150703.jpg") no-repeat center center;
+    .logo-info,
+    .mix {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    .logo-info {
+        background-color: @cre;
+        color: @cwh;
+        width: 400px;
+        height: 400px;
+        cursor: pointer;
+        .trs;
+        &:hover {
+            -moz-box-shadow: 0 10px 30px rgba(0, 0, 34, .5);
+            -webkit-box-shadow: 0 10px 30px rgba(0, 0, 34, .5);
+            box-shadow: 0 10px 30px rgba(0, 0, 34, .5);
+            -webkit-transform: translate(-50%, -51%);
+            -moz-transform: translate(-50%, -51%);
+            -ms-transform: translate(-50%, -51%);
+            -o-transform: translate(-50%, -51%);
+            transform: translate(-50%, -51%);
+        }
+    }
+    .mix {
+        width: 100%;
+        .tac;
+    }
+    .name {
+        color: @cwh;
+        &.en {
+            .mgt(0);
+            .mgb(0);
+        }
+    }
+    h1.name {
+        font-size: 52px;
+    }
+    .info {
+        .pd(@mpb @mpb*3);
+        opacity: 0.7;
+        a {
+            color: @cwh;
+            .mgl(5px);
+            .mgr(5px);
+        }
+    }
+    .coding {
+        .bdr(@cr: @cwh);
+        color: @cwh;
+        .pdl(4*@mpb);
+        .pdr(4*@mpb);
+        .mgb(2*@mpb);
+        &:hover {
+            background-color: @cwh;
+            color: @ces;
+        }
+    }
+    .mask {
+        background: rgba(0, 0, 0, .2) url("../../img/pattern.png") repeat;
+    }
+    .mouse {
+        position: absolute;
+        bottom: 2*@mpb;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        border-color: @cwh;
+        &:before {
+            background-color: @cwh;
+        }
+    }
+}
+
+.exp {
+    &-form {
+        .btn+.btn {
+            .mgt(2*@mpb)
+        }
+    }
+    &-sendmsg {
+        >div,
+        form {
+            background-color: @cwh;
+            .pd(3*@mpb 2*@mpb);
+            .mgb(2*@mpb);
+            .form-group:last-child {
+                .mgt(3*@mpb);
+            }
+        }
+        .tit {
+            .mgb(2*@mpb);
+        }
+    }
+    &-sendmail {
+        height: 513px;
+        .thumbnail-bg {
+            background: url("../../img/PB150703.jpg") no-repeat center center;
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0, 0, 0, .6) url("../../img/pattern.png") repeat;
+            }
+            .caption {
+                .mix {
+                    position: relative;
+                    z-index: 1;
+                    .pd(@mpb 2.5*@mpb);
+                    h3 {
+                        line-height: 1.4;
+                    }
+                }
+            }
+            button,
+            input {
+                .mgt(3*@mpb)
+            }
+        }
+    }
+    &-changesth {
+        .panel-body {
+            .pd(2*@mpb);
+            .pdt(33px);
+            .form-group:only-child {
+                .mgb(0);
+            }
+            .hasbtn {
+                .col-xs-7 {
+                    .pdl(0);
+                    .pdr(0);
+                }
+            }
+        }
+        .panel-footer {
+            .pd(0);
+            .btn-block {
+                .pd(@mpb 0)
+            }
+        }
+    }
+    &-lrmix {
+        background: url(@bgimg) no-repeat center center;
+        .thumbnail-object {
+            .pd(2*@mpb);
+            .mgt(20%);
+        }
+        .caption {
+            .form-horizontal {
+                .mgb(0)
+            }
+            .pd(0);
+        }
+    }
+    &-chginfo {
+        .media {
+            .pdl(3*@mpb);
+            .pdr(3*@mpb);
+            .pdt;
+            .pdb;
+        }
+        .user-header {
+            width: 100px;
+        }
+        .media-body {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5 {
+                .mgt(0);
+            }
+            .pdl;
+            .info {
+                .mgb(0);
+            }
+        }
+        .panel-body {
+            .pdl(0);
+            .pdr(0);
+            .pdb(0);
+            .mix {
+                .pd;
+                .ohd;
+                background-color: @cwh*0.97;
+            }
+        }
+    }
+    &-tab {
+        background-color: @cwh;
+        .mgb;
+        .ohd;
+    }
+    &-navbar {
+        .vba-navbar:not(.navbar-inverse) {
+            background-color: @cwh;
+        }
+        .icon-vbadmin {
+            font-size: 40px;
+            &:hover {
+                .trs;
+                color: @ces;
+            }
+        }
+        .navbar-nav {
+            .icon-seach,
+            .icon-spcar {
+                font-size: 20px;
+            }
+            .icon-fangda {
+                font-size: 30px;
+            }
+            .icon-seach {
+                .mgr(0)!important;
+            }
+            li.logo {
+                a {
+                    .pd(2*@mpb 0);
+                }
+            }
+        }
+        .mixbox.down {
+            background-color: @cwh;
+            .mgb;
+        }
+        .list-nav {
+            li {
+                line-height: ceil(2.4*@mpb);
+            }
+        }
+        &-mb {
+            .listmix {
+                background-color: @bgc4;
+                .pd(@mpb 0);
+            }
+            .list-nav {
+                li {
+                    line-height: ceil(2.9*@mpb);
+                    .pdl(2*@mpb);
+                    .pdr(2*@mpb);
+                    a {
+                        display: block;
+                        &:active,
+                        &:focus,
+                        &:hover {
+                            color: @cwh;
+                            .unl;
+                        }
+                    }
+                    &.active {
+                        background-color: @ces;
+                        a {
+                            color: @cwh;
+                        }
+                    }
+                }
+            }
+            .thumbnail {
+                .exp {
+                    h3 {
+                        .mgt(5*@mpb);
+                    }
+                    .btn {
+                        .mgt(3*@mpb);
+                    }
+                }
+            }
+            .pro {
+                .pd(0);
+            }
+            .tab-content {
+                .list {
+                    li {
+                        a {
+                            &:hover {
+                                color: @cc;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &-footer {
+        .mgb;
+    }
+    &-cavmix {
+        .clear;
+        .cavmix {
+            height: 100vh;
+            .tit {
+                &1 {
+                    font-size: 5*@mpb;
+                }
+                &2 {
+                    font-size: 3*@mpb;
+                }
+                &3 {
+                    font-size: ceil(2.5*@mpb);
+                }
+                &4 {
+                    font-size: ceil(2*@mpb);
+                }
+                &1+&2 {
+                    .mgt(2*@mpb)
+                }
+            }
+            .btn {
+                .mgt(2*@mpb);
+                .pd(@mpb 5*@mpb);
+            }
+        }
+    }
+    &-nav {
+        .nav+.nav,
+        .nav+.row,
+        .row+.row {
+            .mgt;
+        }
+    }
+    &-label {}
+}
+
+//
+#exp-cavmix {
+    &1 {
+        background: url("../../img/bg.jpg") no-repeat top center;
+        background-size: auto 100%;
+    }
+    &2 {
+        background: url("../../img/bg1.jpg") no-repeat center right;
+        background-size: auto 100%;
+    }
+    &3 {
+        background: url("../../img/Dphone.jpg") no-repeat center right;
+        background-size: 100% auto;
+    }
+    &4 {
+        background: url("../../img/phoneinDesk.jpg") no-repeat center right;
+        background-size: 100% auto;
+    }
+}
+
+//
+#inline-login {
+    background: url("https://qmarket.bj.bcebos.com/PB150703.jpg") no-repeat center center;
+    .mgb;
+    .mask {
+        background: rgba(0, 0, 0, .7) url("../../img/pattern.png") repeat;
+    }
+}
+
+//
+#nav-mix {
+    background-color: @cwh;
+    .pd(@mpb);
+}
+
+#expbox {
+    &-form {
+        //      background-color: @cwh;
+    }
+    &-table {
+        .mgt(2*@mpb);
+        .exp-box+.exp-box {
+            .mgt(2*@mpb)
+        }
+    }
+}
+
+.exp {
+    &-tit {
+        h3 {
+            color: @cc2;
+            .mgb(2*@mpb);
+        }
+    }
+    &-box {
+        background-color: @cwh;
+        .pd;
+        .input-group {
+            .mgb;
+        }
+    }
+    &-box+&-box {
+        .mgt(ceil(2*@mpb));
+    }
+}
+
+#exp-media-mix {
+    @mmbg: rgb(247,247,249);
+    .clear;
+    .abs {
+        .time {
+            .mgb(0);
+            .iconfont {
+                font-size: 32px;
+                .mgr;
+            }
+        }
+        .time+.tit {
+            .mgt(0);
+            .mgb;
+        }
+        .icon-time+span {
+            .mgr;
+        }
+    }
+    #mmtest {
+        &1 {
+            .thumbnail {
+                height: 358px;
+            }
+            .time {
+                margin-bottom: 15px;
+            }
+        }
+        &2 {
+            .thumbnail {
+                height: 360px;
+                background-color: @mmbg ;
+                &-object img {
+                    height: inherit;
+                    width: auto;
+                }
+            }
+        }
+        &3{
+            .img-circle{
+                display: inline-block;
+                width: ceil(@mpb*1.5);
+                margin: 0;
+                .mgr(10px);
+            }
+        }
+        &4{
+           .col-md-3{
+               background-color: @mmbg;
+           } 
+        }
+    }
+}

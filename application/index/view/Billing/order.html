@@ -1,0 +1,140 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto mb-0">
+        <li class="list-inline-item">
+          <a href="#" class="fs-16" style="color: #000"> 订单管理</a>
+        </li>
+      </ul>
+      <!-- <ul class="list-inline mb-0">
+        <li class="list-inline-item">
+          <a href="#"><i class="iconfont iconguanlian1"></i>操作指南</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="form-inline form-group">
+        <ul class="list-inline mr-auto form-inline mb-0">
+          <li class="list-inline-item form-inline">
+            <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+              <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+              <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off"
+                value="{$_GET['start']}">
+              <span class="c-datepicker-range-separator">-</span>
+              <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off"
+                value="{$_GET['end']}">
+            </div>
+          </li>
+          <li class="list-inline-item">
+            <select name="type" id="" class="form-control form-control-sm">
+              <option {$_GET['type']=='-1' ?'selected':''} value="-1">订单类型:全部</option>
+              <option {$_GET['type']=='0' ?'selected':''} value="0">消费</option>
+              <option {$_GET['type']=='1' ?'selected':''} value="1">充值</option>
+              <option {$_GET['type']=='2' ?'selected':''} value="2">退款</option>
+              <option {$_GET['type']=='3' ?'selected':''} value="3">提现</option>
+              <option {$_GET['type']=='4' ?'selected':''} value="4">产品交易</option>
+            </select>
+          </li>
+          <li class="list-inline-item">
+            <select name="channel" id="" class="form-control form-control-sm">
+              <option {$_GET['channel']=='-1' ?'selected':''} value="-1">交易渠道:全部</option>
+              <option {$_GET['channel']=='0' ?'selected':''} value="0">账户余额</option>
+              <option {$_GET['channel']=='1' ?'selected':''} value="1">第三方支付</option>
+            </select>
+          </li>
+        </ul>
+        <ul class="list-inline  m-0 form-inline">
+          <li class="list-inline-item m-0"><button class="btn  btn-light btn-sm"><i
+                class="iconfont iconicon_xiazai"></i></button></li>
+        </ul>
+      </div>
+      <div class="form-group ml-nge">
+        <table class="table table-border">
+          <thead class="bg-fB p-2">
+            <tr class="font-weight-light">
+              <th class="px-3">订单号</th>
+              <th>产品名称</th>
+              <th>状态</th>
+              <th>订单金额</th>
+              <th>现金支付</th>
+              <th>订单类型</th>
+              <th>交易渠道</th>
+              <th>下单时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tbody>
+            {if !empty($list[0])}
+            {foreach $list as $k => $v}
+            <tr>
+              <td>{$v.order_number}</td>
+              <td>{$v.productType}</td>
+              <td class="{$v.status == '1'?'fc-green':($v.status == '2'?'fc-gray':'fc-red')}">{$v.statuss}</td>
+              <td>￥{$v.money|to_double}</td>
+              <td>￥{$v.cash|to_double} </td>
+              <td>{$v.types}</td>
+              <td>{$v.channel}</td>
+              <td>{$v.create_time}</td>
+              <td>
+                {if $v['status'] == '0'}
+                <a href="{:URL('index/Buy/onlinepay',['order'=>$v['order_number']])}" class="">支付</a>
+                <a href="javascript:;" onclick="cancelOrder(`{$v['order_number']}`)">取消订单</a>
+                {/if}
+                {if $v['pro_list'] != '0' && !!$v['pro_list']}
+                <a href="{:URL('index/Billing/orderdetails',['order'=>$v['order_number']])}" class="">查看订单</a>
+                {/if}
+                {if $v['status'] == '2'}
+                <a href="javascript:;" onclick="delOrder('{$v['order_number']}')">删除</a>
+                {/if}
+
+              </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr>
+              <td colspan="9" class="text-center">暂无数据</td>
+            </tr>
+            {/if}
+          </tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between pt-3 pl-3">
+      <ul class="mr-auto"></ul>
+      <div class="pagination mb-0">
+        {$list->render()}
+      </div>
+    </div>
+  </div>
+
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  $('[name="starttime"],[name="endtime"],[name="type"],[name="channel"]').change(function () {
+    window.location.href = window.location.origin + window.location.pathname + '?start=' + $('[name="starttime"]')
+      .val() + '&end=' + $('[name="endtime"]').val() + '&type=' + $('[name="type"]').val() + '&channel=' + $(
+        '[name="channel"]').val()
+  });
+
+  function delOrder(id) {
+    if (confirm('确定要删除该订单吗?')) {
+      ajax("{:url('index/Billing/delorder')}?order=" + id).then((e) => {
+        window.location.href = "{:url('index/Billing/order')}";
+      })
+    }
+  }
+  function cancelOrder(id) {
+    if (confirm('确定要取消该订单吗?')) {
+      ajax("{:url('index/Billing/cancelorder')}?order=" + id).then((e) => {
+        window.location.href = "{:url('index/Billing/order')}";
+      })
+    }
+  }
+</script>
+{/block}

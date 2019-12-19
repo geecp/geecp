@@ -1,0 +1,42 @@
+.modal {
+    .modal-full {
+        width: 100%;
+        margin: 0;
+    }
+    .modal-content {
+        .unbdr;
+        .unbd;
+    }
+    .close-btn{
+        width:50px;
+        height:50px;
+        display: block;
+        line-height: 50px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 2;
+        .modal-lg &{
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+        }
+    }
+    .modal-body{
+        .pd(0);
+        padding-top: 50px;
+    }
+    .login{
+        .panel,&.panel{
+            .unbd;
+        }
+    }
+}
+.modal-backdrop {
+    &.in {
+        opacity: 0.84;
+    }
+}
+//.modal-open .modal {
+//  padding-left: 0 !important;
+//}

@@ -1,0 +1,225 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <div class="box-tools form-inline">
+            <!-- <select name="" class="form-control input-sm global_filter">
+              <option value="">全部</option>
+              <option value="消费">消费</option>
+              <option value="充值">充值</option>
+              <option value="提现">提现</option>
+              <option value="退款">退款</option>
+              <option value="订单">订单</option>
+            </select> -->
+            <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+            <div class="input-group" style="width:180px;">
+              <input type="text" class="form-control input-sm pull-right datetime-range col7_filter datetime_filter"
+                placeholder="时间范围" data-column="7">
+            </div>
+            <button class="btn btn-primary btn-sm serchBtn">查询</button>
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-hover tableData">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>订单号</th>
+                <th>所属用户</th>
+                <th>发生金额</th>
+                <th>款项类型</th>
+                <th>交易描述</th>
+                <th>余额</th>
+                <th>交易时间</th>
+                <th>支付状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list)} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                <td>{$v.id}</td>
+                <td>{$v.order_number}</td>
+                <td>{$v.user}</td>
+                <td class="money">{$v.money|to_double}</td>
+                <td>{$v.types}</td>
+                <td>{$v.remarks}</td>
+                <td>{$v.balance|to_double}</td>
+                <td>{$v.create_time}</td>
+                <td>{$v.statuss}</td>
+                <td>
+                  {if $v['pro_list'] && $v['pro_list'] != '0'}
+                  <a href="{:url('admin/Finance/detailsinfo',['id'=>$v['id']])}">查看</a>
+                  <!-- <a href="javascript:;" onclick="seeConfig($(this))">查看</a> -->
+                  {/if}
+                </td>
+              </tr>
+              {/foreach} {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<div class="modal fade" id="config" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">账单详情</h4>
+      </div>
+      <div class="modal-body">
+        <div class="configs clearfix">
+          <div class="page-header l-line mb-3">
+            <h5>订单信息</h5>
+          </div>
+          <div class="cont-box row">
+            <div class="col-md-4 ">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-md-4">订单号：</label>
+                <div class="col">
+                  <div class="form-control-sm form-control-plaintext" data-name="order_number"> - </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-md-4">产品名称：</label>
+                <div class="col">
+                  <div class="form-control-sm form-control-plaintext" data-name="proname"> - </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-md-4">订单状态：</label>
+                <div class="col">
+                  <div class="form-control-sm form-control-plaintext" data-name="status"> - </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-md-4">订单类型：</label>
+                <div class="col">
+                  <div class="form-control-sm form-control-plaintext" data-name="type"> - </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-md-4">支付方式：</label>
+                <div class="col">
+                  <div class="form-control-sm form-control-plaintext" data-name="channel_type"> - </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group form-row">
+                <label for="" class="col-form-label col-md-6">订单创建时间：</label>
+                <div class="col">
+                  <div class="form-control-sm form-control-plaintext" data-name="create_time"> - </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="page-header l-line mb-3">
+            <h5>订单配置</h5>
+          </div>
+          <div class="cont-box">
+            <table class="table table-border">
+              <thead class="bg-fB p-2">
+                <tr class="font-weight-light">
+                  <th>产品名称</th>
+                  <th>配置</th>
+                  <th>数量</th>
+                  <th>时长</th>
+                  <th>单价</th>
+                  <th>计费方式</th>
+                  <th>产品金额</th>
+                </tr>
+              </thead>
+              <tbody data-name="prolist">
+                <tr>
+                  <td> - </td>
+                  <td> - </td>
+                  <td> - </td>
+                  <td> - </td>
+                  <td> - </td>
+                  <td> - </td>
+                  <td> - </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-right mt-3">
+            <div class="form-group form-row">
+              <label for="" class="col-form-label col-md-11">订单金额：</label>
+              <div class="col-md-1">
+                <div class="form-control-sm form-control-plaintext" data-name="money"> - </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .page-header.l-line {
+    border: none;
+  }
+
+  .page-header.l-line h1,
+  .page-header.l-line h2,
+  .page-header.l-line h3,
+  .page-header.l-line h4,
+  .page-header.l-line h5,
+  .page-header.l-line h6 {
+    border-left: 3px solid #007bff;
+    padding-left: 15px;
+  }
+
+  .mb-3 {
+    margin-bottom: 15px;
+  }
+  .modal{
+    font-size: 12px!important;
+  }
+  .bg-fB {
+    background: #F6F7FB;
+  }
+  .bg-fB th, .bg-fB td {
+    text-align: left !important;
+    border-right: 1px solid #E5E5E5;
+    border-right-color: #FFF;
+    /* height: 40px !important; */
+    padding: 10px 20px !important;
+}
+</style>
+<script>
+
+  $('.tableData').DataTable({
+    'paging': true,
+    'fixedHeader': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': true,
+    'info': true,
+    'autoWidth': false,
+    'deferRender': true,
+    'processing': true,
+    "order": [
+      [0, "desc"]
+    ],
+  });
+</script>
+{/block}

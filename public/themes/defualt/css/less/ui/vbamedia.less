@@ -1,0 +1,196 @@
+.thumbnail.vba {
+    .thumbnail-object {
+        height: inherit;
+        position: relative;
+        .ohd;
+        .title {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: @cwh;
+            .pd(@mpb 2*@mpb);
+            .mg(0);
+            display: block;
+            .trs;
+        }
+        img {
+            width: 100%;
+        }
+        .mask& {
+            &:before {
+                content: "";
+                .mask;
+                background-color: rgba(0, 0, 0, .5);
+            }
+        }
+        .absh& {
+            height: inherit;
+            img {
+                width: auto;
+                height: inherit;
+            }
+        }
+        .trs;
+    }
+    &.hover {
+        .title {
+            bottom: -3.5*@mpb
+        }
+        &:hover {
+            .title {
+                bottom: 0;
+            }
+        }
+    }
+    .caption {
+        .pd(@mpb 2*@mpb);
+        .info {
+            text-indent: 2em;
+        }
+        .tool {
+            .pdt(10px);
+            .bdrt;
+        }
+        .abs&,
+        .absh& {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 2*@mpb;
+            &.amid {
+                .amid;
+                width: 100%;
+            }
+        }
+        .trs;
+    }
+    &.abs {
+        .ohd;
+    }
+    &.bottom {
+        .caption {
+            top: initial;
+            bottom: 0;
+        }
+    }
+    &.left {
+        .caption {
+            right: initial;
+            left: 0;
+        }
+    }
+    &.rigth {
+        .caption {
+            left: initial;
+            right: 0;
+        }
+    }
+}
+
+.thumbnail-list {
+    .mgb;
+    .clear;
+    &.pro {
+        .thumbnail {
+            .unbg;
+            &-object {
+                .pd(@mpb 3*@mpb);
+            }
+        }
+    }
+}
+
+.media.vba {
+    background-color: @bgc1;
+    .mgb;
+    .media-left {
+        .pdr(0);
+    }
+    .media-body {
+        .pd(2*@mpb);
+        .label-list {
+            li {
+                .pd(ceil(@mpb*0.7) @mpb);
+                .mgt(ceil(@mpb*0.3));
+                .iconfont {
+                    .mgr(ceil(@mpb*0.3));
+                }
+            }
+        }
+        .btn {
+            &+.btn {
+                .mgr(@mpb);
+            }
+        }
+    }
+    &.vuser {
+        background-color: @cwh;
+        .pd(@mpb*2);
+        .bdr(1px, solid, #ddd);
+        .bdrt(2px, solid, @ces);
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        &.vtop {
+            >.media-left {
+                .pdx(@mpb);
+                min-width: 180px;
+            }
+            >.media-body {
+                .pd(0);
+                .vrow {
+                    .tac;
+                    .bdrb;
+                    .pdy(@mpb);
+                    &.vl {
+                        line-height: 64px;
+                        .pdb(@mpb);
+                    }
+                    &+.vrow {
+                        .unbd;
+                    }
+                    h3 {
+                        display: inline-block;
+                    }
+                }
+                .row {
+                    div[class*="col"] {
+                        .unbd;
+                        &+div[class*="col"] {
+                            .bdrl(1px, solid, @cgy);
+                        }
+                    }
+                }
+                .vrow {
+                    div[class*="col"] {
+                        .unbd;
+                        &+div[class*="col"] {
+                            .unbd;
+                        }
+                    }
+                }
+                ul {
+                    .mg(0);
+                    .pd(@mpb);
+                    >li {
+                        line-height: 28px;
+                    }
+                }
+            }
+        }
+        .media-left {
+            img {
+                .bdrrd(50%);
+                width: 90px;
+            }
+        }
+        .media-body {
+            .media-heading {
+                .mgb(@mpb);
+            }
+            p {
+                color: @cc2;
+            }
+        }
+    }
+}

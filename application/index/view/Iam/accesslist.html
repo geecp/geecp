@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>GEECPS</title>
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
+    <link rel="stylesheet/less" href="../css/less/style.less">
+    <script src="https://cdn.bootcss.com/less.js/3.0.4/less.min.js"></script>
+    <link rel="stylesheet" href="../css/lib/datepicker.css">
+</head>
+
+<body>
+    <div class="main">
+        <div id="zmessage-wrap">
+            <!--消息滑入框部分-->
+            <div class="border position-absolute bg-white" id="message-frame">
+                <div>
+                    <div class="px-4 py-3 border-bottom d-flex list-inline">
+                        <span class="mr-3 list-inline-item">未读消息</span>
+                        <a href="../messageCenter/station-message.html" class="border px-2 text-secondary list-inline-item mr-auto" style="padding-bottom: 2px;"><span class="fs-12 linkblue">进入消息中心</span></a>
+                        <button type="button" class="btn bg-white close list-inline-item" id="closemessage">
+                            <span class="iconfont iconicon_guanbi zfs-16"></span>
+                        </button>
+                    </div>
+
+                    <!--有消息时的样式-->
+
+                    <div class="px-4 pt-2 set-readed">
+                        <ul class="list-inline form-inline mb-0" style="height: 30px">
+                            <li class="list-inline-item mr-auto fs-12 text-secondary ml-1">[ 公告 ]</li>
+                            <li class="list-inline-item fs-12 set-readed-1" style="color: #999">2019-03-25 10:43:08</li>
+                            <li class="d-none set-readed-2">
+                                <button type="button" class="list-inline-item btn btn-light btn-sm fs-12 px-1 py-0" style="border-radius: 30px!important;">设为已读</button>
+                            </li>
+                        </ul>
+                        <div class="ml-1 border-bottom pb-3">
+                            <span class="iconfont iconwarning text-warning zfs-16"></span>
+                            <span class="fs-12">2019年3月25日，七朵云部分网络设备升级优化公告</span>
+                        </div>
+                    </div>
+                    <div class="px-4 pt-2 set-readed">
+                        <ul class="list-inline form-inline mb-0" style="height: 30px">
+                            <li class="list-inline-item mr-auto fs-12 text-secondary ml-1">[ GeeStack动态 ]</li>
+                            <li class="list-inline-item fs-12 set-readed-1" style="color: #999">2019-03-25 10:43:08</li>
+                            <li class="d-none set-readed-2">
+                                <button type="button" class="list-inline-item btn btn-light btn-sm fs-12 px-1 py-0" style="border-radius: 30px!important;">设为已读</button>
+                            </li>
+                        </ul>
+                        <div class="ml-1 border-bottom pb-3">
+                            <span class="fs-12">2019年3月25日，七朵云产品技术更新，技术更新了，更新了</span>
+                        </div>
+                    </div>
+                    <div class="px-4 pt-2 set-readed">
+                        <ul class="list-inline form-inline mb-0" style="height: 30px">
+                            <li class="list-inline-item mr-auto fs-12 text-secondary ml-1">[ 产品服务 ]</li>
+                            <li class="list-inline-item fs-12 set-readed-1" style="color: #999">2019-03-25 10:43:08</li>
+                            <li class="d-none set-readed-2">
+                                <button type="button" class="list-inline-item btn btn-light btn-sm fs-12 px-1 py-0" style="border-radius: 30px!important;">设为已读</button>
+                            </li>
+                        </ul>
+                        <div class="ml-1 border-bottom pb-3">
+                            <span class="fs-12">2019年3月25日，七朵云产品上新公告</span>
+                        </div>
+                    </div>
+
+                    <!--无消息时的样式-->
+
+                    <!--<div class="position-absolute z-nomessage-position">
+                        <span class="fs-12">
+                            <a href="../messageCenter/station-message.html">进入消息中心<br>查看全部消息</a>
+                        </span>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg bg-light fixed-top">
+            <!-- <a class="navbar-brand" href="#"><img src="img/geestack.png" alt="GEESTACK"></a> -->
+            <a class="navbar-brand" href="#" style="background-color: rgba(18, 26, 44, 0.891);"><img src="../img/geestack.png" alt="GEESTACK" style="max-height:35px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hideNav" aria-controls="hideNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse pl-3" id="hideNav">
+                <ul class="navbar-nav mr-auto">
+                    <!-- <li class="nav-item active">
+                        <a class="nav-link" href="javascript:;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;">About</a>
+                    </li> -->
+                </ul>
+
+                <!--导航菜单部分-->
+                <ul class="navbar-nav nav_bar"></ul>
+            </div>
+        </nav>
+        <div class="main-sidebar">
+            <div class="sidebar scroll">
+                <ul class="nav flex-column pt-3">
+
+                </ul>
+            </div>
+            <div class="setting">
+                <button type="button" class="btn btn-sm btn-dark btn-block py-2" data-toggle="modal" data-target="#checkSideItem"><span class="iconfont icon-nav-system-set"></span> 自定义导航</button>
+            </div>
+        </div>
+        <div class="main-sidebar-t">
+            <div class="sidebar sidebarchild" style="background: #fff !important">
+
+            </div>
+        </div>
+        <div class="main-content">
+            <div id="warp" class="content m-f140">
+                <div class="horizontalarr">
+                    <!-- breadcrumb start -->
+                    <nav class="d-flex" aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 unbg p-0">
+                            <li class="breadcrumb-item active" aria-current="page">安全认证</li>
+                            <li class="breadcrumb-item active" aria-current="page">Access Key</li>
+                        </ol>
+                        <ul class="list-inline ml-auto mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-sm btn-link text-dark"><i class="iconfont iconquestion mr-3"></i>帮助</button>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- breadcrumb end -->
+                </div>
+                <div class="card">
+                    <div class="card-header  border-t pb-0" style="background-color: #fff">
+                        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+                        <div class="tool-list d-flex">
+                            <ul class="list-inline mr-auto  m-0">
+                                <li class="list-inline-item ">
+                                    <a href="#" class="fs-16">
+                                        <h4>Access Key</h4>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body fs-12 ">
+                        <div class="cont-box">
+                            <div class="pb-2">
+                                <span class="bg-f7f7 p-2">已创建1个，最多可创建20个</span>
+                            </div>
+                            <div class="py-2">
+                                <button type="button" class="btn btn-primary btn-sm addlist"><i class="iconfont iconicon_tianjia"></i>创建Access Key</button>
+                            </div>
+                            <div class="py-2 ml-nge">
+                                <div>
+                                    <table class="table table-border mytb">
+                                        <thead class="bg-fB p-2">
+                                            <tr class="font-weight-light">
+                                                <th>Access Key</th>
+                                                <th>Secret Key</th>
+                                                <th class="" style="width: 350px">说明</th>
+                                                <th>创建时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>b9abe97c301e4ba78b23d2f5bfbba030</td>
+                                                <td><button class="btn btn-link block_id px-0">显示</button><span class="d-none">126456954748</span></td>
+                                                <td>
+                                                    <div class=" inputclickblock">
+                                                        <span class="inputclick-val"></span><i class="iconfont iconicon_xie1 fc-bff"></i>
+                                                        <div class="inputclick d-none">
+                                                            <input type="text" class="form-control form-control-sm mb-2" id="inputclick_value">
+                                                            <button type="button" class="btn btn-primary btn-sm enter-input">确定</button>
+                                                            <button type="button" class="btn btn-light btn-sm out-input">取消</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>2019-03-27 16:57:30 </td>
+                                                <td><button class="btn btn-link px-0" data-target="#delete" data-toggle="modal">删除</button> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>b9abe97c301e4ba78b23d2f5bfbba030</td>
+                                                <td><button class="btn btn-link block_id px-0">显示</button><span class="d-none">126456954748</span></td>
+                                                <td>
+                                                    <div class=" inputclickblock">
+                                                        <span class="inputclick-val"></span><i class="iconfont iconicon_xie1 fc-bff"></i>
+                                                        <div class="inputclick d-none">
+                                                            <input type="text" class="form-control form-control-sm mb-2" id="inputclick_value">
+                                                            <button type="button" class="btn btn-primary btn-sm enter-input">确定</button>
+                                                            <button type="button" class="btn btn-light btn-sm out-input">取消</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>2019-03-27 16:57:30 </td>
+                                                <td><button class="btn btn-link px-0" data-target="#delete" data-toggle="modal">删除</button> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex justify-content-between pt-3 pl-3">
+                                    <ul class="mr-auto"></ul>
+                                    <ul class="list-inline form-inline px-2">
+                                        <li class="list-inline-item">每页显示</li>
+                                        <li>
+                                            <select name="" id="" class="form-control form-control-sm">
+                                    <option value="">10</option>
+                                    <option value="">20</option>
+                                    <option value="">30</option>
+                                    <option value="">40</option>
+                                  </select>
+                                        </li>
+                                    </ul>
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">2
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">&gt;</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">删除</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 py-5">
+                        <div class="form-row">
+                            <div class="col-1">
+                                <i class="iconfont iconwarning color-orange fs-30"></i>
+                            </div>
+                            <div class="col">
+                                <div>您是否确认要删除该AccessKey: b9abe97c301e4ba78b23d2f5bfbba030？请确保该Access Key已停用，否则相关应用将无法正常运行。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary">确定</button>
+                    <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js"></script>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.22.1/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.1.0/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+    <script src="https://cdn.bootcss.com/decimal.js/10.0.1/decimal.min.js"></script>
+    <script src="../js/lib/jQuery.Pinyin-min.js"></script>
+    <script src="../js/lib/datepicker.all.js"></script>
+    <script src="../js/app.js"></script>
+    <!-- <script src="js/router.js "></script> -->
+    <script src="../js/rule.js"></script>
+    <script src="../js/temp.js"></script>
+    <script src="../js/region.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/comp.js"></script>
+    <script src="../js/safety_certificate.js"></script>
+
+    <script>
+        $(".addlist").click(function() {
+            let temp = ` <tr>
+                  <td>b9abe97c301e4ba78b23d2f5bfbba030</td>
+                  <td><button class="btn btn-link block_id p-0">显示</button><span class="d-none">126456954748</span></td>
+                  <td>
+                    <div class=" inputclickblock">
+                        <span class="inputclick-val"></span><i class="iconfont iconicon_xie1 fc-bff"></i>
+                        <div class="inputclick d-none">
+                            <input type="text" class="form-control form-control-sm mb-2" id="inputclick_value">
+                            <button type="button" class="btn btn-primary btn-sm enter-input">确定</button>
+                            <button type="button" class="btn btn-light btn-sm out-input">取消</button>
+                        </div>
+                    </div>
+                    </td>
+                  <td>2019-03-27 16:57:30 </td>
+                  <td><button class="btn btn-link px-0" data-target="#delete" data-toggle="modal">删除</button> </td>
+              </tr>`
+            if ($(".mytb tbody tr").length <= 20) {
+                $(".mytb tbody").append(temp)
+                addclickblockbtn();
+                addclickblockinput();
+            } else {
+                this.disabled = true
+            }
+        })
+
+        const addclickblockbtn = function() {
+            $(".block_id").click(function() {
+                $(this).addClass("d-none");
+                $(this).parent().children("span").removeClass("d-none")
+            })
+        }
+        addclickblockbtn();
+        const addclickblockinput = function() {
+            $(".iconicon_xie1").click(function() {
+                $(".inputclick").addClass("d-none");
+                $(this).siblings(".inputclick").removeClass("d-none");
+            })
+            $(".enter-input").click(function() {
+                $(this).parent().siblings(".inputclick-val").html($(this).siblings("#inputclick_value").val());
+                $(".inputclick").addClass("d-none");
+            })
+            $(".out-input").click(function() {
+                $(".inputclick").addClass("d-none");
+            })
+        }
+        addclickblockinput();
+    </script>
+</body>
+
+</html>

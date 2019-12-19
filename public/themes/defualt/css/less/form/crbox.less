@@ -1,0 +1,218 @@
+.checkbox,
+.radio {
+    .mgt;
+    .mgb;
+}
+//
+.vba-ck+label,
+.vba-rd+label {
+    position: relative;
+    padding-left: 25px;
+    height: 20px;
+    display: block;
+    &:after {
+        .trs(@t:.2s);
+        content: "";
+        position: absolute;
+        border: 1px solid #ccc;
+        left: 0;
+        top: 3px;
+        width: 14px;
+        height: 14px;
+        display: block;
+    }
+    &:before {
+        .trs(@t:.2s);
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 3px;
+        width: 8px;
+        height: 8px;
+        background: #ccc;
+    }
+}
+.vba-ck+label:hover,
+.vba-rd+label:hover {
+    &:after {
+        border-color: @ces;
+    }
+}
+.vba-ck:checked+label,
+.vba-rd:checked+label {
+    border-color: @ces;
+    &:before {
+        background: @ces;
+    }
+    &:after {
+        border-color: @ces;
+    }
+}
+.vba-ck[disabled="disabled"]+label,
+.vba-rd[disabled="disabled"]+label {
+    cursor: not-allowed;
+    &:after {
+        border-color: #ccc;
+    }
+}
+.vba-ck,
+.vba-rd {
+    display: none;
+}
+.vba-chekbox,
+.vba-ridbox {
+    margin-right: 15px;
+    .form-inline & {
+        .pdl(ceil(1.6*@mpb))!important;
+    }
+    td &,
+    th & {
+        .mg(0);
+        .pdl(0);
+    }
+}
+//
+.vba-rd+label {
+    cursor: pointer;
+    &:after {
+        border-radius: 10px;
+    }
+    &:before {
+        border-radius: 6px;
+    }
+}
+//
+.checkbox,
+.radio {
+    .mgb;
+    &.inline {
+        .vba-ck+label,
+        .vba-rd+label {
+            display: inline-block;
+        }
+    }
+}
+.toggle {
+    input[type="checkbox"]& {
+        display: none;
+    }
+    &-label {
+        .mgr(ceil(@mpb/2));
+    }
+    &+&-round {
+        display: inline-block;
+        position: relative;
+        width: ceil(3*@mpb);
+        height: ceil(1.2*@mpb);
+        border-radius: ceil(1.2*@mpb/2);
+        background-color: @cgy1;
+        .trs;
+        vertical-align: middle;
+        cursor: pointer;
+        &:before {
+            content: "";
+            display: block;
+            width: ceil(1.5*@mpb);
+            height: ceil(1.5*@mpb);
+            position: absolute;
+            background-color: @cwh;
+            .bdr;
+            border-radius: 2*@mpb;
+            left: 0;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+            -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+            .trs(@t:.2s);
+        }
+    }
+    &:checked+&-round {
+        background-color: @ces;
+        &:before {
+            left: ceil(1.5*@mpb);
+        }
+        .danger& {
+            background-color: @cre;
+        }
+        .success& {
+            background-color: @cgr;
+        }
+        .warning& {
+            background-color: @cor;
+        }
+    }
+}
+//
+.vba-check {
+    .list-inline;
+    .mgb(0);
+    input[type="checkbox"],
+    input[type="radio"] {
+        display: none;
+    }
+    input+label {
+        display: inline-block;
+        .bdr;
+        .mgb(0);
+        .pd(ceil(@mpb*0.4) ceil(1.5*@mpb));
+        .trs;
+        cursor: pointer;
+        position: relative;
+        min-height: 38px;
+        line-height: 22px;
+        &:hover {
+            border-color: @ces;
+        }
+    }
+    input:checked+label {
+        border-color: @ces;
+        border-width: 2px;
+        &:before {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 20px solid @ces;
+            border-left: 20px solid transparent;
+            z-index: 2;
+        }
+        &:after {
+            content: "\e63d";
+            right: -3px;
+            bottom: 1px;
+            width: @mpb;
+            height: @mpb;
+            color: @cwh;
+            .iconfont;
+            position: absolute;
+            z-index: 3;
+            top: 19px;
+            .fs(12px);
+        }
+    }
+    &.has-info {
+        > li {
+            display: block;
+            .mgb(ceil(@mpb/2));
+            label {
+                min-width: @mpb*10;
+                .tac;
+            }
+        }
+        li+li{
+            .mgt;
+        }
+        .info {
+            display: inline-block;
+            .mgb(0);
+            .pdl(ceil(@mpb/2));
+        }
+    }
+}

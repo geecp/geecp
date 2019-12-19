@@ -1,0 +1,219 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t bg-white">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto mb-0 form-inline">
+        <li class="list-inline-item border-right">
+          <a href="{:url('index/Ticket/list')}" class="px-3">&lt返回 </a>
+        </li>
+        <li class="list-inline-item px-3">
+          <span class="fs-16">工单详情</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="text-right">
+      {if $info['status'] < 4}
+      <button class="btn btn-primary" type="button" onclick="confirms('{$_GET.id}')">确认完成</button>
+      <button class="btn btn-secondary ml-3" type="button" onclick="cancel('{$_GET.id}')">撤销工单</button>
+      {/if}
+      <button class="btn btn-danger ml-3" type="button" onclick="del('{$_GET.id}')">删除工单</button>
+    </div>
+    <div class="cont-box col-6">
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-2">工单类型：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.type}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-2">工单状态：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.tStatus}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-2">工单标题：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.title}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-2">问题描述：</label>
+          <div class="col">
+            <div class="form-control-sm form-control-plaintext">{$info.content}</div>
+          </div>
+        </div>
+      </div>
+      {if $info.imgs}
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-2">附加文件：</label>
+          <div class="col">
+            <img src="{$info.imgs}" style="max-width:200px;max-height: 200px;margin-top: 15px;display: block;" />
+          </div>
+        </div>
+      </div>
+      {/if}
+    </div>
+    <hr />
+    <div class="cont-box form">
+      <div class="page-header">
+        <h4>补充信息</h4>
+      </div>
+      <input type="hidden" name="tid" value="{$_GET['id']}">
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <div class="col-6">
+            <div class="form-control form-control-sm content" name="content" data-name="content" contenteditable="true"
+              style="height: 100px;overflow: auto;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <div class="col-6">
+            <div class="row file-list">
+              <div class="col">
+                <input type="file" id="file" class="upfile" data-rule=".jpg,.png,.gif" data-size="2" data-width="200px"
+                  data-height="200px" autocomplete="off">
+                <input type="hidden" id="imgs" name="imgs" value="" autocomplete="off">
+                <p class="help-block">请上传 ".jpg"、".png"、".gif" 并且大小不超过2M 的图片文件</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group form-row">
+          <div class="col p-1">
+            <button class="btn btn-primary sub">提交</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="cont-box logs">
+      <div class="page-header">
+        <h4>沟通记录</h4>
+      </div>
+      {if !empty($log)}{foreach name="log" item="v"}
+      <div class="media p-3">
+        <div class="media-left mr-3">
+            {if $v['fromid'] === session('_userInfo')['id']}
+            <img src="__THEMES__/defualt/img/self.png" style="width: 60px;height: 60px;" />
+            {else /}
+            <img src="__THEMES__/defualt/img/qd.png" style="width: 60px;height: 60px;" />
+            {/if}
+        </div>
+        <div class="media-body">
+          <div class="infos mb-3">
+            {if $v['fromid'] === session('_userInfo')['id']}
+            <span>自己</span>
+            {else /}
+            <span>客服</span>
+            {/if}
+            <span class="datetime text-secondary">{$v.create_time}</span>
+          </div>
+          <div class="cont mb-3">
+            {$v.content}
+          </div>
+          <div class="affixs">
+            {if $v.imgs}
+            <img src="{$v.imgs}" style="max-width: 200px;max-height: 200px;" />
+            {/if}
+          </div>
+        </div>
+      </div>
+      {/foreach}{/if}
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<style>
+  .logs .media+.media {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+  }
+</style>
+<script>
+  callEditor();
+  $('.upfile').change(function () {
+    let tfile = $(this),
+      imgurl = '',
+      formdatas = new FormData(),
+      suffix = tfile[0].files[0].name.substr(tfile[0].files[0].name.lastIndexOf("."));
+    if (tfile.data('rule').indexOf(suffix) < 0) {
+      alert('文件类型不符合要求');
+      return false;
+    }
+    if ((tfile[0].files[0].size / 1024 / 1024) >= Number(tfile.data('size'))) {
+      alert('图片尺寸大于2M');
+      return false;
+    }
+    formdatas.append('file', tfile[0].files[0]);
+    ajax('/uploadImg', formdatas, 'post', true).then(e => {
+      if (e.status == 200) {
+        tfile.siblings('[name="imgs"]').val(e.data);
+        if (tfile.next().prop('nodeName') == 'IMG') {
+          tfile.next().attr('src', e.data);
+          return;
+        }
+        tfile.after(
+          `<img src="${e.data}" style="max-width:${tfile.data('width')};max-height: ${tfile.data('height')};margin-top: 15px;display: block;"/>`
+        );
+        return;
+      }
+      alert(e.msg);
+    });
+  });
+  $('.sub').click(function () {
+    let names = document.querySelectorAll('.form [name]'),
+      vals = {};
+    names = [].slice.call(names);
+    names.map((e) => {
+      let name = e.name && e.name || $(e).data("name");
+      console.log(name)
+      vals[name] = e.value && e.value || $(e).html();
+    });
+    ajax('{:url("index/Ticket/reply")}', vals, 'post').then(e => {
+      if (e.status === 200) {
+        alert(e.msg);
+        window.location.reload();
+      } else {
+        alert(e.msg);
+      }
+    });
+  });
+  function confirms(id){
+    if (confirm('确认完成该工单吗?')) {
+      ajax("{:url('index/Ticket/confirm')}?id="+id).then((e) => {
+        window.location.href = "{:url('index/Ticket/details')}?id=" + id;
+      })
+    }
+  }
+  function cancel(id){
+    if (confirm('确定要撤销该工单吗?')) {
+      ajax("{:url('index/Ticket/cancel')}?id="+id).then((e) => {
+        window.location.href = "{:url('index/Ticket/details')}?id=" + id;
+      })
+    }
+  }
+  function del(id){
+    if (confirm('确定要删除该工单吗?')) {
+      ajax("{:url('index/Ticket/del')}?id="+id).then((e) => {
+        window.location.href = "{:url('index/Ticket/list')}";
+      })
+    }
+  }
+</script>
+{/block}

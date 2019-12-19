@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg home-header ">
+    <a class="navbar-brand" href="#">
+            <img src="{$basicInfo.logo1}" alt="" width="100px">
+        <!-- <img src="__THEMES__/defualt/img/geestack.png" alt="GEESTACK" style="max-height:30px;"> -->
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hideNav" aria-controls="hideNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse pl-3" id="hideNav">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <!--导航菜单部分-->
+        <ul class="navbar-nav nav_bar">
+            <li class="nav-item pt-2 mr-4" id="z-search">
+                <div class="btn-group w-100 mt-1">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control fs-12 form-control-sm bg-transparent border border-right-0">
+                        </div>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-light border border-left-0 pt-0 bg-transparent iconfont icon-icon_sousuo-xian mr-0 linkblue zfs-18 font-weight-bold"></button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li  class="nav-item pt-3 mr-2">
+                <span><a href="#">备案</a></span>
+            </li>
+            <li  class="nav-item pt-3 mr-2">
+                <span><a href="#">论坛</a></span>
+            </li>
+            <li  class="nav-item pt-3 mr-2">
+                <span><a {if !$userinfo} href="/console" {else/} href="/login" {/if}>管理控制台</a> </span>
+            </li>
+            {if !$userinfo}
+            <li  class="nav-item pt-3 mr-4 login-router">
+                <a href="/login">登录</a><a href="/register">注册</a>
+            </li>
+            {else/}
+            <li class="nav-item position-relative pt-2 zfs-12 mr-4" id="z-usercenter">
+                <div class="btn-group w-100 position-relative">
+                    <button type="button" class="btn navname pt-0 pr-3">
+                        <div class="bg-dark zrounded-circle my-1">
+                          <span class="zfs-12 text-white">{$userinfo.name|strFirst}</span>
+                        </div>
+                    </button>
+                    <span class="iconfont icon-icon_jiantou-xia zfs-10 font-weight-bold position-absolute" style="top: 10px;left: 50px"></span>
+                    <div class="position-absolute bg-white py-0 border-0" id="z-usercenter-content">
+                        <div>
+                            <div class="d-flex mx-0 mt-0 py-2 px-3" style="background-color: #F6F7FB">
+                                <div class="zbg-lightblue zrounded-circle my-1">
+                                    <span class="zfs-12 text-white">{$userinfo.name|strFirst}</span>
+                                </div>
+                                <a href="../iam/user_overview.html" class="pt-2 pl-1 mr-auto linkblue"><span>{$userinfo.name}</span></a>
+                                <div class="pt-1">
+                                    <a href="javascript:;" data-toggle="tooltip" class="iconfont icon-idcard zfs-18 {$userinfo.approve == '0'?'ztext-unbind':'text-primary'}" title="{$userinfo.approve == '0'?'未实名认证':'已实名认证'}"></a>
+                                    <a href="javascript:;" class="px-1 iconfont icon-mobile zfs-18 {$userinfo.is_phone == '0'?'ztext-unbind':'text-primary'}" data-toggle="tooltip" title="{$userinfo.is_phone == '0'?'手机未绑定':'手机已绑定'}"></a>
+                                    <a href="javascript:;" data-toggle="tooltip" title="{$userinfo.is_email == '0'?'邮箱未绑定':'邮箱已绑定'}" class="iconfont icon-mail zfs-18 {$userinfo.is_email == '0'?'ztext-unbind':'text-primary'}"></a>
+                                </div>
+                            </div>
+                            <div>
+                                <ul class="list-inline d-flex mt-2 mb-2 ml-3">
+                                    <li class="list-inline-item mr-auto">
+                                        <a href="../iam/user_overview.html" class="linkblue">
+                                            <span class="iconfont icon-paichandingdan mr-2 zfs-18"></span><span>用户中心</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item mr-4">
+                                        <a href="../iam/accesslist.html" class="linkblue   broder-0 myborder-left-0">
+                                            <span class="iconfont icon-Security-SCS mr-2 zfs-18"></span><span>安全认证</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="list-inline d-flex mt-4 mb-2 ml-3">
+                                    <li class="list-inline-item mr-auto">
+                                        <a href="#" class="linkblue">
+                                            <span class="iconfont icon-gongdanliebiao mr-2 zfs-18"></span><span>多用户访问控制</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item mr-5">
+                                        <a href="/logout" class="linkblue">
+                                            <span class="iconfont icon-roundclose mr-2 zfs-18"></span><span>退出</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/if}
+        </ul>
+    </div>
+</nav>

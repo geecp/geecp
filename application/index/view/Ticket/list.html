@@ -1,0 +1,93 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2">
+          <h4>工单列表</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="pb-3">
+        <div class="form-row m-0">
+          <ul class="list-inline mr-auto m-0 form-inline">
+            <li class="list-inline-item"><a href="{:URL('index/Ticket/add')}" class="btn btn-primary btn-sm"><i
+                  class="iconfont icon-icon_tianjia"></i> 创建工单</a></li>
+            <li class="list-inline-item">
+              <!-- <div>
+                <select name="" id="" class="form-control form-control-sm">
+                  <option value="">适用产品:全部</option>
+                  <option value="">通用</option>
+                  <option value="">应用引擎专业版 BAEPRO</option>
+                  <option value="">云服务器 BCC</option>
+                  <option value="">关系型数据库 RDS</option>
+                  <option value="">负载均衡 BLB</option>
+                  <option value="">云磁盘 CDS</option>
+                  <option value="">简单缓存服务 SCS</option>
+                  <option value="">百度MapReduce BMR</option>
+                  <option value="">百度消息服务 KAFKA</option>
+                </select>
+              </div> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="ml-nge">
+        <div>
+          <table class="table table-border">
+            <thead class="bg-fB p-2">
+              <tr class="font-weight-light">
+                <th class="px-3">工单编号</th>
+                <th>工单标题</th>
+                <th>工单类型</th>
+                <th>工单状态</th>
+                <th>提交时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list) && !empty($list[0])} {foreach name="list" item="var"}
+              <tr>
+                <td>
+                  <a href="{:URL('index/Ticket/details',['id'=>$var['id']])}">{$var.num}</a>
+                </td>
+                <td>{$var.title}</td>
+                <td>{$var.type}</td>
+                <td>{$var.tStatus}</td>
+                <td>{$var.create_time}</td>
+                <td><a href="{:URL('index/Ticket/details',['id'=>$var['id']])}">查看</a> <a href="javascript:;" onclick="del('{$var.id}')">删除</a> </td>
+              </tr>
+              {/foreach}{else /}
+              <tr>
+                <td colspan="6" class="text-center">暂无数据</td>
+              </tr>
+               {/if}
+
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between pt-3 pl-3">
+          <ul class="mr-auto"></ul>
+          <div class="pagination mb-0">
+            {$list->render()}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+    function del(id){
+      if (confirm('确定要删除该工单吗?')) {
+        ajax("{:url('index/Ticket/del')}?id="+id).then((e) => {
+          window.location.href = "{:url('index/Ticket/list')}";
+        })
+      }
+    }
+</script>
+{/block}

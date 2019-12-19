@@ -1,0 +1,82 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header clearfix">
+                    <div class="box-tools pull-left form-inline">
+                        <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+                        <button class="btn btn-primary btn-sm serchBtn">查询</button>
+                        <div class="pull-right">
+                            <a href="{:url('admin/Routes/add')}" class="btn btn-primary btn-sm">新增路由</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="tableData" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>导航名称</th>
+                                <th>导航标识</th>
+                                <th>是否展示</th>
+                                <th>默认主菜单展示</th>
+                                <th>所属产品类型</th>
+                                <th>路由图标</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if !empty($list)} {foreach name="list" item="v"}
+                            <tr data-id="{$v.id}">
+                                <td>{$v.id}</td>
+                                <td><a href="{:url('admin/Routes/index',['fid'=>$v['id']])}">{$v.title}</a></td>
+                                <td>{$v.code}</td>
+                                <td>{$v.is_show?'是':'否'}</td>
+                                <td>{$v.is_customize?'是':'否'}</td>
+                                <td>{$v.pro_type}</td>
+                                <td>{$v.icon}</td>
+                                <td>{$v.create_time}</td>
+                                <td>
+                                    <a href="{:url('admin/Routes/add',['id'=>$v['id'],'fid'=>$v['f_id']])}">编辑</a>
+                                    <a href="javascript:;" onclick="del($(this))">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach} {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script>
+    function del(t) {
+        if (confirm('确认要删除这个路由吗？')) {
+            ajax("{:url('admin/Routes/del')}", {
+                id: t.parents('tr').data('id')
+            }, 'delete').then((e) => {
+                if (e.status == 200) {
+                    t.parents('tr').remove();
+                } else {
+                    alert(e.msg);
+                }
+            })
+        }
+    }
+
+    $('#tableData').DataTable({
+        'paging': true,
+        'lengthChange': false,
+        'searching': false,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'stateSave': true,
+        'deferRender': true,
+        'processing': true,
+    });
+</script>
+{/block}

@@ -1,0 +1,194 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t pb-0" style="background-color: #fff">
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto  m-0">
+                <li class="list-inline-item p-2" style="border-bottom:3px solid #108cee;">
+                    <h4 style="color: #108cee;">VPS管理</h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="pb-3">
+              {if $userinfo['realverify'] != 2}
+              <div class="bg-orange p-2 mb-3">
+                <h5 class="mb-0 color-orange fs-12">您的账号未通过实名认证，<a href="{:url('index/Iam/overview')}">实名认证</a>之后才能购买该产品</h5>
+              </div>
+              {/if}
+                <div class="form-row m-0">
+                    <ul class="list-inline mr-auto m-0 form-inline">
+                        <!-- <li class="list-inline-item">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-addon">
+                                    <select name="" id="" class="form-control form-control-sm">
+                                    <option value="">服务器名</option>
+                                    <option value="">IP</option>
+                                  </select>
+                                </div>
+                                <input class="form-control" placeholder="请输入关键字" type="text">
+                            </div>
+                        </li>
+                        <li class="list-inline-item">
+                            <button class="btn btn-primary btn-sm">搜索</button>
+                        </li> -->
+                    </ul>
+                    <ul class="list-inline m-0 form-inline">
+                        <li class="list-inline-item">
+                          {if $userinfo['realverify'] != 2}
+                            <button class="btn btn-dark text-white btn-sm disabled" disabled>创建VPS</button>
+                            {else /}
+                            <a href="{:url('index/Vps/add')}" class="btn btn-primary text-white btn-sm">创建VPS</a>
+                          {/if}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ml-nge">
+                <div>
+                    <table class="table table-border">
+                        <thead class="bg-fB p-2">
+                            <tr class="font-weight-light">
+                                <th>型号</th>
+                                <th>服务器名</th>
+                                <th>分配IP</th>
+                                <th>开通日期</th>
+                                <th>到期日期</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {if !empty($list[0])}
+                            {foreach name="list" item="v"} {if $v} {if isset($v['name'])}
+                            <tr data-id="{$v.id}" data-pro_id="{$v.pro_id}" data-name="{$v.name}" data-proid="{$v.product_id}" data-plug_name="{$v.plug_name}">
+                                <td>{$v.product_type}</td>
+                                <td>{$v.name}</td>
+                                <td>{$v.ip}</td>
+                                <td>{$v.create_time}</td>
+                                <td>{$v.end_time|date='Y-m-d H:i:s',###}</td>
+                                <td>{$v.status}</td>
+                                <td>
+                                    <!-- <a href="javascript:;">编辑</a> -->
+                                    <a href="#changepw" data-toggle="modal">修改密码</a>
+                                    <a href="{:url('index/Vps/manager',['vpsname'=>$v['name'],'password'=>$v['password'],'plug_name'=>$v['plug_name']])}" target="_blank">控制面板</a>
+                                    <a href="{:url('index/Vps/add',['id'=>$v['id'],'name'=>$v['name'],'pro_id'=>$v['product_id'],'type'=>'renew','plug_name'=>$v['plug_name']])}">续费</a>
+                                    <a href="{:url('index/Vps/add',['id'=>$v['id'],'name'=>$v['name'],'pro_id'=>$v['product_id'],'type'=>'update','plug_name'=>$v['plug_name']])}">升级</a> {:time() >= $v['end_time'] ? '<a href="javascript:;" onclick="release($(this))">释放</a>':
+                                    ''} </td>
+                            </tr>
+                            {else/}
+                            <tr data-id="{$v.id}">
+                                <td colspan="6">该资源已被删除</td>
+                                <td>
+                                    <a href="javascript:;" onclick="del($(this))">删除</a>
+                                </td>
+                            </tr>
+                            {/if} {/if} {/foreach}
+                            {else /}
+                            <tr>
+                                <td colspan="7" class="text-center">暂无数据</td>
+                            </tr>
+                            {/if}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between pt-3 pl-3">
+                    <ul class="mr-auto"></ul>
+                    <div class="pagination mb-0">
+                        {$list->render()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'}
+<div class="modal fade" id="changepw" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改VPS密码</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="vpsname" class="col-sm-3 col-form-label-sm">云服务器名</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly disabled class="form-control-plaintext form-control-sm disabled" id="vpsname" name="vpsname">
+                        <input type="hidden" readonly disabled class="form-control-plaintext form-control-sm disabled" id="pro_id" name="pro_id">
+                        <input type="hidden" readonly disabled class="form-control-plaintext form-control-sm disabled" id="pro_id" name="plug_name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label-sm">输入新密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control form-control-sm" id="password" name="password">
+                        <span class="help-block">密码必须8位以上,字母+数字</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="vpassword" class="col-sm-3 col-form-label-sm">确认新密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control form-control-sm" id="vpassword" name="vpassword">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-sm btn-primary" onclick="changePwd()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+
+</div>
+{/block} {block name='js'}
+<script>
+    $('[href="#changepw"]').click(function() {
+        $('[name="vpsname"]').val($(this).parents('tr').data('name'));
+        $('[name="pro_id"]').val($(this).parents('tr').data('proid'));
+        $('[name="plug_name"]').val($(this).parents('tr').data('plug_name'));
+    });
+
+    function changePwd() {
+        if ($('[name="password"]').val() != $('[name="vpassword"]').val()) {
+            alert('新密码与确认密码不同！');
+            return false;
+        }
+        ajax('{:url("index/Vps/changepass")}', {
+            pro_id: $('[name="pro_id"]').val(),
+            password: $('[name="plug_name"]').val(),
+            vpsname: $('[name="vpsname"]').val(),
+            password: $('[name="password"]').val()
+        }, 'post').then(e => {
+            alert(e.msg);
+            $('#changepw').modal('hide');
+        });
+    }
+
+    function del(item) {
+        if (confirm("您确定要删除该资源吗？")) {
+            ajax('{:url("index/Vps/del")}', {
+                id: item.parents('tr').data('id')
+            }, 'delete').then(e => {
+                item.parents('tr').remove();
+            });
+        }
+    }
+
+    function release(item) {
+        if (confirm("您确定要释放该资源吗？")) {
+            ajax('{:url("index/Vps/release")}', {
+                id: item.parents('tr').data('id')
+            }, 'delete').then(e => {
+                console.log(e);
+                // item.parents('tr').remove();
+            });
+        }
+    }
+</script>
+{/block}

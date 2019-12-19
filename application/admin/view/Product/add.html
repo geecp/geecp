@@ -1,0 +1,275 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">{$info?'修改':'新增'}产品</h3>
+    </div>
+    <div class="box-body">
+      <div class="form">
+        <div class="form-group form-type">
+          <label for="type" class="col-sm-2 control-label">产品分类</label>
+          <div class="col-sm-10">
+            <select name="type" id="type" class="form-control">
+              {if !empty($classlist)}
+              {foreach name="classlist" item="v"}
+              <option value="{$v.id}" {$info?$info['type']==$v['id']?'selected':'':''}>{$v.title}</option>
+              {/foreach}
+              {/if}
+            </select>
+            <input type="hidden" name="id" value="{$info?$info['id']:''}">
+          </div>
+        </div>
+        <div class="form-group form-name">
+          <label for="name" class="col-sm-2 control-label">产品名称</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name="name" placeholder="请输入产品名称"
+              value="{$info?$info['name']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-group_id">
+          <label for="group_id" class="col-sm-2 control-label">产品分组</label>
+          <div class="col-sm-10">
+            <select name="group_id" id="group_id" class="form-control">
+              {if !empty($groupList)}
+              {foreach name="groupList" item="v"}
+              <option value="{$v.id}" {$info?$info['group_id']==$v['id'] ?'selected':'':''}>{$v.name}</option>
+              {/foreach}
+              {/if}
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-describe">
+          <label for="describe" class="col-sm-2 control-label">产品描述</label>
+          <div class="col-sm-10">
+            <textarea name="describe" id="describe" class="form-control" cols="30" rows="10"
+              placeholder="请输入产品描述">{$info?$info['describe']:''}</textarea>
+          </div>
+        </div>
+        <div class="form-group form-update_list {$info?$info['type']!='8'?'':'hidden':''}">
+          <label for="update_list" class="col-sm-2 control-label" multiple>可选升级套餐</label>
+          <div class="col-sm-10">
+            <select name="update_list" id="update_list" class="form-control" multiple style="height: 200px;">
+              {if !empty($updatelist)}
+              {foreach name="updatelist" item="v"}
+              <option value="{$v.id}" {:in_array($v['id'],explode(',',$info['update_list']))?'selected':''}>{$v.name}
+              </option>
+              {/foreach}
+              {/if}
+            </select>
+            <span class="help-block">按住 Ctrl+Click 选择</span>
+          </div>
+        </div>
+        <div class="form-group form-email_model {$info?$info['type']!='8'?'':'hidden':''}">
+          <label for="email_model" class="col-sm-2 control-label">邮件模板ID</label>
+          <div class="col-sm-10">
+            <select name="email_model" id="email_model" class="form-control">
+              <option value="0">不使用邮件</option>
+              {if !empty($modelList)}
+              {foreach name="modelList" item="v"}
+              <option value="{$v.id}" {$info?$info['email_model']==$v['id'] ?'selected':'':''}>{$v.name}</option>
+              {/foreach}
+              {/if}
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-label">
+          <label for="label" class="col-sm-2 control-label">产品标签</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="label" name="label" placeholder="请输入产品标签"
+              value="{$info?$info['label']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-month">
+          <label for="month" class="col-sm-2 control-label">月价格</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="month" name="month" placeholder="请输入月价格"
+              value="{$info?$info['month']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-quarter">
+          <label for="quarter" class="col-sm-2 control-label">季度价格</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="quarter" name="quarter" placeholder="请输入季度价格"
+              value="{$info?$info['quarter']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-semestrale">
+          <label for="semestrale" class="col-sm-2 control-label">半年价格</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="semestrale" name="semestrale" placeholder="请输入半年价格"
+              value="{$info?$info['semestrale']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-years">
+          <label for="years" class="col-sm-2 control-label">年价格</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="years" name="years" placeholder="请输入年价格"
+              value="{$info?$info['years']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-biennium">
+          <label for="biennium" class="col-sm-2 control-label">两年价格</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="biennium" name="biennium" placeholder="请输入两年价格"
+              value="{$info?$info['biennium']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-triennium">
+          <label for="triennium" class="col-sm-2 control-label">三年价格</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="triennium" name="triennium" placeholder="请输入三年价格"
+              value="{$info?$info['triennium']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-sort">
+          <label for="sort" class="col-sm-2 control-label">产品排序</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="sort" name="sort" placeholder="请输入产品排序"
+              value="{$info?$info['sort']:''}" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group form-plug {$info?$info['type']!='8'?'':'hidden':''}">
+          <label for="plug" class="col-sm-2 control-label">插件接口</label>
+          <div class="col-sm-10">
+            <select name="plug" id="plug" class="form-control">
+              <option value="0">不使用插件</option>
+              {if !empty($addonslList)}
+              {foreach name="addonslList" item="v"}
+              <option value="{$v.id}" {$info?$info['plug']==$v['id'] ?'selected':'':''}>{$v.title} （接口范围：{$v.range} /
+                版本：{$v.version} / 作者：{$v.author}）</option>
+              {/foreach}
+              {/if}
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group form-added {$info?$info['type']=='8'?'':'hidden':''}">
+          <label for="sort" class="col-sm-2 control-label">可使用的增值服务</label>
+          <div class="col-sm-10">
+            {if !empty($added)}
+            {foreach name="added" item="v"}
+            <label class="show mr-3">
+              <input type="checkbox" name="added" class="minimal" value="{$v.id}" {$info?in_array($v['id'],explode(",",$info['added']))?'checked':'':''}>
+              {$v.title}
+            </label>
+            {/foreach}
+            {/if}
+          </div>
+        </div>
+        <div id="plugConfig">
+          {if $info['plug_config']} {$plug_config} {/if}
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary sub">提交</button>
+            <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<style>
+  .icheckbox_minimal-blue {
+    vertical-align: top;
+  }
+</style>
+<script>
+  $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue',
+    radioClass: 'iradio_minimal-blue'
+  })
+  $('.sub').click(function () {
+    let names = document.querySelectorAll('.form-group [name]'),
+      vals = {};
+    names = [].slice.call(names);
+    names.map((e) => {
+      if ($(e).attr('type') == 'checkbox') {
+        if ($(e).prop('checked')) {
+          if (vals[e.name]) {
+            vals[e.name] += ',' + $(e).val();
+          } else {
+            vals[e.name] = $(e).val();
+          }
+        }
+      } else {
+        vals[e.name] = $(e).val();
+      }
+    });
+    ajax('{:url("admin/Product/addAuth")}', vals, 'post').then(e => {
+      if (e.status === 200) {
+        alert(e.msg);
+        location.href = "{:url('admin/Product/list')}";
+      } else {
+        alert(e.msg);
+      }
+    });
+  });
+  $('[name="type"]').change(function () {
+    if ($(this).val() == '8') {
+      $('.form-group.form-update_list,.form-group.form-email_model,.form-group.form-plug').addClass('hidden');
+      $('.form-group.form-added').removeClass('hidden');
+    } else {
+      $('.form-group').removeClass('hidden');
+      $('.form-group.form-added').addClass('hidden');
+    }
+  });
+  $('[name="plug"]').change(function () {
+    let t = $(this);
+    if (t.val() && t.val() != 0) {
+      ajax('{:url("admin/Product/getPlugConfig")}?id=' + t.val()).then(e => {
+        let data = JSON.parse(e.data)
+        html = '';
+        for (let i in data) {
+          switch (data[i].type) {
+            case 'text':
+              html += `<div class="form-group">
+                                  <label for="${i}" class="col-sm-2 control-label">${i}</label>
+                                  <div class="col-sm-10">
+                                      <input type="${data[i].type}" class="form-control" id="${i}" name="${i}" placeholder="请输入${i}" value="${data[i].value}" autocomplete="off">
+                                  </div>
+                              </div>`;
+              break;
+            case 'password':
+              html += `<div class="form-group">
+                                  <label for="${i}" class="col-sm-2 control-label">${i}</label>
+                                  <div class="col-sm-10">
+                                      <input type="${data[i].type}" class="form-control" id="${i}" name="${i}" placeholder="请输入${i}" value="${data[i].value}" autocomplete="off">
+                                  </div>
+                              </div>`;
+              break;
+            case 'select':
+              let opt = '';
+              data[i].opt.map(e => {
+                opt += `<option value="${e.value}" ${e.sel?'selected':''}>${e.name}</option>`;
+              });
+              html += `<div class="form-group">
+                                  <label for="${i}" class="col-sm-2 control-label">${i}</label>
+                                  <div class="col-sm-10">
+                                    <select name="${i}" id="${i}" class="form-control">
+                                      ${opt}
+                                    </select>
+                                  </div>
+                              </div>`;
+              break;
+            case 'textarea':
+              html += `<div class="form-group">
+                                  <label for="${i}" class="col-sm-2 control-label">${i}</label>
+                                  <div class="col-sm-10">
+                                    <textarea name="${i}" id="${i}" class="form-control" cols="30" rows="10" placeholder="请输入${i}">${data[i].value}</textarea>
+                                  </div>
+                              </div>`;
+              break;
+          }
+        }
+        $('#plugConfig').html(html);
+      });
+    } else {
+      $('#plugConfig').html('');
+    }
+
+  });
+</script>
+{/block}

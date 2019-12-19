@@ -1,0 +1,138 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline m-0">
+        <li class="list-inline-item py-2">
+          <div>
+            <span class="iconfont icon-icon_jiantou-zuo zfs-12 font-weight-bold"></span>
+            <a href="javascript:history.go(-1);" class="text-secondary">返回上一页</a>
+          </div>
+        </li>
+        <li class="list-inline-item py-2 position-absolute" style="left:50%;margin-left:-65px">
+          <h4>购买{$proname}</h4>
+        </li>
+        <li class="list-inline-item">
+          <div class=" form-inline py-1" style="position: absolute;top:15px;right:15px">
+            <div class="fs-12 text-primary ">
+              <span class="steps steps-active pl-2">1</span>
+              <span class="px-1">选择产品</span>
+              <span class="iconfont iconicon_jiantou-you fs-12"></span>
+            </div>
+            <div class="fs-12 text-primary px-2">
+              <span class="steps steps-active pl-2">2</span>
+              <span class="px-1">确认订单</span>
+              <span class="iconfont iconicon_jiantou-you fs-12"></span>
+            </div>
+            <div class="fs-12 px-2">
+              <span class="steps pl-2">3</span>
+              <span class="px-1">在线支付</span>
+              <span class="iconfont iconicon_jiantou-you fs-12"></span>
+            </div>
+            <div class="fs-12">
+              <span class="steps pl-2">4</span>
+              <span class="px-1">支付成功</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="dnsanalysis-server-buy2">
+        <div class="py-2 ml-nge">
+          <div>
+            <table class="table mytb">
+              <thead class="bg-fB p-2">
+                <tr class="font-weight-light">
+                  <th>产品类型</th>
+                  <th>产品名称</th>
+                  <th>配置</th>
+                  <th>数量</th>
+                  <th>时长</th>
+                  <th>单价</th>
+                  <th>计费方式</th>
+                </tr>
+              </thead>
+              <tbody>
+                {foreach name="info" item="v"}
+                <tr>
+                  <td>预付费</td>
+                  <td>{$v.class}</td>
+                  <td>
+                    <?php $describe = explode("|", $v['config']); ?> {foreach name="describe" item="var"} {$var}<br>
+                    {/foreach}
+                    <?php 
+                      if($v['added']){
+                        $addeds = json_decode($v['added'],true);
+                        $g = model('index/GeeServerAdded');
+                        $ginfo = model('index/GeeServerAddedItems');
+                        foreach($addeds as $k=>$vo){
+                          if($vo){
+                            if(strpos($vo,',')){
+                              $val = explode(',',$vo);
+                              // dump($vo);
+                              $gname = $g->where('name = "'.$k.'"')->find()['title'];
+                              $ginfoname = $ginfo->where('id = '.$val[0])->find()['title'];
+                              // dump($ginfoname);
+                              echo $gname.'：'.$val[1].$ginfoname.'<br>';
+                            } else {
+                              // dump($vo);
+                              $gname = $g->where('name = "'.$k.'"')->find()['title'];
+                              $ginfoname = $ginfo->where('id = '.$vo)->find()['title'];
+                              // dump($ginfoname);
+                              echo $gname.'：'.$ginfoname.'<br>';
+                            }
+                          }
+                        }
+                      }
+                    ?>
+                  </td>
+                  <td>{$v.num}</td>
+                  <td>{$v.years}月</td>
+                  <td class="text-danger"><span class="money">{$v.price}</span></td>
+                  <td>包年包月</td>
+                </tr>
+                {/foreach}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- <div class="my-3">
+                            <a href="#" class="mr-2">+激活代金券</a>
+                            <a href="#">代金券管理</a>
+                        </div>
+                        <div>
+                            代金券(<span class="text-danger">0</span>张可用)
+                        </div>
+                        <div class="form-inline">
+                            <div class="mr-4">产品类型：DNS</div>
+                            <select class="form-control form-control-sm">
+                              <option>无可用代金券</option>
+                          </select>
+                        </div> -->
+          </div>
+          <div class="col text-right">
+            <div class="my-2">
+              实付金额：<span class="money text-danger fs-lg totlePrice">{$money}</span>
+            </div>
+            <div class="text-danger my-3">*后付费服务将根据使用情况从账户余额中扣除，请保证有足够的金额。</p>
+              <div class="my-2">
+                <a href="javascript:history.go(-1)" class="btn btn-link btn-sm back">返回修改</a>
+                <a href="{:url('index/Buy/onlinepay',['order'=>$order])}" class="btn btn-primary btn-sm goPay">去支付</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='js'}
+<script>
+</script>
+{/block}

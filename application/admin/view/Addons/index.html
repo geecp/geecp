@@ -1,0 +1,93 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <table class="table table-bordered table-hover tableData">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>插件名称</th>
+                                <th>介绍</th>
+                                <th>开发商</th>
+                                <th>版本</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if !empty($list)} {foreach name="list" item="v"}
+                            <tr>
+                                <td>{$v.id}</td>
+                                <td>{$v.title}</td>
+                                <td>{$v.introduce}</td>
+                                <td>{$v.author}</td>
+                                <td>{$v.version}</td>
+                                <td>{$v.status != 0 ? $v.status == 2 ? '已启用' :'未启用' : '未安装'}</td>
+                                <td>
+                                    {if $v.status == 0}
+                                    <a onclick="install({$v['id']})" href="javascritp:;">安装</a> {else/}
+                                    <a onclick="uninstall({$v['id']})" href="javascritp:;">卸载</a> {if $v.status == 1}
+                                    <a href="{:url('admin/Addons/on',['id'=>$v['id']])}">启用</a> {else/}
+                                    <a href="{:url('admin/Addons/off',['id'=>$v['id']])}">禁用</a> {/if}
+                                    <!-- <a href="{:url('admin/Addons/edit',['id'=>$v['id']])}">配置</a>  -->
+                                    {/if}
+                                </td>
+                            </tr>
+                            {/foreach} {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script>
+    function install(id) {
+        $.ajax({
+            url: "{:url('admin/Addons/install')}?id=" + id,
+            type: "get",
+            success: function(e) {
+                if (e.status == 200) {
+                    window.location.reload();
+                } else {
+                    alert(e.msg);
+                }
+            },
+            error: function(e) {
+
+            }
+        });
+    }
+
+    function uninstall(id) {
+        $.ajax({
+            url: "{:url('admin/Addons/uninstall')}?id=" + id,
+            type: "get",
+            success: function(e) {
+                if (e.status == 200) {
+                    window.location.reload();
+                } else {
+                    alert(e.msg);
+                }
+            },
+            error: function(e) {
+
+            }
+        });
+    }
+    $('.tableData').DataTable({
+        'paging': true,
+        'fixedHeader': true,
+        'lengthChange': false,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'deferRender': true,
+        'processing': true,
+    });
+</script>
+{/block}

@@ -1,0 +1,437 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="row">
+  <div class="col-9 server" style="flex: 1 0 auto;">
+    <div class="cont-box bg-white p-3">
+      <div class="page-header pb-3" style="border-bottom: 1px solid #eee;">
+        <h4 class="mb-0">{$_GET['type'] == 'renew'?'续费':'租用'}物理服务器</h4>
+      </div>
+      <div class="mt-4" id="configs">
+        <input type="hidden" name="id" value="{$_GET['id']}">
+        <!-- <input type="hidden" name="name" value="{$_GET['name']}">
+        <input type="hidden" name="pro_id" value="{$_GET['pro_id']}"> -->
+        {if $_GET['type'] != 'renew'}
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">选择区域</label>
+          <div class="col-8">
+            <div class="rc-group" id="group">
+              {foreach name="group" item="v" key="k"}
+              <input type="radio" name="group" value="{$v.id}" autocomplete="off" id="group{$v.id}" {$k=='0' ? 'checked' : '' }>
+              <label class="rc-group-item" for="group{$v.id}">{$v.name}</label>
+              {/foreach}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">选择配置</label>
+          <div class="col-8 cloudhost-vps-create">
+            <div class="row px-3" id="common-type">
+              {foreach name="prolist" item="v" key="k"} {if $v}
+              <div data-id="{$v.id}"
+                class="col-3 mr-3 mb-3 p-3 vps-buy {if $k==0}vps-selectcolor{else/}vps-unselectcolor{/if}">
+                <ul class="list-unstyled">
+                  <li class="zfs-14 pb-1 border-bottom d-flex w-100">
+                    <span class="mr-auto">{$v.name}</span>
+                  </li>
+                  <?php $describe = explode("|", $v['describe']);?> {foreach name="describe" item="v"}
+                  <li class="mt-2">{$v}</li>
+                  {/foreach}
+                </ul>
+              </div>
+              {/if}
+              {/foreach}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">操作系统</label>
+          <div class="col-8">
+            <div class="rc-group" id="osgroup">
+              {foreach name="oslist" item="v" key="k"}
+              <input type="radio" name="osgroup" value="{$v.id}" data-uname="{$v.uname}" autocomplete="off" id="osgroup{$v.id}" {$k=='0' ? 'checked' : '' }>
+              <label class="rc-group-item" for="osgroup{$v.id}">{$v.title}</label>
+              {/foreach}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">系统版本</label>
+          <div class="col-8">
+            <select name="ostype" id="ostype" class="form-control form-control-sm">
+              {foreach name="ostypelist" item="v" key="k"}
+              <option value="{$v.id}" {$k=='0' ? 'selected': '' }>{$v.title}</option>
+              {/foreach}
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">主机名</label>
+          <div class="col-8">
+            <input type="text" name="name" class="form-control form-control-sm" placeholder="" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">用户名</label>
+          <div class="col-8">
+            <input type="text" name="username" class="form-control form-control-sm" placeholder="" value="{$oslist[0]['uname']}" style="border: none;background: #fff;" readonly />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">密码</label>
+          <div class="col-8">
+            <input type="password" name="password" class="form-control form-control-sm" placeholder="" />
+          </div>
+        </div>
+        <div class="added"></div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">备注</label>
+          <div class="col-8">
+            <textarea class="form-control form-control-sm" name="remake" rows="4"></textarea>
+          </div>
+        </div>
+        {/if}
+        <div class="form-group row">
+          <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">购买时长</label>
+          <div class="col-8">
+            <div class="rc-group" id="purchaseLength">
+              <input type="radio" name="purchaseLength" value="1" autocomplete="off" id="purchaseLength1" checked>
+              <label class="rc-group-item" for="purchaseLength1">1个月</label>
+              <input type="radio" name="purchaseLength" value="2" autocomplete="off" id="purchaseLength2">
+              <label class="rc-group-item" for="purchaseLength2">2</label>
+              <input type="radio" name="purchaseLength" value="3" autocomplete="off" id="purchaseLength3">
+              <label class="rc-group-item" for="purchaseLength3">3</label>
+              <input type="radio" name="purchaseLength" value="4" autocomplete="off" id="purchaseLength4">
+              <label class="rc-group-item" for="purchaseLength4">4</label>
+              <input type="radio" name="purchaseLength" value="5" autocomplete="off" id="purchaseLength5">
+              <label class="rc-group-item" for="purchaseLength5">5</label>
+              <input type="radio" name="purchaseLength" value="6" autocomplete="off" id="purchaseLength6">
+              <label class="rc-group-item" for="purchaseLength6">6</label>
+              <input type="radio" name="purchaseLength" value="7" autocomplete="off" id="purchaseLength7">
+              <label class="rc-group-item" for="purchaseLength7">7</label>
+              <input type="radio" name="purchaseLength" value="8" autocomplete="off" id="purchaseLength8">
+              <label class="rc-group-item" for="purchaseLength8">8</label>
+              <input type="radio" name="purchaseLength" value="9" autocomplete="off" id="purchaseLength9">
+              <label class="rc-group-item" for="purchaseLength9">9</label>
+              <input type="radio" name="purchaseLength" value="12" autocomplete="off" id="purchaseLength12">
+              <label class="rc-group-item" for="purchaseLength12">1年</label>
+              <input type="radio" name="purchaseLength" value="24" autocomplete="off" id="purchaseLength24">
+              <label class="rc-group-item" for="purchaseLength24">2年</label>
+              <input type="radio" name="purchaseLength" value="36" autocomplete="off" id="purchaseLength36">
+              <label class="rc-group-item" for="purchaseLength36">3年</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="cont-box bg-white p-3">
+      <div class="page-header pb-3" style="border-bottom: 1px solid #eee;">
+        <h4 class="mb-0 d-flex align-content-center justify-content-between">
+          所选配置
+          <a href="JavaScript:;" onclick="window.location.reload()">清空配置</a>
+        </h4>
+      </div>
+      <div class="" id="configinfo">
+        {if $_GET['type'] != 'renew'}
+        <div class="form-group row m-0">
+          <label class="col-sm-4 col-form-label col-form-label-sm">当前区域：</label>
+          <div class="col-sm-7">
+            <p class="form-text text-muted" data-id="group">{$progroup?$progroup:'-'}</p>
+          </div>
+        </div>
+        <div class="form-group row m-0">
+          <label class="col-sm-4 col-form-label col-form-label-sm">当前配置：</label>
+          <div class="col-sm-7">
+            <p class="form-text text-muted" data-id="type">{$proname?$proname:'-'}</p>
+          </div>
+        </div>
+        {/if}
+        <div class="form-group row m-0" id="tpfCountBox">
+          <label class="col-sm-4 col-form-label col-form-label-sm">购买配额：</label>
+          <div class="col-sm-7">
+            <p class="form-text text-muted count">
+              <span data-id="num">-</span>台 * <span data-id="length">-</span>月
+            </p>
+          </div>
+        </div>
+        <div class="form-group row m-0">
+          <label class="col-sm-4 col-form-label col-form-label-sm">配置费用：</label>
+          <div class="col-sm-7">
+            <p class="form-text text-muted"><span class="money text-danger fs-md" data-id="price">-</span></p>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block createCdsNext">下一步</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name='js'}
+<script>
+  $('[name="group"]').change(function () {
+    let t = $(this);
+    ajax('{:url("index/Server/getAddedItems")}', {
+      id: t.val(),
+      type: "{$_GET['type']}",
+      pro_id: $('[name="pro_id"]').val()
+    }, 'post').then(data => {
+      if (data) {
+        let temp = '',
+          dlist = '',
+          fName = '';
+        data.map((e, i) => {
+          if (e) {
+            dlist = '';
+            let describe = e.describe.split('|');
+            describe.map(eve => {
+              dlist += `<li class="mt-2">${eve}</li>`;
+            });
+            if (i == 0) {
+              fName = e.name;
+            }
+            temp += `<div data-id="${e.id}" class="col-3 mr-3 mb-3 p-3 vps-buy ${i==0?'vps-selectcolor':'vps-unselectcolor'}">
+                          <ul class="list-unstyled">
+                              <li class="zfs-14 pb-1 border-bottom d-flex w-100">
+                                  <span class="mr-auto">${e.name}</span>
+                              </li>
+                              ${dlist}
+                          </ul>
+                      </div>`;
+          }
+        });
+        $('#common-type').html(temp);
+        // setTimeout(function () {
+        //   getPrice();
+        // }, 1000);
+        getAdded(getPrice);
+      }
+    });
+  });
+  $('[name="osgroup"]').change(function(){
+    let t = $(this);
+    $('[name="username"]').val(t.data('uname'));
+    ajax('{:url("index/Server/getOstypes")}', {
+      id: t.val(),
+    }, 'post').then(data => {
+      if (data) {
+        let temp = '',
+          dlist = '',
+          fName = '';
+        data.map((e, i) => {
+          if (e) {
+            temp += `
+              <option value="${e.id}" ${i==0 ? 'selected': '' }>${e.title}</option>
+            `;
+          }
+        });
+        $('#ostype').html(temp);
+      }
+    });
+  });
+  $(document).on("click", ".vps-buy", function () {
+    $(this).addClass("vps-selectcolor").removeClass("vps-unselectcolor").siblings().not(".novps-buy").removeClass(
+      "vps-selectcolor").addClass("vps-unselectcolor");
+    // setTimeout(function () {
+    //   getPrice();
+    // }, 1000);
+    getAdded(getPrice);
+  });
+  $('[name="purchaseLength"]').change(function () {
+    getPrice();
+  });
+  $(document).on("change", ".added [name]", function () {
+    getPrice();
+  });
+  // setTimeout(function () {
+  //   ;
+  // }, 1000);
+  getAdded(getPrice);
+  let sinfo = {$sinfo?json_encode($sinfo):'""'};
+  console.log(sinfo)
+  function getAdded(cb) {
+    ajax('{:url("index/Server/getAdded",["type"=>$_GET["type"]])}', {
+      id: {$_GET['pro_id'] ? $_GET['pro_id'] :"$('.vps-selectcolor').data('id') ? $('.vps-selectcolor').data('id') : $('[name=`pro_id`]').val()"}
+    }, 'post').then(e => {
+      $('.added').html('');
+      let html = '';
+      let items = '';
+      let c;
+      e.map(item => {
+        switch (item.type) {
+          case 1:
+            items = '';
+            c = false;
+            item.child.map(child => {
+              if(sinfo && sinfo[item.name] && sinfo[item.name] == child.title){
+                c = true;
+              } else {
+                c = false;
+              }
+              items += `
+            <div class="custom-control custom-radio">
+              <input type="radio" id="${item.name}${child.id}" name="${item.name}" class="custom-control-input" data-id="${child.id}" ${c?'checked':''} value="${child.title}">
+              <label class="custom-control-label" for="${item.name}${child.id}">${child.title}</label>
+            </div>
+            `;
+            })
+            html += `
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">${item.title}</label>
+            <div class="col-8">
+              <div class="redio-box">
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="${item.name}999" name="${item.name}" class="custom-control-input" data-id="0" value="不使用该服务" checked>
+                  <label class="custom-control-label" for="${item.name}999">不使用该服务</label>
+                </div>
+                ${items}
+              </div>
+            </div>
+          </div>
+          `;
+            break;
+          case 2:
+            items = '';
+            c = false;
+            item.child.map(child => {
+              if(sinfo && sinfo[item.name] && sinfo[item.name] == child.title){
+                c = true;
+              } else {
+                c = false;
+              }
+              items += `
+            <option data-id="${child.id}" ${c?'selected':''} value="${child.title}">${child.title}</option>
+            `;
+            })
+            html += `
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">${item.title}</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" name="${item.name}">
+                <option data-id="0" value="不使用该服务">不使用该服务</option>
+                ${items}
+              </select>
+            </div>
+          </div>
+          `;
+            break;
+          case 3:
+          let val = 1;
+          if(sinfo && sinfo[item.name]){
+            val = sinfo[item.name];
+          }
+            html += `
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label text-left" style="font-size: 12px;">${item.title}</label>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-2"><input type="number" name="${item.name}" class="form-control form-control-sm" placeholder="" data-id="${item.child[0].id}" value="${val?val:item.child[0].value?item.child[0].value:0}" /></div>
+                <div class="col"><div class="form-control form-control-sm form-control-plaintext">${item.child[0].title}</div></div>
+              </div>
+            </div>
+          </div>
+          `;
+            break;
+        }
+      })
+      $('.added').append(html);
+      console.log(cb)
+      cb && cb()
+    })
+  }
+
+  function getPrice() {
+    let names = document.querySelectorAll('.added .form-group [name]'),
+      vals = {};
+    names = [].slice.call(names);
+    names.map((e) => {
+      // console.log($(e).attr('type'))
+      // console.log($(e).prop('tagName'))
+      if ($(e).prop('tagName') == 'SELECT') {
+        if ($(e).find('option:selected')) {
+          vals[e.name] = $(e).find('option:selected').data('id');
+        }
+      } else if ($(e).attr('type') == 'radio') {
+        if ($(e).prop('checked')) {
+          vals[e.name] = $(e).data('id');
+        }
+      } else if ($(e).attr('type') == 'number') {
+        vals[e.name] = $(e).data('id') + ',' + $(e).val();
+        if (!vals[e.name]) {
+          vals[e.name] = 0;
+        }
+      }
+    });
+    console.log(vals)
+    // return;
+    ajax('{:url("index/Server/getPrice",["type"=>$_GET["type"]])}', {
+      type: "{$_GET['type']}",
+      pro_id: {$_GET['pro_id'] ? $_GET['pro_id'] :"$('.vps-selectcolor').data('id') ? $('.vps-selectcolor').data('id') : $('[name=`pro_id`]').val()"},
+      pay_length: $('[name="purchaseLength"]:checked').val(),
+      id: $('[name="id"]').val(),
+      name: $('[name="name"]').val() ? $('[name="name"]').val() : '',
+      num: 1,
+      added: sinfo?JSON.stringify(sinfo):JSON.stringify(vals)
+    }, 'post').then(e => {
+      $('[data-id="group"]').text( <?php echo $progroup ? '"'.$progroup.
+        '"' : "$('[name=\'group\']:checked').next().text()" ?> );
+      $('[data-id="type"]').text( <?php echo $proname ? '"'.$proname.
+        '"' : "$('.vps-selectcolor').find('li span').text()" ?> );
+      $('[data-id="num"]').text(1);
+      $('[data-id="length"]').text($('[name="purchaseLength"]:checked').val());
+      $('[data-id="price"]').text(e.data.price);
+      // console.log(e);
+    });
+  }
+  $('.createCdsNext').click(function () {
+    let names = document.querySelectorAll('.added .form-group [name]'),
+      vals = {};
+    names = [].slice.call(names);
+    names.map((e) => {
+      // console.log($(e).attr('type'))
+      // console.log($(e).prop('tagName'))
+      if ($(e).prop('tagName') == 'SELECT') {
+        if ($(e).find('option:selected')) {
+          vals[e.name] = $(e).find('option:selected').data('id');
+        }
+      } else if ($(e).attr('type') == 'radio') {
+        if ($(e).prop('checked')) {
+          vals[e.name] = $(e).data('id');
+        }
+      } else if ($(e).attr('type') == 'number') {
+        vals[e.name] = $(e).data('id') + ',' + $(e).val();
+        if (!vals[e.name]) {
+          vals[e.name] = 0;
+        }
+      }
+    });
+    // console.log($('[name="osgroup"]:checked').val())
+    // console.log($('[name="username"]').val())
+    // console.log($('[name="password"]').val())
+    // return;
+    //开通
+    ajax('{:url("index/Server/addAuth")}', {
+      type: "{$_GET['type']}",
+      pro_id: {$_GET['pro_id'] ? $_GET['pro_id'] :"$('.vps-selectcolor').data('id') ? $('.vps-selectcolor').data('id') : $('[name=`pro_id`]').val()"},
+      pay_length: $('[name="purchaseLength"]:checked').val(),
+      id: {$_GET['id']?$_GET['id']:"$('[name=id]').val()"},
+      group: {$_GET['group_id']?$_GET['group_id']:"$('[name=group]').val()"},
+      name: $('[name="name"]').val()?$('[name="name"]').val():'',
+      remake: $('[name="remake"]').val(),
+      username: $('[name="username"]').val(),
+      password: $('[name="password"]').val(),
+      osgroup: $('[name="osgroup"]:checked').val(),
+      ostype: $('[name="ostype"]').val(),
+      remake: $('[name="remake"]').val(),
+      num: 1,
+      added: sinfo?JSON.stringify(sinfo):JSON.stringify(vals)
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        location.href = "{:url('index/Buy/confirm')}";
+      } else {
+        alert(e.msg);
+      }
+    });
+
+  });
+</script>
+{/block}

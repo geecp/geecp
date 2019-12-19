@@ -1,0 +1,117 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">{$info?'修改':'新增'}虚拟主机配置</h3>
+        </div>
+        <div class="box-body">
+            <div class="form">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">产品标识</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入产品标识" value="{$info?$info['name']:''}" autocomplete="off">
+                        <input type="hidden" name="id" value="{$info?$info['id']:''}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">产品名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="请输入产品名称" value="{$info?$info['title']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="group_id" class="col-sm-2 control-label">产品分组</label>
+                    <div class="col-sm-10">
+                        <select name="group_id" id="group_id" class="form-control">
+              <option value="0" {$info?$info['group_id'] == '0'?'selected':'':''}>无分组</option>
+              {foreach name="groupList" item="v"}
+              <option value="{$v.id}" {$info?$info['group_id'] == $v['id']?'selected':'':''}>{$v.name}</option>
+              {/foreach}
+            </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="information" class="col-sm-2 control-label">产品信息</label>
+                    <div class="col-sm-10">
+                        <textarea name="information" id="information" class="form-control" placeholder="请输入邮箱" cols="30" rows="10">{$info?$info['information']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="请输入邮箱" value="{$info?$info['email']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="label" class="col-sm-2 control-label">产品标签</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="label" name="label" placeholder="请输入产品标签" value="{$info?$info['label']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="month" class="col-sm-2 control-label">月价格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="month" name="month" placeholder="请输入月价格" value="{$info?$info['month']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="quarter" class="col-sm-2 control-label">季度价格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="quarter" name="quarter" placeholder="请输入季度价格" value="{$info?$info['quarter']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="semestrale" class="col-sm-2 control-label">半年价格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="semestrale" name="semestrale" placeholder="请输入半年价格" value="{$info?$info['semestrale']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="years" class="col-sm-2 control-label">年价格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="years" name="years" placeholder="请输入年价格" value="{$info?$info['years']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="biennium" class="col-sm-2 control-label">两年价格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="biennium" name="biennium" placeholder="请输入两年价格" value="{$info?$info['biennium']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="triennium" class="col-sm-2 control-label">三年价格</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="triennium" name="triennium" placeholder="请输入三年价格" value="{$info?$info['triennium']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-primary sub">提交</button>
+                        <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<script>
+    $('.sub').click(function() {
+        let names = document.querySelectorAll('.form-group > div > [name]'),
+            vals = {};
+        names = [].slice.call(names);
+        names.map((e) => {
+            vals[e.name] = e.value;
+        });
+        ajax('{:url("admin/Vhosts/addAuth")}', vals, 'post').then(e => {
+            if (e.status === 200) {
+                alert(e.msg);
+                location.href = "{:url('admin/Vhosts/list')}";
+            } else {
+                alert(e.msg);
+            }
+        });
+    });
+</script>
+{/block}

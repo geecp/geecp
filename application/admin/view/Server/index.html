@@ -1,0 +1,382 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header clearfix">
+          <div class="box-tools pull-left form-inline">
+            <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+            <button class="btn btn-primary btn-sm serchBtn">查询</button>
+            <!-- <div class="pull-right">
+              <a href="{:url('admin/Product/addgroup')}" class="btn btn-primary btn-sm">新增产品组</a>
+              <a href="{:url('admin/Product/add')}" class="btn btn-primary btn-sm">新增产品</a>
+            </div> -->
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-hover tableData">
+            <thead>
+              <tr>
+                <th>所属用户</th>
+                <th>主机名</th>
+                <th>服务器公网IP</th>
+                <th>服务器内网IP</th>
+                <th>账号/密码</th>
+                <th>产品类型</th>
+                <th>开通时间</th>
+                <th>到期时间</th>
+                <th>状态</th>
+                <th>详细信息</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list)} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}">
+                <td>{$v.user}</td>
+                <td>{$v.name}</td>
+                <td>{$v.ip}</td>
+                <td>{$v.intranetip}</td>
+                <td>{$v.username} / {$v.ispass}</td>
+                <td>{$v.groupname}</td>
+                <td>{$v.create_time}</td>
+                <td>{$v.end_time|date='Y-m-d H:i:s',###}</td>
+                <td>{$v.statuss}</td>
+                <td>
+                  <a href="javascript:;" data-config='{$v.config}' class="mr-3">查看产品详情</a>
+                  <a href="javascript:;" data-config='{$v.addeds}' class="mr-3">查看增值服务</a>
+
+                </td>
+                <td>
+                  <a href="javascript:;" class="delivery {$v['status'] != 3 ? '':'hidden'}"
+                    onclick="delivery({$v['id']},'{$v['username']}','{$v['password']}')">交付</a>
+                  <a href="javascript:;" onclick="calledit({$v['id']})">编辑</a>
+                </td>
+              </tr>
+              {/foreach} {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<div class="modal fade" id="config" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">配置查看</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="delivery" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">信息补充</h4>
+      </div>
+      <div class="modal-body">
+        <p class="info">请补充服务器IP/用户名/密码相关信息</p>
+        <div class="form-horizontal">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器公网IP：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="ip">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器内网IP：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="intranetip">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器用户名：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器密码：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="password">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm subdelivery">确认</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">编辑服务器信息</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器公网IP：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="ip">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器内网IP：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="intranetip">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器用户名：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="username" readonly style="border: none;background: #fff;">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器密码：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">所属用户：</label>
+            <div class="col-sm-5">
+              <!-- <input type="text" class="form-control" name="user_id"> -->
+              <select name="user_id" class="form-control"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">服务器状态：</label>
+            <div class="col-sm-5">
+              <select name="status" class="form-control">
+                <option value="0">开通中</option>
+                <option value="1">已到期</option>
+                <option value="2">正在重装系统</option>
+                <option value="3">正在运行</option>
+                <option value="4">服务器异常</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">到期时间：</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="end_time" placeholder="时间范围" style="padding:6px 12px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm subedit">确认</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('[data-config]').click(function () {
+    // console.log($(this).data('config'))
+    var html = '',
+      config = $(this).data('config');
+    console.log(config);
+    for (let k in config) {
+      if (config[k].indexOf('|') >= 0) {
+        // console.log(config[k])
+        config[k] = config[k].split('|');
+        config[k].map((v, i) => {
+          config[k][i] = v + '<br>';
+        });
+        config[k] = config[k].join('');
+        // console.log(config[k])
+      }
+      html += `
+      <div class="form-group">
+        <label class="col-sm-5 control-label">${config[k][0]}：</label>
+        <div class="col-sm-7">
+          <div class="form-control-static">${config[k][1]}</div>
+        </div>
+      </div>
+      `;
+    }
+    $('#config .form-horizontal').html(html);
+    $('#config').modal('show');
+  })
+  $('[data-pass]').click(function () {
+    $(this).text($(this).data('pass'));
+  });
+
+  $('.subdelivery').click(function () {
+    if (!RULE.remoteIP($('#delivery [name="ip"]').val())) {
+      alert('请输入正确的公网IP地址');
+      return false;
+    }
+    if (!RULE.remoteIP($('#delivery [name="intranetip"]').val())) {
+      alert('请输入正确的内网IP地址');
+      return false;
+    }
+    let subinfo = {
+        id: $('#delivery [name="id"]').val(),
+        ip: $('#delivery [name="ip"]').val(),
+        intranetip: $('#delivery [name="intranetip"]').val(),
+        username: $('#delivery [name="username"]').val(),
+        password: $('#delivery [name="password"]').val(),
+      },
+      vsub = true;
+    for (let k in subinfo) {
+      if (!subinfo[k]) {
+        vsub = false;
+      }
+    }
+    if (!vsub) {
+      alert('请补充服务器相关信息');
+      return;
+    }
+    ajax("{:url('admin/Service/deliveryauth')}", subinfo, 'post').then((e) => {
+      if (e.status == 200) {
+        // t.parents('tr').remove();
+        $('tr[data-id="' + $('#delivery [name="id"]').val() + '"] a.delivery').addClass('hidden');
+        alert(e.msg);
+        $('#delivery [name]').val('');
+        $('#delivery').modal('hide');
+        window.location.reload()
+      } else {
+        alert(e.msg);
+      }
+    })
+
+  });
+  $('.subedit').click(function(){
+    if (!RULE.remoteIP($('#edit [name="ip"]').val())) {
+      alert('请输入正确的公网IP地址');
+      return false;
+    }
+    if (!RULE.remoteIP($('#edit [name="intranetip"]').val())) {
+      alert('请输入正确的内网IP地址');
+      return false;
+    }
+    let subinfo = {
+        id: $('#edit [name="id"]').val(),
+        ip: $('#edit [name="ip"]').val(),
+        intranetip: $('#edit [name="intranetip"]').val(),
+        username: $('#edit [name="username"]').val(),
+        password: $('#edit [name="password"]').val(),
+        user_id: $('#edit [name="user_id"]').val(),
+        status: $('#edit [name="status"]').val(),
+        end_time: $('#edit [name="end_time"]').val(),
+      },
+      vsub = true;
+    for (let k in subinfo) {
+      if (!subinfo[k]) {
+        vsub = false;
+      }
+    }
+    if (!vsub && vsub !== 0) {
+      alert('服务器信息不能为空!');
+      return;
+    }
+    ajax("{:url('admin/Service/editserver')}", subinfo, 'post').then((e) => {
+      if (e.status == 200) {
+        window.location.reload()
+      } else {
+        alert(e.msg);
+      }
+    })
+
+  })
+
+  function calledit(id) {
+    $('#edit [name="id"]').val(id);
+    ajax("{:url('admin/Service/getserver')}?id="+id).then(e=>{
+      console.log(e)
+      if(e.status == 200){
+        let html = ``;
+        e.data.users.map(e=>{
+          html += `<option value="${e.id}">${e.name}</option>`;
+        });
+        $('#edit [name="ip"]').val(e.data.ip);
+        $('#edit [name="intranetip"]').val(e.data.intranetip);
+        $('#edit [name="username"]').val(e.data.username);
+        $('#edit [name="password"]').val(e.data.password);
+        $('#edit [name="user_id"]').html(html);
+        $('#edit [name="user_id"]').val(e.data.user_id);
+        $('#edit [name="status"]').val(e.data.status);
+        $('#edit [name="end_time"]').daterangepicker({
+          autoclose: true,
+          singleDatePicker: true,
+          autoApply: true,
+          showDropdowns: true,
+          timePicker: true,
+          timePicker24Hour: true,
+          startDate: e.data.end_time,
+          locale: {
+            format: "YYYY-MM-DD HH:mm:ss",
+            applyLabel: '确定',
+            cancelLabel: '取消',
+            daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'
+            ],
+            firstDay: 1
+          }
+        });
+        $('#edit').modal('show');
+      } else {
+        alert(e.msg);
+      }
+    });
+  }
+
+  function delivery(id,u,p) {
+    if (confirm('确认交付吗？')) {
+      ajax("{:url('admin/Service/delivery')}", {
+        id: id
+      }, 'post').then((e) => {
+        if (e.status == 200) {
+          // t.parents('tr').remove();
+          $('tr[data-id="' + id + '"] a.delivery').addClass('hidden');
+          alert(e.msg);
+          window.location.reload()
+        } else {
+          $('#delivery [name]').val('');
+          $('#delivery [name="id"]').val(id);
+          $('#delivery [name="username"]').val(u);
+          $('#delivery [name="password"]').val(p);
+          $('#delivery').modal('show');
+        }
+      })
+    }
+  }
+
+  $('.tableData').DataTable({
+    'paging': false,
+    'fixedHeader': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': false,
+    'info': true,
+    'autoWidth': false,
+    'deferRender': true,
+    'processing': true,
+  });
+</script>
+{/block}

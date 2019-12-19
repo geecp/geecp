@@ -1,0 +1,125 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t pb-0" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto  m-0">
+                <li class="list-inline-item p-2 pl-0">
+                    <h4>财务总览</h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="border-t px-2">
+                <div class="mb-3">
+                    <span class="fs-16">账户信息</span>
+                </div>
+                <div class="form-row  form-group">
+                    <div class="col-6 ">
+                        <label class="col-form-label-sm mb-0">现金余额:</label>
+                        <span class="p-2">￥0.00</span>
+                        <a href="account_recharge.html" class="p-2">充值</a>
+                        <a href="withdraw_list.html" class="p-2">提现</a>
+                    </div>
+                    <div class="col-6 form-row">
+                        <label class="col-form-label-sm mb-0">余额预警：</label>
+                        <div class="col-6 form-control-sm switch-box">
+                            <input type="checkbox" id="warning" data-mid="isAlarm" checked>
+                            <label for="warning" class="switch"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row  form-group">
+                    <div class="col-6">
+                        <label class="col-form-label-sm mb-0">可用代金券:</label>
+                        <span class="p-2"><a href="coupon_list.html">0</a> 张</span>
+                    </div>
+                    <div class="col-6 form-row switch-check">
+                        <label class="col-form-label-sm mb-0">预警阈值：</label>
+                        <div class="col form-inline">
+                            <input type="text" class="form-control form-control-sm" value="1" data-mid="alarmValue">
+                            <span class="ml-2">元</span>
+                            <button type="button" class="btn btn-primary btn-sm ml-4 setVal">确定</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="px-2 border-t  pb-3">
+                <div class="my-3">
+                    <span class="fs-16">消费信息</span>
+                </div>
+                <div class="form-row ">
+                    <div class="card card-bgf6 border-0 mr-1">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-5 "><span class="iconfont icon-wangluocelvepeizhi  fs-2"></span></div>
+                                <div class="col-6 ">
+                                    <div class="form-row fs-20">￥0.00</div>
+                                    <div class="form-row ">本月消费金额</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-bgf6 border-0 mr-1">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-5"><span class="iconfont icon-wangluocelvepeizhi fs-2"></span></div>
+                                <div class="col-6 ">
+                                    <div class="form-row fs-20"><a href="../billing/consumption_overview.html">￥0.00</a></div>
+                                    <div class="form-row ">今日消费金额</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-2 border-t pb-3">
+                <div class="my-3">
+                    <span class="fs-16">待办事项</span>
+                </div>
+                <div class="form-row ">
+                    <div class="card card-bgf6 border-0 mr-1">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-5 "><span class="iconfont icon-wangluocelvepeizhi fs-2"></span></div>
+                                <div class="col-6 ">
+                                    <div class="form-row fs-20"><a href="../billing/order_list.html">0</a></div>
+                                    <div class="form-row ">待支付订单</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-bgf6 border-0 mr-1">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-5"><span class="iconfont icon-wangluocelvepeizhi fs-2"></span></div>
+                                <div class="col-6 ">
+                                    <div class="form-row fs-20"><a href="../billing/renew_list.html">0</a></div>
+                                    <div class="form-row ">待续费实例</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-bgf6 border-0 mr-1">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-5"><span class="iconfont icon-wangluocelvepeizhi fs-2"></span></div>
+                                <div class="col-6 ">
+                                    <div class="form-row fs-20">￥0.00</div>
+                                    <div class="form-row ">待开票金额</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+</script>
+{/block}

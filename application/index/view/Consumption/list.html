@@ -1,0 +1,155 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t pb-0" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto  m-0">
+                <li class="list-inline-item p-2" style="border-bottom:3px solid #108cee;">
+                    <h4 style="color: #108cee;">流水账单</h4>
+                </li>
+                <!-- <li class="list-inline-item p-2 ">
+                    <a href="{:url('index/Consumption/resource')}" class="fs-16">
+                        <h4>资源账单 </h4>
+                    </a>
+                </li> -->
+            </ul>
+            <!-- <ul class="list-inline m-0">
+                <li class="list-inline-item p-2">
+                    <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="pb-3">
+                <div class="form-row m-0">
+                    <ul class="list-inline mr-auto m-0 form-inline">
+                        <!-- <li class="list-inline-item">
+                            <div>
+                                <select name="" id="" class="form-control form-control-sm">
+                                  <option value="">适用产品:全部</option>
+                                  <option value="">通用</option>
+                                  <option value="">应用引擎专业版 BAEPRO</option>
+                                  <option value="">云服务器 BCC</option>
+                                  <option value="">关系型数据库 RDS</option>
+                                  <option value="">负载均衡 BLB</option>
+                                  <option value="">云磁盘 CDS</option>
+                                  <option value="">简单缓存服务 SCS</option>
+                                  <option value="">百度MapReduce BMR</option>
+                                  <option value="">百度消息服务 KAFKA</option>
+                                </select>
+                            </div>
+                        </li> -->
+                        <li class="list-inline-item form-inline">
+                          <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                            <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                            <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off" value="{$_GET['start']}">
+                            <span class="c-datepicker-range-separator">-</span>
+                            <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off" value="{$_GET['end']}">
+                          </div>
+                        </li>
+                        <!-- <ul class="mb-0 nav account-list">
+                            <li class="list-inline-item "><button data-toggle="tab" class="btn btn-light btn-sm">后付费</button></li>
+                            <li class="list-inline-item "><button data-toggle="tab" class="btn btn-light btn-sm active">预付费</button></li>
+                        </ul> -->
+                    </ul>
+                    <!-- <ul class="list-inline  m-0 form-inline">
+                        <li class="list-inline-item form-inline">
+                            <div class="custom-control  custom-checkbox ">
+                                <input type="checkbox" class="custom-control-input" id="reviewedorder1">
+                                <label class="custom-control-label  " style="top:0" for="reviewedorder1">不显示0元账单</label>
+                            </div>
+                        </li>
+                        <li class="list-inline-item"><button class="btn  btn-light btn-sm"><i class="iconfont icon-icon_xiazai"></i></button></li>
+                        <li class="list-inline-item"><button class="btn  btn-light btn-sm"><i class="iconfont icon-icon_shuaxin"></i></button></li>
+                    </ul> -->
+                </div>
+            </div>
+            <div class="ml-nge">
+                <div>
+                    <table class="table table-border">
+                        <thead class="bg-fB p-2">
+                            <tr class="font-weight-light">
+                                <th class="px-3">账单编号</th>
+                                <th>账单时间</th>
+                                <th>产品名称</th>
+                                <th>账单金额</th>
+                                <th>应付金额</th>
+                                <th>支付状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {if !empty($list[0])}
+                        {foreach $list as $k => $v}
+                        <tr>
+                          <td>{$v.order_number}</td>
+                          <td>{$v.create_time}</td>
+                          <td>{$v.productType}</td>
+                          <td>￥{$v.money|to_double} </td>
+                          <td class="color-orange">￥{$v.money|to_double} </td>
+                          <td class="color-green">{$v.statuss}</td>
+                          <td>
+                            {if $v['type'] == '0' || $v['type'] == '4'}
+                            <a href="{:URL('index/Billing/dealrecorddetails',['order'=>$v['order_number']])}">查看</a>
+                            {else /}
+                            -
+                            {/if}
+                          </td>
+                        </tr>
+                        {/foreach}
+                        {else /}
+                        <tr>
+                          <td colspan="8" class="text-center">暂无数据</td>
+                        </tr>
+                        {/if}
+                            <!-- <tr>
+                                <td>
+                                    <a href="order_detail_prepaid.html">1d30f80ff4f9478aa3a365df12d8f3f3</a>
+                                </td>
+                                <td>2019-03-24 11:21</td>
+                                <td>BCD（域名服务）</td>
+                                <td>￥35.00</td>
+                                <td class="color-orange"> ￥35.00</td>
+                                <td class="color-green">已支付</td>
+                                <td><a href="order_detail_prepaid.html">查看</a> </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="order_detail_prepaid.html">44d4bfb855f44fd5bbeff16c6471dd48</a>
+                                </td>
+                                <td>2019-03-22 20:43</td>
+                                <td>
+                                    <ul class="mb-0 p-0" style="list-style-type: none">
+                                        <li>BCC（云服务器）</li>
+                                        <li>CDS（云磁盘）</li>
+                                        <li>EIP（弹性公网IP）</li>
+                                    </ul>
+                                </td>
+                                <td>￥35.00</td>
+                                <td class="color-orange"> ￥35.00</td>
+                                <td class="color-green">已支付</td>
+                                <td><a href="order_detail_prepaid.html">查看</a> </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between pt-3 pl-3">
+                  <ul class="mr-auto"></ul>
+                  <div class="pagination mb-0">
+                    {$list->render()}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  
+  $('[name="starttime"],[name="endtime"]').change(function () {
+    window.location.href = window.location.origin + window.location.pathname + '?start=' + $('[name="starttime"]').val() + '&end=' + $('[name="endtime"]').val()
+  });
+</script>
+{/block}

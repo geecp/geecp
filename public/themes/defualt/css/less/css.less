@@ -1,0 +1,615 @@
+/*httpimg*/
+
+@bgimg: "https://qmarket.bj.bcebos.com/PB150703.jpg";
+
+/*颜色变量*/
+
+// @ces: @cbl * 1.2; //颜色网站基础色
+@ces: rgb(0,123,255); //颜色网站基础色
+@cun: transparent; //透明背景
+@cwh: rgb(255, 255, 255); //白色
+
+/*flat 推荐颜色*/
+
+
+/*http://bsfans.com/fc/index.html*/
+
+@cor: rgb(230, 126, 34); //橙色
+@cor1: rgb(211, 84, 0);
+@cbl: rgb(52, 152, 219); //蓝色
+@cbl1: rgb(41, 128, 185);
+@cgr: rgb(46, 204, 113); //绿色
+@cgr1: rgb(39, 174, 96);
+@cye: rgb(241, 196, 15); //黄色
+@cye1: rgb(243, 156, 18);
+@cre: rgb(231, 76, 60)*1.2; //红色
+@cre1: rgb(192, 57, 43);
+@cgy: rgb(236, 240, 241); //灰色
+@cgy1: rgb(189, 195, 199);
+@cbla: rgb(0, 0, 0); //黑色
+@ccb: rgb(237, 248, 255);//浅蓝
+//
+
+/*文字颜色*/
+
+@cc: rgb(51, 51, 51); //主文字颜色
+@cc1: rgb(102, 102, 102); //副标题颜色
+@cc2: rgb(153, 153, 153); //描述颜色
+@cc3: rgb(192, 12, 0); //红色字体
+@cc4: rgb(0, 128, 0); //绿色字体
+
+/*背景色*/
+
+@bgc: rgb(34, 34, 34);
+@bgcc: rgb(21, 33, 47);
+@bgc1: rgb(241, 241, 241);
+@bgc2: rgb(238, 238, 238);
+@bgc3: rgb(70, 69, 83);
+@bgc4: rgb(54, 62, 75);
+//
+@cbsw: rgb(252, 248, 227);
+//
+
+/*边框颜色*/
+
+@bdrc: rgb(225, 225, 225); //边框颜色
+
+/*自定义颜色占位*/
+
+
+/*   */
+
+
+/*其他常用变量*/
+
+
+/*文字*/
+
+@ffmix: "Helvetica Neue",
+Helvetica,
+Arial,
+"Microsoft Yahei",
+"Hiragino Sans GB",
+"Heiti SC",
+"WenQuanYi Micro Hei",
+sans-serif;
+//
+@rem: 12px; //
+@hack: ~"\9"; //
+@mpb: 15px; //基础单位
+//
+.fs(@a) {
+    font-size: @a;
+}
+
+.fss {
+    font-size: .9rem;
+}
+
+.fsx {
+    font-size: .8rem;
+}
+
+.fsl {
+    font-size: 1rem;
+}
+
+.fsxl {
+    font-size: 2.5rem;
+}
+
+//文字颜色
+.cr(@a) {
+    color: @a;
+}
+
+.crw {
+    color: @cwh;
+}
+
+.crb {
+    .cr(@cbla);
+}
+
+.crc {
+    color: @cc;
+}
+
+.cre {
+    color: @ces;
+}
+
+//
+.lh(@h) {
+    line-height: @h;
+}
+
+//常用class配置
+.bgcw {
+    background-color: @cwh;
+}
+
+.bgcb {
+    background-color: @cbla;
+}
+
+.bgce {
+    background-color: rgb(231, 244, 255);
+}
+
+.bgc(@c) {
+    background-color: @c;
+}
+
+//....
+.db {
+    display: block;
+}
+
+.dn {
+    display: none;
+}
+
+.dib {
+    display: inline-block;
+}
+
+.di {
+    display: inline;
+}
+
+.df {
+    display: flex;
+}
+
+.dif {
+    display: inline-flex;
+}
+
+//....
+.pr {
+    position: relative;
+}
+
+.ps {
+    position: absolute;
+}
+
+.pp(@t, @r, @b, @l, @type: absolute) {
+    position: @type;
+    top: @t;
+    right: @r;
+    bottom: @b;
+    left: @l;
+}
+
+.ppd(@w: 0, @type: absolute) {
+    position: @type;
+    top: @w;
+    right: @w;
+    bottom: @w;
+    left: @w;
+}
+
+.pf {
+    position: fixed;
+}
+
+//边框控制
+.bdr(@w: 1px, @s: solid, @cr: @bdrc) {
+    border: @w @s @cr;
+}
+
+.bdrt(@w: 1px, @s: solid, @cr: @bdrc) {
+    border-top: @w @s @cr;
+}
+
+.bdrr(@w: 1px, @s: solid, @cr: @bdrc) {
+    border-right: @w @s @cr;
+}
+
+.bdrb(@w: 1px, @s: solid, @cr: @bdrc) {
+    border-bottom: @w @s @cr;
+}
+
+.bdrl(@w: 1px, @s: solid, @cr: @bdrc) {
+    border-left: @w @s @cr;
+}
+
+.bdr-d {
+    .bdr(@cr: @cre)
+}
+
+.bdr-s {
+    .bdr(@cr: @cgr)
+}
+
+.bdr-w {
+    .bdr(@cr: @cye)
+}
+
+.bdrrd(@s: .25rem) {
+    border-radius: @s;
+}
+
+//
+.cbo {
+    margin: 0 auto;
+}
+
+//内外边距控制
+.mg(@a: @mpb) {
+    margin: @a;
+}
+
+.mgt(@a: @mpb) {
+    margin-top: @a;
+}
+
+.mgr(@a: @mpb) {
+    margin-right: @a;
+}
+
+.mgb(@a: @mpb) {
+    margin-bottom: @a;
+}
+
+.mgl(@a: @mpb) {
+    margin-left: @a;
+}
+
+.mgx(@a: @mpb) {
+    margin-left: @a;
+    margin-right: @a;
+}
+
+.mgy(@a: @mpb) {
+    margin-top: @a;
+    margin-bottom: @a;
+}
+
+.pd(@a: @mpb) {
+    padding: @a;
+}
+
+.pdt(@a: @mpb) {
+    padding-top: @a;
+}
+
+.pdr(@a: @mpb) {
+    padding-right: @a;
+}
+
+.pdb(@a: @mpb) {
+    padding-bottom: @a;
+}
+
+.pdl(@a: @mpb) {
+    padding-left: @a;
+}
+
+.pdx(@a: @mpb) {
+    padding-left: @a;
+    padding-right: @a;
+}
+
+.pdy(@a: @mpb) {
+    padding-top: @a;
+    padding-bottom: @a;
+}
+
+//clear
+.clear {
+    &:after,
+    &:before {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.cp {
+    cursor: pointer;
+}
+
+//居中
+.amid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.flmm {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fxcell {
+    width: 1%;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    word-break: break-all;
+}
+//extend
+.absfull {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+/**
+* animation
+*/
+
+.key (@prefix, @name, @content) when (@prefix=def) {
+    @keyframes @name {
+        @content();
+    }
+}
+
+.key (@prefix, @name, @content) when (@prefix=moz) {
+    @-moz-keyframes @name {
+        @content();
+    }
+}
+
+.key (@prefix, @name, @content) when (@prefix=o) {
+    @-o-keyframes @name {
+        @content();
+    }
+}
+
+.key (@prefix, @name, @content) when (@prefix=webkit) {
+    @-webkit-keyframes @name {
+        @content();
+    }
+}
+
+.key (@prefix, @name, @content) when (@prefix=all) {
+    .key(moz, @name, @content);
+    .key(o, @name, @content);
+    .key(webkit, @name, @content);
+    .key(def, @name, @content);
+}
+
+//trandorm
+.trf(@content) {
+    -webkit-transform: @content;
+    -moz-transform: @content;
+    -ms-transform: @content;
+    -o-transform: @content;
+    transform: @content;
+}
+
+.trfo(@content) {
+    -webkit-transform-origin: @content;
+    -moz-transform-origin: @content;
+    -ms-transform-origin: @content;
+    -o-transform-origin: @content;
+    transform-origin: @content;
+}
+
+//animation
+.ani(@n: ani, @t: 1s, @t2: .5s, @fn: ease-in-out, @i: infinite, @dur: alternate) {
+    animation: @n @t @t2 @fn @i @dur;
+    -webkit-animation: @n @t @t2 @fn @i @dur;
+    -o-animation: @n @t @t2 @fn @i @dur;
+    -moz-animation: @n @t @t2 @fn @i @dur;
+}
+
+//过度
+.trs(@t: .5s, @b: ease-in-out) {
+    transition: all @t @b;
+    -webkit-transition: all @t @b;
+    -ms-transition: all @t @b;
+}
+
+//
+.mat-hover {
+    .trs;
+    &:hover {
+        -webkit-box-shadow: 0 5px 20px rgba(0, 0, 34, .5);
+        -moz-box-shadow: 0 5px 20px rgba(0, 0, 34, .5);
+        box-shadow: 0 5px 20px rgba(0, 0, 34, .5); //
+        .trf(translateY(-2px));
+        z-index: 999;
+    }
+}
+
+//去除设置
+.unbg {
+    background: transparent;
+}
+
+.unbdr {
+    border-radius: 0;
+}
+
+.unbd {
+    border: none;
+}
+
+.unbs {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -ms-box-shadow: none;
+}
+
+.unst {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-inline {
+    .unst;
+    >li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}
+
+.unl {
+    text-decoration: none;
+}
+
+//杂项
+.round {
+    border-radius: 50%;
+}
+
+.rnd(@w) {
+    width: @w;
+    height: @w;
+    border-radius: @w;
+}
+
+.ohd {
+    overflow: hidden;
+}
+
+.ohy {
+    overflow-y: auto;
+}
+
+.ohx {
+    overflow-x: auto;
+}
+
+//文字方向控制
+.tac {
+    text-align: center;
+}
+
+.tal {
+    text-align: left;
+}
+
+.tar {
+    text-align: right;
+}
+
+.taj {
+    text-align: justify;
+}
+
+.thlc(@w) {
+    height: @w;
+    line-height: @w;
+}
+//
+.fll{
+    float: left;
+}
+.flr{
+    float: right;
+}
+.fln{
+    float: none;
+}
+//
+.textoh {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.blod {
+    font-weight: bolder;
+}
+
+//flex center
+.fc {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+//iconfont 建议使用强大的iconfont
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    display: inline-block;
+    top: -1px;
+}
+
+//loop
+.col-loop(@n, @i: @cgy1) when (@i=<@n) {
+    .col-xs-@{i} {
+        .pdl(0);
+        .pdr(0);
+    }
+    .col-loop(@n, (@i+1));
+}
+
+//extend
+.abs {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.ffull {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    line-height: 100vh;
+}
+
+.scroll(@w: 3px, @cr: @ces) {
+    &::-webkit-scrollbar-track {
+        width: @w;
+        background-color: @cgy;
+    }
+    &::-webkit-scrollbar {
+        width: @w;
+        height: @mpb;
+        background-color: @cr;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: @cr;
+    }
+}
+
+.unspin {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}

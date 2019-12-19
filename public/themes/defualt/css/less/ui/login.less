@@ -1,0 +1,144 @@
+.login {
+    @c: @ces; //组件配色
+    @ftc: rgb(70,69,83); //footer 背景色 如果有
+    &-tit {
+        .mgt(0);
+        .mgb(3*@mpb);
+    }
+    &.panel,
+    .panel {
+        position: relative;
+        z-index: 1;
+    }
+    .panel-body {
+        .pd(3*@mpb);
+    }
+    .panel-footer {
+        position: relative;
+        background-color: @ftc;
+        height: 6*@mpb;
+        .unbdr;
+        .pd(0);
+        .mix {
+            .amid;
+            p {
+                .tac;
+                .mgb(0);
+                a {
+                    color: @cwh;
+                    &:hover{
+                        color: @ces;
+                    }
+                }
+                &.help {
+                    .mgt(0);
+                }
+            }
+            .list-inline {
+                .mgb(0);
+            }
+            a.iconfont {
+                display: block;
+                &:hover {
+                    text-decoration: none;
+                    &.icon-weixin1 {
+                        color: @cgr;
+                    }
+                    &.icon-qq {
+                        color: @cbl1;
+                    }
+                    &.icon-zhifubao {
+                        color: @cbl;
+                    }
+                    &.icon-weibo {
+                        color: @cre;
+                    }
+                }
+            }
+            .iconfont {
+                color: @cwh;
+                font-size: 42px;
+                .trs;
+            }
+        }
+    }
+    input.form-control {
+        &:focus {
+            .unbs;
+        }
+    }
+    .form-group {
+        position: relative;
+    }
+    .btn+.form-group,
+    .form-group+.form-group {
+        .mgt(2*@mpb);
+    }
+    .form-group+.btn-lg {
+        .mgt(3*@mpb);
+    }
+    p.help,
+    p.info {
+        .tac;
+        .mgt(1.5*@mpb);
+        .mgb(1.5*@mpb);
+    }
+    .close-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        background-color: @c;
+        color: @cwh;
+        .iconfont {
+            font-size: 18px;
+        }
+    }
+    .form-group {
+        a+a {
+            .mgr;
+        }
+    }
+    //
+    &.inline {
+        position: relative;
+        .pd(0 4*@mpb);
+        .pdb(4*@mpb);
+        .mix{
+            z-index: 2;
+        }
+        .tit {
+            .mg(4*@mpb 0);
+            position: relative;
+            z-index: 2;
+        }
+        input.form-control{
+            color: @cwh;
+            .unbg;
+        }
+    }
+}
+.modal-login {
+    font-size: 14px;
+    .panel-body{
+        .pdt(0);
+        .hasbtn{
+            .clear;
+            .col-xs-7{
+                .pdl(0);
+            }
+        }
+        .btn+.btn{
+            .mgr(0)!important;
+        }
+    }
+    @media(min-width:992px){
+       .modal{
+           &-dialog{
+               width: 400px;
+           }
+       }
+    }
+}

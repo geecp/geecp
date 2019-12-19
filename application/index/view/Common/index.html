@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {include file='index@Public:head'} {block name='style'}{/block}
+</head>
+
+<body>
+  <div class="main">
+    {include file='index@Public:header'}
+    <?php
+      $items = seekarr($r_lists,'id',$topRoute['id'])?seekarr($r_lists,'id',$topRoute['id'])['child']:false;
+      //dump($items);
+      //dump($topRoute['id']);
+      //dump(seekarr($r_lists,'id',$topRoute['id']));
+    ?>
+    <div class="main-sidebar">
+      <div class="sidebar scroll">
+        <ul class="nav flex-column pt-3">
+          <li class="nav-item defualt">
+            <a class="nav-link py-2" href="/console"><span class="iconfont icon-Database-RDS"></span> 总览</a>
+          </li>
+          <li class="nav-item defualt allSee">
+            <a class="nav-link py-2" href="javascript:;"><span class="pl-2"></span>产品服务 <span
+                class="iconfont icon-icon_jiantou-you float-right"></span></a>
+            <div class="c-menu">
+              <div class="close"></div>
+              <div class="c-menu-list">
+                <ul class="list-unstyled">
+                  {foreach name="webroutelist" item="v"} {if $v['child']}
+                  <li>
+                    <span class="tit">{$v.title}</span>
+                    <ul class="list-unstyled mb-0">
+                      {foreach name="v['child']" item="var"}
+                      <li data-proid="{$var.code}" data-icon="icon-ecs">
+                        <a href="/console/{$var.code}"><span class="{$var['icon']?'iconfont '.$var['icon']:'pl-2'} d-inline-block"></span> {$var.title}</a>
+                      </li>
+                      {/foreach}
+                    </ul>
+                  </li>
+                  {/if} {/foreach}
+                </ul>
+              </div>
+            </div>
+          </li>
+          {foreach name="webroutelist" item="v"} {if $v['child']}
+          {foreach name="v['child']" item="var"}
+          <li class="nav-item defualt" data-proid="{$var.code}">
+            <a class="nav-link py-2" href="/console/{$var.code}"><span class="{$var['icon']?'iconfont '.$var['icon']:'pl-2'}"></span> {$var.title}</a>
+          </li>
+          {/foreach}
+          {/if} {/foreach}
+        </ul>
+      </div>
+      <div class="setting">
+        <button type="button" class="btn btn-sm btn-dark btn-block py-2" data-toggle="modal"
+          data-target="#checkSideItem"><span class="iconfont icon-nav-system-set"></span> 自定义导航</button>
+      </div>
+    </div>
+    {if $nowStart && $items}
+    <div class="main-sidebar-t">
+      <div class="sidebar sidebarchild" style="background: #fff !important">
+        <ul class="sidebar-ul sidebar-ul-li ul-liside ">
+          <li>
+            <div class="sidebar-item fs-16 border-t">
+              {$topRoute.title}
+            </div>
+          </li>
+          {foreach name="items" item="v"}
+          <?php 
+            $childItems = $v['child'];
+          ?> {if $childItems}
+          <li>
+            <!-- active -->
+            <div
+              class="sidebar-item{if strpos($_SERVER['REDIRECT_URL'],'/console/'.$v['code'].'/') !== false} active {/if}">
+              <span>{$v.title}</span>
+              <!-- iconRotate -->
+              <i
+                class="iconfont icon-icon_jiantou-you float-right{if strpos($_SERVER['REDIRECT_URL'],'/console/'.$v['code'].'/') !== false} iconRotate {/if}"></i>
+            </div>
+            <ul class="sidebar-item-child">
+              {foreach name="childItems" item="var"}
+              <li>
+                <a href="/console/{$v['code']}/{$var['code']}"
+                  class="sidebar-item text-dark{if $_SERVER['REDIRECT_URL'] === '/console/'.$v['code'].'/'.$var['code'] || $_SERVER['REDIRECT_URL'] === '/console/'.$v['code'].'/'.$var['code'].'.html'} active {/if}">
+                   <span>{$var.title}</span>
+                </a>
+              </li>
+              {/foreach}
+            </ul>
+          </li>
+          {else/}
+          <li>
+            <a href="/console/{$topRoute['code']}/{$v['code']}"
+              class="sidebar-item text-dark{if $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'].'/'.$v['code'] || $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'].'/'.$v['code'].'.html' || ($v['code'] === 'console/index' && $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'])} active {/if}">
+               <span>{$v.title}</span>
+            </a>
+          </li>
+          {/if} {/foreach}
+        </ul>
+      </div>
+    </div>
+    {/if}
+    <div class="main-content">
+      <div id="warp" class="content" {if $nowStart && $items} style="margin-left: 150px" {/if}> {block name='content'
+        }{/block} </div> {include file='index@Public:footer' } {include file='index@Public:aside' } </div> </div> <div
+        class="modal fade" id="changePwd" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">更改密码</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="registerform" class="px-3 py-3">
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-sm" placeholder="请输入手机号" name="compPhone"
+                    autocomplete="off" maxlength="11">
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="请输入验证码" name="code" maxlength="6"
+                      autocomplete="off">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-primary" type="button" onclick="fetchMsg(120, this)"
+                        disabled="">获取验证码</button>
+                      <span class="btn btn-secondary disabled" style="display: none;"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-sm" placeholder="请输入密码" name="compPassword"
+                    autocomplete="off">
+                </div>
+                <div class="form-group mb-0">
+                  <input type="password" class="form-control form-control-sm" placeholder="请输入密码" name="recompPassword"
+                    autocomplete="off">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-primary">确定</button>
+              <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {block name='modal'}{/block} {include file='index@Public:script'} {block name='js'}{/block}
+</body>
+
+</html>

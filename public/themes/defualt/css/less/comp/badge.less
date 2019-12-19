@@ -1,0 +1,57 @@
+.badge {
+    position: relative;
+    top: -2px;
+    &.imp {
+        background-color: @cre;
+    }
+    &.ces {
+        background-color: @ces;
+    }
+    &.top {
+        position: absolute;
+        right: 0;
+        top: 15%;
+    }
+    .navbar & {
+        @size: 2*@mpb;
+        min-width: @size;
+        height: @size;
+        line-height: @size;
+        border-radius: @size;
+        .mgl(5px);
+        .pd(0);
+        top: -3px;
+    }
+    &-radius{
+        background-color: transparent;
+        color: @cc;
+        font-weight: normal;
+        top: 0;
+        &:before{
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 12px;
+            background-color: @ces;
+            display: inline-block;
+            .pr;
+            top: 1px;
+            .mgr(@mpb/3);
+            .success&{
+                .bgc(@cgr);
+            }
+            .danger&{
+                .bgc(@cre);
+            }
+            .gray&{
+                .bgc(@cgy);
+            }
+            .warn&{
+                .bgc(@cye);
+            }
+            .gray&{
+                .bgc(@cgy1);
+            }
+        }
+    }
+}

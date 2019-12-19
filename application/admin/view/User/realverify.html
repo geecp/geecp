@@ -1,0 +1,87 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- <div class="box-header clearfix">
+                    <div class="box-tools pull-left form-inline">
+                        <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+                        <div class="input-group" style="width:180px;">
+                            <input type="text" class="form-control input-sm pull-right datetime-range col11_filter datetime_filter" placeholder="时间范围" data-column="11">
+                        </div>
+                        <button class="btn btn-primary btn-sm serchBtn">查询</button>
+                        <div class="pull-right">
+                            <a href="{:url('admin/User/add')}" class="btn btn-primary btn-sm">新增</a>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="box-body">
+                    <table class="table table-bordered table-hover tableData">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>提交用户</th>
+                                <th>真实姓名</th>
+                                <th>身份证号码</th>
+                                <th>认证状态</th>
+                                <!-- <th>申请时间</th> -->
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if !empty($list)} {foreach name="list" item="v"}
+                            <tr data-id="{$v.id}">
+                                <td>{$v.id}</td>
+                                <td>{$v.name}</td>
+                                <td>{$v.realname}</td>
+                                <td>{$v.idcard}</td>
+                                <td>{$v.rstatus}</td>
+                                
+                                <!-- <td>{$v.create_time}</td> -->
+                                <td>
+                                    <a href="javascript:;" onclick="pass($(this))">通过</a>
+                                    <a href="javascript:;" onclick="reject($(this))">拒绝</a>
+                                </td>
+                            </tr>
+                            {/foreach} {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script>
+    function pass(t) {
+        if (confirm('确认要通过审核吗？')) {
+            ajax("{:url('admin/User/passreal')}", {
+                id: t.parents('tr').data('id')
+            }, 'put').then((e) => {
+                t.parents('tr').remove();
+            })
+        }
+    }
+    function reject(t) {
+        if (confirm('确认要拒绝审核吗？')) {
+            ajax("{:url('admin/User/rejectreal')}", {
+                id: t.parents('tr').data('id')
+            }, 'put').then((e) => {
+                t.parents('tr').remove();
+            })
+        }
+    }
+
+    $('.tableData').DataTable({
+        'paging': true,
+        'fixedHeader': true,
+        'lengthChange': false,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'deferRender': true,
+        'processing': true,
+    });
+</script>
+{/block}

@@ -1,0 +1,74 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: @cc1;
+}
+h1 {
+    font-size: 34px;
+}
+h2 {
+    font-size: 26px;
+}
+h3 {
+    font-size: 20px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6{
+    font-size: 12px;
+}
+//
+.en {
+    font-family: robote;
+}
+.cn {
+    font-family: webfont;
+}
+//
+.blod {
+    font-weight: bolder;
+}
+//
+.money {
+    &:before {
+        content: "￥";
+    }
+}
+span.baifen {
+    &:after {
+        content: "%";
+    }
+}
+//
+.help{
+    color: @cgy1;
+    label{
+        color: inherit;
+    }
+}
+.info,.copy{
+    color: @cc2;
+    .footer &{
+        .mgt;
+    }
+}
+.pabs {
+    position: absolute;
+}
+a {
+    cursor: pointer;
+    color:@ces;
+    .trs(@t:.2s);
+}
+.form-control {
+    .unbdr;
+}
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio]{
+    top: -2px;
+}

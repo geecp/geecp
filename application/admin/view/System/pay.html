@@ -1,0 +1,170 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">支付设置</h3>
+        </div>
+        <div class="box-body">
+            <div class="form">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">支付宝商户ID</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入网站名称" value="{$info?$info['name']:''}" autocomplete="off">
+                        <input type="hidden" name="id" value="{$info?$info['id']:''}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">联系邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="请输入联系邮箱" value="{$info?$info['email']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="url" class="col-sm-2 control-label">网站首页域名</label>
+                    <div class="col-sm-10">
+                        <input type="url" class="form-control" id="url" name="url" placeholder="请输入网站首页域名" value="{$info?$info['url']:''}" autocomplete="off">
+                        <p class="help-block">网站首页域名必须以 "http://"、"http://"、"//" 开头 例：https://www.baidu.com</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file" class="col-sm-2 control-label">Logo</label>
+                    <div class="col-sm-10">
+                        <input type="file" id="file" name="file" class="upfile" data-rule=".jpg,.png,.gif" data-size="2" data-width="200px" data-height="50px" autocomplete="off"> {if $info}
+                        <img src="{$info['logo']}" style="width:200px;height: 50px;margin-top: 15px;" /> {/if}
+                        <input type="hidden" id="logo" name="logo" value="{$info?$info['logo']:''}" autocomplete="off">
+                        <p class="help-block">请上传 ".jpg"、".png"、".gif" 并且大小不超过2M 的图片文件</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">网站描述</label>
+                    <div class="col-sm-10">
+                        <textarea name="description" id="description" class="form-control" cols="30" rows="5" placeholder="请输入网站描述">{$info?$info['description']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="keywords" class="col-sm-2 control-label">SEO关键字</label>
+                    <div class="col-sm-10">
+                        <textarea name="keywords" id="keywords" class="form-control" cols="30" rows="5" placeholder="请输入SEO关键字">{$info?$info['keywords']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="icp" class="col-sm-2 control-label">ICP备案</label>
+                    <div class="col-sm-10">
+                        <textarea name="icp" id="icp" class="form-control" cols="30" rows="5" placeholder="请输入ICP备案">{$info?$info['icp']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="beian" class="col-sm-2 control-label">网安备案</label>
+                    <div class="col-sm-10">
+                        <textarea name="beian" id="beian" class="form-control" cols="30" rows="5" placeholder="请输入网安备案">{$info?$info['beian']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="idc" class="col-sm-2 control-label">IDC备案</label>
+                    <div class="col-sm-10">
+                        <textarea name="idc" id="idc" class="form-control" cols="30" rows="5" placeholder="请输入IDC备案">{$info?$info['idc']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isp" class="col-sm-2 control-label">ISP备案</label>
+                    <div class="col-sm-10">
+                        <textarea name="isp" id="isp" class="form-control" cols="30" rows="5" placeholder="请输入ISP备案">{$info?$info['isp']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maintain" class="col-sm-2 control-label">维护模式</label>
+                    <div class="col-sm-10">
+                        <select name="maintain" id="maintain" class="form-control">
+              <option value="0" {$info?$info['maintain'] == '0'?'selected':'':''}>关闭</option>
+              <option value="1" {$info?$info['maintain'] == '1'?'selected':'':''}>开启</option>
+            </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maintaininfo" class="col-sm-2 control-label">维护展示内容</label>
+                    <div class="col-sm-10">
+                        <textarea name="maintaininfo" id="maintaininfo" class="form-control" cols="30" rows="10" placeholder="请输入维护展示内容">{$info?$info['maintaininfo']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="code" class="col-sm-2 control-label">第三方统计代码</label>
+                    <div class="col-sm-10">
+                        <textarea name="code" id="code" class="form-control" cols="30" rows="10" placeholder="请输入第三方统计代码">{$info?$info['code']:''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="account_name" class="col-sm-2 control-label">开户名称(线下汇款用)</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="account_name" name="account_name" placeholder="请输入开户名称" value="{$info?$info['account_name']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bank_name" class="col-sm-2 control-label">开户银行(线下汇款用)</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="请输入开户银行" value="{$info?$info['bank_name']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="account_number" class="col-sm-2 control-label">汇款账号(线下汇款用)</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="account_number" name="account_number" placeholder="请输入汇款账号" value="{$info?$info['account_number']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-primary sub">提交</button>
+                        <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<script>
+    $('.upfile').change(function() {
+        let tfile = $(this),
+            imgurl = '',
+            formdatas = new FormData(),
+            suffix = tfile[0].files[0].name.substr(tfile[0].files[0].name.lastIndexOf("."));
+        if (tfile.data('rule').indexOf(suffix) < 0) {
+            alert('文件类型不符合要求');
+            return false;
+        }
+        if ((tfile[0].files[0].size / 1024 / 1024) >= Number(tfile.data('size'))) {
+            alert('图片尺寸大于2M');
+            return false;
+        }
+        formdatas.append('file', tfile[0].files[0]);
+        ajax('/uploadImg', formdatas, 'post', true).then(e => {
+            if (e.status == 200) {
+                tfile.siblings('[name="logo"]').val(e.data);
+                if (tfile.next().prop('nodeName') == 'IMG') {
+                    tfile.next().attr('src', e.data);
+                    return;
+                }
+                tfile.after(`<img src="${e.data}" style="width:${tfile.data('width')};height: ${tfile.data('height')};margin-top: 15px;"/>`);
+                return;
+            }
+            alert(e.msg);
+        });
+    });
+    $('.sub').click(function() {
+        let names = document.querySelectorAll('.form-group > div > [name]'),
+            vals = {};
+        names = [].slice.call(names);
+        names.map((e) => {
+            vals[e.name] = e.value;
+        });
+        ajax('{:url("admin/System/basicAuth")}', vals, 'post').then(e => {
+            if (e.status === 200) {
+                alert(e.msg);
+                location.href = "{:url('admin/System/basic')}";
+            } else {
+                alert(e.msg);
+            }
+        });
+    });
+</script>
+{/block}

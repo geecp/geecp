@@ -1,0 +1,72 @@
+//
+    .page-header {
+        position: relative;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        margin:0 0 20px 0;
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            position: relative;
+            margin: 0;
+            line-height: 30px;
+        }
+        small {
+            margin-left: 10px;
+            line-height: 30px;
+            font-size: 14px;
+        }
+        a {
+            text-decoration: none;
+            color: @ces;
+            font-size: 14px;
+            .iconfont {
+                font-size: 16px;
+                .mgr(5px);
+            }
+        }
+        &.un {
+            .unbd;
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 30px;
+                height: 1px;
+                background-color: @ces;
+            }
+        }
+        .nav {
+            position: absolute;
+            right: 0;
+            bottom: 10px;
+            li {
+                a {
+                    .trs;
+                    .unbdr;
+                    padding: 0 30px;
+                    line-height: 30px;
+                    color: @cc;
+                    &:hover {
+                        background-color: @ces;
+                        color: @cwh;
+                    }
+                    &.more {
+                        padding: 0;
+                        color: @cwh;
+                    }
+                }
+            }
+            >li+li {
+                margin-left: 10px;
+            }
+        }
+    }
+    
+    a.page-header {
+        display: block;
+        text-decoration: none;
+    }

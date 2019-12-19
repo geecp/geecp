@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {include file='home@Public:head'} {block name='style'}{/block}
+</head>
+
+<body>
+  <div class="main">
+    <div class="home">
+        {include file='home@Public:header'}
+        <div class="">
+            {block name='content'}{/block}
+        </div>
+        {include file='home@Public:footer'}
+        {include file='home@Public:aside'}
+    </div>
+  </div>
+  {block name='modal'}
+  <!-- 通用modal -->
+  <div class="modal fade" id="changePwd" tabindex="-1" role="dialog" aria-hidden="true">
+    </div>
+  {/block}
+  {include file='home@Public:script'}
+  {block name='js'}
+  <style>
+    body{
+      min-width: 1200px;
+    }
+  </style>
+  <script></script>
+  <!-- 公共JS -->
+  {/block}
+</body>
+
+</html>

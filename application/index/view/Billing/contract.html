@@ -1,0 +1,149 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+    <div class="card-header  border-t pb-0" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto  m-0">
+                <li class="list-inline-item p-2">
+                    <h4>合同管理</h4>
+                </li>
+            </ul>
+            <!-- <ul class="list-inline m-0">
+                <li class="list-inline-item p-2">
+                    <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="bg-f5 p-3 form-group">
+                <ul class="mb-0 px-2">
+                    <li>合同管理支持您申请、查看带订单信息的电子合同。</li>
+                    <li>申请带订单信息的电子合同有两个前提：
+                        <ol class="px-3">
+                            <li>您已同意《 <a href="#">七朵云线上订购协议</a> 》，订购协议可在官网查看、下载;</li>
+                            <li>需完成实名认证，甲方信息必须与当前实名认证信息保持一致;</li>
+                        </ol>
+                    </li>
+                    <li>每个订单只支持创建一次带电子章的正式合同，草稿合同需作废后才能重新申请合同。</li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <div class="col bg-orange color-orange p-2">
+                    您还未完成实名认证，暂时无法申请合同。<a href="../iam/qualify_result.html">立即实名认证</a>
+                </div>
+            </div>
+            <div class="form-group tool-list d-flex">
+                <ul class="list-inline mr-auto m-0 form-inline ">
+                    <li class="list-inline-item ">
+                        <div class="">
+                            <button type="button" class="btn btn-block btn-sm" disabled><span class="iconfont iconicon_tianjia">申请合同</span></button>
+                        </div>
+                    </li>
+                    <li class="list-inline-item ">
+                        <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                            <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                            <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                            <span class="c-datepicker-range-separator">-</span>
+                            <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-inline border mb-0 ">
+                    <li class="list-inline-item p-0 mr-0">
+                        <select name="" id="" class="form-control form-control-sm border-0 fs-12" style="width: 70px">
+                                <option value="" selected="">全部</option>
+                                <option value="">正式</option>
+                                <option value="">草稿</option>
+                                <option value="">作废</option>
+                            </select>
+                    </li>
+                    <li class="list-inline-item">
+                        <div class="form-inline">
+                            <input type="text" class="form-control form-control-sm border-0 fs-12 " onfocus="addborder(this)" onblur="remborder(this)" placeholder="请输入实例ID进行搜索">
+                            <div class="input-group-append">
+                                <button type="button" class="btn unbg btn-sm px-2" style="">
+                                        <span class="iconfont iconicon_sousuo-xian mr-0"></span>
+                                    </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group ml-nge">
+                <table class="table table-border">
+                    <thead class="bg-fB p-2">
+                        <tr class="font-weight-light">
+                            <th class="px-3">合同编号</th>
+                            <th class="p-2">关联订单</th>
+                            <th class="p-2">备注</th>
+                            <th class="p-2">申请时间</th>
+                            <th class="p-2">
+                                <div class="bg-tran">
+                                    <select name="" id="" class="form-control form-control-sm border-0 " style="width: 80px">
+            <option value="" selected>全部</option>
+            <option value="">正式</option>
+            <option value="">草稿</option>
+            <option value="">作废</option>
+          </select>
+                                </div>
+                            </th>
+                            <th class="p-2">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center p-5">您尚未未实名 <a href="#">重新加载</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between pt-3 pl-3">
+            <ul class="mr-auto"></ul>
+            <ul class="list-inline form-inline px-2">
+                <li class="list-inline-item">每页显示</li>
+                <li>
+                    <select name="" id="" class="form-control form-control-sm">
+      <option value="">10</option>
+      <option value="">20</option>
+      <option value="">30</option>
+      <option value="">40</option>
+    </select>
+                </li>
+            </ul>
+            <ul class="pagination mb-0">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2
+          <span class="sr-only">(current)</span>
+      </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">&gt;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+    function addborder(e) {
+        $(e).parent().parent().parent().addClass("focus-border");
+    }
+
+    function remborder(e) {
+        $(e).parent().parent().parent().removeClass("focus-border");
+    }
+</script>
+{/block}

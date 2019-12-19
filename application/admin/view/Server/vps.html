@@ -1,0 +1,147 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header clearfix">
+          <div class="box-tools pull-left form-inline">
+            <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+            <button class="btn btn-primary btn-sm serchBtn">查询</button>
+            <!-- <div class="pull-right">
+              <a href="{:url('admin/Product/addgroup')}" class="btn btn-primary btn-sm">新增产品组</a>
+              <a href="{:url('admin/Product/add')}" class="btn btn-primary btn-sm">新增产品</a>
+            </div> -->
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-hover tableData">
+            <thead>
+              <tr>
+                <th>主机名</th>
+                <th>开通时间</th>
+                <th>到期时间</th>
+                <th>配置</th>
+                <th>所属用户</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list)} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-name="{$v.name}" data-user="{$v.user}" data-pro_id="{$v.product_id}">
+                <td>{$v.name}</td>
+                <td>{$v.create_time}</td>
+                <td>{$v.end_time|date='Y-m-d H:i:s',###}</td>
+                <td>{$v.pro_list}</td>
+                <td>{$v.user}</td>
+                <td>{$v.status}</td>
+                <td>
+                  <a href="javascript:;" onclick="showRenew($(this))">续费</a>
+                  <!-- <a href="javascript:;" onclick="">关机</a>
+                  <a href="javascript:;" onclick="">开机</a> -->
+                  <a href="{:url('admin/Service/vpsmanager',['vpsname'=>$v['name'],'password'=>$v['password'],'plug_name'=>$v['plug_name']])}" target="_blank">控制面板</a>
+                </td>
+              </tr>
+              {/foreach} {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<div class="modal fade" id="renew" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">云主机续费</h4>
+      </div>
+      <div class="modal-body">
+        <p>请选择您要续费的时长</p>
+        <div class="form-horizontal">
+          <input type="hidden" name="id">
+          <input type="hidden" name="pro_id">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">主机名：</label>
+            <div class="col-sm-5">
+              <div data-name="name" class="form-control-plaintext"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">所属用户：</label>
+            <div class="col-sm-5">
+              <div data-name="user" class="form-control-plaintext"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">续费时长：</label>
+            <div class="col-sm-5">
+              <select name="pay_length" class="form-control">
+                <option value="1">1个月</option>
+                <option value="2">2个月</option>
+                <option value="3">3个月</option>
+                <option value="4">4个月</option>
+                <option value="5">5个月</option>
+                <option value="6">6个月</option>
+                <option value="7">7个月</option>
+                <option value="8">8个月</option>
+                <option value="9">9个月</option>
+                <option value="12">1年</option>
+                <option value="24">2年</option>
+                <option value="36">3年</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm subrenew">确认</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function showRenew(t){
+    $('#renew [name]').val('')
+    $('#renew [data-name]').text('')
+    $('#renew [name="id"]').val(t.parents('tr').data('id'))
+    $('#renew [name="pro_id"]').val(t.parents('tr').data('pro_id'))
+    $('#renew [data-name="name"]').text(t.parents('tr').data('name'))
+    $('#renew [data-name="user"]').text(t.parents('tr').data('user'))
+    $('#renew').modal('show')
+  }
+  $('.subrenew').click(function(){
+    if(confirm("确定要为这台云主机续费吗？")){
+      ajax('{:url("admin/Service/renewvps")}',{
+        id: $('#renew [name="id"]').val(),
+        pro_id: $('#renew [name="pro_id"]').val(),
+        pay_length: $('#renew [name="pay_length"]').val(),
+        name: $('#renew [data-name="name"]').text(),
+        user: $('#renew [data-name="user"]').text(),
+        type: 'renew',
+      },'post').then(e=>{
+        if(e.status == 200){
+          window.location.reload()
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  })
+  $('.tableData').DataTable({
+    'paging': false,
+    'fixedHeader': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': false,
+    'info': true,
+    'autoWidth': false,
+    'deferRender': true,
+    'processing': true,
+  });
+</script>
+{/block}

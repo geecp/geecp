@@ -1,0 +1,79 @@
+@import "btn.less";
+@import "input.less";
+@import "crbox.less";
+@import "inputgroup.less";
+.form-group {
+    position: relative;
+    .control-label {
+        padding-top: 13px;
+        color: @cgy1*0.5;
+        &.forta {
+            padding-top: 7px;
+        }
+    }
+    .form-horizontal &.hasbtn {
+        .col-loop(12);
+        .btn-lg {
+            .pdl;
+            .pdr;
+        }
+    }
+}
+
+.input-group {
+    .input-group-addon {
+        .unbg;
+        .unbd;
+        &+.select[class*="col"] {
+            display: inline-block;
+            .pdl(0);
+        }
+    }
+    .form-group[class*="col"] {
+        .mgb(0);
+    }
+    .select {
+        .ohd;
+    }
+}
+
+fieldset[disabled="disabled"] {
+    .vba-ck,
+    .vba-rd {
+        &:hover:after {
+            border-color: #ccc;
+        }
+    }
+}
+
+.form-inline {
+    .form-group+.checkbox,
+    .form-group+.form-group {
+        .mgl
+    }
+    .checkbox+button,
+    .form-group+button {
+        .mgl(2*@mpb);
+    }
+}
+
+.form-horizontal {
+    @media (min-width: 768px) {
+        .form-group .control-label {
+            .pdt(7px);
+        }
+    }
+    &.vba-set {
+        .form-group {
+            .pdy(@mpb);
+            .mgx(@mpb);
+            .bdrb;
+            &:last-child{
+                .unbd;
+            }
+        }
+        .info {
+            color: @cc2;
+        }
+    }
+}

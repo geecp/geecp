@@ -1,0 +1,89 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">{$info?'修改':'新增'}产品</h3>
+        </div>
+        <div class="box-body">
+            <div class="form">
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">导航名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="请输入导航名称" value="{$info?$info['title']:''}" autocomplete="off">
+                        <input type="hidden" name="f_id" value="{$info?$info['f_id']:''}">
+                        <input type="hidden" name="id" value="{$info?$info['id']:''}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="code" class="col-sm-2 control-label">导航标识</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="请输入导航标识" value="{$info?$info['code']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="is_show" class="col-sm-2 control-label">是否展示</label>
+                    <div class="col-sm-10">
+                        <select name="is_show" id="is_show" class="form-control">
+                          <option value="0" {$info['is_show'] === "0" ?'selected':''}>否</option>
+                          <option value="1" {$info['is_show'] === "1" ?'selected':''}>是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="is_customize" class="col-sm-2 control-label">默认主菜单展示</label>
+                    <div class="col-sm-10">
+                        <select name="is_customize" id="is_customize" class="form-control">
+                          <option value="0" {$info['is_customize'] === "0" ?'selected':''}>否</option>
+                          <option value="1" {$info['is_customize'] === "1" ?'selected':''}>是</option>
+                        </select>
+                    </div>
+                </div>
+                {if $info['f_id'] == 0}
+                <div class="form-group">
+                    <label for="is_pro" class="col-sm-2 control-label">所属产品类型</label>
+                    <div class="col-sm-10">
+                        <select name="is_pro" id="is_pro" class="form-control">
+                          {foreach name="typelist" item="v"}
+                          <option value="{$v.id}" {$info['is_pro'] === $v['id'] ?'selected':''}>{$v.title}</option>
+                          {/foreach}
+                        </select>
+                    </div>
+                </div>
+                {/if}
+                <div class="form-group">
+                    <label for="icon" class="col-sm-2 control-label">路由图标</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="icon" name="icon" placeholder="请输入路由图标" value="{$info?$info['icon']:''}" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-primary sub">提交</button>
+                        <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<script>
+    $('.sub').click(function() {
+        let names = document.querySelectorAll('.form-group > div > [name]'),
+            vals = {};
+        names = [].slice.call(names);
+        names.map((e) => {
+            vals[e.name] = $(e).val();
+        });
+        ajax('{:url("admin/Routes/addAuth")}', vals, 'post').then(e => {
+            if (e.status === 200) {
+                alert(e.msg);
+                location.href = "{:url('admin/Routes/index',['fid'=>$info['f_id']])}";
+            } else {
+                alert(e.msg);
+            }
+        });
+    });
+</script>
+{/block}

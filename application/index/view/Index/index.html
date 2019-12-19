@@ -1,0 +1,30 @@
+{extend name='Common/index' /}
+{block name='content'}
+<div class="mb-2">
+  欢迎回来, {$userinfo.name}
+  <a href="javascript:;" data-toggle="tooltip" class="iconfont icon-idcard zfs-18 {$userinfo.realverify != 2?'ztext-unbind':'text-primary'} ml-1" title="{$userinfo.realverify != 2?'未实名认证':'已实名认证'}"></a>
+  <a href="javascript:;" class="px-1 iconfont icon-mobile zfs-18 {$userinfo.is_phone == '0'?'ztext-unbind':'text-primary'} ml-1" data-toggle="tooltip" title="{$userinfo.is_phone == '0'?'手机未绑定':'手机已绑定'}"></a>
+  <a href="javascript:;" data-toggle="tooltip" title="{$userinfo.is_email == '0'?'邮箱未绑定':'邮箱已绑定'}" class="iconfont icon-mail zfs-18 {$userinfo.is_email == '0'?'ztext-unbind':'text-primary'} ml-1"></a>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card" style="border-radius: 0;">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-body">
+            <span class="fs-12 text-muted">现金余额:</span>
+            <h3><b>￥{$userinfo.balance|to_double}</b></h3>
+          </div>
+          <div class="media-right">
+            <a href="{:url('index/Billing/recharge')}" class="btn btn-sm btn-primary">充值</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name='js'}
+
+{/block}
+ 

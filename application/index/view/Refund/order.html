@@ -1,0 +1,194 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto mb-0">
+                <li class="list-inline-item">
+                    <a href="#" class="fs-16" style="color: #000"> 订单管理</a>
+                </li>
+            </ul>
+            <!-- <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <a href="#"><i class="iconfont iconguanlian1"></i>操作指南</a>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="col-12 px-0">
+                <div class="form-group">
+                    <div class="tool-list d-flex">
+                        <ul class="list-inline form-inline mr-auto mb-0">
+                            <li class="list-inline-item">
+                                <div>
+                                    <select name="" id="" class="form-control form-control-sm">
+          <option value="">适用产品:全部</option>
+          <option value="">通用</option>
+          <option value="">应用引擎专业版 BAEPRO</option>
+          <option value="">云服务器 BCC</option>
+          <option value="">关系型数据库 RDS</option>
+          <option value="">负载均衡 BLB</option>
+          <option value="">云磁盘 CDS</option>
+          <option value="">简单缓存服务 SCS</option>
+          <option value="">百度MapReduce BMR</option>
+          <option value="">百度消息服务 KAFKA</option>
+        </select>
+                                </div>
+                            </li>
+                            <li class="list-inline-item ">
+                                <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                                    <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                                    <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                                    <span class="c-datepicker-range-separator">-</span>
+                                    <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                                </div>
+                            </li>
+                            <li class="list-inline-item">
+                                <div>
+                                    <select name="" id="" class="form-control form-control-sm">
+          <option value="">付费方式:全部</option>
+          <option value="">后付费</option>
+          <option value="">预付费</option>
+        </select>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <button class="btn  btn-light btn-sm"><i class="iconfont iconicon_xiazai"></i></button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button class="btn  btn-light btn-sm"><i class="iconfont iconicon_shuaxin"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ml-nge">
+                <table class="table table-border">
+                    <thead class="bg-fB p-2">
+                        <tr class="font-weight-light">
+                            <th class="px-3">订单号</th>
+                            <th>产品名称</th>
+                            <th class="" style="padding-left:11px !important">
+                                <div class="bg-tran">
+                                    <select name="" id="" class="form-control form-control-sm border-0 p-0" style="width: 80px;background: #F6F7FB!important;">
+                                      <option value="" selected="">状态</option>
+                                      <option value="">全部</option>
+                                      <option value="">未支付</option>
+                                      <option value="">已支付</option>
+                                      <option value="">已取消</option>
+                                      <option value="">已作废</option>
+                                    </select>
+                                </div>
+                            </th>
+                            <th>订单金额</th>
+                            <th>现金支付</th>
+                            <th>订单类型</th>
+                            <th>下单时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> <a href="order_detail.html" class="">10f443a523d34987a330a3ed365e827a</a></td>
+                            <td>
+                                <ul class="mb-0 p-0" style="list-style-type: none">
+                                    <li>BCC（云服务器）</li>
+                                    <li>CDS（云磁盘）</li>
+                                    <li>EIP（弹性公网IP）</li>
+                                </ul>
+                            </td>
+                            <td class="fc-red">未支付</td>
+                            <td> ￥70.00</td>
+                            <td>￥0.00</td>
+                            <td>购买</td>
+                            <td>2019-03-22 15:39</td>
+                            <td>
+                                <a href="../finance/pay_orderId.html" class="">支付</a>
+                                <a href="order_detail.html" class="">查看订单</a>
+                                <a href="#" class="">取消订单</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <a href="#" class="">1d30f80ff4f9478aa3a365df12d8f3f3</a></td>
+                            <td>
+                                <ul class="mb-0 p-0" style="list-style-type: none">
+                                    <li>BCC（云服务器）</li>
+                                    <li>CDS（云磁盘）</li>
+                                    <li>EIP（弹性公网IP）</li>
+                                </ul>
+                            </td>
+                            <td class="color-green">已支付</td>
+                            <td> ￥35.00</td>
+                            <td class="color-orange">￥35.00</td>
+                            <td>购买</td>
+                            <td>2019-03-22 15:39</td>
+                            <td>
+                                <a href="#" class="">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> <a href="#" class="">10f443a523d34987a330a3ed365e827a</a></td>
+                            <td>
+                                <ul class="mb-0 p-0" style="list-style-type: none">
+                                    <li>BCC（云服务器）</li>
+                                    <li>CDS（云磁盘）</li>
+                                    <li>EIP（弹性公网IP）</li>
+                                </ul>
+                            </td>
+                            <td class="op-8">已取消</td>
+                            <td> ￥70.00</td>
+                            <td>￥0.00</td>
+                            <td>购买</td>
+                            <td>2019-03-22 15:39</td>
+                            <td>
+                                <a href="#" class="">查看</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between pt-3 pl-3">
+            <ul class="mr-auto"></ul>
+            <ul class="list-inline form-inline px-2">
+                <li class="list-inline-item">每页显示</li>
+                <li>
+                    <select name="" id="" class="form-control form-control-sm">
+    <option value="">10</option>
+    <option value="">20</option>
+    <option value="">30</option>
+    <option value="">40</option>
+  </select>
+                </li>
+            </ul>
+            <ul class="pagination mb-0">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2
+        <span class="sr-only">(current)</span>
+    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">&gt;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+</script>
+{/block}

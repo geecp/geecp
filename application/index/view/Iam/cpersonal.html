@@ -1,0 +1,298 @@
+{extend name='index@Common/index' /} {block name='content'}
+{if $userinfo.realverify == 0 || $userinfo.realverify == 3}
+<div class="cont">
+  <div class="card form-group">
+    <div class="card-header bg-white text-center" style="position:relative">
+      <div class="py-2" style="position: absolute;top:15px;z-index: 1;">
+        <a href="{:url('Index/Iam/overview')}" class="fs-12 text-dark">&lt&nbsp;返回用户中心首页</a>
+      </div>
+      <div class=" form-inline py-1" style="position: absolute;top:15px;right:15px">
+        <div class="fs-12 text-primary ">
+          <span class="steps steps-active">1</span>
+          <span class="px-1">填写认证信息</span>
+          <span class="iconfont iconicon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12 px-2">
+          <span class="steps">2</span>
+          <span class="px-1">人工审核</span>
+          <span class="iconfont iconicon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12">
+          <span class="steps">3</span>
+          <span class="px-1">认证结果</span>
+        </div>
+      </div>
+      <h4 class="clear page-header mb-0 text-center">个人认证</h4>
+    </div>
+    <div class="card-body clear">
+      {if $userinfo.realverify == 3}
+      <div class="text-center">
+        <h2 class="text-dark ">实名认证失败,请重新提交认证信息</h2>
+        <h5 class=""><i class="iconfont iconSecurity-HIDS"></i> 技术加密，保障您的账号信息安全</h5>
+      </div>
+      {else/}
+      <div class="text-center">
+        <h2 class="text-dark ">欢迎进行实名认证</h2>
+        <h5 class=""><i class="iconfont iconSecurity-HIDS"></i> 技术加密，保障您的账号信息安全</h5>
+      </div>
+      {/if}
+      <div class="pt-3 px-4 m-auto text-center col-3">
+        <div class="col m-auto pb-2">
+          <img src="__THEMES__/defualt/img/self.png" alt="" style="border-radius: 50%">
+        </div>
+        <div class="col m-auto pb-4">
+          <span>{$userinfo.name}</span>
+        </div>
+        <form action="{:url('Index/Iam/subauth')}">
+          <input type="hidden" name="id" value="{$userinfo.id}" />
+          <div class="col pb-3">
+            <input type="text" class="form-control" name="realname" placeholder="输入本人真实姓名">
+          </div>
+          <div class="col pb-4">
+            <input type="text" class="form-control" name="idcard" placeholder="输入本人身份证号">
+          </div>
+          <div class="col form-group">
+            <!-- <button class="btn btn-primary w-100" type="submit">开始验证</button> -->
+            <a href="javascript:;" onclick="subauth()" class="btn btn-primary w-100">开始验证</a>
+          </div>
+        </form>
+        <h6 class="fs-12">如无法操作，请提交工单，类型为“账号实名认证” <a href="#"> 提交工单</a></h6>
+      </div>
+    </div>
+    <div class="card-footer mb-3 unbg border-0" style="opacity: 0.5">
+      <div class="col-3 m-auto text-center form-row form-group fs-12">
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            保障账号安全
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            消费权益保障
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            专属客服通道
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{elseif $userinfo.realverify == 2}
+<div class="cont">
+  <div class="card form-group">
+    <div class="card-header bg-white text-center" style="position:relative">
+      <div class="py-2" style="position: absolute;top:15px;z-index:2">
+        <a href="{:url('Index/Iam/overview')}" class="fs-12 text-dark">&lt&nbsp;返回用户中心首页</a>
+      </div>
+      <div class=" form-inline py-1" style="position: absolute;top:15px;right:15px">
+        <div class="fs-12 text-primary ">
+          <span class="steps steps-active">1</span>
+          <span class="px-1">填写认证信息</span>
+          <span class="iconfont iconicon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12 px-2 text-primary">
+          <span class="steps steps-active">2</span>
+          <span class="px-1">人工审核</span>
+          <span class="iconfont iconicon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12 text-primary">
+          <span class="steps steps-active">3</span>
+          <span class="px-1">认证结果</span>
+        </div>
+      </div>
+      <h4 class="clear page-header mb-0 text-center">认证结果</h4>
+    </div>
+    <div class="card-body clear">
+      <div class="text-center">
+        <h2 class="text-dark ">您已完成实名认证，可继续购买和使用云产品</h2>
+        <h5 class=""><i class="iconfont iconSecurity-HIDS"></i> 技术加密，保障您的账号信息安全</h5>
+      </div>
+      <div class="pt-3 px-4 m-auto text-center col-3">
+        <div class="col m-auto pb-2">
+          <img src="__THEMES__/defualt/img/self.png" alt="" style="border-radius: 50%">
+        </div>
+        <div class="col m-auto ">
+          <span>{$userinfo.name}</span>
+        </div>
+        <form class="p-3 fs-14 text-left">
+          <table class="m-auto">
+            <tbody>
+              <tr>
+                <td style="width: 90px" class="py-2">真实姓名：</td>
+                <td>{$userinfo.realname}</td>
+              </tr>
+              <tr>
+                <td style="width: 90px" class="py-2">身份证号：</td>
+                <td>{$userinfo.idcard}</td>
+              </tr>
+              <tr>
+                <td style="width: 90px" class="py-2">认证：</td>
+                <td class="color-green">已认证 <i class="iconfont iconwarning"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="col-12 m-auto  form-row">
+          <div class="col">
+            <a href="/" class="btn btn-primary w-100">进入首页购买</a>
+          </div>
+          <!-- <div class="col">
+                  <a href="#" class="btn btn-primary w-100">继续刷脸认证</a>
+                </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="card-footer mb-3 unbg border-0" style="opacity: 0.5">
+      <div class="col-3 m-auto text-center form-row form-group fs-12">
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            保障账号安全
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            消费权益保障
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            专属客服通道
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{else /}
+<div class="cont">
+  <div class="card form-group">
+    <div class="card-header bg-white text-center" style="position:relative">
+      <div class="py-2" style="position: absolute;top:15px;z-index:2">
+        <a href="{:url('Index/Iam/overview')}" class="fs-12 text-dark">&lt&nbsp;返回用户中心首页</a>
+      </div>
+      <div class=" form-inline py-1" style="position: absolute;top:15px;right:15px">
+        <div class="fs-12 text-primary ">
+          <span class="steps steps-active">1</span>
+          <span class="px-1">填写认证信息</span>
+          <span class="iconfont iconicon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12 px-2 text-primary">
+          <span class="steps steps-active">2</span>
+          <span class="px-1">人工审核</span>
+          <span class="iconfont iconicon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12">
+          <span class="steps">3</span>
+          <span class="px-1">认证结果</span>
+        </div>
+      </div>
+      <h4 class="clear page-header mb-0 text-center">人工审核</h4>
+    </div>
+    <div class="card-body clear">
+      <div class="text-center">
+        <h2 class="text-dark ">正在审核，实名认证后，可继续购买和使用云产品</h2>
+        <h5 class=""><i class="iconfont iconSecurity-HIDS"></i> 技术加密，保障您的账号信息安全</h5>
+      </div>
+      <div class="pt-3 px-4 m-auto text-center col-3">
+        <div class="col m-auto pb-2">
+          <img src="__THEMES__/defualt/img/self.png" alt="" style="border-radius: 50%">
+        </div>
+        <div class="col m-auto ">
+          <span>{$userinfo.name}</span>
+        </div>
+        <form class="p-3 fs-14 text-left">
+          <table class="m-auto">
+            <tbody>
+              <tr>
+                <td style="width: 90px" class="py-2">真实姓名：</td>
+                <td>{$userinfo.realname}</td>
+              </tr>
+              <tr>
+                <td style="width: 90px" class="py-2">身份证号：</td>
+                <td>{$userinfo.idcard}</td>
+              </tr>
+              <tr>
+                <td style="width: 90px" class="py-2">认证：</td>
+                <td class="fc-red">审核中 <i class="iconfont iconwarning"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <!-- <div class="col-12 m-auto  form-row">
+          <div class="col">
+            <a href="javascript;;" class="btn btn-primary w-100">审核完成</a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="card-footer mb-3 unbg border-0" style="opacity: 0.5">
+      <div class="col-3 m-auto text-center form-row form-group fs-12">
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            保障账号安全
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            消费权益保障
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="col">
+            <i class="iconfont iconanquanfuwu-Security fs-30"></i>
+          </div>
+          <div class="col">
+            专属客服通道
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}
+{/block} {block name='modal'} {/block} {block name='js'}
+{if $userinfo.realverify == 0 || $userinfo.realverify == 3}
+<script>
+  function subauth(){
+    ajax("{:url('Index/Iam/subauth')}",{
+      id: $('[name="id"]').val(),
+      realname: $('[name="realname"]').val(),
+      idcard: $('[name="idcard"]').val(),
+    },'post').then(e=>{
+      if(e.status == 200){
+        window.location.reload();
+      } else {
+        alert(e.msg)
+      }
+    });
+  }
+</script>
+{/if}
+{/block}

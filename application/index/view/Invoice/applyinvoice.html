@@ -1,0 +1,378 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2" style="border-bottom:3px solid #108cee;">
+          <a href="{:url('index/Invoice/list')}" class="fs-16">
+            <h4 style="color: #108cee;">发票列表</h4>
+          </a>
+        </li>
+        <li class="list-inline-item p-2">
+          <a href="{:url('index/Invoice/template')}" class="fs-16">
+            <h4>发票信息管理</h4>
+          </a>
+        </li>
+        <li class="list-inline-item p-2">
+          <a href="{:url('index/Invoice/addresslist')}" class="fs-16">
+            <h4>寄送地址</h4>
+          </a>
+        </li>
+      </ul>
+      <!-- <ul class="list-inline m-0">
+        <li class="list-inline-item p-2">
+          <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="card-body fs-12 invoice_info">
+    <div class="cont-box px-5">
+      <div class="form-group form-row">
+        <label for="" class="bef-red col-form-label-sm col-1">本次申请类目：</label>
+        <div class="col-3">
+          <div class="form-control-plaintext form-control-sm">消费类</div>
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <label for="" class="bef-red col-form-label-sm col-1">本次申请金额：</label>
+        <div class="col-3">
+          <input type="number" step="0.01" max="{$cimoney|to_double}" class="form-control form-control-sm" name="money"
+            value="">
+          <span class="text-muted">可开票金额为{$cimoney|to_double}元</span>
+        </div>
+      </div>
+    </div>
+    <div class="cont-box px-5 py-3 bg-light">
+      <div class="form-group form-row">
+        <label for="" class="col-form-label-sm col-1">发票类型：</label>
+        <div class="col col-form-label-sm">
+          <div class="pay-list">
+            <div class="rc-group">
+              <input type="radio" name="type" value="0" autocomplete="off" id="invType1"
+                <?php echo $iinfo?$iinfo['type']==0?'checked':'': 'checked'; ?>>
+              <label class="rc-group-item px-1 mb-0" for="invType1">增值税普通发票</label>
+              {if !empty($cinfo) && $cinfo['status'] == 1}
+              <input type="radio" name="type" value="1" autocomplete="off" id="invType2"
+                <?php echo $iinfo?$iinfo['type']==1?'checked':'': ''; ?>>
+              <label class="rc-group-item px-1 mb-0" for="invType2">增值税专用发票</label>
+              {else /}
+              <span class="color-orange"><span class="iconfont iconwarning"></span>如果您是具有一般纳税人资格的用户，可在依次通过 <a
+                  href="{:url('Index/Iam/ccompany')}">企业或组织的实名认证</a>和 <a
+                  href="{:url('Index/Iam/ccompany')}">专票认证</a>后，申请增值税专用发票</span>
+              {/if}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <label class="col-form-label-sm col-1">普票类型：</label>
+        <div class="col">
+          <div class="pay-list">
+            <div class="rc-group">
+              <input type="radio" name="n_type" value="0" autocomplete="off" id="individual_invoice"
+                <?php echo $iinfo?$iinfo['n_type']==0?'checked':'': 'checked'; ?>>
+              <label class="rc-group-item px-1 mb-0 wh-90" for="individual_invoice"> 个人普票</label>
+              <input type="radio" name="n_type" value="1" autocomplete="off" id="corporate_invoice"
+                <?php echo $iinfo?$iinfo['n_type']==1?'checked':'': ''; ?>>
+              <label class="rc-group-item px-1 mb-0 wh-90" for="corporate_invoice">企业类普票</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <label for="" class="bef-red col-form-label-sm col-1">发票抬头：</label>
+        <div class="col-3">
+          <input type="text" class="form-control form-control-sm" name="title"
+            value="<?php echo $iinfo?$iinfo['title']:''; ?>">
+        </div>
+      </div>
+      <div class="individual_invoice  <?php echo $iinfo?$iinfo['n_type']==0?'d-none':'': 'd-none'; ?>">
+        <div class="form-group form-row">
+          <label for="" class="bef-red col-form-label-sm col-1">纳税人识别号：</label>
+          <div class="col-3">
+            <input type="text" class="form-control form-control-sm" name="taxpayerno"
+              value="<?php echo $iinfo?$iinfo['taxpayerno']:''; ?>">
+          </div>
+          <div class="col-12 form-row">
+            <label for="" class="col-form-label-sm col-1"></label>
+            <div class="col-10">
+              <span class="text-secondary">请填写纳税人识别号或统一社会信用代码号，若您是其他组织机构，请填写组织机构代码证上的编号</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <label for="" class="bef-red col-form-label-sm col-1">开户银行名称：</label>
+          <div class="col-2">
+            <input type="text" class="form-control form-control-sm" name="bank"
+              value="<?php echo $iinfo?$iinfo['bank']:''; ?>">
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <label for="" class="bef-red col-form-label-sm col-1">开户帐号：</label>
+          <div class="col-2">
+            <input type="text" class="form-control form-control-sm" name="bankuser"
+              value="<?php echo $iinfo?$iinfo['bankuser']:''; ?>">
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <label for="" class="bef-red col-form-label-sm col-1">地址：</label>
+          <div class="col-2">
+            <input type="text" class="form-control form-control-sm" name="address"
+              value="<?php echo $iinfo?$iinfo['address']:''; ?>">
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <label for="" class="bef-red col-form-label-sm col-1">电话：</label>
+          <div class="col-2">
+            <input type="text" class="form-control form-control-sm" name="tel"
+              value="<?php echo $iinfo?$iinfo['tel']:''; ?>">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cont-box py-3">
+      <div class="page-header l-line mb-0">
+        <h4>选择收取地址 <small class="text-muted fs-12">将以快递<span class="text-warning">(免费)</span>方式寄给您</small></h4>
+      </div>
+      <div class="col-form-label bg-orange color-orange px-2">已保存了{$count}条地址，还能保存<?php echo 10-$count;?>条地址</div>
+      <div class="addr-list row mt-3">
+        <input type="hidden" name="addressid" value="{$daddr['id']}" />
+        {if !empty($addrlist[0])}
+        {foreach $addrlist as $k => $v}
+        <div class="col-2 mb-3">
+          <div class="addr-list-item {$v['is_defualt'] == 1?'cur':''}" data-id="{$v.id}" data-name="{$v.name}"
+            data-region="{$v.region}" data-address="{$v.address}" data-code="{$v.code}" data-tel="{$v.tel}"
+            data-is_defualt="{$v.is_defualt}" style="cursor: pointer;">
+            <div class="addr-region clearfix">
+              <span class="region float-left">{$v.region}</span>
+              {if $v['is_defualt'] == 1}
+              <span class="float-right">【默认地址】</span>
+              {/if}
+            </div>
+            <div class="addr-location clearfix">
+              <span class="addr float-left mr-1">{$v.address}</span>
+              <span class="float-left">收</span>
+            </div>
+            <hr>
+            <div class="addr-info text-right clearfix">
+              <div class="infos float-left">
+                <span class="name">{$v.name}</span>
+                <span class="tel">{$v.tel|hideStar}</span>
+              </div>
+              <div class="action float-right">
+                <a href="javascript:;" class="mr-1" onclick="showaddr($(this))">修改</a>
+                <a href="javascript:;" onclick="del($(this))">删除</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/foreach}
+        {/if}
+        {if ((int)$count < 10)} <div class="col-2">
+          <div class="addr-list-item add" onclick="showaddr()">
+            <span class="iconfont icon-icon_tianjia"></span>
+            <span>新增地址信息</span>
+          </div>
+      </div>
+      {/if}
+    </div>
+    <hr>
+    <div class="cont-box py-3">
+      <button class="btn btn-primary btn-sm subin">申请发票</button>
+    </div>
+  </div>
+</div>
+{/block}{block name='modal'}
+
+<div class="modal searchfrom-box fade" id="mapedit" tabindex="-1" role="dialog" aria-labelledby="advanced_search">
+  <div class="modal-dialog modal-dialog-centered show" role="document" style="max-width: 650px">
+    <div class="modal-content m-auto ">
+      <div class="modal-header">
+        <h5 class="modal-title">新增地址信息</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="iconfont">&#xe779;</i></span>
+        </button>
+      </div>
+      <form action="" class="searchfrom fs12">
+        <div class="modal-body p-5 row" style="overflow: visible;">
+          <div class="col-12">
+            <div class="form-row form-group">
+              <label for="" class="col-form-label col-2 text-right bef-red">收取人姓名：</label>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="" name="name">
+                <input type="hidden" name="id">
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-row form-group">
+              <label for="" class="col-form-label col-2 text-right">所在地区： </label>
+              <div class="col">
+                <div class="dropdown" id="cityselect">
+                  <div class="p-0 col-md-12" style="position: relative;">
+                    <input type="text" value="" style="width: 100%;" class="form-control" name="region">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-row form-group">
+              <label for="" class="col-form-label col-2 text-right bef-red">街道地址：</label>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="" name="address">
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-row form-group">
+              <label for="" class="col-form-label col-2 text-right ">邮政编码：</label>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="" name="code">
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-row form-group">
+              <label for="" class="bef-red col-form-label col-2 text-right">联系电话：</label>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="" name="tel">
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-row form-group">
+              <label for="" class="col-form-label col-2 text-right"></label>
+              <div class="col">
+                <div class="custom-control  custom-checkbox allselect">
+                  <input type="checkbox" value="1" class="custom-control-input" id="allcollection" name="is_defualt">
+                  <label class="custom-control-label" for="allcollection">设置为默认地址</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary subaddr">确定</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{/block} {block name='js'}
+<script>
+  $("#individual_invoice").click(function () {
+    if (this.checked) {
+      $(".individual_invoice").addClass("d-none")
+    }
+  })
+  $("#corporate_invoice").click(function () {
+    if (this.checked) {
+      $(".individual_invoice").removeClass("d-none")
+    }
+  })
+  $('.addr-list-item:not(".add")').click(function () {
+    $('[name="addressid"]').val($(this).data('id'));
+    $('.addr-list-item').removeClass('cur');
+    $(this).addClass('cur');
+  });
+  const maxMoney = '{$cimoney|to_double}';
+  $('[name="money"]').change(function () {
+    if (Number($(this).val()) >= Number(maxMoney)) {
+      $(this).val(Number(maxMoney))
+    }
+    if(Number($(this).val()) <= 500){
+      $(this).val(500)
+    }
+  })
+
+  function showaddr(t) {
+    if (t) {
+      let ft = t.parents('.addr-list-item');
+      $('#mapedit [name="id"]').val(ft.data('id'))
+      $('#mapedit [name="name"]').val(ft.data('name'))
+      $('#mapedit [name="region"]').val(ft.data('region'))
+      $('#mapedit [name="address"]').val(ft.data('address'))
+      $('#mapedit [name="code"]').val(ft.data('code'))
+      $('#mapedit [name="tel"]').val(ft.data('tel'))
+      $('#mapedit [name="is_defualt"]').prop('checked', Number(ft.data('is_defualt')) ? true : false)
+    } else {
+      $('#mapedit [name="id"]').val('')
+      $('#mapedit [name="name"]').val('')
+      $('#mapedit [name="region"]').val('')
+      $('#mapedit [name="address"]').val('')
+      $('#mapedit [name="code"]').val('')
+      $('#mapedit [name="tel"]').val('')
+      $('#mapedit [name="is_defualt"]').prop('checked', false)
+    }
+    $('#mapedit').modal('show');
+  }
+
+  function del(t) {
+    let ft = t.parents('.addr-list-item');
+    if (confirm('确认要删除该地址吗?')) {
+      ajax('{:url("Index/Invoice/deladdress")}', {
+        id: ft.data('id')
+      }, 'post').then(e => {
+        if (e.status == 200) {
+          window.location.reload()
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  }
+  $('.subaddr').click(function () {
+    ajax('{:url("Index/Invoice/subaddress")}', {
+      id: $('#mapedit [name="id"]').val(),
+      name: $('#mapedit [name="name"]').val(),
+      region: $('#mapedit [name="region"]').val(),
+      address: $('#mapedit [name="address"]').val(),
+      code: $('#mapedit [name="code"]').val(),
+      tel: $('#mapedit [name="tel"]').val(),
+      is_defualt: $('#mapedit [name="is_defualt"]:checked').val() ? $('#mapedit [name="is_defualt"]:checked')
+        .val() : 0,
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        window.location.reload()
+      } else {
+        alert(e.msg)
+      }
+    })
+  })
+
+  $('.subin').click(function () {
+    let names = document.querySelectorAll('.invoice_info [name]'),
+      vals = {};
+    names = [].slice.call(names);
+    names.map((e) => {
+      if ($(e).attr('type') == 'checkbox') {
+        if ($(e).prop('checked')) {
+          if (vals[e.name]) {
+            vals[e.name] += ',' + $(e).val();
+          } else {
+            vals[e.name] = $(e).val();
+          }
+        }
+      } else if ($(e).attr('type') == 'radio') {
+        if ($(e).prop('checked')) {
+          vals[e.name] = $(e).val();
+        }
+      } else {
+        vals[e.name] = $(e).val();
+      }
+    });
+    ajax('{:url("Index/Invoice/subapplyinvoice")}', {...vals}, 'post').then(e => {
+      if (e.status == 200) {
+        window.location.href = '{:url("index/Invoice/list")}';
+      } else {
+        alert(e.msg);
+      }
+    })
+  });
+</script>
+{/block}

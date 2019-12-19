@@ -1,0 +1,160 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t py-0 bg-white">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto mb-0 form-inline">
+                <li class="list-inline-item py-2 form-inline">
+                    <a href="#" class="fs-16 text-dark"> 续费管理</a>
+                </li>
+                <li class="list-inline-item p-2 form-inline">
+                    <div>
+                        <select name="" id="" class="form-control form-control-sm  col-8 border-0">
+                          <option value="">适用产品:全部</option>
+                          <option value="">通用</option>
+                          <option value="">应用引擎专业版 BAEPRO</option>
+                          <option value="">云服务器 BCC</option>
+                          <option value="">关系型数据库 RDS</option>
+                          <option value="">负载均衡 BLB</option>
+                          <option value="">云磁盘 CDS</option>
+                          <option value="">简单缓存服务 SCS</option>
+                          <option value="">百度MapReduce BMR</option>
+                          <option value="">百度消息服务 KAFKA</option>
+                          </select>
+                    </div>
+                </li>
+            </ul>
+            <!-- <ul class="list-inline mb-0 form-inline">
+                <li class="list-inline-item">
+                    <a href="#"><i class="iconfont iconguanlian1"></i>操作指南</a>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="d-flex form-group">
+                <ul class="list-inline mr-auto mb-0 form-inline">
+                    <li class="list-inline-item">
+                        <button class="btn  btn-light btn-sm" disabled="">续费</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn  btn-light btn-sm" disabled="">设置自动续费</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn  btn-light btn-sm" disabled="">关闭自动续费</button>
+                    </li>
+                </ul>
+                <ul class="list-inline mb-0 form-inline">
+                    <li class="list-inline-item">
+                        <div>
+                            <select name="" id="" class="form-control form-control-sm">
+                              <option value="">实例ID</option>
+                              <option value="">实例名称</option>
+                          </select>
+                        </div>
+                    </li>
+                    <li class="list-inline-item  form-inline">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm" placeholder="请输入实例ID进行搜索">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-primary btn-sm">
+                                      <span class="iconfont iconicon_sousuo-xian mr-0"></span>
+                                      </button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <div>
+                            <select name="" id="" class="form-control form-control-sm">
+                              <option value="">华北-北京</option>
+                              <option value="">华南-广州</option>
+                              <option value="">香港一区</option>
+                              <option value="">香港</option>
+                              <option value="">香港二区</option>
+                              <option value="">华东-苏州</option>
+                              <option value="">金融华东-上海</option>
+                          </select>
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn  btn-light btn-sm"><i class="iconfont iconicon_shuaxin"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group ml-nge">
+                <table class="table table-border">
+                    <thead class="bg-fB p-2">
+                        <tr class="font-weight-light">
+                            <th>
+                                <div class="custom-control  custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="all1">
+                                    <label class="custom-control-label" style="top:0px" for="all1">实例名称</label>
+                                </div>
+                            </th>
+                            <th>实例ID</th>
+                            <th>
+                                <div class="bg-tran">
+                                    <select name="" id="" class="form-control form-control-sm border-0 " style="width: 110px">
+                                      <option value="" selected="">到期时间</option>
+                                      <option value="">已到期</option>
+                                      <option value="">7天内到期</option>
+                                      <option value="">15天内到期</option>
+                                      <option value="">30天内到期</option>
+                                      <option value="">3个月内到期</option>
+                                      <option value="">全部时间</option>
+                                  </select>
+                                </div>
+                            </th>
+                            <th>自动续费/续费周期</th>
+                            <th>下次自动续费日期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5  " class="text-center p-5">无可相关数据</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between pt-3 pl-3">
+            <ul class="mr-auto"></ul>
+            <ul class="list-inline form-inline px-2">
+                <li class="list-inline-item">每页显示</li>
+                <li>
+                    <select name="" id="" class="form-control form-control-sm">
+    <option value="">10</option>
+    <option value="">20</option>
+    <option value="">30</option>
+    <option value="">40</option>
+  </select>
+                </li>
+            </ul>
+            <ul class="pagination mb-0">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2
+        <span class="sr-only">(current)</span>
+    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">&gt;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+</script>
+{/block}

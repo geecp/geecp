@@ -1,0 +1,41 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-body">
+        <div class="media d-none" id="payOk">
+            <div class="media-left align-self-center">
+                <span class="iconfont icon-roundcheck mr-3 text-success" style="font-size: 700%;top: -35px;height: 100px;"></span>
+            </div>
+            <div class="media-body align-self-center">
+                <h3 class="text-primary">订单支付成功！</h3>
+                <p class="my-2">您购买的服务将在1-5分钟内开通，请耐心等候。</p>
+                <a href="{:url('index/Billing/order')}" class="mr-3">查看订单明细</a>
+                <a href="/console">管理控制台</a>
+            </div>
+        </div>
+        <div class="media d-none" id="payError">
+            <div class="media-left">
+                <span class="iconfont icon-roundclose mr-3 text-danger" style="font-size: 700%;top: -35px;height: 100px;"></span>
+            </div>
+            <div class="media-body">
+                <h3 class="text-primary">订单支付失败！</h3>
+                <p class="my-2">支付并未成功！</p>
+                <a href="{:url('index/Billing/order')}" class="mr-3">返回财务中心</a>
+                <a href="/console">管理控制台</a>
+            </div>
+        </div>
+        <ul class="list-unstyled mt-3">
+            <li class="text-muted my-2">温馨提示：</li>
+            <li class="text-muted my-2">1.感谢开通我们的服务，如您后续的操作遇到困难，您可以点击导航栏的“工单”提交问题。</li>
+        </ul>
+    </div>
+</div>
+{/block} {block name='js'}
+<script>
+    let status = getQueryString('status');
+    if (status == 1) {
+        $('#payOk').removeClass('d-none')
+    } else {
+        $('#payError').removeClass('d-none')
+    }
+</script>
+{/block}

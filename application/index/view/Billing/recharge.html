@@ -1,0 +1,184 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t bg-white">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto mb-0 form-inline">
+        <li class="list-inline-item border-right">
+          <a href="{:url('index/Billing/overview')}" class="px-3">&lt返回财务总览 </a>
+        </li>
+        <li class="list-inline-item px-3">
+          <span class="fs-16">续费管理</span>
+        </li>
+        <li class="list-inline-item">
+          <a href="{:url('index/Billing/dealrecord')}"><i class="iconfont icon-guanlian1"></i>查看充值记录</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <div class="col bg-f5 p-3">
+            <ul class="list-inline mb-0">
+              <li class="list-item">温馨提示：</li>
+              <li class="list-item fc-red">1.若您有欠费账单，充值后将优先抵扣欠费账单。</li>
+              <li class="list-item fc-red">2.若您后付费产品已欠费并停止服务，请充值大于欠款的金额，以重启服务。</li>
+              <li class="list-item">3.充值后请及时支付未支付订单，以免影响正常服务。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">可用余额：</label>
+          <div class="col">
+            <div class="form-control-plaintext">
+              <span class="color-orange fs-12 money">{$userinfo.balance|to_double}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">充值方式：</label>
+          <div class="col">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="allwarehouse" name="outboundorder" class="custom-control-input" value="1" checked>
+              <label class="custom-control-label  tp-5" for="allwarehouse">在线支付</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="allwarehouse1" name="outboundorder" class="custom-control-input" value="0">
+              <label class="custom-control-label  tp-5" for="allwarehouse1">线下汇款</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 online">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">支付平台：</label>
+          <div class="col">
+            <div class="pay-list">
+              <div class="rc-group">
+                <!-- <input type="radio" name="caType" value="3" autocomplete="off" id="caType1" checked>
+                                <label class="rc-group-item wh-120" for="caType1"><span class="iconfont icon-zhifupingtai-yinlian pr-2"></span>银联个人</label> -->
+                <input type="radio" name="caType" value="1" autocomplete="off" id="caType2" checked>
+                <label class="rc-group-item wh-120" for="caType2"><span
+                    class="iconfont icon-zhifubao pr-2"></span>支付宝</label>
+                <!-- <input type="radio" name="caType" value="2" autocomplete="off" id="caType3">
+                                <label class="rc-group-item wh-120" for="caType3"><span class="iconfont icon-weixinzhifu pr-2"></span>微信支付</label> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">充值金额：</label>
+          <div class="col">
+            <div class="pay-list form-group">
+              <div class="rc-group">
+                <input type="radio" name="caType1" value="200" autocomplete="off" id="moneny1" checked>
+                <label class="rc-group-item wh-90" for="moneny1">200元</label>
+                <input type="radio" name="caType1" value="500" autocomplete="off" id="moneny2">
+                <label class="rc-group-item wh-90" for="moneny2">500元</label>
+                <input type="radio" name="caType1" value="1000" autocomplete="off" id="moneny3">
+                <label class="rc-group-item wh-90" for="moneny3">1000元</label>
+                <input type="radio" name="caType1" value="2000" autocomplete="off" id="moneny4">
+                <label class="rc-group-item wh-90" for="moneny4">2000元</label>
+                <input type="radio" name="caType1" value="5000" autocomplete="off" id="moneny5">
+                <label class="rc-group-item wh-90" for="moneny5">5000元</label>
+                <input type="radio" name="caType1" value="10000" autocomplete="off" id="moneny6">
+                <label class="rc-group-item wh-90" for="moneny6">10000元</label>
+              </div>
+            </div>
+            <div class="form-inline">
+              <input type="text" name="num" class="form-control form-control-sm wh-90" placeholder="其他金额" value="200"
+                style="height: 35px;width: 80px">
+              <span class="px-2">元</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group form-row">
+          <div class="col offset-1 p-1">
+            <button class="btn btn-danger sub">确认充值</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 offline d-none">
+        <div class="form-group form-row">
+          <label for="" class="col-form-label col-1">汇款信息：</label>
+          <div class="col">
+            <table class="table table-border mb-3">
+              <thead class="bg-fB p-2">
+                <tr class="font-weight-light">
+                  <th>开户名称</th>
+                  <th>开户银行</th>
+                  <th>汇款账号</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{$basicInfo.account_name}</td>
+                  <td>{$basicInfo.bank_name}</td>
+                  <td>{$basicInfo.account_number}</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="list-inline mb-0">
+              <li class="list-item">温馨提示：</li>
+              <li class="list-item">1.仅需一次开通，线下汇款可直接向银行电汇自动加款专属账号汇款。</li>
+              <li class="list-item">2.节假日加款不受限，百度实体银行账户到账后充值金额将在10分钟左右自动转入您的百度智能云账户。百度实体银行账户到账时间受银行处理时间影响，<span
+                  class="text-danger">采用信汇方式到账可能会有延误，建议您使用银行电汇的方式。</span></li>
+              <li class="list-item text-danger">3.为保证打款顺利进行，请务必保证打款方名称、实名认证名称一致。同时本名称将是您后期开增值税专用发票的名称。</li>
+              <li class="list-item">
+                4.如您之前已通过非专属账号方式汇款，请提交汇款底单、您在百度智能云的登录账号（包括账号类型和账号名）、金额提供给我们，邮件发至bce_support@baidu.com。财务会在一个工作日内审核并查账，如到帐会将充值至您的百度智能云账户。受银行处理时间影响，付款到帐可能有所延误。
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  $('[name="outboundorder"]').change(function () {
+    let t = $(this);
+    if (Number(t.val())) {
+      $('.online').removeClass('d-none');
+      $('.offline').addClass('d-none');
+    } else {
+      $('.offline').removeClass('d-none');
+      $('.online').addClass('d-none');
+    }
+  })
+  $('[name="caType1"]').change(function () {
+    $('[name="num"]').val($('[name="caType1"]:checked').val());
+  })
+  $('[name="num"]').change(function () {
+    let c = [];
+    $('[name="caType1"]').each(function (i, v) {
+      c.push($(v).val())
+    });
+
+    if (c.indexOf($(this).val()) < 0) {
+      $('[name="caType1"]').prop('checked', false);
+    } else {
+      $('[name="caType1"]').prop('checked', false);
+      $('[name="caType1"]').eq(c.indexOf($(this).val())).prop('checked', true);
+    }
+  })
+  $('.sub').click(function () {
+    let params = {};
+    params.channel = $('[name="caType"]').val();
+    params.money = $('[name="num"]').val();
+    params.title = '账户充值';
+    params.cont = '账户充值 - 金额为:'+$('[name="num"]').val();;
+    ajax('{:url("index/Billing/rechargeauth")}', params,'post').then(res=>{
+      var win=window.open('about:blank');
+      win.document.write(`<div class="d-none">${res}</div>`);
+    });
+  })
+</script>
+{/block}

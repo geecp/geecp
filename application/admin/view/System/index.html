@@ -1,0 +1,108 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header clearfix">
+                    <div class="box-tools pull-left">
+                        <!-- <div class="has-feedback w260">
+              <input type="text" class="form-control input-sm" placeholder="请输入用户手机号">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div> -->
+                        <div class="pull-right">
+                            <a href="{:url('admin/User/add')}" class="btn btn-primary btn-sm">新增</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="tableData" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>用户名</th>
+                                <th>个人/公司名称</th>
+                                <th>邮箱</th>
+                                <th>手机</th>
+                                <th>固话</th>
+                                <th>注册IP</th>
+                                <th>用户类型</th>
+                                <th>用户组</th>
+                                <th>认证状态</th>
+                                <th>用户状态</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if !empty($list)} {foreach name="list" item="v"}
+                            <tr data-id="{$v.id}">
+                                <td>{$v.id}</td>
+                                <td>{$v.username}</td>
+                                <td>{$v.name}</td>
+                                <td>{$v.email}</td>
+                                <td>{$v.phone}</td>
+                                <td>{$v.tel}</td>
+                                <td>{$v.create_ip}</td>
+                                <td>{$v.user_type}</td>
+                                <td>{$v.user_group}</td>
+                                <td>{$v.user_approve}</td>
+                                <td>{$v.user_status}</td>
+                                <td>{$v.create_time}</td>
+                                <td>
+                                    <a href="{:url('admin/User/add',['id'=>$v['id']])}">编辑</a>
+                                    <a data-href="{:url('admin/User/recharge',['id'=>$v['id']])}" href="javascript:;">充值</a>
+                                    <a href="javascript:;" onclick="del($(this))">删除</a> {if $v['status'] == '0'}
+                                    <a href="javascript:;" onclick="disabled($(this),'2')">禁用</a> {else/}
+                                    <a href="javascript:;" onclick="disabled($(this),'0')">解禁</a> {/if}
+                                </td>
+                            </tr>
+                            {/foreach} {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{/block} {block name='js'}
+<script>
+    function del(t) {
+        if (confirm('确认要删除这个用户吗？')) {
+            ajax("{:url('admin/User/del')}", {
+                id: t.parents('tr').data('id')
+            }, 'delete').then((e) => {
+                t.parents('tr').remove();
+            })
+        }
+    }
+
+    function disabled(t, sta) {
+        if (confirm(`确认要${sta == '0'?'解禁':'禁用'}这个用户吗？`)) {
+            ajax("{:url('admin/User/disabled')}", {
+                id: t.parents('tr').data('id'),
+                status: sta
+            }, 'put').then((e) => {
+                if (sta == '0') {
+                    t.attr('onclick', 'disabled($(this),"2")');
+                    t.text('禁用');
+                } else {
+                    t.attr('onclick', 'disabled($(this),"0")');
+                    t.text('解禁');
+                }
+            })
+        }
+    }
+
+    $('#tableData').DataTable({
+        'paging': true,
+        'lengthChange': true,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'stateSave': true,
+        'deferRender': true,
+        'processing': true,
+    });
+</script>
+{/block}

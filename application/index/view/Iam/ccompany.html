@@ -1,0 +1,619 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="cont">
+  <div class="card form-group">
+    <div class="card-header bg-white text-center" style="position:relative">
+      <div class="py-2" style="position: absolute;top:15px;z-index:1">
+        <a href="{:url('Index/Iam/overview')}" class="fs-12 text-dark">&lt&nbsp;返回用户中心首页</a>
+      </div>
+      <div class=" form-inline py-1" style="position: absolute;top:15px;right:15px">
+        <div class="fs-12 text-primary ">
+          <span class="steps steps-active">1</span>
+          <span class="px-1">填写认证信息</span>
+          <span class="iconfont icon-icon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12 px-2 {$cinfo?'text-primary':''}">
+          <span class="steps {$cinfo?'steps-active':''}">2</span>
+          <span class="px-1">人工审核</span>
+          <span class="iconfont icon-icon_jiantou-you fs-12"></span>
+        </div>
+        <div class="fs-12 {$cinfo?$cinfo['status'] > 0?'text-primary':'':''}">
+          <span class="steps {$cinfo?$cinfo['status'] > 0?'steps-active':'':''}">3</span>
+          <span class="px-1">认证结果</span>
+        </div>
+      </div>
+      <h4 class="clear page-header mb-0 text-center">企业认证</h4>
+    </div>
+    <div class="card-body clear">
+      {if !empty($cinfo) && $cinfo['status'] == 2}
+        <div class="bg-orange p-2 mb-3">
+          <h5 class="mb-0 color-orange fs-12">您的账号未通过企业认证，请重新提交认证信息</h5>
+        </div>
+      {elseif  !empty($cinfo) && $cinfo['status'] == 1}
+      <div class="bg-green p-2 mb-3">
+        <h5 class="mb-0 color-green fs-12">您的账号已通过企业认证</h5>
+      </div>
+      {elseif !empty($cinfo) && $cinfo['status'] == 0}
+      <div class="bg-orange p-2 mb-3">
+        <h5 class="mb-0 color-orange fs-12">您的企业认证信息正在审核中,我们将在1-3天内完成审核</h5>
+      </div>
+      {/if}
+      <form>
+        <div>
+          <div class="border-t mb-3">
+            <span class="page-header mb-0 d-inline-block fs-16 border-b-2">企业信息</span>
+          </div>
+          <div class="col-8">
+            <div class="form-row mb-3">
+              <label class="bef-red col-form-label col-2">组织类型：</label>
+              <div class="col">
+                {if empty($cinfo) || $cinfo['status'] != 0}
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="allwarehouse1" name="type" class="custom-control-input" value="0" <?php echo empty($cinfo)?'checked':$cinfo['type'] == 0?'checked':''; ?>>
+                  <label class="custom-control-label" for="allwarehouse1">企业 </label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="notallwarehouse2" name="type" class="custom-control-input" value="1" <?php echo empty($cinfo)?'':$cinfo['type'] == 1?'checked':''; ?>>
+                  <label class="custom-control-label" for="notallwarehouse2">其他组织 </label>
+                </div>
+                {else /}
+                  <div class="form-control-sm form-control-static">{$cinfo['type'] == 0 ? '企业':'其他组织'}</div>
+                {/if}
+              </div>
+            </div>
+          </div>
+          <div class="col p-0 company {$cinfo?$cinfo['type']==0?'':'d-none':''}">
+            <div class="col-8">
+              <div class="form-row ">
+                <label class="bef-red col-form-label col-2 geti">企业名称：</label>
+                <div class="col-4">
+                  <div class="col p-0">
+                      {if empty($cinfo) || $cinfo['status'] != 0}
+                      <input type="text" class="form-control form-control-sm" name="name" value="<?php echo empty($cinfo)?'':($cinfo['name'] && $cinfo['type'] == 0)?$cinfo['name']:''; ?>">
+                      {else /}
+                      <div class="form-control-sm form-control-static">{$cinfo['name']}</div>
+                      {/if}
+                  </div>
+                  <div class="col mb-2 p-0">
+                        {if empty($cinfo) || $cinfo['status'] != 0}
+                        <div class="custom-control  custom-checkbox">
+                          <input type="checkbox" class="custom-control-input " name="is_individual" value="1" id="geti" <?php echo empty($cinfo)?'':($cinfo['is_individual'] == 1 && $cinfo['type'] == 0)?'checked':''; ?>>
+                          <label class="custom-control-label" for="geti">我是个体工商户</label>
+                        </div>
+                        {else /}
+                        <div class="form-control-sm form-control-static fs-12 text-secondary">{$cinfo['type']?'个体工商户':'非个体工商户'}</div>
+                        {/if}
+  
+                  </div>
+                  <div class="col mb-3 p-0 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                    <span class="op-5">请务必与营业执照上的名称保持一致</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="form-row ">
+                <label class="bef-red col-form-label col-2">营业执照注册号：</label>
+                <div class="col-4">
+                  <div class="col p-0">
+                      {if empty($cinfo) || $cinfo['status'] != 0}
+                      <input type="text" name="code" class="form-control form-control-sm" value="<?php echo empty($cinfo)?'':($cinfo['code'] && $cinfo['type'] == 0)?$cinfo['code']:''; ?>">
+                      {else /}
+                      <div class="form-control-sm form-control-static">{$cinfo['code']}</div>
+                      {/if}
+
+                  </div>
+                  <div class="col mb-3 p-0 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                    <span class="op-5">请务必与营业执照上的注册号或统一社会信用代码号一致</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="form-row mb-3">
+                <label class="bef-red col-form-label col-2">营业执照扫描件：</label>
+                <div class="col-7">
+                  <div class="row file-list">
+                    <div class="col">
+                        {if empty($cinfo) || $cinfo['status'] != 0}
+                        <button class="btn btn-primary btn-sm upfiles" style="z-index:1" type="button">+ 选择文件</button>
+                        <input type="file" class="upfile d-none" data-rule=".jpg,.png,.gif" data-size="10"
+                          data-width="200px" data-height="200px" autocomplete="off">
+                          {if !empty($cinfo) && $cinfo['pic'] && $cinfo['type'] == 0}
+                          <img src="{$cinfo['pic']}" style="max-width:200px;max-height: 200px;margin-top: 15px;display: block;"/>
+                          {/if}
+                        <input type="hidden" name="imgs" value="<?php echo empty($cinfo)?'':($cinfo['pic'] && $cinfo['type'] == 0)?$cinfo['pic']:''; ?>" autocomplete="off">
+                        {else /}
+                        <img src="{$cinfo['pic']}" style="max-width:200px;max-height: 200px;margin-top: 15px;display: block;"/>
+                        {/if}
+                    </div>
+                  </div>
+                  <div class="col mb-3 p-0 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                    <ul class="px-3">
+                      <li class="color-999">请提供证件的原件照片或彩色扫描件（正副本均可），文字/盖章清晰可辨认
+                        <button type="button" class="btn btn-link op" data-toggle="modal"
+                          data-target="#jpgbig">参考样式</button>
+                      </li>
+                      <li class="op-5">格式要求jpg、jpeg、png，不超过10MB
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-2 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                  <img src="__THEMES__/defualt/img/getimoban.jpg" alt="" width="100%">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col p-0 organization {$cinfo?$cinfo['type']==1?'':'d-none':'d-none'}">
+            <div class="col-8">
+              <div class="form-row ">
+                <label class="bef-red col-form-label col-2 geti">组织名称：</label>
+                <div class="col-4">
+                  <div class="col p-0">
+                      {if empty($cinfo) || $cinfo['status'] != 0}
+                      <input type="text" class="form-control form-control-sm" name="name" value="<?php echo empty($cinfo)?'':($cinfo['name'] && $cinfo['type'] == 1)?$cinfo['name']:''; ?>">
+                      {else /}
+                      <div class="form-control-sm form-control-static">{$cinfo['name']}</div>
+                      {/if}
+
+                  </div>
+                  <div class="col mb-3 p-0 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                    <span class="op-5">请务必与组织机构代码证上的名称保持一致</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="form-row ">
+                <label class="bef-red col-form-label col-2">组织机构代码： </label>
+                <div class="col-4">
+                  <div class="col p-0">
+                      {if empty($cinfo) || $cinfo['status'] != 0}
+                      <input type="text" class="form-control form-control-sm" name="code" value="<?php echo empty($cinfo)?'':($cinfo['code'] && $cinfo['type'] == 1)?$cinfo['code']:''; ?>">
+                      {else /}
+                      <div class="form-control-sm form-control-static">{$cinfo['code']}</div>
+                      {/if}
+
+                  </div>
+                  <div class="col mb-3 p-0 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                    <span class="op-5">请务必与组织机构代码证上的编号一致</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="form-row mb-3">
+                <label class="bef-red col-form-label col-2">组织机构代码证扫描件：</label>
+                <div class="col-7">
+                  <div class="row file-list">
+                    <div class="col">
+                        {if empty($cinfo) || $cinfo['status'] != 0}
+                        <button class="btn btn-primary btn-sm upfiles" style="z-index:1" type="button">+ 选择文件</button>
+                        <input type="file" class="upfile d-none" data-rule=".jpg,.png,.gif" data-size="10"
+                          data-width="200px" data-height="200px" autocomplete="off">
+                          {if !empty($cinfo) && $cinfo['pic'] && $cinfo['type'] == 1}
+                          <img src="{$cinfo['pic']}" style="max-width:200px;max-height: 200px;margin-top: 15px;display: block;"/>
+                          {/if}
+                        <input type="hidden" name="imgs" value="<?php echo empty($cinfo)?'':($cinfo['pic'] && $cinfo['type'] == 1)?$cinfo['pic']:''; ?>" autocomplete="off">
+                        {else /}
+                        <img src="{$cinfo['pic']}" style="max-width:200px;max-height: 200px;margin-top: 15px;display: block;"/>
+                        {/if}
+                    </div>
+                  </div>
+                  <div class="col mb-3 p-0 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                    <ul class="px-3">
+                      <li class="color-999">请提供证件的原件照片或彩色扫描件（正副本均可），文字/盖章清晰可辨认
+                        <button type="button" class="btn btn-link op" data-toggle="modal"
+                          data-target="#jpgbig2">参考样式</button>
+                      </li>
+                      <li class="op-5">格式要求jpg、jpeg、png，不超过10MB
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-2 <?php echo !empty($cinfo) && $cinfo['status'] == 0?'d-none':''; ?>">
+                  <img src="__THEMES__/defualt/img/zuzhijigou.jpg" alt="" width="100%">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 
+            <div>
+              <div class="border-t mb-3">
+                <span class="page-header mb-0 d-inline-block fs-16 border-b-2">其他资质</span>
+              </div>
+              <div class="col-8">
+                <div class="form-row mb-3">
+                  <label class="col-form-label col-3">
+                    <div class="col mb-2 p-0">
+                      <div class="custom-control  custom-checkbox">
+                          <input type="checkbox" class="custom-control-input "  id="needReceipt" data-toggle="collapse" data-target="#collapse_shof">
+                          <label class="custom-control-label"  for="needReceipt">同时提交资质认证   </label>
+                      </div>
+                    </div>
+                  </label>
+                  <div class="col form-inline">
+                       使用部分产品（如LSS、VOD等）需完成特殊的资质认证
+                  </div>
+                </div>
+                <div class="collapse" id="collapse_shof">
+                  <div class="col-12 p-0">
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">资质类型：</label>
+                      <div class="col-2">
+                        <select name="" id="" class="form-control form-control-sm" disabled>
+                          <option value="">音视频相关</option>
+                        </select>
+                      </div>
+                      <div class="col-3">
+                        <select name="" id="" class="form-control form-control-sm" disabled>
+                          <option value="">网络文化经营许可证</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">资质编号：</label>
+                      <div class="col-4">
+                        <div class="col p-0">
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="col p-0">
+                          <span class="op-5">请填写证件的许可证编号</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">资质编号：</label>
+                      <div class="col-4">
+                        <div class="col p-0">
+                          <div class="c-datepicker-date-editor J-datepicker-range-day mt10 col " >
+                              <i class="c-datepicker-range__icon kxiconfont icon--clock" ></i>
+                              <input placeholder="截止日期" name="starttime" class="c-datepicker-data-input only-date"
+                                  autocomplete="off" value="">
+                              <input placeholder="截止日期" name="endtime" class="c-datepicker-data-input only-date d-none"
+                                  autocomplete="off" value="" >
+                          </div>
+                        </div>
+                        <div class="col p-0">
+                          <span class="op-5">请选择证件上标注的有效期限截止时间</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row mb-3">
+                      <label class="bef-red col-form-label col-2">资质扫描件：</label>
+                      <div class="col-6">
+                        <div class="col p-0">
+                          <label class="col-form-label p-0">
+                            <div class="attachment-box">
+                              <div class="" style="z-index:2" data-img=".jpg,.png,.jpeg" data-file="" data-size="10" data-length="1">
+                                  <input type="hidden" name="files">
+                                  <ul class="list-inline mb-0">
+                                      <li class="list-inline-item add">
+                                          <button class="btn btn-primary btn-sm upfiles"style="z-index:1" type="button">+ 选择文件</button>
+                                          <input type="file" class="d-none">
+                                      </li>
+                                  </ul>
+                                  <small class="form-text text-muted"></small>
+                              </div>
+                            </div>
+                          
+                          </label>
+                        </div>
+                        <div class="col p-0">
+                          <ul class="px-3 op-5">
+                            <li>请请上传相关资质正面的原件照片或彩色扫描件，文字清晰可辨认
+                            </li>
+                            <li>格式要求jpg、jpeg、png，不超过10MB
+                            </li>
+                            <li>可上传最多10张图片
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="border-t mb-3">
+                <span class="page-header mb-0 d-inline-block fs-16 border-b-2">增值税专用发票信息</span>
+              </div>
+              <div class="col-8">
+                <div class="form-row mb-3">
+                  <label class="col-form-label col-3">
+                    <div class="col mb-2 p-0">
+                      <div class="custom-control  custom-checkbox">
+                          <input type="checkbox" class="custom-control-input "  id="needReceipt2" data-toggle="collapse" data-target="#collapse_shof3">
+                          <label class="custom-control-label"  for="needReceipt2">同时提交专票认证 </label>
+                      </div>
+                    </div>
+                  </label>
+                  <div class="col form-inline">
+                      完成专票认证后可申请开具专票
+                  </div>
+                </div>
+                <div class="collapse" id="collapse_shof3">
+                  <div class="col-12 p-0">
+                    <div class="form-row form-group">
+                      <label class="col-form-label col-2"></label>
+                      <div class="col-6 color-orange">
+                          请务必和贵方财务人员确认具有一般纳税人资格，并请贵方财务人员提供如下信息：
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">税务登记号：</label>
+                      <div class="col-4">
+                          <input type="text" class="form-control form-control-sm">
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">开户银行名称：</label>
+                      <div class="col-4">
+                          <input type="text" class="form-control form-control-sm">
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">开户账号：</label>
+                      <div class="col-4">
+                          <input type="text" class="form-control form-control-sm">
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">地址：</label>
+                      <div class="col-4">
+                          <input type="text" class="form-control form-control-sm">
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2 geti">电话：</label>
+                      <div class="col-4">
+                          <input type="text" class="form-control form-control-sm">
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2">税务登记证扫描件：</label>
+                      <div class="col-6">
+                        <div class="col p-0">
+                          <label class="col-form-label p-0">
+                            <div class="attachment-box">
+                              <div class="" style="z-index:2" data-img=".jpg,.png,.jpeg" data-file="" data-size="10" data-length="1">
+                                  <input type="hidden" name="files">
+                                  <ul class="list-inline mb-0">
+                                      <li class="list-inline-item add">
+                                          <button class="btn btn-primary btn-sm upfiles"style="z-index:1" type="button">+ 选择文件</button>
+                                          <input type="file" class="d-none">
+                                      </li>
+                                  </ul>
+                                  <small class="form-text text-muted"></small>
+                              </div>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="col p-0">
+                          <ul class="op-5 px-3 mb-0">
+                            <li>税务登记证的正本/副本均可 </li>
+                            <li>三证合一没有税务登记证时，请上传营业执照 </li>
+                            <li>格式要求jpg、jpeg、png，不超过10MB</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row form-group">
+                      <label class="bef-red col-form-label col-2">一般纳税人资格认证扫描件：</label>
+                      <div class="col">
+                        <div class="col p-0">
+                          <label class="col-form-label p-0">
+                            <div class="attachment-box">
+                              <div class="" style="z-index:2" data-img=".jpg,.png,.jpeg" data-file="" data-size="10" data-length="1">
+                                  <input type="hidden" name="files">
+                                  <ul class="list-inline mb-0">
+                                      <li class="list-inline-item add">
+                                          <button class="btn btn-primary btn-sm upfiles"style="z-index:1" type="button">+ 选择文件</button>
+                                          <input type="file" class="d-none">
+                                      </li>
+                                  </ul>
+                                  <small class="form-text text-muted"></small>
+                              </div>
+                            </div>
+                          </label>
+                          <label class="col-form-label mx-2">
+                              <div class="attachment-box">
+                                <div class="" style="z-index:2" data-img=".jpg,.png,.jpeg" data-file="" data-size="10" data-length="1">
+                                    <input type="hidden" name="files">
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item add">
+                                            <button class="btn btn-primary btn-sm upfiles"style="z-index:1" type="button">+ 选择补充文件</button>
+                                            <input type="file" class="d-none">
+                                        </li>
+                                    </ul>
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                              </div>
+                            </label>
+                        </div>
+                        <div class="col p-0">
+                          <ul class="op-5 px-3">
+                            <li>
+                              能证明一般纳税人资格的文件均可，包括：
+                              <ol class="px-2">
+                                  1.一般纳税人资格认证书/通知（主管税务机关颁发给企业认定其纳税性质的批复文件）
+                              </ol>
+                              <ol class="px-2">
+                                  2.加盖“一般增值税纳税人”印章的税务登记证
+                              </ol>
+                              <ol class="px-2">
+                                  3.贵方所在主管国税网站上一般纳税人状态的截图，截图需包含浏览器地址栏（该情况下需要同时提供近一个月内贵公司为其他方开具的增值税专用发票扫描件作为补充文件）
+                              </ol>
+                            </li>
+                            <li>格式要求jpg、jpeg、png，不超过10MB</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+             -->
+        <div>
+          <div class="col-8">
+            <div class="form-row form-group">
+              <label class="col-form-label col-2"></label>
+              <div class="col-6 color-orange">
+                {if $cinfo && $cinfo['status'] != 0}
+                <button class="btn btn-primary btn-sm" onclick="subInfo()" type="button">
+                  {if $cinfo['status'] > 0}
+                    修改审核
+                    {else /}
+                    提交审核
+                  {/if}
+                </button>
+                {/if}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+
+<button type="button" class="btn btn-sm btn-link fs-12 p-0" data-toggle="modal" data-target="#jpgbig">修改</button>
+<div class="modal fade" id="jpgbig" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 800px;position:relative">
+    <div class="modal-content unbg">
+      <div class="unbg">
+      </div>
+      <div class="modal-body p-0">
+        <img src="__THEMES__/defualt/img/getimoban.jpg" alt="" width="100%">
+      </div>
+      <button type="button"
+        style="position: absolute; top: 0;right: -45px;background:#fff !important;padding: 5px 11px;padding-bottom: 8px;"
+        class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="jpgbig2" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document" style="min-width: 800px;position:relative">
+    <div class="modal-content unbg">
+      <div class="unbg">
+      </div>
+      <div class="modal-body p-0">
+        <img src="__THEMES__/defualt/img/zuzhijigou.jpg" alt="" width="100%">
+      </div>
+      <button type="button"
+        style="position: absolute; top: 0;right: -45px;background:#fff !important;padding: 5px 11px;padding-bottom: 8px;"
+        class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  /*
+   * @name 上传附件
+   */
+  $('.upfiles').click(function (event) {
+    $(this).next().click();
+    console.log(1)
+    event.stopPropagation();
+
+  });
+  $('.upfile').change(function () {
+    console.log(11)
+    let tfile = $(this),
+      imgurl = '',
+      formdatas = new FormData(),
+      suffix = tfile[0].files[0].name.substr(tfile[0].files[0].name.lastIndexOf("."));
+    if (tfile.data('rule').indexOf(suffix) < 0) {
+      alert('文件类型不符合要求');
+      return false;
+    }
+    if ((tfile[0].files[0].size / 1024 / 1024) >= Number(tfile.data('size'))) {
+      alert('图片尺寸大于' + Number(tfile.data('size')) + 'M');
+      return false;
+    }
+    formdatas.append('file', tfile[0].files[0]);
+    ajax('/uploadImg', formdatas, 'post', true).then(e => {
+      if (e.status == 200) {
+        tfile.siblings('[name="imgs"]').val(e.data);
+        if (tfile.next().prop('nodeName') == 'IMG') {
+          tfile.next().attr('src', e.data);
+          return;
+        }
+        tfile.after(
+          `<img src="${e.data}" style="max-width:${tfile.data('width')};max-height: ${tfile.data('height')};margin-top: 15px;display: block;"/>`
+        );
+        return;
+      }
+      alert(e.msg);
+    });
+  });
+</script>
+<script>
+  $("#geti").click(function () {
+    if (this.checked) {
+      $(".company .geti").html("字号名称：")
+    } else {
+      $(".company .geti").html("企业名称：")
+    }
+  })
+
+  function subInfo() {
+    console.log('提交审核')
+    let typename = '',
+      id = "{$userinfo['id']}";
+    if ($("#allwarehouse1")[0].checked) {
+      typename = ".company";
+    } else {
+      typename = ".organization";
+    }
+
+    ajax('{:url("Index/Iam/subcompany")}', {
+      id: Number(id),
+      type: $('[name="type"]:checked').val(),
+      name: $(typename + ' [name="name"]').val(),
+      is_individual: $(typename + ' [name="is_individual"]:checked').val() ? $(typename +
+        ' [name="is_individual"]:checked').val() : 0,
+      code: $(typename + ' [name="code"]').val(),
+      pic: $(typename + ' [name="imgs"]').val(),
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        window.location.reload();
+      } else {
+        alert(e.msg)
+      }
+    });
+  }
+  $(document).click(function () {
+    if ($("#allwarehouse1")[0].checked) {
+      $(".organization").addClass("d-none");
+      $(".company").removeClass("d-none");
+    } else {
+      $(".company").addClass("d-none");
+      $(".organization").removeClass("d-none");
+    }
+  })
+  window.onload = function () {
+    $('.J-datepicker-range-day').datePicker({
+      hasShortcut: false,
+      format: 'YYYY-MM-DD',
+      isRange: false,
+      shortcutOptions: [],
+      hide: (e) => {
+        $('[name="starttime"],[name="endtime"]').trigger('change');
+      }
+    });
+
+    $('#address').on('show.bs.modal', function () {
+      $('#goods').modal('hide');
+    });
+  }
+</script>
+{/block}

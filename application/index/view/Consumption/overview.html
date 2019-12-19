@@ -1,0 +1,385 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2  style=" border-bottom:3px solid #108cee; "">
+          <h4>消费总览</h4>
+        </li>
+      </ul>
+      <!-- <ul class="list-inline m-0">
+        <li class="list-inline-item p-2">
+          <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="pb-3">
+        <div class="form-row form-group">
+          <ul class="list-inline mr-auto m-0">
+            <span class="fs-16 p-lf">消费统计</span>
+          </ul>
+          <ul class="list-inline  m-0 form-inline">
+            <li class="list-inline-item "><label class="">统计日期：</label></li>
+            <li class="list-inline-item">
+              <button class="btn btn-primary btn-sm">自定义</button>
+            </li>
+            <li class="list-inline-item">
+              <div class="c-datepicker-date-editor J-datepicker-range-day lefts mt10">
+                <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off"
+                  value="<?php echo date('Y-m-d', strtotime('-30 day')); ?>" onchange="gethistory('pie')">
+                <span class="c-datepicker-range-separator">-</span>
+                <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off"
+                  value="<?php echo date('Y-m-d', strtotime('-0 day')); ?>" onchange="gethistory('pie')">
+              </div>
+            </li>
+            <!-- <li class="list-inline-item">
+              <select name="" id="" class="form-control form-control-sm">
+                <option value="">付费方式:全部</option>
+                <option value="">后付费</option>
+                <option value="">预付费</option>
+              </select>
+            </li> -->
+            <!-- <li class="list-inline-item"><button class="btn  btn-light btn-sm"><i
+                  class="iconfont iconicon_xiazai"></i></button></li>
+            <li class="list-inline-item"><button class="btn  btn-light btn-sm"><i
+                  class="iconfont iconicon_shuaxin"></i></button></li> -->
+          </ul>
+        </div>
+        <div class="form-row ">
+          <div class="col-6 form-inline" style="width:100%;height: 285px;">
+            <div id="report-order-chart" style="width:100%;height: 100%;overflow: hidden;"></div>
+            <!-- <div class="m-auto border-radius-50 form-inline" style="width:250px;height: 250px;">
+              <div class="m-auto border-radius-50" style="width:180px;height: 180px;"></div>
+            </div> -->
+          </div>
+          <div class="col-6 bg-fB">
+            <div class="">
+              <div class="form-row p-3 border-t-fff">
+                <span class="fs-16 ">账单总金额：￥<span data-name="allPrice">{$allPrice|to_double}</span></span>
+              </div>
+              <div class="p-3 border-t-fff ">
+                <div class="form-row form-group">
+                  <button class="btn btn-link btn-sm text-dark p-0 fs-12" data-container="body" data-toggle="popover"
+                    data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+                    data-html="true" data-content="应付金额：应付金额是您刨除了优惠后实际应该支付给GeeStack的款项，包括已支付的金额(如：现金支付)及未支付的金额（如：欠费）。"
+                    data-original-title="" title="">
+                    应付金额：<span style="color:orange">￥<span data-name="allPrice">{$allPrice|to_double}</span></span> <i
+                      class="iconfont iconwenhao"></i>
+                  </button>
+                </div>
+                <div class="form-row form-group">
+                  <div class="col-6 p-0">-已付部分-</div>
+                  <div class="col-6">-待付部分-</div>
+                </div>
+                <div class="form-row">
+                  <div class="col-6 p-0">
+                    <label for="">现金已付：</label>
+                    <span>￥<span data-name="allPrice">{$allPrice|to_double}</span></span>
+                  </div>
+                  <div class="col-6">
+                    <label for="">欠费：</label>
+                    <span>￥0.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-t-fff">
+                <div class="form-row form-group">
+                  <button class="btn btn-link btn-sm text-dark p-0 fs-12" data-container="body" data-toggle="popover"
+                    data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+                    data-html="true" data-content="优惠金额：GeeStack给予您的优惠，您无需为该部分金额买单。" data-original-title="" title="">
+                    优惠金额：<span>￥0.00</span><i class="iconfont iconwenhao px-1"></i>
+                  </button>
+                </div>
+                <div class="form-row ">代金券支付：
+                  <spa>￥0.00</spa>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="py-3">
+        <div class="ml-nge">
+          <table class="table table-border">
+            <thead class="bg-fB p-2">
+              <tr class="font-weight-light">
+                <th class="px-3">产品名称</th>
+                <th>账单金额</th>
+                <th>应付金额</th>
+                <th>优惠金额</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody data-name="prolist">
+              {if (!empty($proTree) && $proTree[0])}
+              {foreach name="proTree" item="v"}
+              <tr>
+                <td>{$v.name}</td>
+                <td>￥{$v.value|to_double}</td>
+                <td>￥{$v.value|to_double}</td>
+                <td>￥0.00</td>
+                <td> - </td>
+              </tr>
+              {/foreach}
+              {else /}
+              <tr>
+                <td colspan="5" rowspan="1" class="text-center">暂无相关消费数据</td>
+              </tr>
+              {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class=" p-3">
+        <div class="form-group">
+          <span class="fs-16">历史消费趋势</span>
+        </div>
+        <div class="form-group form-inline">
+          <ul class="list-inline  m-0 form-inline">
+            <!-- <li class="list-inline-item">
+                <select name="" id="" class="form-control form-control-sm">
+                  <option value="">选取对比数据</option>
+                  <option value="">总金额</option>
+                </select>
+              </li> -->
+            <li class="list-inline-item">
+              <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                <input placeholder="开始日期" name="hstarttime" class="c-datepicker-data-input only-date" autocomplete="off"
+                  value="<?php echo date('Y-m-d', strtotime('-30 day')); ?>" onchange="gethistory()">
+                <span class="c-datepicker-range-separator">-</span>
+                <input placeholder="结束日期" name="hendtime" class="c-datepicker-data-input only-date" autocomplete="off"
+                  value="<?php echo date('Y-m-d', strtotime('-0 day')); ?>" onchange="gethistory()">
+              </div>
+            </li>
+            <!-- <li class="list-inline-item">
+              <select name="htype" id="" class="form-control form-control-sm">
+                <option value="1">按月汇总</option>
+                <option value="2">按日汇总</option>
+              </select>
+            </li> -->
+          </ul>
+        </div>
+        <div class="px-2" style="width:100%;border: 1px solid #EEE;">
+          <div id="report_consume" style="width:100%;height: 400px;overflow: hidden;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+
+<script>
+  let val = new Number();
+  setTimeout(function () {
+    let data = JSON.parse('{$proTree|json_encode}');
+    pHistory(data);
+  }, 500);
+  $('[name="hstarttime"],[name="hendtime"],[name="htype"]').change(function () {
+    gethistory();
+  })
+  $('[name="starttime"], [name="endtime"]').change(function () {
+    gethistory('pie');
+  });
+
+  function gethistory(type) {
+    let val;
+    if (type == 'pie') {
+      val = {
+        start: $('[name="starttime"]').val(),
+        end: $('[name="endtime"]').val(),
+        type: $('[name="type"]').val(),
+        ctype: type,
+      }
+    } else {
+      val = {
+        start: $('[name="hstarttime"]').val(),
+        end: $('[name="hendtime"]').val(),
+        type: $('[name="type"]').val(),
+        ctype: type,
+      }
+    }
+
+    ajax('{:url("index/Consumption/gethistory")}', {
+      ...val
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        if (type == 'pie') {
+          pHistory(e.data.data)
+          $('[data-name="allPrice"]').text(e.data.allPrice.toFixed(2))
+          let html = '';
+          if (e.data.data.length && e.data.data) {
+            e.data.data.map(e => {
+              html += `
+              <tr>
+                <td>${e.name}</td>
+                <td>￥${e.value.toFixed(2)}</td>
+                <td>￥${e.value.toFixed(2)}</td>
+                <td>￥0.00</td>
+                <td> - </td>
+              </tr>
+              `;
+            })
+          } else {
+            html = `
+              <tr>
+                <td colspan="5" rowspan="1" class="text-center">暂无相关消费数据</td>
+              </tr>
+              `;
+          }
+          console.log(html)
+          $('[data-name="prolist"]').html(html);
+        } else {
+          cHistory(e.data.date, e.data.data)
+        }
+      }
+    })
+  }
+  setTimeout(function () {
+    let date = JSON.parse('{$hdate|json_encode}'),
+      data = JSON.parse('{$hval|json_encode}');
+    cHistory(date, data)
+  }, 500);
+  window.cbdate = () => {
+    gethistory();
+  }
+
+  function pHistory(data) {
+    let namelist = [];
+    namelist = data.map(e => {
+      return {
+        name: e.name + ',' + e.value,
+        value: e.value
+      }
+    });
+    report = [];
+    report = echarts.init(document.getElementById('report-order-chart'), ETheme.ligntBlue);
+    option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: (v) => {
+          let res = v.name.split(',');
+          let str = res[0];
+          return `消费统计<br />${str}：￥${v.value.toFixed(2)}(${v.percent}%)`;
+        }
+      },
+      legend: {
+        orient: 'vertical',
+        x: 'right',
+        data: namelist,
+        formatter: function (e) {
+          let res = e.split(',');
+          let str = res[0];
+          if (str.length > 10) {
+            str = str.slice(0, 10) + "..."
+          }
+          return `${str}：￥${Number(res[1]).toFixed(2)}`;
+        }
+      },
+      series: [{
+        type: 'pie',
+        radius: ["65%", "90%"],
+        center: ['25%', '50%'],
+        avoidLabelOverlap: false,
+        label: {
+          normal: {
+            show: true,
+            position: 'center',
+            formatter: function () {
+              let price = 0;
+              data.map(e => {
+                price += e.value;
+              })
+              return "总金额：" + price.toFixed(2) + "元"
+            }
+          }
+        },
+        data: namelist,
+        labelLine: {
+          normal: {
+            show: false
+          }
+        },
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
+    };
+
+    report.setOption(option);
+
+  }
+
+  function cHistory(date, data) {
+    report = [];
+    report = echarts.init(document.getElementById('report_consume'), ETheme.ligntBlue);
+    option = {
+      grid: {
+        left: 0,
+        right: 30,
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        },
+        formatter: (e, i) => {
+          return `${e[0].axisValue} <br /> ${e[0].value} 元`;
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date
+      },
+      yAxis: {
+        type: 'value'
+      },
+      dataZoom: [{
+        id: 'dataZoomX',
+        type: 'slider',
+        xAxisIndex: [0],
+        start: 0,
+        end: 100
+      }],
+      series: [{
+        data: data,
+        type: 'line',
+        areaStyle: {}
+      }]
+    };
+    report.setOption(option);
+  }
+  // $(function () {
+  //   $('.J-datepicker-range-day.lefts').datePicker({
+  //     hasShortcut: false,
+  //     format: 'YYYY-MM-DD',
+  //     isRange: true,
+  //     shortcutOptions: [],
+  //     hide: (e) => {
+  //       $('[name="starttime"],[name="endtime"]').trigger('change');
+  //       // console.log(window.cbdate)
+  //       datepickercb(window.cbdate)
+  //     }
+  //   });
+
+  //   function datepickercb(cb){
+  //     cb && cb();
+  //   }
+  // })
+</script>
+{/block}

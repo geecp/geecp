@@ -1,0 +1,123 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto mb-0 form-inline">
+                <li class="list-inline-item border-right">
+                    <a href="{:url('index/Billing/overview')}" class="px-3">&lt返回财务总览 </a>
+                </li>
+                <li class="list-inline-item px-3">
+                    <span class="fs-16"> 提现</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="form-group">
+                <div class="col bg-f5 p-3">
+                    <ul class="list-inline mb-0">
+                        <li class="list-item">申请提交后，您的款项将按照先进后出的原则退回至您的充值账户。常见问题可查看
+                            <a href="#">提现说明</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <button class="btn btn-link btn-sm text-dark px-0" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent" data-html="true" data-content="可提现金额(0.0000) = min(余额(0.0000) - 账期未支付金额(0.0000), 总投入(0.0000) - 总开票金额(0.00)) - (0)"
+                    data-original-title="" title="">
+            可用余额：<span class="color-orange fs-12 money">{$userinfo.balance}</span><i class="iconfont icon-question px-1"></i>
+          </button>
+                <div class="col">
+                    <button class="btn btn-secondary btn-sm" disabled>申请提现</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <h4 class="border-left px-2">提现记录</h4>
+            </div>
+            <div class="form-group form-inline">
+                <ul class="list-inline mr-auto mb-0">
+                    <li class="list-inline-item">
+                        <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                            <i class="c-datepicker-range__icon kxiconfont icon--clock"></i>
+                            <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                            <span class="c-datepicker-range-separator">-</span>
+                            <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <button class="btn btn-sm btn-light"><i class="iconfont icon-icon_shuaxin"></i></button>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="ml-nge">
+                <div>
+                    <table class="table table-border mytb">
+                        <thead class="bg-fB p-2">
+                            <tr class="font-weight-light">
+                                <th>申请提现时间</th>
+                                <th>提现金额（元）</th>
+                                <th>返回渠道</th>
+                                <th>
+                                    <select name="" id="" class="form-control form-control-sm border-0" style="width:120px ">
+                                      <option value="">状态：全部</option>
+                                      <option value="">消费</option>
+                                      <option value="">退款</option>
+                                      <option value="">激活</option>
+                                    </select>
+                                </th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="text-center fs-16 p-5 ">无相关数据！</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between pt-3 pl-3">
+                    <ul class="mr-auto"></ul>
+                    <ul class="list-inline form-inline px-2">
+                        <li class="list-inline-item">每页显示</li>
+                        <li>
+                            <select name="" id="" class="form-control form-control-sm">
+                              <option value="">10</option>
+                              <option value="">20</option>
+                              <option value="">30</option>
+                              <option value="">40</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <ul class="pagination mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">2
+                          <span class="sr-only">(current)</span>
+                      </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">&gt;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+</script>
+{/block}

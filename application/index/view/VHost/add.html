@@ -1,0 +1,270 @@
+{extend name='Common/index' /} {block name='content'}
+<div class="row">
+    <div class="col-9" style="flex: 1 0 auto;">
+        <div class="cont-box bg-white p-3">
+            <div class="page-header pb-3" style="border-bottom: 1px solid #eee;">
+                <h4 class="mb-0">
+                    创建VHost
+                </h4>
+            </div>
+            <div class="mt-4" id="configs">
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-right" for="">
+                        产品分组
+                    </label>
+                    <div class="col-sm-6">
+                        <div class="rc-group" id="group">
+                            {foreach name="groups" item="group" key="k"}
+                            <input type="radio" name="group" value="{$group.id}" autocomplete="off" id="group{$group.id}"  />
+                            
+                            <label class="rc-group-item" for="group{$group.id}">
+                                {$group.name}
+                            </label>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-right" for="">
+                        产品类型
+                    </label>
+                    <div class="col-sm-10 cloudhost-vps-create">
+                        <div class="row px-3" id="common-type">
+                            {foreach name="products" item="product" key="key"}
+                            <div class="col-3 mr-3 p-3 vps-buy {if $key==0}vps-selectcolor{else/}vps-unselectcolor{/if}" data-id="{$product.id}">
+                                <ul class="list-unstyled">
+                                    <li class="zfs-14 pb-1 border-bottom d-flex w-100">
+                                        <span class="mr-auto">
+                                            {$product.name}
+                                        </span>
+                                    </li>
+                                    <?php $describe = explode("|", $product['describe']); ?>
+                                    {foreach name="describe" item="v"}
+                                    <li class="mt-2">
+                                        {$v}
+                                    </li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                            {/foreach}
+                            <!-- <div class="col-3 vps-unselectcolor mr-3 p-3 vps-buy">
+                                <ul class="list-unstyled">
+                                    <li class=" zfs-14 pb-1 border-bottom d-flex w-100">
+                                        <span class="mr-auto">套餐3</span>
+                                    </li>
+                                    <li class=" mt-2">CPU：2核</li>
+                                    <li class=" mt-2">内存：3G</li>
+                                    <li class=" mt-2">硬盘(系统+数据)：200G</li>
+                                    <li class="mt-2">带宽：6M独享</li>
+                                </ul>
+                            </div> -->
+                            <!-- <div class="col-3 mr-3 p-3 novps-buy sellout" data-toggle="tooltip" title="已售罄，请尝试切换地域或提交工单申请">
+                                <ul class="list-unstyled">
+                                    <li class=" zfs-14 pb-1 border-bottom d-flex w-100">
+                                        <span class="mr-auto">套餐2</span>
+                                        <span class="badge bg-white text-999 font-weight-normal badge-pill pt-1 px-2">售罄</span>
+                                    </li>
+                                    <li class=" mt-2">CPU：2核</li>
+                                    <li class=" mt-2">内存：2G</li>
+                                    <li class=" mt-2">硬盘(系统+数据)：180G</li>
+                                    <li class="mt-2">带宽：5M独享</li>
+
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label text-right" for="">
+                        购买时长
+                    </label>
+                    <div class="col-sm-6">
+                        <div class="rc-group" id="purchaseLength">
+                            <input autocomplete="off" checked="" id="purchaseLength1" name="purchaseLength" type="radio" value="1"/>
+                            <label class="rc-group-item" for="purchaseLength1">
+                                1个月
+                            </label>
+                            <input autocomplete="off" id="purchaseLength2" name="purchaseLength" type="radio" value="2"/>
+                            <label class="rc-group-item" for="purchaseLength2">
+                                2
+                            </label>
+                            <input autocomplete="off" id="purchaseLength3" name="purchaseLength" type="radio" value="3"/>
+                            <label class="rc-group-item" for="purchaseLength3">
+                                3
+                            </label>
+                            <input autocomplete="off" id="purchaseLength4" name="purchaseLength" type="radio" value="4"/>
+                            <label class="rc-group-item" for="purchaseLength4">
+                                4
+                            </label>
+                            <input autocomplete="off" id="purchaseLength5" name="purchaseLength" type="radio" value="5"/>
+                            <label class="rc-group-item" for="purchaseLength5">
+                                5
+                            </label>
+                            <input autocomplete="off" id="purchaseLength6" name="purchaseLength" type="radio" value="6"/>
+                            <label class="rc-group-item" for="purchaseLength6">
+                                6
+                            </label>
+                            <input autocomplete="off" id="purchaseLength7" name="purchaseLength" type="radio" value="7"/>
+                            <label class="rc-group-item" for="purchaseLength7">
+                                7
+                            </label>
+                            <input autocomplete="off" id="purchaseLength8" name="purchaseLength" type="radio" value="8"/>
+                            <label class="rc-group-item" for="purchaseLength8">
+                                8
+                            </label>
+                            <input autocomplete="off" id="purchaseLength9" name="purchaseLength" type="radio" value="9"/>
+                            <label class="rc-group-item" for="purchaseLength9">
+                                9
+                            </label>
+                            <input autocomplete="off" id="purchaseLength12" name="purchaseLength" type="radio" value="12"/>
+                            <label class="rc-group-item" for="purchaseLength12">
+                                1年
+                            </label>
+                            <input autocomplete="off" id="purchaseLength24" name="purchaseLength" type="radio" value="24"/>
+                            <label class="rc-group-item" for="purchaseLength24">
+                                2年
+                            </label>
+                            <input autocomplete="off" id="purchaseLength36" name="purchaseLength" type="radio" value="36"/>
+                            <label class="rc-group-item" for="purchaseLength36">
+                                3年
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="cont-box bg-white p-3">
+            <div class="page-header pb-3" style="border-bottom: 1px solid #eee;">
+                <h4 class="mb-0 d-flex align-content-center justify-content-between">
+                    所选配置
+                    <a href="JavaScript:;" onclick="window.location.reload()">
+                        清空配置
+                    </a>
+                </h4>
+            </div>
+            <div class="" id="configinfo">
+                <div class="form-group row m-0">
+                    <label class="col-sm-4 col-form-label col-form-label-sm">
+                        产品分组：
+                    </label>
+                    <div class="col-sm-7">
+                        <p class="form-text text-muted" data-id="region">
+                            {$groups[0]['name']}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group row m-0">
+                    <label class="col-sm-4 col-form-label col-form-label-sm">
+                        产品类型：
+                    </label>
+                    <div class="col-sm-7">
+                        <p class="vhost-product-name form-text text-muted" data-id="config">
+                            {$products[0]['name']}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group row m-0" id="tpfCountBox">
+                    <label class="col-sm-4 col-form-label col-form-label-sm">
+                        购买配额：
+                    </label>
+                    <div class="col-sm-7">
+                        <p class="form-text text-muted count">
+                            <span data-id="purchaseNum">
+                                1
+                            </span>
+                            台 *
+                            <span class="vhost-product-len" data-id="purchaseLength">
+                                1月
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group row m-0">
+                    <label class="col-sm-4 col-form-label col-form-label-sm">
+                        配置费用：
+                    </label>
+                    <div class="col-sm-7">
+                        <p class="form-text text-muted price" data-id="price">
+                            <span class="settlement money text-danger fs-md">
+                                {$products[0]['month']}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block createCdsNext">
+                    下一步
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='js'}
+<script>
+    let vhostId = {$products[0]['id']}, purchaseLength = 1;
+
+    
+
+    let $purchaseLength = $('[name="purchaseLength"]');
+
+
+    $purchaseLength.change(function(){
+        purchaseLength = $(this).val();
+        let params = `id=${vhostId}&len=${purchaseLength}`;
+        ajax(`{:url("index/VHost/getprice")}?${params}`).then(data => {
+            if(data.code != 0 && data.msg != "ok"){
+                // 错误提示
+            }
+            return data.data;
+        }).then(data => {
+            $(".settlement.money").text(data.price || 0);
+            $(".vhost-product-name").text(data.name || "");
+            $(".vhost-product-len").text(data.time || "")
+        });
+    });
+
+    function initVHostEvent(){
+        let $buy = $(".vps-buy");
+
+        $buy.on("click",function() {
+            $(this).addClass("vps-selectcolor").removeClass("vps-unselectcolor").siblings().not(".novps-buy").removeClass("vps-selectcolor").addClass("vps-unselectcolor");
+            $(this).trigger("change", [$(this).data()])
+        }).on("change",(event, data) => {
+            vhostId = data.id;
+            $($purchaseLength[0]).trigger(purchaseLength == 1 ? "change" : "click");
+        });
+    }
+
+    initVHostEvent();
+
+    $('[name="group"]').change(function() {
+        
+        ajax('{:url("index/VHost/getproducts")}?id='+$(this).val()).then(data => {
+            if(data.code != 0 && data.msg != "ok"){
+                // 错误提示
+            }
+            return data.data;
+        }).then(data => {
+            if (data) {
+                $('#common-type').html(data.map((val, idx) => {
+                    if(idx == 0) vhostId = val.id;
+                    let describe = val.describe.split('|');
+                    let str = describe.map(item => {
+                        return '<li class="mt-2">' + item + '</li>';
+                    }).join("");
+                    return '<div data-id="' + val.id + '" class="col-3 mr-3 p-3 vps-buy ' + ( idx == 0 ? 'vps-selectcolor' : 'vps-unselectcolor') +'">\
+                          <ul class="list-unstyled">\
+                              <li class="zfs-14 pb-1 border-bottom d-flex w-100">\
+                                  <span class="mr-auto">' + val.name + '</span>\
+                              </li>\
+                              ' + str + '\
+                          </ul>\
+                      </div>';
+                }).join(""));
+                initVHostEvent();
+            }
+        });
+    });
+</script>
+{/block}

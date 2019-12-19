@@ -1,0 +1,161 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="cont">
+  <div class="card">
+    <div class="card-header bg-white border-t">
+      <h4 class="text-center p-2 mb-0">
+        <a class="text-dark fs-12 float-left" style="line-height: 1.8"
+          href="{:url('Index/Iam/overview')}">&lt;&nbsp;返回用户中心首页</a> 基本信息
+      </h4>
+    </div>
+    <div class="card-body fs-12">
+      <div class="border-t form-group">
+        <div class="mb-4 border-left-4">
+          <h4 class="px-3">基本信息</h4>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm bef-red text-left mb-0"> 联系人：</label>
+            <div class="col-2 ">
+              <input type="text" class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm text-left mb-0">属性：</label>
+            <div class="col-2 col-form-label-sm">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="allordertag" name="ordertag" data-toggle="collapse" data-target="#"
+                  class="custom-control-input" checked>
+                <label class="custom-control-label" for="allordertag">个人</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="saleorder" name="ordertag" data-toggle="collapse" data-target="#"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="saleorder">企业</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 collapse" id="collapse1">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm bef-red text-left mb-0">企业名称：</label>
+            <div class="col-2">
+              <input type="text" class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row">
+            <label class="col-1 col-form-label-sm text-left mb-0">用户ID：</label>
+            <div class="col-2 col-form-label-sm">
+              30ef4693427884d7d5f3e8fcbad0
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="mb-4 border-left-4">
+          <h4 class="px-3">业务信息</h4>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm text-left mb-0"> 一级行业分类：</label>
+            <div class="col-2 ">
+              <select name="" id="" class="form-control form-control-sm">
+                <option value="全部" selected>网站</option>
+                <option value="">建站服务</option>
+                <option value="">数字推广营销</option>
+                <option value="">游戏</option>
+                <option value="">移动应用</option>
+                <option value="">电子商务</option>
+                <option value="">金融</option>
+                <option value="">视频</option>
+                <option value="">智能设备</option>
+                <option value="">教育</option>
+                <option value="">医疗</option>
+                <option value="">行业解决方案</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm text-left mb-0"> 二级行业分类：</label>
+            <div class="col-3">
+              <div class="row px-3 pb-2">
+                <div class="custom-control  custom-checkbox col-4">
+                  <input type="checkbox" class="custom-control-input" id="reviewedorder1">
+                  <label class="custom-control-label" for="reviewedorder1">社交网站</label>
+                </div>
+                <div class="custom-control  custom-checkbox col-4">
+                  <input type="checkbox" class="custom-control-input" id="financialaudit2">
+                  <label class="custom-control-label" for="financialaudit2">论坛</label>
+                </div>
+                <div class="custom-control  custom-checkbox col-4">
+                  <input type="checkbox" class="custom-control-input" id="outboundorders3">
+                  <label class="custom-control-label" for="outboundorders3">博客</label>
+                </div>
+              </div>
+              <div class="row px-3 form-group">
+                <div class="custom-control  custom-checkbox col-4">
+                  <input type="checkbox" class="custom-control-input" id="reviewedorder4">
+                  <label class="custom-control-label" for="reviewedorder4">企业官网</label>
+                </div>
+                <div class="custom-control  custom-checkbox col-4">
+                  <input type="checkbox" class="custom-control-input" id="financialaudit5">
+                  <label class="custom-control-label" for="financialaudit5">行业门户</label>
+                </div>
+                <div class="custom-control  custom-checkbox col-4">
+                  <input type="checkbox" class="custom-control-input" id="outboundorders6">
+                  <label class="custom-control-label" for="outboundorders6">其他</label>
+                </div>
+              </div>
+              <!-- <input type="text" class="form-control form-control-sm"> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm bef-red text-left mb-0">主营业务：</label>
+            <div class="col-3">
+              <textarea class="form-control textarea-row-3 "></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm text-left mb-0">网站地址：</label>
+            <div class="col-2 ">
+              <input type="text" class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group form-row ">
+            <label class="col-1 col-form-label-sm text-left mb-0"></label>
+            <div class="col-1">
+              <button class="btn btn-sm btn-primary w-100" type="button">保存</button>
+            </div>
+            <div class="col-1">
+              <a href="{:url('Index/Iam/overview')}" class="btn btn-sm btn-light">取消</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer unbg border-0">
+
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  $("#allordertag").click(function () {
+    $("#collapse1").removeClass("d-block")
+  })
+  $("#saleorder").click(function () {
+    $("#collapse1").addClass("d-block")
+  })
+</script>
+{/block}

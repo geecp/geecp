@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>用户登录 - {$basicInfo.name}</title>
+    <link rel="stylesheet" href="__THEMES__/defualt/css/lib/bootstrap.min.css">
+    <link rel="stylesheet/less" href="__THEMES__/defualt/css/less/style.less">
+    <script src="__THEMES__/defualt/js/lib/less.min.js"></script>
+    <link rel="Shortcut Icon" href="{$basicInfo.favicon}">
+    <link rel="Bookmark" href="{$basicInfo.favicon}">
+    <link rel="stylesheet" href="__THEMES__/defualt/css/lib/datepicker.css">
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+    }
+
+
+</style>
+
+<body>
+    <div class="m-auto loginsty">
+        <div class="bg">
+            <div></div>
+            <div></div>
+
+        </div>
+        <div class="content">
+            <div>
+                <img src="__THEMES__/defualt/img/decoration.png" alt="" width="200px">
+            </div>
+            <div>
+                <img src="__THEMES__/defualt/img/decoration2.png" alt="" width="130px">
+            </div>
+            <div class="row login-head">
+                <div class="col-md-10">
+                    <img src="{$basicInfo.logo1}" alt="" width="100px">
+                </div>
+                 <div class="col-md-2 returnindex">
+                    <a href="/">返回首页</a>
+                </div>
+            </div>
+            <div class="brand">
+                <div class="">
+                    <div class="title">智能云，计算无限可能</div>
+                    <div>
+                        <ul>
+                            <li>全面、落地的 AI</li>
+                            <li>开放、安全的 Big Data</li>
+                            <li>持续、先进的 Cloud</li>
+                        </ul>
+                    </div>
+                    <p class="hr"></p>
+                    <div>
+                        <img width="366px" height="100px" src="http://bce.bdstatic.com/login/banner002.png">
+                    </div>
+                    <div class="footer">
+                      © 2019 {$basicInfo.name} 
+                      <a href="#" target="_blank">{$basicInfo.idc}</a> - 
+                      <a href="#" target="_blank">{$basicInfo.isp}</a> - 
+                      ICP备案：<a href="#" target="_blank">{$basicInfo.icp}</a> - 
+                      公安网安备：<a href="#" target="_blank">{$basicInfo.beian}</a>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="card1">
+                        <div class="tab">
+                            <span class="active">账号</span>
+                            <!-- <span>云账号</span> -->
+                        </div>
+                        <div>
+                            <div class="mt-4">
+                                <div class="form-group">
+                                    <input type="text " class="form-control" name="username" placeholder="请输入手机号码">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="请输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary d-block w-100 sub">登陆</button>
+                                </div>
+                                <div class="form-group">
+                                    <small class="">没有账号， <a href="/register">立即注册</a></small>
+                                    <small class=""><a href="/forget" class="float-right">忘记密码？</a></small>
+                                </div>
+                                 <div class="form-group desc">
+
+                                    <p><small class="">温馨提示：</small></p>
+                                    <small class="">与...等产品通用。</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content m-auto unbg border-0">
+            <div class="p-3">
+                <img src="__THEMES__/defualt/img/logo_black.png" width="190px">
+            </div>
+            <div class="modal-body p-4 bg-white" style="border-radius: 5px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="__THEMES__/defualt/img/login-bg1.png">
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-5">
+                                <h4 class="mb-3">
+                                    欢迎来到Geestack！
+                                    <small class="float-right">没有账号， <a href="/register">立即注册 ></a></small>
+                                </h4>
+                                <div class="form-group">
+                                    <input type="text " class="form-control" name="username" placeholder="请输入手机号码">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" placeholder="请输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success d-block w-100 sub">登陆</button>
+                                    <a href="/forget" class="float-right mt-3">忘记密码？</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <script src="__THEMES__/defualt/js/lib/jquery.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/popper.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/bootstrap.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/axios.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/js.cookie.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/lodash.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/qs.min.js"></script>
+    <script src="__THEMES__/defualt/js/lib/decimal.min.js"></script>
+    <script src="__THEMES__/defualt/js/app.js"></script>
+    <script>
+        $('.sub').click(function(){
+          $.ajax({
+            url: "{:url('index/Login/auth')}",
+            type: 'post',
+            data: {
+              username: $('[name="username"]').val(),
+              password: $('[name="password"]').val(),
+            },
+            success: function(e){
+              if(e.status == 200){
+                Cookies.set('token',e.token,{expires: 1/12,path: '/'});
+                location.reload();
+              } else {
+                alert(e.msg);
+              }
+            }
+          });
+      });
+      $('.loginsty .bg').css('height',$(window).height()+'px')
+    </script>
+
+</body>
+
+</html>

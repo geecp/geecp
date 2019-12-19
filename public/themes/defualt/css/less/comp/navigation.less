@@ -1,0 +1,179 @@
+//右侧消息框的父盒子样式
+#zmessage-wrap{
+  position: fixed;
+  width: 0;
+  height: 880px;
+  top: 55px;
+  right: 0;
+  z-index: 1031
+}
+//导航菜单点击“消息”，右侧滑出内容框的样式
+#message-frame{
+  width: 300px;
+  height: 880px;
+  top: 0;
+  right: -500px;
+  z-index:100;
+  transition:all 0.3s;
+  overflow-y: scroll;
+  overflow-x:scroll
+}
+//将导航菜单以下的盒子高度撑到880px;
+.z880-height{
+  height: 880px;
+}
+//导航菜单右侧消息滑入框无消息展示时的定位
+.z-nomessage-position{
+    top: 300px;
+    left: 100px;
+}
+//#999浅灰
+.ztext-lightgray{
+  color: #999;
+}
+//鼠标移入字体灰变浅蓝
+.zchangeblue{
+  color: #6c757d;
+  &:hover{
+    color: #20a0ff;
+  }
+}
+//字体大小
+.zfs-10{
+  font-size: 10px!important;
+}
+.zfs-12{
+  font-size: 12px!important;
+}
+.zfs-14{
+  font-size: 14px!important;
+}
+.zfs-16{
+  font-size: 16px!important;
+}
+.zfs-18{
+  font-size: 18px!important;
+}
+.zfs-20{
+  font-size: 20px!important;
+}
+//头像圆背景
+.zrounded-circle {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 50%;
+}
+.zbg-lightblue{
+  background-color: #108CEE;
+}
+//导航菜单里未绑定时的状态颜色
+.ztext-unbind{
+  color: #DCDCDC;
+}
+//导航菜单小箭头动效
+#z-usercenter:hover{
+  .iconicon_jiantou-xia{
+    transition: all .4s;
+    transform: rotate(-180deg);
+  }
+}
+#z-usercenter{
+  .iconicon_jiantou-xia{
+    transition: all .4s;
+  }
+}
+//鼠标移入导航菜单财务部分，内容展示出来
+#z-finance-content{
+  top:-500px;
+  left: -124px;
+  width: 230px;
+  height: 165px;
+}
+#z-finance{
+  height: 55px;
+  &:hover{
+    #z-finance-content{
+      top:47px;
+    }
+  }
+
+}
+//用户中心部分，同上
+#z-usercenter-content{
+  top: -500px;
+  left: -173px;
+  width: 250px;
+  height: 150px
+}
+#z-usercenter{
+  height: 55px;
+  &:hover{
+    #z-usercenter-content{
+      top:47px;
+    }
+  }
+}
+//帮助中心部分，同上
+#z-helpcenter-content{
+  top: -500px;
+  left:-20px;
+  width: 215px;
+  height: 170px;
+}
+#z-helpcenter{
+  height: 55px;
+  &:hover{
+    #z-helpcenter-content{
+      top: 47px;
+    }
+  }
+}
+//我的工单部分，同上
+#z-myorder-content{
+  top: -500px;
+  left: -210px;
+  width: 270px;
+  height: 94px;
+}
+#z-myorder{
+  height: 55px;
+  &:hover{
+    #z-myorder-content{
+      top: 47px;
+    }
+  }
+}
+//导航菜单搜索部分
+#z-search{
+  height: 55px;
+}
+//消息中心
+#z-newscenter-remind{
+  top: -500px;
+  width: 56px;
+}
+#z-newscenter{
+  height: 55px;
+  &:hover{
+    #z-newscenter-remind{
+      top: 47px;
+    }
+  }
+}
+//企业组织
+#z-organization-remind{
+  top: -500px;
+  width: 56px;
+}
+#z-organization{
+  height: 55px;
+  &:hover{
+    #z-organization-remind{
+      top: 47px;
+    }
+  }
+}
+

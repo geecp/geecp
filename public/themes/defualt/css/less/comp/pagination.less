@@ -1,0 +1,174 @@
+.pagination {
+  .disabled{
+    a,span{
+      .bgc(#e9ecef)!important;
+    }
+  }
+  .active{
+    .disabled{
+      .bgc(@cbl);
+      .cr(@cwh);
+    }
+  }
+}
+.vba {
+    &-pagination {
+        .mgb;
+        &.round {
+            .pagination {
+                .mgb(5px);
+            }
+        }
+        background-color: @cwh;
+        .pagination {
+            .mgt(10px);
+            .mgb(7px);
+            li {
+                display: inline-block;
+                 > span,
+                > a {
+                    .unbdr;
+                    position: initial;
+                    .unbd;
+                    color: @cc2;
+                    .trs;
+                    &.next,
+                    &.prev {
+                        .unbd!important;
+                    }
+                }
+                &.active {
+                    a,
+                    span {
+                        background-color: @ces;
+                        color: @cwh;
+                    }
+                }
+                .round & {
+                     > span,
+                    > a {
+                        .unbg;
+                        .bdr;
+                    }
+                    &.active {
+                         > span,
+                        > a {
+                            color: @cc2;
+                            border-color: @ces;
+                        }
+                    }
+                    > a:hover {
+                        background-color: @bgc2;
+                    }
+                }
+            }
+            li+li {
+                .mgl(10px);
+            }
+        }
+        .btn-group {
+            .mgt(10px);
+            &.pnmix {
+                &.pull-left {
+                    .mgl(2*@mpb);
+                    .btn {
+                        color: @cc2;
+                        .unbd;
+                        &:hover {
+                            color: inherit;
+                            .unbg;
+                        }
+                        &.disabled {
+                            cursor: not-allowed;
+                            &,
+                            &:hover {
+                                color: @cgy;
+                            }
+                        }
+                    }
+                    .btn+.btn {
+                        &,
+                        &:hover {
+                            .bdrl;
+                        }
+                    }
+                }
+                .prev {
+                    .pdr(2*@mpb);
+                    .pdl(10px);
+                }
+                .next {
+                    .pdl(2*@mpb);
+                    .pdr(10px);
+                }
+            }
+            &.countmix {
+                input[type="radio"] {
+                    display: none;
+                    &+label {
+                        width: 34px;
+                        height: 34px;
+                        line-height: 34px;
+                        .tac;
+                        .pd(0);
+                        color: @cc2;
+                        cursor: pointer;
+                    }
+                    &:checked {
+                        &+label {
+                            background-color: @bgc2;
+                        }
+                    }
+                }
+            }
+        }
+         > .next,
+        > .prev {
+            display: block;
+            line-height: 54px;
+            font-size: 14px;
+            color: @cc2;
+            .pdl;
+            .pdr;
+            .blod;
+            &.disabled {
+                cursor: not-allowed;
+                &,
+                &:hover {
+                    color: @cgy;
+                }
+            }
+            &:hover {
+                text-decoration: none;
+                color: @cc;
+            }
+            .iconfont {
+                display: inline-block;
+            }
+        }
+        > .prev {
+            float: left;
+            .iconfont {
+                .pdr;
+                &:only-child {
+                    .bdrr;
+                }
+            }
+        }
+        > .next {
+            float: right;
+            .iconfont {
+                .pdl;
+                &:only-child {
+                    .bdrl;
+                }
+            }
+        }
+        .table+ & {
+            .pdl;
+            .pdr;
+            .mgt;
+            .ohd;
+        }
+    }
+}

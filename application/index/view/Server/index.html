@@ -1,0 +1,265 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2" style="border-bottom:3px solid #108cee;">
+          <h4 style="color: #108cee;">物理服务器租用管理</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="pb-3">
+        {if $userinfo['realverify'] != 2}
+        <div class="bg-orange p-2 mb-3">
+          <h5 class="mb-0 color-orange fs-12">您的账号未通过实名认证，<a href="{:url('index/Iam/overview')}">实名认证</a>之后才能购买该产品</h5>
+        </div>
+        {/if}
+        <div class="form-row m-0">
+          <ul class="list-inline mr-auto m-0 form-inline">
+            <!-- <li class="list-inline-item">
+              <div class="input-group input-group-sm">
+                <div class="input-group-addon">
+                  <select name="" id="" class="form-control form-control-sm">
+                    <option value="">服务器名</option>
+                    <option value="">IP</option>
+                  </select>
+                </div>
+                <input class="form-control" placeholder="请输入关键字" type="text">
+              </div>
+            </li>
+            <li class="list-inline-item">
+              <button class="btn btn-primary btn-sm">搜索</button>
+            </li> -->
+          </ul>
+          <ul class="list-inline m-0 form-inline">
+            <li class="list-inline-item">
+              {if $userinfo['realverify'] != 2}
+                <button class="btn btn-dark text-white btn-sm disabled" disabled>租用物理服务器</button>
+              {else /}
+                <a href="{:URL('console/Server/add',['type'=>'create'])}" class="btn btn-primary text-white btn-sm">租用物理服务器</a>
+              {/if}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="ml-nge">
+        <div>
+          <table class="table table-border">
+            <thead class="bg-fB p-2">
+              <tr class="font-weight-light">
+                <th>主机名</th>
+                <th>公网IP</th>
+                <th>内网IP</th>
+                <th>账号/密码</th>
+                <th>开通日期</th>
+                <th>到期日期</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list[0])}
+              {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-pro_id="{$v.pro_id}" data-name="{$v.name}" data-proid="{$v.pro_id}">
+                <td>{$v.name}</td>
+                <td>{$v.ip}</td>
+                <td>{$v.intranetip}</td>
+                <td>{$v.username?$v.username:'-'} / {$v.ispass?$v.ispass:'-'}</td>
+                <td>{$v.create_time}</td>
+                <td>{$v.end_time|date='Y-m-d H:i:s',###}</td>
+                <td>{$v.statuss}</td>
+                <td>
+                  <!-- <a href="javascript:;">编辑</a> -->
+                  {if $v.status == 3}
+                  <a href="javascript:;" onclick="callreset({$v['id']})">重装操作系统</a>
+                  {/if}
+                  <a href="{:url('index/Server/add',['id'=>$v['id'],'pro_id'=>$v['pro_id'],'group_id'=>$v['pro_group_id'],'type'=>'renew'])}">续费</a>
+                  <a href="{:url('index/Server/detail',['id'=>$v['id']])}">查看详情</a>
+                </td>
+              </tr>
+              {/foreach}
+              {else /}
+              <tr>
+                <td colspan="7" class="text-center">暂无数据</td>
+              </tr>
+              {/if}
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between pt-3 pl-3">
+          <ul class="mr-auto"></ul>
+          <div class="pagination mb-0">
+            {$list->render()}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'}
+<div class="modal fade" id="changepw" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改VPS密码</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="vpsname" class="col-sm-3 col-form-label-sm">云服务器名</label>
+          <div class="col-sm-9">
+            <input type="text" readonly disabled class="form-control-plaintext form-control-sm disabled" id="vpsname"
+              name="vpsname">
+            <input type="hidden" readonly disabled class="form-control-plaintext form-control-sm disabled" id="pro_id"
+              name="pro_id">
+            <input type="hidden" readonly disabled class="form-control-plaintext form-control-sm disabled" id="pro_id"
+              name="plug_name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-sm-3 col-form-label-sm">输入新密码</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control form-control-sm" id="password" name="password">
+            <span class="help-block">密码必须8位以上,字母+数字</span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="vpassword" class="col-sm-3 col-form-label-sm">确认新密码</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control form-control-sm" id="vpassword" name="vpassword">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-sm btn-primary" onclick="changePwd()">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="resetos" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">重装操作系统</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label text-right">操作系统</label>
+            <div class="col-8">
+              <input type="hidden" name="id" value="" autocomplete="off">
+              <div class="rc-group" id="osgroup">
+                {foreach name="oslist" item="v" key="k"}
+                <input type="radio" name="osgroup" value="{$v.id}" data-uname="{$v.uname}" autocomplete="off" id="osgroup{$v.id}" {$k=='0' ? 'checked' : '' }>
+                <label class="rc-group-item" for="osgroup{$v.id}">{$v.title}</label>
+                {/foreach}
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label text-right">操作系统版本</label>
+            <div class="col-8">
+              <select name="ostype" id="ostype" class="form-control form-control-sm">
+                {foreach name="ostypelist" item="v" key="k"}
+                <option value="{$v.id}" {$k=='0' ? 'selected': '' }>{$v.title}</option>
+                {/foreach}
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label text-right">用户名</label>
+            <div class="col-8">
+              <input type="text" name="username" class="form-control form-control-sm" style="border: none;background: #fff;" readonly placeholder="" value="{$oslist[0]['uname']}" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label text-right">密码</label>
+            <div class="col-8">
+              <input type="password" name="password" class="form-control form-control-sm" placeholder="" />
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-sm btn-primary" onclick="reset()">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='js'}
+<script>
+  $('[href="#changepw"]').click(function () {
+    $('[name="vpsname"]').val($(this).parents('tr').data('name'));
+    $('[name="pro_id"]').val($(this).parents('tr').data('proid'));
+    $('[name="plug_name"]').val($(this).parents('tr').data('plug_name'));
+  });
+
+  $('[data-pass]').click(function () {
+    let t = $(this);
+    ajax('{:url("index/Server/getpass")}', {
+      id: $(this).parents('tr').data('id')
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        t.text(e.data);
+      } else {
+        alert(e.msg);
+      }
+    });
+  });
+
+  
+  $('[name="osgroup"]').change(function(){
+    let t = $(this);
+    $('[name="username"]').val(t.data('uname'));
+    ajax('{:url("index/Server/getOstypes")}', {
+      id: t.val(),
+    }, 'post').then(data => {
+      if (data) {
+        let temp = '',
+          dlist = '',
+          fName = '';
+        data.map((e, i) => {
+          if (e) {
+            temp += `
+              <option value="${e.id}" ${i==0 ? 'selected': '' }>${e.title}</option>
+            `;
+          }
+        });
+        $('#ostype').html(temp);
+      }
+    });
+  });
+  $('#resetos').on('bs.modal.hide',function(){
+    $('#resetos [name]').val('')
+  })
+  function callreset(id){
+    $('#resetos [name="id"]').val(id);
+    $('#resetos [name="password"]').val('');
+    $('#resetos').modal('show');
+  }
+  function reset(){
+    if (confirm("您确定要重装系统吗？")) {
+      ajax('{:url("index/Server/resetos")}', {
+        id: $('#resetos [name="id"]').val(),
+        osgroup: $('#resetos [name="osgroup"]').val(),
+        ostype: $('#resetos [name="ostype"]').val(),
+        username: $('#resetos [name="username"]').val(),
+        password: $('#resetos [name="password"]').val(),
+      }, 'post').then(e => {
+        alert(e.msg)
+        if(e.status == 200){
+          window.location.reload();
+        }
+      });
+    }
+  }
+</script>
+{/block}

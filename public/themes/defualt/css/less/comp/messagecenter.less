@@ -1,0 +1,57 @@
+
+.station-message{
+  >.form-row{
+    .btn{
+      font-size:12px;
+      padding-right: 11px;
+      padding-left: 11px;
+    }
+  }
+}
+
+.station-message{
+  .mr-auto{
+      .iconwarning{
+        position: absolute;
+        font-size: 19px;
+        top:-5px;
+        left:40px;
+        &:hover{
+          color:red!important;
+        }
+      }
+    }
+  }
+//信息被阅读后的灰色
+.letter-readed{
+  color:#999999;
+}
+//信息未阅读前的黑色
+.letter-unread{
+  color: #000000;
+}
+//箭头旋转180度动态
+.rotation[aria-expanded="true"]{
+  .iconicon_jiantou-xia{
+    transition: all .5s;
+    transform: rotate(-180deg);
+  }
+}
+//箭头回旋0.5s缓动
+.rotation[aria-expanded="false"]{
+  .iconicon_jiantou-xia{
+    transition: all .5s;
+  }
+}
+//复选框定位对齐
+.station-message{
+  .message-check-r{
+    position: relative;
+  }
+}
+.station-message{
+  .message-check-a{
+    position: absolute;
+    top:-6px;
+  }
+}

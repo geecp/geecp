@@ -1,0 +1,163 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+    <div class="card-header  border-t pb-0" style="background-color: #fff">
+        <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+        <div class="tool-list d-flex">
+            <ul class="list-inline mr-auto mb-0">
+                <li class="list-inline-item">
+                    <a href="#" class="fs-16" style="color: #000"> 现金收支</a>
+                </li>
+            </ul>
+            <!-- <ul class="list-inline m-0">
+                <li class="list-inline-item p-2">
+                    <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="card-body fs-12">
+        <div class="cont-box">
+            <div class="bg-f5 p-3 form-group">
+                <ul class="list-inline mb-0">
+                    <li class="list-item">温馨提示：</li>
+                    <li class="list-item">收支明细按时间记录了账户流入和流出的交易流水，与账单的记账时间不同。所以同一时间范围内消费账单与消费类型收支可能存在差异。</li>
+                    <li class="list-item">例如：您有一笔100元的3月31日23：00到23:59的后付费账单，系统在4月1日0点后支付这笔账单。此时，您3月将有一笔100元账单记录，这笔账单对应的收支记录在4月。</li>
+                </ul>
+            </div>
+            <div class="form-inline form-group">
+                <div class="bg-f5 p-3">
+                    <ul class="list-inline  mb-0">
+                        <li class="list-item fs-18"><span class="color-green py-1 pr-1 pl-0">￥0.00</span>=<span class="color-green p-1">￥0.00</span>+<span class="color-green p-1">￥0.00</span></li>
+                        <li class="list-item"><span class=" p-2">账号收入</span><span class="px-4">充值</span><span class="p-4">退款</span></li>
+                    </ul>
+                </div>
+                <div class="bg-f5 p-3 m-lf">
+                    <ul class="list-inline  mb-0">
+                        <li class="list-item fs-18"><span class="fc-red p-1">￥0.00</span>=<span class="fc-red p-1">￥0.00</span>+<span class="fc-red p-1">￥0.00</span></li>
+                        <li class="list-item"><span class="p-2">账号支出</span><span class="px-4">消费</span><span class="px-4">提现</span></li>
+                    </ul>
+                </div>
+                <div class="bg-f5 p-3">
+                    <ul class="list-inline  mb-0">
+                        <li class="list-item fs-18">￥0.00</li>
+                        <li class="list-item">第三方直接消费</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-inline form-group">
+                <ul class="list-inline mr-auto form-inline mb-0">
+                    <li class="list-inline-item form-inline">
+                        <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+                            <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+                            <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                            <span class="c-datepicker-range-separator">-</span>
+                            <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off" value="">
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <select name="" id="" class="form-control form-control-sm">
+              <option value="">交易类型:全部</option>
+              <option value="">消费</option>
+              <option value="">充值</option>
+              <option value="">退款</option>
+              <option value="">提现</option>
+              <option value="">冻结</option>
+              <option value="">解冻</option>
+              </select>
+                    </li>
+                    <li class="list-inline-item">
+                        <select name="" id="" class="form-control form-control-sm">
+              <option value="">渠道类型:全部</option>
+              <option value="">账户余额</option>
+              <option value="">第三方支付</option>
+              </select>
+                    </li>
+                </ul>
+                <ul class="list-inline  m-0 form-inline">
+                    <li class="list-inline-item m-0"><button class="btn  btn-light btn-sm"><i class="iconfont iconicon_xiazai"></i></button></li>
+                </ul>
+            </div>
+            <div class="ml-nge">
+                <table class="table table-border">
+                    <thead class="bg-fB p-2">
+                        <tr class="font-weight-light">
+                            <th>编号</th>
+                            <th>时间</th>
+                            <th>产品</th>
+                            <th>交易类型</th>
+                            <th>金额</th>
+                            <th>渠道类型</th>
+                            <th>余额</th>
+                            <th>详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>hGDHNJIj</td>
+                            <td>2019-03-24 11:21:54 </td>
+                            <td>BCD(域名服务)</td>
+                            <td>消费</td>
+                            <td class="fc-red">-￥35.00 </td>
+                            <td>第三方支付</td>
+                            <td>-</td>
+                            <td><a href="account_orderdetail.html">查看账单</a></td>
+                        </tr>
+                        <tr>
+                            <td>O13GgV4m</td>
+                            <td>2019-03-22 20:44:14</td>
+                            <td>
+                                <ul class="mb-0 p-0" style="list-style-type: none !important">
+                                    <li>BCC(云服务器)</li>
+                                    <li>CDS(云磁盘)</li>
+                                    <li>EIP(弹性公网IP)</li>
+                                </ul>
+                            </td>
+                            <td>消费</td>
+                            <td class="fc-red">-￥9.90</td>
+                            <td>第三方支付</td>
+                            <td>-</td>
+                            <td><a href="#">查看账单</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-between pt-3 pl-3">
+                <ul class="mr-auto"></ul>
+                <ul class="list-inline form-inline px-2">
+                    <li class="list-inline-item">每页显示</li>
+                    <li>
+                        <select name="" id="" class="form-control form-control-sm">
+                  <option value="">10</option>
+                  <option value="">20</option>
+                  <option value="">30</option>
+                  <option value="">40</option>
+              </select>
+                    </li>
+                </ul>
+                <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">&lt;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">2
+                      <span class="sr-only">(current)</span>
+                  </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">&gt;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+</script>
+{/block}

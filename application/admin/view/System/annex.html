@@ -1,0 +1,198 @@
+{extend name='Common/index' /}
+{block name='content'}
+<section class="content">
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">附件设置</h3>
+    </div>
+    <div class="box-body">
+      <div class="form">
+        <div class="form-group">
+          <label for="type" class="col-sm-2 control-label">附件管理类型</label>
+          <div class="col-sm-10">
+            <select name="type" id="type" class="form-control">
+              <option value="0" {$info?$info['type'] == '0'?'selected':'':''}>本地服务器</option>
+              <!-- <option value="ftp" {$info?$info['type'] == 'ftp'?'selected':'':''}>FTP服务器</option> -->
+              <option value="bos" {$info?$info['type'] == 'bos'?'selected':'':''}>百度云存储</option>
+              <option value="qiniu" {$info?$info['type'] == 'qiniu'?'selected':'':''}>七牛云存储</option>
+              <!-- <option value="oss" {$info?$info['type'] == 'oss'?'selected':'':''}>阿里云OSS</option> -->
+            </select>
+            <input type="hidden"  name="id" value="{$info?$info['id']:''}">
+          </div>
+        </div>
+        <div data-type="ftp" class="hidden">
+          <div class="form-group">
+            <label for="ftp_sever" class="col-sm-2 control-label">FTP服务器域名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="ftp_sever" name="ftp_sever" placeholder="请输入FTP服务器域名" value="{$info?$info['ftp_sever']:''}" autocomplete="off">
+              <p class="help-block">FTP服务器域名必须以 "http://"、"http://"、"//" 开头 例：https://www.baidu.com(它将作为文件读取地址)</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_name" class="col-sm-2 control-label">FTP账号</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="ftp_name" name="ftp_name" placeholder="请输入FTP账号" value="{$info?$info['ftp_name']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_pwd" class="col-sm-2 control-label">FTP密码</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="ftp_pwd" name="ftp_pwd" placeholder="请输入FTP密码" value="{$info?$info['ftp_pwd']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_port" class="col-sm-2 control-label">FTP端口号</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="ftp_port" name="ftp_port" placeholder="请输入FTP端口号" value="{$info?$info['ftp_port']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_pasv" class="col-sm-2 control-label">被动模式</label>
+            <div class="col-sm-10">
+              <select name="ftp_pasv" id="ftp_pasv" class="form-control">
+                <option value="0" {$info?$info['ftp_pasv'] == '0'?'selected':'':''}>关闭</option>
+                <option value="1" {$info?$info['ftp_pasv'] == '1'?'selected':'':''}>启用</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_ssl" class="col-sm-2 control-label">SSL模式</label>
+            <div class="col-sm-10">
+              <select name="ftp_ssl" id="ftp_ssl" class="form-control">
+                <option value="0" {$info?$info['ftp_ssl'] == '0'?'selected':'':''}>关闭</option>
+                <option value="1" {$info?$info['ftp_ssl'] == '1'?'selected':'':''}>启用</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_timeout" class="col-sm-2 control-label">超时时间</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="ftp_timeout" name="ftp_timeout" placeholder="请输入超时时间" value="{$info?$info['ftp_timeout']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ftp_remoteroor" class="col-sm-2 control-label">图片服务器根目录</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="ftp_remoteroor" name="ftp_remoteroor" placeholder="请输入图片服务器根目录" value="{$info?$info['ftp_remoteroor']:''}" autocomplete="off">
+            </div>
+          </div>
+        </div>
+        <div data-type="bos" class="hidden">
+          <div class="form-group">
+            <label for="bos_ak" class="col-sm-2 control-label">AK</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="bos_ak" name="bos_ak" placeholder="请输入AK" value="{$info?$info['bos_ak']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bos_sk" class="col-sm-2 control-label">SK</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="bos_sk" name="bos_sk" placeholder="请输入SK" value="{$info?$info['bos_sk']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bos_bucket" class="col-sm-2 control-label">Bucket</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="bos_bucket" name="bos_bucket" placeholder="请输入Bucket" value="{$info?$info['bos_bucket']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bos_domain" class="col-sm-2 control-label">绑定域名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="bos_domain" name="bos_domain" placeholder="请输入绑定域名" value="{$info?$info['bos_domain']:''}" autocomplete="off">
+              <p class="help-block">绑定域名必须以 "http://"、"http://"、"//" 开头 例：https://www.baidu.com</p>
+            </div>
+          </div>
+        </div>
+        <div data-type="qiniu" class="hidden">
+          <div class="form-group">
+            <label for="qiniu_ak" class="col-sm-2 control-label">AK</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="qiniu_ak" name="qiniu_ak" placeholder="请输入AK" value="{$info?$info['qiniu_ak']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="qiniu_sk" class="col-sm-2 control-label">SK</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="qiniu_sk" name="qiniu_sk" placeholder="请输入SK" value="{$info?$info['qiniu_sk']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="qiniu_bucket" class="col-sm-2 control-label">Bucket</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="qiniu_bucket" name="qiniu_bucket" placeholder="请输入Bucket" value="{$info?$info['qiniu_bucket']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="qiniu_domain" class="col-sm-2 control-label">绑定域名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="qiniu_domain" name="qiniu_domain" placeholder="请输入绑定域名" value="{$info?$info['qiniu_domain']:''}" autocomplete="off">
+              <p class="help-block">绑定域名必须以 "http://"、"http://"、"//" 开头 例：https://www.baidu.com</p>
+            </div>
+          </div>
+        </div>
+        <div data-type="oss" class="hidden">
+          <div class="form-group">
+            <label for="oss_ak" class="col-sm-2 control-label">AK</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="oss_ak" name="oss_ak" placeholder="请输入AK" value="{$info?$info['oss_ak']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="oss_sk" class="col-sm-2 control-label">SK</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="oss_sk" name="oss_sk" placeholder="请输入SK" value="{$info?$info['oss_sk']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="oss_bucket" class="col-sm-2 control-label">Bucket</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="oss_bucket" name="oss_bucket" placeholder="请输入Bucket" value="{$info?$info['oss_bucket']:''}" autocomplete="off">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="oss_domain" class="col-sm-2 control-label">绑定域名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="oss_domain" name="oss_domain" placeholder="请输入绑定域名" value="{$info?$info['oss_domain']:''}" autocomplete="off">
+              <p class="help-block">绑定域名必须以 "http://"、"http://"、"//" 开头 例：https://www.baidu.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary sub">提交</button>
+            <a href="javascript:history.go(-1);" class="btn btn-default">返回</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block}
+{block name='js'}
+<script src="__STATIC__/dist/js/formBasic.js"></script>
+<script>
+$('.sub').click(function(){
+  let names = document.querySelectorAll('.form-group > div > [name]'),
+      vals = {};
+  names = [].slice.call(names);
+  names.map((e)=>{
+    vals[e.name] = e.value;
+  });
+  ajax('{:url("admin/System/annexAuth")}',vals,'post').then(e=>{
+    if(e.status === 200){
+      alert(e.msg);
+      location.href="{:url('admin/System/annex')}";
+    } else {
+      alert(e.msg);
+    }
+  });
+});
+$('[data-type="'+$('[name="type"]').val()+'"]').removeClass('hidden');
+$('[name="type"]').change(function(){
+  $('[data-type]').addClass('hidden');
+  $('[data-type="'+$(this).val()+'"]').removeClass('hidden');
+});
+</script>
+{/block}
+ 

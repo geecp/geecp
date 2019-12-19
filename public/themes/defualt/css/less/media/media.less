@@ -1,0 +1,174 @@
+@media (max-width: 767px) {
+    @mre: rgb(255, 68, 51);
+    a {
+        color: @mre;
+    }
+    .navbar,
+    .footer.vba {
+        .dn;
+    }
+    .full-width {
+        background: @cwh;
+        .content-mix{
+            .page-header{
+                .pdy(@mpb);
+                .mgb(@mpb);
+                p{
+                    .mgy(@mpb/3);
+                }
+            }
+        }
+        >.container {
+            .vba-cont {
+                .pdx(0);
+                .content-mix {
+                    .pdx(0);
+                }
+            }
+        }
+        ul.news {
+            .mgb(0);
+            blockquote {
+                .unbd;
+                .pd(0);
+                .mgb(@mpb/1.5);
+                .fs(12px);
+                >a {
+                    .dib;
+                    width: 60%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                a,
+                time {
+                    .fs(12px);
+                }
+            }
+        }
+        .table {
+            td,
+            th {
+                .pd(8px);
+            }
+            .table {
+                thead {
+                    tr {
+                        th:first-child {
+                            width: 90px!important;
+                        }
+                    }
+                }
+            }
+        }
+        .page-header {
+            .pdy(@mpb);
+            &.vba {
+                .bdrb;
+                .mgb(@mpb);
+                >h3,
+                >h4 {
+                    border-color: @mre;
+                }
+            }
+            h2 {
+                .fs(16px);
+            }
+            h4 {
+                .fs(14px);
+            }
+            h2,
+            h3,
+            h4,
+            h5 {
+                line-height: 24px;
+            }
+            p {
+                color: @cc2;
+            }
+        }
+        .vtop,
+        .col-md-12>.nav.nav-tabs {
+            .dn;
+        }
+        .panel {
+            .unbd;
+            box-shadow: none;
+            &-body {
+                .pd(0);
+            }
+            &-heading.vnav {
+                >.nav.nav-tabs {
+                    .bdr;
+                }
+                .nav {
+                    &.nav-tabs {
+                        width: 100%;
+                        display: block;
+                        >li {
+                            display: table-cell;
+                            width: 1%;
+                            >a {
+                                .pd(@mpb @mpb/3);
+                                .mg(0);
+                            }
+                            &.active {
+                                >a {
+                                    color: @mre!important;
+                                    border-bottom-color: @mre!important;
+                                    .unbdr!important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        >.container {
+            >.row {
+                .mgb(@mpb);
+            }
+            .fbox {
+                h4 {
+                    .fs(14px);
+                }
+                .table {
+                    tr:first-child {
+                        td:first-child {
+                            width: 140px;
+                        }
+                    }
+                }
+            }
+            .tab {
+                &-left {
+                    width: 90px;
+                    .table {
+                        tr {
+                            td,
+                            th {
+                                width: 100%;
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                            }
+                        }
+                    }
+                }
+                &-body {
+                    .pdl(90px);
+                }
+                &-left,
+                &-body {
+                    tr {
+                        th,
+                        td {
+                            min-width: 80px!important;
+                            max-width: 80px!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
