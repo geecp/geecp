@@ -1,0 +1,144 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="nav-tabs-custom" style="margin: 0;">
+    <ul class="nav nav-tabs">
+      <li><a href="{:url('manager/Service/domain')}">域名列表</a></li>
+      <li><a href="{:url('manager/Service/domainprice')}">域名价格</a></li>
+      <li class="active"><a href="{:url('manager/Service/domaintempaudit')}">信息模板</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box" style="border-top: 0;">
+        <div class="box-header clearfix">
+          <div class="box-tools pull-left form-inline">
+            <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+            <button class="btn btn-primary btn-sm serchBtn">查询</button>
+            <div class="pull-right">
+              <!-- <a href="{:url('admin/Service/adddomainprice')}" class="btn btn-primary btn-sm">新增域名价格</a> -->
+              <!-- <a href="{:url('admin/Product/add')}" class="btn btn-primary btn-sm">新增产品</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-hover tableData">
+            <thead>
+              <tr>
+                <th>域名所有者</th>
+                <th>所有者类型</th>
+                <th>实名认证状态</th>
+                <th>管理联系人</th>
+                <th>联系邮箱</th>
+                <th>所属用户</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list)} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                <td>{$v.company_cn}</td>
+                <td>{$v.usertype == 'O'?'企业':'个人'}</td>
+                <td>{$v.ischeck}</td>
+                <td>{$v.lastname_cn}{$v.firstname_cn}</td>
+                <td>{$v.email}</td>
+                <td>{$v.user}</td>
+                <td>{$v.status == '1'?'正常':'禁用'}</td>
+                <td>
+                  <a href="javascript:;" class="btn-link btn-xs" onclick="edit($(this))">查看</a>
+                  <!-- <a href="javascript:;" class="btn-link btn-xs" onclick="copy($(this))">复制</a> -->
+                </td>
+              </tr>
+              {/foreach} {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<div class="modal fade" id="config" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">信息查看</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function edit(t) {
+    // console.log($(this).data('config'))
+    var html = '',
+      config = t.parents('tr').data('config');
+    for (let k in config) {
+      if(k == 'id'){
+        continue;
+      } else if(k == 'user_id'){
+        config[k] = t.parents('tr').find('td').eq(5).html()
+      }
+      html += `
+      <div class="form-group">
+        <label class="col-sm-5 control-label">${escape(k)}：</label>
+        <div class="col-sm-7">
+          <div class="form-control-static">${escape(config[k],k)}</div>
+        </div>
+      </div>
+      `;
+    }
+    $('#config .form-horizontal').html(html);
+    $('#config').modal('show');
+  }
+
+  function escape(str, type) {
+    if (!type) {
+      return (str == 'id' && '模板ID' || str == 'company_en' && '域名所有人(英文)' || str == 'lastname_en' && '联系人姓(英文)' ||
+        str == 'firstname_en' && '联系人名(英文)' || str == 'country_en' && '国家(英文)' || str == 'state_en' && '省份(英文)' ||
+        str == 'city_en' && '城市(英文)' || str == 'address_en' && '详细地址(英文)' || str == 'company_cn' && '域名所有人' || str ==
+        'lastname_cn' && '联系人姓' || str == 'firstname_cn' && '联系人名' || str == 'country_cn' && '国家' || str ==
+        'state_cn' && '省份' || str == 'city_cn' && '城市' || str == 'address_cn' && '详细地址' || str == 'zipcode' &&
+        '邮政编码' || str == 'phone' && '手机号' || str == 'fax' && '传真' || str == 'email' && '电子邮箱' || str == 'usertype' &&
+        '所有者类型' || str == 'idtype' && '证件类型' || str == 'idnumber' && '证件号码' || str == 'ischecked' && '审核状态' || str ==
+        'status' && '状态' || str == 'contact_id' && '模板插件ID' || str == 'user_id' && '所属用户' || str == 'create_time' &&
+        '创建时间' || str == 'update_time' && '修改时间' || '');
+    }
+
+    let _t = {
+      usertype: (t) => {
+        return t == 'O' && '企业' || '个人'
+      },
+      idtype: (t) => {
+        return (t == 'SFZ' && '居民身份证' || t == 'HZ' && '护照' || t == 'JGZ' && '军官证' || t == 'GATXZ' && '港澳居民来往内地通行证' || t == 'TWJM' && '台湾居民来往内地通行证' || t == 'WGJM' && '外国人永久居留身份证' || t == 'YYZZ' && '工商营业执照' || t == 'ORG' && '组织机构代码证' || t == 'SHXYZS' && '统一社会信用代码证' || t == 'SYDWFR' && '事业单位法人证书' || t == 'SHTTFR' && '社会团体法人登记证书 ' || t == 'MBFQY' && '民办非企业单位登记证书' || t == 'LSSWS' && '律师事务所执业许可证' || t == 'SFJD' && '司法鉴定许可证' || t == 'ZJHD' && '宗教活动场所登记证' || t == 'JJHFR' && '基金会法人登记证书' || t == 'BDDH' && '部队代号' || t == 'JDDW' && '军队单位对外有偿服务许可证' || t == 'WGQY' && '外国企业常驻代表机构登记证' || t == 'WGZH' && '外国在华文化中心登记证' || t == 'WGZFLY' && '外国政府旅游部门常驻代表机构批准登记证' || t == 'WGJGZ' && '境外机构证/香港商业登记证' || t == 'GZJGZYZ' && '公证机构执业证' || t == 'WGZHBXXKZ' && '北京市外国驻华使馆人员子女学校办学许可证' || t == 'GATJZZ' && '港澳台居民居住证' || t == 'SHFWJGDJZ' && '社会服务机构登记证书' || t == 'MBXXBXXKZ' && '民办学校办学许可证' || t == 'YLJGZYXKZ' && '医疗机构执业许可证' || '')
+      },
+      ischecked: (t) => {
+        return (t == '0' && '未审核' || t == '1' && '待审核' || t == '2' && '通过' || t == '3' && '失败' || t == '5' &&
+          '未上传资料' || t == '6' && '黑名单' || t == '8' && '上传中' || '')
+      },
+      status: (t) => {
+        return (t == '1' && '正常' || '禁用')
+      },
+    }
+    return _t[type] ? _t[type](str) : str;
+  }
+  $('.tableData').DataTable({
+    'paging': false,
+    'fixedHeader': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': false,
+    'info': true,
+    'autoWidth': false,
+    'deferRender': true,
+    'processing': true,
+  });
+</script>
+{/block}

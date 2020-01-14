@@ -1,0 +1,206 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item py-2">
+          <h4>域名管理</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <!-- <div class="form-group">
+        <div class="col bg-orange color-orange p-2">
+          4月域名促销热潮火热上线，.com域名新注52元持续不限量， 更有.mobi /.info 新注低至28元！
+        </div>
+      </div> -->
+      <!-- <div class="form-group">
+        <ul class="list-inline mr-auto m-0 form-inline ">
+          <li class="list-inline-item form-inline">
+            <label class="col-form-label-sm">域名状态：</label>
+            <div>
+              <select name="" id="" class="form-control form-control-sm">
+                <option value="">全部域名</option>
+                <option value="">未实名认证</option>
+                <option value=""> 实名认证中</option>
+                <option value=""> 实名认证失败</option>
+                <option value="">已过期</option>
+                <option value="">亟需赎回</option>
+                <option value=""> 已删除</option>
+              </select>
+            </div>
+          </li>
+          <li class="list-inline-item form-inline">
+            <label class="col-form-label-sm">到期时间：</label>
+            <div class="c-datepicker-date-editor J-datepicker-range-day mt10">
+              <i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
+              <input placeholder="开始日期" name="starttime" class="c-datepicker-data-input only-date" autocomplete="off"
+                value="">
+              <span class="c-datepicker-range-separator">-</span>
+              <input placeholder="结束日期" name="endtime" class="c-datepicker-data-input only-date" autocomplete="off"
+                value="">
+            </div>
+          </li>
+        </ul>
+      </div> -->
+      <div class="form-group tool-list d-flex">
+        <ul class="list-inline mr-auto m-0">
+          <li class="list-inline-item ">
+            <div>
+              <a href="{:url('index/Domain/search')}" class="btn btn-primary btn-sm">
+                <span class="iconfont icon-icon_tianjia"></span>注册新域名
+              </a>
+            </div>
+          </li>
+          <!-- <li class="list-inline-item ">
+            <div>
+              <button type="button" class="btn btn-block  btn-sm" disabled>
+                <span class="iconfont icon-icon_tianjia">续费</span>
+              </button>
+            </div>
+          </li> -->
+          <!-- <li class="list-inline-item ">
+            <div>
+              <button type="button" class="btn btn-block  btn-sm" disabled>
+                <span class="iconfont icon-icon_tianjia">标签</span>
+              </button>
+            </div>
+          </li> -->
+          <!-- <li class="list-inline-item form-inline">
+            <div>
+              <select name="" id="" class="form-control form-control-sm">
+                <option value="">转至其他账号</option>
+                <option value=""> 修改DNS</option>
+                <option value=""> 变更所有者</option>
+                <option value="">设置隐私保护</option>
+              </select>
+            </div>
+          </li> -->
+        </ul>
+        <ul class="list-inline  m-0 form-inline">
+          <!-- <li class="list-inline-item p-0 mr-0 pr-1">
+            <select name="" id="" class="form-control form-control-sm fs-12" style="width: 70px">
+              <option value="" selected="">全部</option>
+              <option value="">正式</option>
+              <option value="">草稿</option>
+              <option value="">作废</option>
+            </select>
+          </li> -->
+          <li class="list-inline-item">
+            <div class="input-group input-group-sm">
+              <input type="text" class="form-control form-control-sm" placeholder="请输入域名进行模糊搜索">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-primary btn-sm">
+                  <span class="iconfont icon-icon_sousuo-xian mr-0"></span>
+                </button>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item"><button class="btn btn-light btn-sm"><i class="iconfont icon-icon_shuaxin"></i></button></li>
+          <!-- <li class="list-inline-item">
+            <button class="btn  btn-light btn-sm"><i class="iconfont icon-icon_xiazai"></i></button>
+          </li> -->
+        </ul>
+      </div>
+      <div class="form-group ml-nge">
+        <table class="table table-border">
+          <thead class="bg-fB p-2">
+            <tr class="font-weight-light">
+              <th class="px-3">
+                <!-- <div class="custom-control  custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="reviewedorder">
+                  <label class="custom-control-label" for="reviewedorder" style="top:0px">域名</label>
+                </div> -->
+                域名
+              </th>
+              <th class="p-2">域名状态</th>
+              <th class="p-2">域名类型</th>
+              <!-- <th class="p-2">备案状态</th> -->
+              <th class="p-2">注册日期</th>
+              <th class="p-2">到期日期</th>
+              <th class="p-2" style="width: 150px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            {if (!empty($list) && !empty($list[0]))}
+            {foreach name="list" item="v"}
+            <tr>
+              <td>
+                <span>{$v.domainname}</span>
+              </td>
+              <td>{$v.r_state}</td>
+              <td>{$v.d_type}</td>
+              <!-- <td>{$v.d_state}</td> -->
+              <td>{$v.create_time}</td>
+              <td>{$v.end_time|date='Y-m-d H:i:s',###}</td>
+              <td class="form-inline" style="width:160px">
+                <a href="javascirpt:;" onclick="recharge($(this))" data-domain="{$v.domainname}" data-end="{$v.end_time|date='Y-m-d H:i:s',###}" class="btn-link">续费</a>
+                <!-- <a href="../dns/dnsanalysis-server-recordlist.html" class="btn-link  pl-1">解析</a> -->
+                <button type="button" class="btn btn-link p-0 dropdown-toggle fs-12 pl-1" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false" style="font-size:12px">
+                  更多操作
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="{:url('index/Domain/detail')}?domain={$v.domainname}">域名信息</a>
+                  <a class="dropdown-item" href="{:url('index/Domain/tomanager')}?domain={$v.domainname}" target="_blank">前往控制面板</a>
+                  <a class="dropdown-item" href="{:url('index/Domain/certification')}?domain={$v.domainname}" target="_blank">生成域名证书</a>
+                  <!-- <a class="dropdown-item" href="manage_verifySubmit.html">所有者实名认证</a> -->
+                  <a class="dropdown-item" href="{:url('index/Domain/transform')}?domain={$v.domainname}">变更所有者</a>
+                  <!-- <a class="dropdown-item" href="../ssl/purchased_list.html">申请SSL证书</a> -->
+                </div>
+              </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <td colspan="7" class="text-center">暂无数据</td>
+            {/if}
+            <!-- <tr>
+              <td>
+                <div class="custom-control  custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="reviewedorder">
+                  <label class="custom-control-label" for="reviewedorder" style="top:0px">
+                    <a href="#" class="btn btn-link btn-sm text-dark disabled p-0">
+                      sj.com
+                    </a></label>
+                </div>
+              </td>
+              <td><a href="manage_verifySubmit.html">未实名认证</a></td>
+              <td><a href="#" class="text-danger form-inline"><i class="iconfont icondian fs-18"></i>未备案</a></td>
+              <td>2019-03-24</td>
+              <td>2021-03-24</td>
+              <td>-</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between pt-3 pl-3">
+      <ul class="mr-auto"></ul>
+      <div class="pagination mb-0">
+        {$list->render()}
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+ function recharge(t){
+   let _c;
+   _c = [];
+   _c.push({
+    domain: t.data('domain').split('.')[0],
+    suffix: '.'+t.data('domain').split('.')[1],
+    years: 1,
+    end: t.data('end')
+   })
+   localStorage.setItem('domainlist',JSON.stringify(_c))
+   setTimeout(function(){
+    location.href="{:url('index/Domain/recharge')}"
+   },200)
+ }
+</script>
+{/block}

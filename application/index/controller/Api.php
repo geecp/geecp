@@ -7,6 +7,13 @@ use app\index\model\GeeBilling; //用户表
 use app\index\model\GeeOrder; //交易记录表
 use app\index\model\GeeProConfig; //订单表
 use app\index\model\GeeUser; //订单表
+use app\admin\model\GeeDomainContact; //产品分类表
+use app\admin\model\GeeDomainPrice; //产品分类表
+use app\admin\model\GeeAddons; // 
+use app\admin\model\GeeProduct; //产品组表
+use app\admin\model\GeeProductClass; //产品表
+use app\admin\model\GeeProductGroup; //插件表
+use app\index\model\GeeDomain; //产品购买配置表
 use think\Controller;
 
 // 请求类
@@ -43,14 +50,109 @@ class Api extends Common
                 $pcs = $pc->where('order_number = "' . $data['order'] . '"')->find();
                 $configs = json_decode($pcs['config'], true);
                 if($configs['_create_putData']){
-                  //vps 或 插件类购买
-                  $plug = new $configs['_create_putData']['plug']();
-                  $func = $configs['_create_putData']['class'];
-                  $putData = $configs['_create_putData']['data'];
-                  if (!$putData['function']) {
-                      $putData['function'] = $configs['_create_putData']['function'];
+                  if($configs['_create_putData']['class'] == 'domain'){
+                    $d = new GeeDomain();
+                    $dc = new GeeDomainContact();
+                    $dp = new GeeDomainPrice();
+                    $pro = new GeeProduct();
+                    $addons = new GeeAddons();
+                    $plug = new $configs['_create_putData']['plug']();
+                    $func = $configs['_create_putData']['class'];
+                    // dump($configs['_create_putData']);
+                    foreach ($configs['_create_putData']['data'] as $k => $v) {
+                        // dump($v);
+                        $suffix = '.' . explode(".", $v['domainname'])[1];
+                        $dpinfo = $dp->where('domain = "' . $suffix . '"')->find();
+                        $proinfo = $pro->where('id = ' . $dpinfo['pro_id'])->find();
+                        $adninfo = $addons->where('id = ' . $proinfo['plug'])->find();
+                        if ($configs['_create_putData']['action'] != 'domainRenew') {
+                            $dcinfo = $dc->where('id = ' . $v['userid'])->find();
+                            $userid = json_decode($dcinfo['contact_id'], true)[$proinfo['name']]['value'];
+                        }
+                        // dump(json_decode($dcinfo['contact_id'],true));
+                        if ($configs['_create_putData']['action'] == 'domainRenew') {
+                            $putData = [
+                                'way' => $adninfo['name'],
+                                'pro_id' => $dpinfo['pro_id'],
+                                'function' => 'control',
+                                'action' => $configs['_create_putData']['action'],
+                                'data' => [
+                                    "domainname" => $v['domainname'],
+                                    "years" => $v['years'],
+                                    "exptme" => $v['exptme'],
+                                ],
+                            ];
+                        } else {
+                            $putData = [
+                                'way' => $adninfo['name'],
+                                'pro_id' => $dpinfo['pro_id'],
+                                'function' => 'control',
+                                'action' => 'createDom',
+                                'data' => [
+                                    'userid' => $userid,
+                                    'domainname' => $v['domainname'],
+                                    'years' => $v['years'],
+                                    'domainpass' => $v['domainpass'],
+                                    'dns1' => $v['dns1'],
+                                    'dns2' => $v['dns2'],
+                                ],
+                            ];
+                        }
+                        // dump($v);
+                        // dump($putData);
+
+                        $res = $plug->$func($putData);
+                        $res = json_decode($res, true);
+                        if ($res['status'] == 'failed') {
+                            $ret['status'] = 400;
+                            $ret['msg'] = '请求超时！请联系管理员处理！错误码:' . explode(' ', $res['data'])[0];
+                            $isfailed = true;
+                            break;
+                        } else {
+                            if ($configs['_create_putData']['action'] == 'domainRenew') {
+                                $save = [
+                                    'user_id' => session('_userInfo')['id'],
+                                    'end_time' => strtotime(date("Y-m-d H:i:s", strtotime("+" . ((int) $v['years'] * 12) . " month"))),
+                                ];
+                                $d->where('domainname = "' . $v['domainname'] . '"')->update($save);
+                            } else {
+                                $save = [
+                                    'user_id' => session('_userInfo')['id'],
+                                    'userid' => $userid,
+                                    'domainname' => $v['domainname'],
+                                    'years' => $v['years'],
+                                    'domainpass' => $v['domainpass'],
+                                    'isname' => 0,
+                                    'dns' => json_encode(['dns1' => $v['dns1'], 'dns2' => $v['dns2']]),
+                                    'status' => 0,
+                                    'r_status' => 0,
+                                    'newstas' => 0,
+                                    'end_time' => strtotime(date("Y-m-d H:i:s", strtotime("+" . ((int) $v['years'] * 12) . " month"))),
+                                ];
+                                $d->save($save);
+                            }
+                        }
+                    }
+                    // return;
+
+                    // dump($ret);
+                    if ($isfailed) {
+                        // dump(session('_userInfo')['balance']);
+                        // dump($info['money']);
+                        $userup = db('gee_user')->where('id = ' . session('_userInfo')['id'])->update(['balance' => ((double) session('_userInfo')['balance'] - (double) $info['money']) + (double) $info['money']]);
+                        return json_encode($ret);
+                    }
+                  } else {
+                    //vps 或 其他通用插件类购买
+                    $plug = new $configs['_create_putData']['plug']();
+                    $func = $configs['_create_putData']['class'];
+                    $putData = $configs['_create_putData']['data'];
+                    if (!$putData['function']) {
+                        $putData['function'] = $configs['_create_putData']['function'];
+                    }
+                    $res = $plug->$func($putData);
                   }
-                  $res = $plug->$func($putData);
+
                 } else {
                   //租用物理服务器
                   $server = new GeeServer();

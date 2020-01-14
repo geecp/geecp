@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : localhosts
  Source Server Type    : MySQL
  Source Server Version : 50553
  Source Host           : localhost:3306
@@ -11,11 +11,26 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 19/12/2019 16:04:08
+ Date: 14/01/2020 13:52:14
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for gee_accesskey
+-- ----------------------------
+DROP TABLE IF EXISTS `gee_accesskey`;
+CREATE TABLE `gee_accesskey`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ak` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'AccessKey',
+  `sk` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'SecretKey',
+  `intro` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '说明',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '所属用户',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_addons
@@ -36,7 +51,7 @@ CREATE TABLE `gee_addons`  (
   `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gee_addons
@@ -67,7 +82,8 @@ CREATE TABLE `gee_adminuser`  (
 -- ----------------------------
 -- Records of gee_adminuser
 -- ----------------------------
-INSERT INTO `gee_adminuser` VALUES (1, 'admin', '', '', '$2y$11$cub.Y9NiD6OhSrWo/q.TsegCVglCDoP7Mg6GLuVMuE.mBA5xGBVPa', '', '::1', 1557120679, 1576741532, 1576741532, '0', '超级管理员', 8);
+INSERT INTO `gee_adminuser` VALUES (1, 'admin', 'xiao.song@qiduo.net', '13789398868', '$2y$11$cub.Y9NiD6OhSrWo/q.TsegCVglCDoP7Mg6GLuVMuE.mBA5xGBVPa', '', '::1', 1557120679, 1578979052, 1578979052, '0', '超级管理员', 8);
+INSERT INTO `gee_adminuser` VALUES (2, 'ylsq', '975827527@qq.com', '13789398868', '$2y$11$VRC6vfIdRv0FsJNnC80sJOKrttqnnMJQH.U2/5fI4lpT7eVAqbV.W', NULL, '::1', 1557385353, 1558062805, 1558062805, '0', '詹孝松', 8);
 
 -- ----------------------------
 -- Table structure for gee_annexconfig
@@ -129,7 +145,114 @@ CREATE TABLE `gee_billing`  (
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   `update_time` int(11) NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 132 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 142 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for gee_domain
+-- ----------------------------
+DROP TABLE IF EXISTS `gee_domain`;
+CREATE TABLE `gee_domain`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '所属用户',
+  `domainname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名',
+  `userid` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '联系人ID',
+  `domainpass` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名密码',
+  `isname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否为姓名域名 0:普通域名 1:姓名域名',
+  `dns` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'DNS服务器 [{dns1: \"\"},{dns2:\"\"}]',
+  `status` int(11) NULL DEFAULT NULL COMMENT '域名状态 0:待审核 1:审核中 2:正常 3:审核未通过',
+  `r_status` int(11) NULL DEFAULT NULL COMMENT '备案状态 0:未备案 1:备案审核中 2:正常 3:审核未通过',
+  `r_state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名状态 具体看美橙文档',
+  `d_state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名命名状态 具体看美橙文档',
+  `domaintype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名状态 具体看美橙文档',
+  `newstas` int(11) NULL DEFAULT NULL COMMENT '域名隐私保护 0:关闭 1:开启',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  `end_time` int(11) NULL DEFAULT NULL COMMENT '结束时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for gee_domain_cndns
+-- ----------------------------
+DROP TABLE IF EXISTS `gee_domain_cndns`;
+CREATE TABLE `gee_domain_cndns`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '所属用户',
+  `userid` int(11) NULL DEFAULT NULL COMMENT '联系人ID',
+  `domainname` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '域名',
+  `years` int(11) NULL DEFAULT NULL COMMENT '注册年限',
+  `domainpass` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '域名密码',
+  `isname` int(11) NULL DEFAULT NULL COMMENT '是否为姓名域名 0:普通域名 1:姓名域名',
+  `dns` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'DNS服务器 [{dns1: \"\"},{dns2:\"\"}]',
+  `status` int(11) NULL DEFAULT NULL COMMENT '域名状态 0:待审核 1:审核中 2:正常 3:审核未通过',
+  `r_status` int(11) NULL DEFAULT NULL COMMENT '备案状态 0:未备案 1:备案审核中 2:正常 3:审核未通过',
+  `newstas` int(11) NULL DEFAULT NULL COMMENT '域名隐私保护 0:关闭 1:开启',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  `end_time` int(11) NULL DEFAULT NULL COMMENT '结束时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for gee_domain_contact
+-- ----------------------------
+DROP TABLE IF EXISTS `gee_domain_contact`;
+CREATE TABLE `gee_domain_contact`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名所有者(英文) 至少包含一个空格',
+  `lastname_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓(英文)',
+  `firstname_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名(英文)',
+  `country_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '国家代码(英文)  中国 CN',
+  `state_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '省份(英文)',
+  `city_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '城市(英文)',
+  `address_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址(英文)',
+  `company_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名所有者(中文) 企业长度至少6位 个人长度至少2位  (1汉字=2位)',
+  `lastname_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓(中文)',
+  `firstname_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名(中文)',
+  `country_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '国家代码(中文)',
+  `state_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '省份(中文)',
+  `city_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '城市(中文)',
+  `address_cn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系地址(中文)',
+  `zipcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮编',
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话',
+  `fax` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '传真',
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
+  `usertype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '域名类型 (O:企业  I:个人)',
+  `idtype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '证件类型',
+  `idnumber` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '证件号码',
+  `ischecked` int(11) NULL DEFAULT NULL COMMENT '审核状态 0:未审核 1:待审核 2:通过 3:失败 5:未上传资料 6:黑名单 8:上传中',
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态 1:正常 2:禁用',
+  `contact_id` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '联系人模板ID',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '所属用户',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for gee_domain_price
+-- ----------------------------
+DROP TABLE IF EXISTS `gee_domain_price`;
+CREATE TABLE `gee_domain_price`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '域名后缀',
+  `origin_price` double(11, 2) NULL DEFAULT NULL COMMENT '原价(元/年)',
+  `price` double(11, 2) NULL DEFAULT NULL COMMENT '促销价(元/年)',
+  `recharge` double(11, 2) NULL DEFAULT NULL COMMENT '续费价(元/年)',
+  `transferin` double(11, 2) NULL DEFAULT NULL COMMENT '转入价(元/年)',
+  `twelvemonth` double(11, 2) NULL DEFAULT NULL COMMENT '一年价',
+  `biennia` double(11, 2) NULL DEFAULT NULL COMMENT '两年价',
+  `triennium` double(11, 2) NULL DEFAULT NULL COMMENT '三年价',
+  `quadrennium` double(11, 2) NULL DEFAULT NULL COMMENT '四年价',
+  `lustrum` double(11, 2) NULL DEFAULT NULL COMMENT '五年价',
+  `decade` double(11, 2) NULL DEFAULT NULL COMMENT '十年价',
+  `tag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签',
+  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '描述',
+  `pro_id` int(11) NULL DEFAULT NULL COMMENT '所使用产品ID',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_emailconfig
@@ -265,7 +388,7 @@ CREATE TABLE `gee_log`  (
   `create_time` int(11) NOT NULL COMMENT '操作时间',
   `update_time` int(11) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 661 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 703 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_msgmodel
@@ -371,6 +494,63 @@ CREATE TABLE `gee_picture`  (
 ) ENGINE = MyISAM AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of gee_picture
+-- ----------------------------
+INSERT INTO `gee_picture` VALUES (1, 'https://ylsq.cdn.bcebos.com/1558341347744682.png', '', '', 1558341347, 1558341347);
+INSERT INTO `gee_picture` VALUES (2, 'https://ylsq.cdn.bcebos.com/1558341399879898.png', '', '', 1558341399, 1558341399);
+INSERT INTO `gee_picture` VALUES (3, 'https://ylsq.cdn.bcebos.com/1558341751672715.jpeg', '', '', 1558341752, 1558341752);
+INSERT INTO `gee_picture` VALUES (4, 'https://ylsq.cdn.bcebos.com/1572935071179500.png', '', '', 1572935071, 1572935071);
+INSERT INTO `gee_picture` VALUES (5, 'https://ylsq.cdn.bcebos.com/1572937554456840.png', '', '', 1572937554, 1572937554);
+INSERT INTO `gee_picture` VALUES (6, 'https://ylsq.cdn.bcebos.com/1572937669828394.png', '', '', 1572937670, 1572937670);
+INSERT INTO `gee_picture` VALUES (7, 'https://ylsq.cdn.bcebos.com/1572937697818693.png', '', '', 1572937698, 1572937698);
+INSERT INTO `gee_picture` VALUES (8, 'https://ylsq.cdn.bcebos.com/1572941554904025.png', '', '', 1572941554, 1572941554);
+INSERT INTO `gee_picture` VALUES (9, 'https://ylsq.cdn.bcebos.com/1572941555174641.png', '', '', 1572941555, 1572941555);
+INSERT INTO `gee_picture` VALUES (10, 'https://ylsq.cdn.bcebos.com/1572942455565577.png', '', '', 1572942455, 1572942455);
+INSERT INTO `gee_picture` VALUES (11, 'https://ylsq.cdn.bcebos.com/1572942479574173.png', '', '', 1572942479, 1572942479);
+INSERT INTO `gee_picture` VALUES (12, 'https://ylsq.cdn.bcebos.com/1572942805484442.png', '', '', 1572942805, 1572942805);
+INSERT INTO `gee_picture` VALUES (13, 'https://ylsq.cdn.bcebos.com/1572943078292983.png', '', '', 1572943078, 1572943078);
+INSERT INTO `gee_picture` VALUES (14, 'https://ylsq.cdn.bcebos.com/157294373239425.png', '', '', 1572943732, 1572943732);
+INSERT INTO `gee_picture` VALUES (15, 'https://ylsq.cdn.bcebos.com/1572944416711090.png', '', '', 1572944416, 1572944416);
+INSERT INTO `gee_picture` VALUES (16, 'https://ylsq.cdn.bcebos.com/1572944519180179.png', '', '', 1572944520, 1572944520);
+INSERT INTO `gee_picture` VALUES (17, 'https://ylsq.cdn.bcebos.com/1572944606199115.png', '', '', 1572944606, 1572944606);
+INSERT INTO `gee_picture` VALUES (18, 'https://ylsq.cdn.bcebos.com/1572945257160972.png', '', '', 1572945257, 1572945257);
+INSERT INTO `gee_picture` VALUES (19, 'https://ylsq.cdn.bcebos.com/157294630642593.png', '', '', 1572946307, 1572946307);
+INSERT INTO `gee_picture` VALUES (20, 'https://ylsq.cdn.bcebos.com/157294631198743.png', '', '', 1572946311, 1572946311);
+INSERT INTO `gee_picture` VALUES (21, 'https://ylsq.cdn.bcebos.com/1572948455678960.png', '', '', 1572948455, 1572948455);
+INSERT INTO `gee_picture` VALUES (22, 'https://ylsq.cdn.bcebos.com/1572948458902518.png', '', '', 1572948458, 1572948458);
+INSERT INTO `gee_picture` VALUES (23, 'https://ylsq.cdn.bcebos.com/1573004829365866.png', '', '', 1573004830, 1573004830);
+INSERT INTO `gee_picture` VALUES (24, 'https://ylsq.cdn.bcebos.com/1573008335591469.png', '', '', 1573008336, 1573008336);
+INSERT INTO `gee_picture` VALUES (25, 'https://ylsq.cdn.bcebos.com/1573020883357834.png', '', '', 1573020883, 1573020883);
+INSERT INTO `gee_picture` VALUES (26, 'https://ylsq.cdn.bcebos.com/1573025860842735.png', '', '', 1573025861, 1573025861);
+INSERT INTO `gee_picture` VALUES (27, 'https://ylsq.cdn.bcebos.com/1573026041952018.png', '', '', 1573026042, 1573026042);
+INSERT INTO `gee_picture` VALUES (28, 'https://ylsq.cdn.bcebos.com/1573027041893797.png', '', '', 1573027041, 1573027041);
+INSERT INTO `gee_picture` VALUES (29, 'https://ylsq.cdn.bcebos.com/1573027378568645.png', '', '', 1573027378, 1573027378);
+INSERT INTO `gee_picture` VALUES (30, 'https://ylsq.cdn.bcebos.com/1575278057769276.jpeg', '', '', 1575278058, 1575278058);
+INSERT INTO `gee_picture` VALUES (31, 'https://ylsq.cdn.bcebos.com/1575278102808462.jpeg', '', '', 1575278103, 1575278103);
+INSERT INTO `gee_picture` VALUES (32, 'https://ylsq.cdn.bcebos.com/1575278271764929.jpeg', '', '', 1575278271, 1575278271);
+INSERT INTO `gee_picture` VALUES (33, 'https://ylsq.cdn.bcebos.com/1575278347739953.jpeg', '', '', 1575278348, 1575278348);
+INSERT INTO `gee_picture` VALUES (34, 'https://ylsq.cdn.bcebos.com/1575280241595859.jpeg', '', '', 1575280241, 1575280241);
+INSERT INTO `gee_picture` VALUES (35, 'https://ylsq.cdn.bcebos.com/1575280553395250.jpeg', '', '', 1575280554, 1575280554);
+INSERT INTO `gee_picture` VALUES (36, 'https://ylsq.cdn.bcebos.com/1575342139531096.jpeg', '', '', 1575342140, 1575342140);
+INSERT INTO `gee_picture` VALUES (37, 'https://ylsq.cdn.bcebos.com/1575343976713522.jpeg', '', '', 1575343976, 1575343976);
+INSERT INTO `gee_picture` VALUES (38, 'https://ylsq.cdn.bcebos.com/1575343989337132.jpeg', '', '', 1575343989, 1575343989);
+INSERT INTO `gee_picture` VALUES (39, 'https://ylsq.cdn.bcebos.com/1575344019110553.jpeg', '', '', 1575344019, 1575344019);
+INSERT INTO `gee_picture` VALUES (40, 'https://ylsq.cdn.bcebos.com/1575352240744859.jpeg', '', '', 1575352241, 1575352241);
+INSERT INTO `gee_picture` VALUES (41, 'https://ylsq.cdn.bcebos.com/1575352390530427.jpeg', '', '', 1575352391, 1575352391);
+INSERT INTO `gee_picture` VALUES (42, 'https://ylsq.cdn.bcebos.com/1575361864209774.jpeg', '', '', 1575361864, 1575361864);
+INSERT INTO `gee_picture` VALUES (43, 'https://ylsq.cdn.bcebos.com/157542603642559.jpeg', '', '', 1575426037, 1575426037);
+INSERT INTO `gee_picture` VALUES (44, 'https://ylsq.cdn.bcebos.com/1575427586803617.jpeg', '', '', 1575427586, 1575427586);
+INSERT INTO `gee_picture` VALUES (45, 'https://ylsq.cdn.bcebos.com/1575427616136494.jpeg', '', '', 1575427618, 1575427618);
+INSERT INTO `gee_picture` VALUES (46, 'https://ylsq.cdn.bcebos.com/1575428071976714.jpeg', '', '', 1575428072, 1575428072);
+INSERT INTO `gee_picture` VALUES (47, 'https://ylsq.cdn.bcebos.com/1575428074350282.jpeg', '', '', 1575428075, 1575428075);
+INSERT INTO `gee_picture` VALUES (48, 'https://ylsq.cdn.bcebos.com/1576663497381689.png', '', '', 1576663498, 1576663498);
+INSERT INTO `gee_picture` VALUES (49, 'https://ylsq.cdn.bcebos.com/1576739359122674.png', '', '', 1576739360, 1576739360);
+INSERT INTO `gee_picture` VALUES (50, 'https://ylsq.cdn.bcebos.com/1576739547493077.png', '', '', 1576739547, 1576739547);
+INSERT INTO `gee_picture` VALUES (51, 'https://ylsq.cdn.bcebos.com/1576739562488948.png', '', '', 1576739562, 1576739562);
+INSERT INTO `gee_picture` VALUES (52, 'https://ylsq.cdn.bcebos.com/1576739607123266.png', '', '', 1576739607, 1576739607);
+INSERT INTO `gee_picture` VALUES (53, 'https://ylsq.cdn.bcebos.com/157673985627459.png', '', '', 1576739857, 1576739857);
+
+-- ----------------------------
 -- Table structure for gee_pro_config
 -- ----------------------------
 DROP TABLE IF EXISTS `gee_pro_config`;
@@ -381,7 +561,7 @@ CREATE TABLE `gee_pro_config`  (
   `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_product
@@ -409,7 +589,7 @@ CREATE TABLE `gee_product`  (
   `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_product_class
@@ -422,7 +602,7 @@ CREATE TABLE `gee_product_class`  (
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   `update_time` int(11) NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1000 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gee_product_class
@@ -432,8 +612,9 @@ INSERT INTO `gee_product_class` VALUES (2, 'VPS主机', 'vps', 0, 0);
 INSERT INTO `gee_product_class` VALUES (3, '云服务器', 'chost', 0, 0);
 INSERT INTO `gee_product_class` VALUES (4, 'SSL证书', 'ssl', 0, 0);
 INSERT INTO `gee_product_class` VALUES (5, '域名', 'domain', 0, 0);
-INSERT INTO `gee_product_class` VALUES (6, '其他', 'other', 0, 0);
+INSERT INTO `gee_product_class` VALUES (999, '其他', 'other', 0, 0);
 INSERT INTO `gee_product_class` VALUES (8, '物理服务器租用', 'server', 1573543543, 1573543551);
+INSERT INTO `gee_product_class` VALUES (9, '云主机', 'cloudserver', 0, 0);
 
 -- ----------------------------
 -- Table structure for gee_product_group
@@ -448,7 +629,7 @@ CREATE TABLE `gee_product_group`  (
   `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_product_type
@@ -496,13 +677,13 @@ CREATE TABLE `gee_route`  (
   `update_time` int(11) NOT NULL COMMENT '修改时间',
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由图标',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 93 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1000 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gee_route
 -- ----------------------------
 INSERT INTO `gee_route` VALUES (1, '服务管理', 'service', 0, '1', 1557194766, 1557194766, 'fa-industry');
-INSERT INTO `gee_route` VALUES (2, '域名列表', 'domain', 1, '0', 1557194766, 1557194766, 'fa-globe');
+INSERT INTO `gee_route` VALUES (2, '域名管理', 'domain', 1, '1', 1557194766, 1557194766, 'fa-globe');
 INSERT INTO `gee_route` VALUES (3, '主机管理', 'host', 1, '0', 1557194766, 1557194766, 'fa-server');
 INSERT INTO `gee_route` VALUES (4, '租用托管', 'server', 1, '1', 1557194766, 1557194766, 'fa-server');
 INSERT INTO `gee_route` VALUES (5, '工单管理', 'ticket', 0, '1', 1557194766, 1557194766, ' fa-ticket');
@@ -528,14 +709,14 @@ INSERT INTO `gee_route` VALUES (29, '员工分组', 'group', 27, '1', 1557194766
 INSERT INTO `gee_route` VALUES (30, '插件管理', 'addons', 0, '1', 1557194766, 1557194766, 'fa-th');
 INSERT INTO `gee_route` VALUES (31, '插件列表', 'list', 30, '1', 1557194766, 1557194766, 'fa-list');
 INSERT INTO `gee_route` VALUES (32, '详细', 'details', 30, '0', 1557194766, 1557194766, 'fa-newspaper-o');
-INSERT INTO `gee_route` VALUES (33, '应用市场', '', 0, '0', 1557194766, 1557194766, 'fa-cube');
-INSERT INTO `gee_route` VALUES (34, '系统设置', 'system', 0, '1', 1557194766, 1557194766, 'fa-cog');
-INSERT INTO `gee_route` VALUES (35, '基本信息', 'basic', 34, '1', 1557194766, 1557194766, 'fa-info-circle');
-INSERT INTO `gee_route` VALUES (36, '邮件设置', 'email', 34, '1', 1557194766, 1557194766, 'fa-envelope');
-INSERT INTO `gee_route` VALUES (37, '短信设置', 'sms', 34, '0', 1557194766, 1557194766, 'fa-commenting');
-INSERT INTO `gee_route` VALUES (38, '支付设置', 'pay', 34, '0', 1557194766, 1557194766, 'fa-credit-card');
-INSERT INTO `gee_route` VALUES (39, '消息模板', 'template', 34, '1', 1557194766, 1557194766, 'fa-comments');
-INSERT INTO `gee_route` VALUES (40, '附件设置', 'annex', 34, '1', 1557194766, 1557194766, 'fa-file');
+INSERT INTO `gee_route` VALUES (33, '应用市场', 'https://addon.geecp.com', 0, '0', 1557194766, 1557194766, 'fa-cube');
+INSERT INTO `gee_route` VALUES (999, '系统设置', 'system', 0, '1', 1557194766, 1557194766, 'fa-cog');
+INSERT INTO `gee_route` VALUES (35, '基本信息', 'basic', 999, '1', 1557194766, 1557194766, 'fa-info-circle');
+INSERT INTO `gee_route` VALUES (36, '邮件设置', 'email', 999, '1', 1557194766, 1557194766, 'fa-envelope');
+INSERT INTO `gee_route` VALUES (37, '短信设置', 'sms', 999, '0', 1557194766, 1557194766, 'fa-commenting');
+INSERT INTO `gee_route` VALUES (38, '支付设置', 'pay', 999, '0', 1557194766, 1557194766, 'fa-credit-card');
+INSERT INTO `gee_route` VALUES (39, '消息模板', 'template', 999, '1', 1557194766, 1557194766, 'fa-comments');
+INSERT INTO `gee_route` VALUES (40, '附件设置', 'annex', 999, '1', 1557194766, 1557194766, 'fa-file');
 INSERT INTO `gee_route` VALUES (43, '产品列表', 'list', 8, '1', 1557194766, 1557194766, 'fa-list-ul');
 INSERT INTO `gee_route` VALUES (47, '导航管理', 'routes', 0, '0', 1557194766, 1557194766, 'fa-navicon');
 INSERT INTO `gee_route` VALUES (48, '添加导航', 'add', 47, '0', 1557194766, 1557194766, 'fa-navicon');
@@ -567,7 +748,7 @@ INSERT INTO `gee_route` VALUES (76, '添加操作系统版本', 'addostype', 8, 
 INSERT INTO `gee_route` VALUES (77, '添加操作系统验证', 'addostypeAuth', 8, '0', 0, 0, NULL);
 INSERT INTO `gee_route` VALUES (78, '删除操作系统版本', 'delostype', 8, '0', 0, 0, NULL);
 INSERT INTO `gee_route` VALUES (80, '编辑物理服务器信息', 'editserver', 1, '0', 0, 0, NULL);
-INSERT INTO `gee_route` VALUES (81, '实名认证', 'realverify', 16, '0', 0, 0, 'fa-check');
+INSERT INTO `gee_route` VALUES (81, '实名认证', 'realverify', 16, '1', 0, 0, 'fa-check');
 INSERT INTO `gee_route` VALUES (82, '通过认证', 'passreal', 16, '0', 0, 0, NULL);
 INSERT INTO `gee_route` VALUES (83, '拒绝认证', 'rejectreal', 16, '0', 0, 0, NULL);
 INSERT INTO `gee_route` VALUES (84, '企业认证', 'enterpriseverify', 16, '1', 0, 0, 'fa-black-tie');
@@ -579,6 +760,14 @@ INSERT INTO `gee_route` VALUES (88, '拒绝发票申请', 'nopassinvoice', 19, '
 INSERT INTO `gee_route` VALUES (89, '编辑发票信息', 'editinvoice', 19, '0', 0, 0, NULL);
 INSERT INTO `gee_route` VALUES (91, '续费VPS', 'renewvps', 1, '0', 0, 0, NULL);
 INSERT INTO `gee_route` VALUES (92, 'vps控制面板', 'vpsmanager', 1, '0', 0, 0, NULL);
+INSERT INTO `gee_route` VALUES (97, '提交域名价格', 'adddomainpriceauth', 1, '0', 0, 0, NULL);
+INSERT INTO `gee_route` VALUES (95, '域名价格', 'domainprice', 1, '0', 0, 0, NULL);
+INSERT INTO `gee_route` VALUES (96, '信息模板审核', 'domaintempaudit', 1, '0', 0, 0, NULL);
+INSERT INTO `gee_route` VALUES (98, '域名接口测试', 'domainchecked', 1, '0', 0, 0, NULL);
+INSERT INTO `gee_route` VALUES (99, '云平台', 'cloudservice', 0, '1', 0, 0, 'fa-cloud');
+INSERT INTO `gee_route` VALUES (100, '系统升级', 'update', 99, '1', 0, 0, 'fa-cloud-download');
+INSERT INTO `gee_route` VALUES (101, '注册站点', 'regsite', 99, '0', 0, 0, NULL);
+INSERT INTO `gee_route` VALUES (102, '云服务诊断', 'diagnose', 99, '0', 0, 0, NULL);
 
 -- ----------------------------
 -- Table structure for gee_server
@@ -606,22 +795,6 @@ CREATE TABLE `gee_server`  (
 ) ENGINE = MyISAM AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of gee_server
--- ----------------------------
-INSERT INTO `gee_server` VALUES (7, 14, 23, '{\"CC\":18,\"ddosfree\":20,\"ddospro\":22,\"dk\":\"54,10\"}', '测试', '192.168.0.2', '192.168.0.21', 'root', '123456789', 1, 1, 25, '测试用', 3, 1574128273, 1574128273, 1587261073);
-INSERT INTO `gee_server` VALUES (10, 14, 23, '{\"CC\":18,\"ddosfree\":19,\"ddospro\":21,\"dk\":\"54,1\"}', 'bdpqt479', '192.168.0.133', '192.168.0.20', 'root', '1234567', 1, 1, 30, '', 3, 1574321429, 1574751527, 1577808000);
-INSERT INTO `gee_server` VALUES (11, 14, 23, '{\"CC\":18,\"ddosfree\":20,\"ddospro\":22,\"dk\":\"54,1\"}', 'klmIOPS3', '192.168.0.123', '192.168.0.19', 'root', '123123', 1, 1, 25, '', 3, 1574326534, 1574326534, 1576918534);
-INSERT INTO `gee_server` VALUES (17, 13, 22, '{\"HDD2\":0,\"cn2\":0}', 'dhoqIMS7', '64.54.166.24', '192.168.0.13', 'root', '123123', 1, 1, 25, '', 3, 1574923884, 1574925458, 1577515860);
-INSERT INTO `gee_server` VALUES (12, 14, 23, '{\"CC\":18,\"ddosfree\":20,\"ddospro\":22,\"dk\":\"54,10\"}', 'aqwCJZ48', '192.168.1.151', '192.168.0.18', 'root', '123456', 1, 1, 25, '', 3, 1574836404, 1574836404, 1590561204);
-INSERT INTO `gee_server` VALUES (13, 13, 22, '{\"HDD2\":46,\"cn2\":53}', 'muAJKLV2', '192.168.0.116', '192.168.0.17', 'root', '123456', 1, 1, 25, '', 3, 1574836915, 1574836915, 1577428915);
-INSERT INTO `gee_server` VALUES (14, 13, 22, '{\"HDD2\":0,\"cn2\":0}', 'noBFKQU4', '192.168.0.112', '192.168.0.16', 'root', '123456', 1, 1, 25, '', 3, 1574837305, 1574837305, 1577429305);
-INSERT INTO `gee_server` VALUES (15, 13, 22, '{\"HDD2\":46,\"cn2\":53}', 'test-v-1', '192.168.0.155', '192.168.0.15', 'root', '123456', 1, 1, 25, '', 3, 1574837632, 1574837632, 1577429632);
-INSERT INTO `gee_server` VALUES (16, 13, 22, '{\"HDD2\":0,\"cn2\":0}', 'test-v-2', '192.168.0.124', '192.168.0.14', 'root', 'test123456', 1, 1, 25, '', 3, 1574837774, 1574925466, 1577429760);
-INSERT INTO `gee_server` VALUES (18, 13, 22, '{\"HDD2\":0,\"cn2\":0}', 'oBCFHL39', '64.51.177.25', '192.168.0.12', 'root', '123456', 1, 1, 25, '', 3, 1574924677, 1574925450, 1577516640);
-INSERT INTO `gee_server` VALUES (19, 13, 22, '{\"HDD2\":0,\"cn2\":0}', 'ciHORUX8', '64.51.177.26', '192.168.0.11', 'root', '123456', 1, 1, 25, '12321312321321321321', 3, 1574924926, 1574934835, 1577516880);
-INSERT INTO `gee_server` VALUES (20, 13, 22, '{\"HDD2\":0,\"cn2\":0}', 'diluL149', '64.54.177.27', '192.168.0.33', 'root', '123456', 1, 1, 25, '', 3, 1574934732, 1574934732, 1577526732);
-
--- ----------------------------
 -- Table structure for gee_server_added
 -- ----------------------------
 DROP TABLE IF EXISTS `gee_server_added`;
@@ -636,20 +809,6 @@ CREATE TABLE `gee_server_added`  (
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of gee_server_added
--- ----------------------------
-INSERT INTO `gee_server_added` VALUES (3, 'CC', '免费CC防护服务', '', 1, NULL, 1573635011, 1573635011);
-INSERT INTO `gee_server_added` VALUES (4, 'ddosfree', 'IP DDOS 防护服务（10G/共享）', '', 2, NULL, 1573635054, 1573635054);
-INSERT INTO `gee_server_added` VALUES (5, 'ddospro', 'DDOS防护升级服务', '', 2, NULL, 1573635083, 1573635083);
-INSERT INTO `gee_server_added` VALUES (6, 'ip', '增加IP地址数量', '', 2, NULL, 1573635130, 1573635130);
-INSERT INTO `gee_server_added` VALUES (7, 'bandwidth', '网络带宽升级服务', '', 2, NULL, 1573635167, 1573635167);
-INSERT INTO `gee_server_added` VALUES (8, 'memory', '内存升级服务', '', 2, NULL, 1573635191, 1573635191);
-INSERT INTO `gee_server_added` VALUES (9, 'HDD1', '默认硬盘一', '', 2, NULL, 1573635214, 1573635214);
-INSERT INTO `gee_server_added` VALUES (10, 'HDD2', '默认硬盘二', '', 1, 2, 1573635229, 1573723620);
-INSERT INTO `gee_server_added` VALUES (11, 'cn2', '中国直连CN2线路优化服务', '', 1, 1, 1573635263, 1573723613);
-INSERT INTO `gee_server_added` VALUES (12, 'dk', '带宽选择', '', 3, 4, 1573787507, 1573787507);
 
 -- ----------------------------
 -- Table structure for gee_server_added_items
@@ -671,47 +830,6 @@ CREATE TABLE `gee_server_added_items`  (
 ) ENGINE = MyISAM AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of gee_server_added_items
--- ----------------------------
-INSERT INTO `gee_server_added_items` VALUES (17, '不开启', 3, 1, 0.00, 0, 0, 0, '', 1573635655, 1573635655);
-INSERT INTO `gee_server_added_items` VALUES (18, '开启', 3, 2, 0.00, 0, 0, 0, '', 1573635676, 1573635676);
-INSERT INTO `gee_server_added_items` VALUES (19, '默认 5 IP DDOS 防护', 4, 1, 0.00, 0, 0, 0, '', 1573635708, 1573635708);
-INSERT INTO `gee_server_added_items` VALUES (20, '升级至 /29 防护服务', 4, 2, 175.00, 380, 1240, 2590, '', 1573635749, 1573635757);
-INSERT INTO `gee_server_added_items` VALUES (21, '免费 10G DDOS 防护服务', 5, 1, 0.00, 0, 0, 0, '', 1573635789, 1573635789);
-INSERT INTO `gee_server_added_items` VALUES (22, '升级至 20G DDOS 防护服务', 5, 2, 2233.00, 4466, 8822, 12580, '', 1573635825, 1573635825);
-INSERT INTO `gee_server_added_items` VALUES (23, '升级至 40G DDOS 防护服务', 5, 3, 6573.00, 18750, 34850, 94880, '', 1573635865, 1573635865);
-INSERT INTO `gee_server_added_items` VALUES (24, '升级至 60G DDOS 防护服务', 5, 4, 8680.00, 24870, 67810, 187650, '', 1573635890, 1573635890);
-INSERT INTO `gee_server_added_items` VALUES (25, '升级至 90G DDOS 防护服务', 5, 5, 15197.00, 38540, 97580, 27850, '', 1573635918, 1573635918);
-INSERT INTO `gee_server_added_items` VALUES (26, '升级至 150G DDOS 防护服务', 5, 6, 30387.00, 90975, 278940, 678970, '', 1573635946, 1573635946);
-INSERT INTO `gee_server_added_items` VALUES (28, '升级至 200G DDOS 防护服务', 5, 7, 52097.00, 157800, 399999, 999999, '', 1573635992, 1573635992);
-INSERT INTO `gee_server_added_items` VALUES (29, '升级至 500G DDOS 防护服务', 5, 8, 86821.00, 248760, 678540, 1875460, '', 1573636019, 1573636019);
-INSERT INTO `gee_server_added_items` VALUES (30, '升级至 /29 5个可用IP ', 6, 1, 175.00, 345, 970, 2750, '', 1573636087, 1573636087);
-INSERT INTO `gee_server_added_items` VALUES (31, '升级至 /28 13个可用IP', 6, 2, 280.00, 680, 1880, 3880, '', 1573636110, 1573636110);
-INSERT INTO `gee_server_added_items` VALUES (32, '升级至 /27 29个可用IP', 6, 3, 483.00, 1280, 3680, 9280, '', 1573636137, 1573636137);
-INSERT INTO `gee_server_added_items` VALUES (33, '升级至 /26 61个可用IP', 6, 4, 693.00, 1890, 3890, 9890, '', 1573636162, 1573636162);
-INSERT INTO `gee_server_added_items` VALUES (34, '升级至 /25 125个可用IP', 6, 5, 833.00, 1633, 3833, 9833, '', 1573636192, 1573636192);
-INSERT INTO `gee_server_added_items` VALUES (35, '升级至 /24 253个可用IP', 6, 6, 1323.00, 3323, 9323, 27333, '', 1573636233, 1573636233);
-INSERT INTO `gee_server_added_items` VALUES (36, '免费100M（直连带宽）服务', 7, 1, 0.00, 0, 0, 0, '', 1573636263, 1573636263);
-INSERT INTO `gee_server_added_items` VALUES (37, '升级至30M CN2 GIA 线路带宽', 7, 2, 140.00, 340, 940, 2740, '', 1573636294, 1573636294);
-INSERT INTO `gee_server_added_items` VALUES (38, '默认 16GB 内存', 8, 1, 0.00, 0, 0, 0, '', 1573636333, 1573636333);
-INSERT INTO `gee_server_added_items` VALUES (39, '升级至 256GB 内存', 8, 2, 9999.00, 27999, 67999, 187999, '', 1573636356, 1573636356);
-INSERT INTO `gee_server_added_items` VALUES (40, '默认 1TB SATA HDD 硬盘', 9, 1, 0.00, 0, 0, 0, '', 1573636424, 1574317397);
-INSERT INTO `gee_server_added_items` VALUES (41, '升级为 2TB SATA HDD 硬盘', 9, 2, 140.00, 248, 580, 1280, '', 1573636450, 1574317389);
-INSERT INTO `gee_server_added_items` VALUES (42, '升级为 4TB SATA HDD 硬盘', 9, 3, 245.00, 480, 880, 1880, '', 1573636481, 1574317374);
-INSERT INTO `gee_server_added_items` VALUES (43, '升级为 6TB SATA HDD 硬盘', 9, 4, 420.00, 880, 1880, 2880, '', 1573636501, 1574317351);
-INSERT INTO `gee_server_added_items` VALUES (44, '升级为 480G SSD 硬盘', 9, 5, 280.00, 480, 880, 1880, '', 1573636527, 1574317338);
-INSERT INTO `gee_server_added_items` VALUES (45, '无', 10, 1, 0.00, 0, 0, 0, '', 1573636558, 1574317323);
-INSERT INTO `gee_server_added_items` VALUES (46, '增加 1TB SATA HDD 硬盘', 10, 2, 112.00, 332, 992, 2792, '', 1573636585, 1573636592);
-INSERT INTO `gee_server_added_items` VALUES (47, '增加 2TB SATA HDD 硬盘', 10, 3, 140.00, 280, 458, 1400, '', 1573636608, 1574317315);
-INSERT INTO `gee_server_added_items` VALUES (48, '增加 4TB SATA HDD 硬盘', 10, 4, 245.00, 540, 1240, 2450, '', 1573636628, 1574317292);
-INSERT INTO `gee_server_added_items` VALUES (49, '增加 6TB SATA HDD 硬盘', 10, 5, 420.00, 840, 1500, 2460, '', 1573636653, 1574317267);
-INSERT INTO `gee_server_added_items` VALUES (50, '增加 480G SSD 硬盘', 10, 6, 280.00, 480, 880, 1080, '', 1573636678, 1574317246);
-INSERT INTO `gee_server_added_items` VALUES (51, '增加 2TB SSD 硬盘', 10, 7, 525.00, 1050, 2100, 4200, '', 1573636717, 1574317230);
-INSERT INTO `gee_server_added_items` VALUES (52, '中国优质（CN2/CU/CM ）线路升级选项 35元/M', 11, 1, 700.00, 1400, 2800, 5600, '', 1573636828, 1574317195);
-INSERT INTO `gee_server_added_items` VALUES (53, 'CN2/GIA 升级选项 42元/M', 11, 2, 840.00, 1200, 2400, 4200, '', 1573636866, 1574317178);
-INSERT INTO `gee_server_added_items` VALUES (54, 'M带宽', 12, 1, 10.00, 20, 30, 40, '1', 1573787829, 1574307085);
-
--- ----------------------------
 -- Table structure for gee_staffgroup
 -- ----------------------------
 DROP TABLE IF EXISTS `gee_staffgroup`;
@@ -729,6 +847,24 @@ CREATE TABLE `gee_staffgroup`  (
 INSERT INTO `gee_staffgroup` VALUES (8, '超级管理员', 1557380521, 1557380521);
 INSERT INTO `gee_staffgroup` VALUES (9, '财务审核', 1557380533, 1557380533);
 INSERT INTO `gee_staffgroup` VALUES (10, '销售', 1557380542, 1557380549);
+
+-- ----------------------------
+-- Table structure for gee_system_info
+-- ----------------------------
+DROP TABLE IF EXISTS `gee_system_info`;
+CREATE TABLE `gee_system_info`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `versions` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '系统版本',
+  `charset` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '字符集',
+  `devinfo` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '开发商信息',
+  `officesite` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '官方网站',
+  `qq` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'QQ群',
+  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客服电话',
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间  可当作更新时间用',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_ticket
@@ -883,10 +1019,12 @@ CREATE TABLE `gee_vps`  (
   `plug_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属插件数据表',
   `plug_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '插件名称',
   `pro_id` int(11) NULL DEFAULT NULL COMMENT '产品id',
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
   `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  `end_time` int(11) NULL DEFAULT NULL COMMENT '结束时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_vps_zoneidc
@@ -905,7 +1043,7 @@ CREATE TABLE `gee_vps_zoneidc`  (
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   `end_time` int(11) NULL DEFAULT NULL COMMENT '结束时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for gee_webbasic
@@ -939,7 +1077,7 @@ CREATE TABLE `gee_webbasic`  (
 -- ----------------------------
 -- Records of gee_webbasic
 -- ----------------------------
-INSERT INTO `gee_webbasic` VALUES (1, 'test', '123@123.cc', 'https://3', 'https://ylsq.cdn.bcebos.com/1576663497381689.png', 'https://ylsq.cdn.bcebos.com/157673985627459.png', 'https://ylsq.cdn.bcebos.com/1576739607123266.png', '1', '1', '1', '2', '3', '4', '0', '1', '1', '北京百度网讯科技有限公司', '招商银行北京分行上地支行', '1109021606104020100157799', 1557910511, 1576739861);
+INSERT INTO `gee_webbasic` VALUES (1, 'GEECP管理系统', '123@123.cc', 'https://3', 'https://ylsq.cdn.bcebos.com/1576663497381689.png', 'https://ylsq.cdn.bcebos.com/157673985627459.png', 'https://ylsq.cdn.bcebos.com/1576739607123266.png', '1', '1', '1', '2', '3', '4', '0', '1', '1', '北京百度网讯科技有限公司', '招商银行北京分行上地支行', '1109021606104020100157799', 1557910511, 1576739861);
 
 -- ----------------------------
 -- Table structure for gee_webroute
@@ -950,6 +1088,7 @@ CREATE TABLE `gee_webroute`  (
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '路由名称',
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '路由标识',
   `f_id` int(11) NOT NULL COMMENT '上级ID',
+  `s_id` int(11) NULL DEFAULT 0 COMMENT '从属ID',
   `level` int(11) NULL DEFAULT NULL COMMENT '路由等级',
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由图标',
   `is_show` enum('0','1') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1' COMMENT '是否展示到列表中 0:不展示 1:展示',
@@ -960,91 +1099,129 @@ CREATE TABLE `gee_webroute`  (
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   `update_time` int(11) NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 198 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 237 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gee_webroute
 -- ----------------------------
-INSERT INTO `gee_webroute` VALUES (1, '基本信息', 'basic', 0, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (2, '账号信息', 'info', 1, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (3, '安全设置', 'safety', 1, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (4, '实名认证', 'auth', 1, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (6, '云虚拟主机', 'host', 0, NULL, 'icon-cvh', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (7, '云主机VPS', 'vps', 0, NULL, 'icon-ecs', '1', '0', 1, NULL, NULL, 1557194766, 1560335621);
-INSERT INTO `gee_webroute` VALUES (8, '云服务器', 'server', 0, NULL, 'icon-ecs', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (9, '域名管理', 'domain', 0, NULL, 'icon-cdm', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (10, '云解析', 'analysis', 0, NULL, 'icon-dns', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (11, '工单管理', 'ticket', 0, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (12, '工单列表', 'list', 11, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (13, '创建工单', 'add', 11, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (14, '消息管理', 'message', 0, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (132, '财务总览', 'overview', 131, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (16, '安全认证', 'safetyauth', 0, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
-INSERT INTO `gee_webroute` VALUES (136, '收支明细', 'dealrecord', 131, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (134, '消费总览', 'overview', 133, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (135, '账单明细', 'list', 133, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (133, '消费中心', 'consumption', 131, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (131, '财务中心', 'billing', 0, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (130, '支付状态', 'paystatus', 127, NULL, '', '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (129, '线上支付', 'onlinepay', 127, NULL, '', '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (128, '确认订单', 'confirm', 127, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (127, '购买产品', 'buy', 0, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (126, '实例', 'index', 7, NULL, NULL, '1', '0', 0, NULL, 'VPS实例列表', 1559807152, 1560335597);
-INSERT INTO `gee_webroute` VALUES (138, '发票管理', 'invoice', 131, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (139, '发票列表', 'list', 138, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (140, '发票信息管理', 'template', 138, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (141, '寄送地址', 'addresslist', 138, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (142, '订单管理', 'order', 131, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (143, '续费管理', 'renew', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (144, '退订管理', 'refund', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (145, '可退款订单', 'list', 144, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (146, '退订记录', 'record', 144, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (147, '合同管理', 'contract', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (148, '资源账单', 'resource', 133, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (182, '账号信息', 'iam', 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (150, '充值', 'recharge', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (151, '提现', 'withdraw', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (152, '购买验证', 'pay', 127, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (153, '工单详情', 'details', 11, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (154, '创建工单验证', 'addauth', 11, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (155, '工单回复', 'reply', 11, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (156, '工单确认', 'confirm', 11, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (157, '撤销工单', 'cancel', 11, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (158, '删除工单', 'del', 11, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (159, '充值验证', 'rechargeauth', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (160, '接口API', 'api', 0, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (161, '支付宝同步', 'return_url', 160, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (162, '支付宝异步', 'notify_url', 160, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (163, '账单详情', 'dealrecorddetails', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (166, '物理服务器租用', 'server', 0, NULL, 'icon-dcc', '1', '0', 1, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (165, '取消订单', 'cancelorder', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
-INSERT INTO `gee_webroute` VALUES (167, '租用物理服务器', 'add', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (168, '物理服务器管理', 'index', 166, NULL, NULL, '1', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (169, '获取物理服务器产品', 'getAddedItems', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (170, '获取价格', 'getPrice', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (171, '获取物理服务器增值服务', 'getAdded', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (172, '租用物理服务器验证', 'addAuth', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (173, '获取物理服务器密码', 'getpass', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (174, '重装操作系统', 'resetos', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (176, '删除订单', 'delorder', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (177, '获取操作系统版本', 'getOstypes', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (178, '订单详情', 'orderdetails', 131, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (179, '物理服务器详情', 'detail', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (180, '编辑服务器信息', 'edits', 166, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (181, '获取历史消费趋势', 'gethistory', 133, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (183, '用户中心', 'overview', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (184, '安全认证', 'accesslist', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (185, '个人认证', 'cpersonal', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (186, '企业认证', 'ccompany', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (187, '账号信息编辑', 'baseinfoedit', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (189, '提交实名认证信息', 'subauth', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (190, '修改基本信息', 'baseinfoedit', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (191, '提交企业认证信息', 'subcompany', 182, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (192, '提交发票信息', 'subtemp', 138, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (193, '提交发票地址', 'subaddress', 138, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (194, '删除发票地址', 'deladdress', 138, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (195, '发票申请', 'applyinvoice', 138, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (196, '提交发票申请', 'subapplyinvoice', 138, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
-INSERT INTO `gee_webroute` VALUES (197, '取消发票申请', 'cancelInvoice', 138, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (1, '基本信息', 'basic', 0, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (2, '账号信息', 'info', 1, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (3, '安全设置', 'safety', 1, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (4, '实名认证', 'auth', 1, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (6, '云虚拟主机', 'host', 0, NULL, NULL, 'icon-cvh', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (7, '云主机VPS', 'vps', 0, NULL, NULL, 'icon-ecs', '1', '0', 1, NULL, NULL, 1557194766, 1560335621);
+INSERT INTO `gee_webroute` VALUES (8, '云主机', 'cloudserver', 0, NULL, NULL, 'icon-ecs', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (9, '域名管理', 'domain', 0, NULL, NULL, 'icon-cdm', '1', '0', 1, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (10, '云解析', 'analysis', 0, NULL, NULL, 'icon-dns', '0', '0', 1, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (11, '工单管理', 'ticket', 0, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (12, '工单列表', 'list', 11, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (13, '创建工单', 'add', 11, 12, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (14, '消息管理', 'message', 0, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (132, '财务总览', 'overview', 131, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (16, '安全认证', 'safetyauth', 0, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1557194766, 1557194766);
+INSERT INTO `gee_webroute` VALUES (136, '收支明细', 'dealrecord', 131, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (134, '消费总览', 'overview', 133, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (135, '账单明细', 'list', 133, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (133, '消费中心', 'consumption', 131, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (131, '财务中心', 'billing', 0, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (130, '支付状态', 'paystatus', 127, NULL, NULL, '', '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (129, '线上支付', 'onlinepay', 127, NULL, NULL, '', '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (128, '确认订单', 'confirm', 127, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (127, '购买产品', 'buy', 0, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (126, '实例', 'index', 7, NULL, NULL, NULL, '1', '0', 0, NULL, 'VPS实例列表', 1559807152, 1560335597);
+INSERT INTO `gee_webroute` VALUES (138, '发票管理', 'invoice', 131, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (139, '发票列表', 'list', 138, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (140, '发票信息管理', 'template', 138, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (141, '寄送地址', 'addresslist', 138, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (142, '订单管理', 'order', 131, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (143, '续费管理', 'renew', 131, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (144, '退订管理', 'refund', 131, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (145, '可退款订单', 'list', 144, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (146, '退订记录', 'record', 144, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (147, '合同管理', 'contract', 131, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (148, '资源账单', 'resource', 133, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (182, '账号信息', 'iam', 0, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (150, '充值', 'recharge', 131, 132, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (151, '提现', 'withdraw', 131, 132, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (152, '购买验证', 'pay', 127, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (153, '工单详情', 'details', 11, 12, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (154, '创建工单验证', 'addauth', 11, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (155, '工单回复', 'reply', 11, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (156, '工单确认', 'confirm', 11, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (157, '撤销工单', 'cancel', 11, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (158, '删除工单', 'del', 11, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (159, '充值验证', 'rechargeauth', 131, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (160, '接口API', 'api', 0, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (161, '支付宝同步', 'return_url', 160, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (162, '支付宝异步', 'notify_url', 160, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (163, '账单详情', 'dealrecorddetails', 131, 136, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (166, '物理服务器租用', 'server', 0, NULL, NULL, 'icon-dcc', '1', '0', 1, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (165, '取消订单', 'cancelorder', 131, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 1560335597, 1560335597);
+INSERT INTO `gee_webroute` VALUES (167, '租用物理服务器', 'add', 166, 168, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (168, '物理服务器管理', 'index', 166, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (169, '获取物理服务器产品', 'getAddedItems', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (170, '获取价格', 'getPrice', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (171, '获取物理服务器增值服务', 'getAdded', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (172, '租用物理服务器验证', 'addAuth', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (173, '获取物理服务器密码', 'getpass', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (174, '重装操作系统', 'resetos', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (176, '删除订单', 'delorder', 131, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (177, '获取操作系统版本', 'getOstypes', 166, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (178, '订单详情', 'orderdetails', 131, 142, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (179, '物理服务器详情', 'detail', 166, 168, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (180, '编辑服务器信息', 'edits', 166, 168, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (181, '获取历史消费趋势', 'gethistory', 133, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (183, '用户中心', 'overview', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (184, '安全认证', 'accesslist', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (185, '个人认证', 'cpersonal', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (186, '企业认证', 'ccompany', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (187, '账号信息编辑', 'baseinfoedit', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (189, '提交实名认证信息', 'subauth', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (190, '修改基本信息', 'baseinfoedit', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (191, '提交企业认证信息', 'subcompany', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (192, '提交发票信息', 'subtemp', 138, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (193, '提交发票地址', 'subaddress', 138, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (194, '删除发票地址', 'deladdress', 138, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (195, '发票申请', 'applyinvoice', 138, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (196, '提交发票申请', 'subapplyinvoice', 138, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (197, '取消发票申请', 'cancelInvoice', 138, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (198, '域名概览', 'index', 9, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (199, '域名搜索', 'search', 9, 200, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (200, '域名管理', 'manage', 9, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (201, '域名价格', 'price', 9, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (202, '信息模板', 'model', 9, NULL, NULL, NULL, '1', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (203, '域名搜索接口', 'searchdomain', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (204, '域名查询接口', 'searchdomaininfo', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (205, '获取域名清单价格', 'getDomainListPrice', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (206, '创建域名订单', 'add', 9, 200, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (207, '创建联系人信息验证', 'modelAuth', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (208, '删除联系人信息', 'modeldel', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (209, '创建域名验证', 'addAuth', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (210, '域名续费', 'recharge', 9, 200, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (211, '域名详情', 'detail', 9, 200, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (212, '前往域名控制台', 'tomanager', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (213, '更变域名隐私保护', 'whoisProtect', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (214, '更变域名所有者', 'transform', 9, 200, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (215, '更变域名所有者验证', 'transformauth', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (216, '更变域名DNS', 'changens', 9, 200, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (217, '更变域名DNS验证', 'changensAuth', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (218, '生成域名证书', 'certification', 9, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (219, '新增AKSK', 'addaccessAuth', 0, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (220, '新增AKSK', 'addaccessAuth', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (221, '修改AKSK说明', 'editaccessIntro', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (222, '删除AKSK', 'delaccess', 182, NULL, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (223, '主机服务', 'clientarea', 8, 224, NULL, NULL, '0', '1', 1, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (224, '实例列表', 'list', 8, NULL, NULL, NULL, '0', '1', 1, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (232, 'VPS关闭', 'off', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (226, '创建VPS', 'add', 7, 126, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (227, '创建VPS验证', 'addAuth', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (228, '更新VPS', 'up', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (229, '释放VPS', 'del', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (230, '续费VPS', 'renew', 7, 126, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (231, 'VPS开启', 'on', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (233, '修改VPS密码', 'changepass', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (234, '获取VPS产品信息', 'getProItem', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (235, '获取VPS价格', 'getPrice', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
+INSERT INTO `gee_webroute` VALUES (236, 'VPS控制台', 'manager', 7, 0, NULL, NULL, '0', '0', 0, NULL, NULL, 0, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,0 +1,610 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <div class="tool-list">
+      <h4 style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap;display: inline-block;max-width: 50%;"
+        class="py-2">域名信息配置： <span class="domatitle"></span></h4>
+      <ul class="list-inline">
+        <div class=" form-inline py-1 text-center" style="position: absolute;top:15px;right:15px">
+          <div class="fs-12 text-primary ">
+            <span class="steps steps-active">1</span>
+            <span class="px-1">添加清单</span>
+            <span class="iconfont iconicon_jiantou-you fs-12"></span>
+          </div>
+          <div class="fs-12 px-2 text-primary">
+            <span class="steps steps-active">2</span>
+            <span class="px-1">资料配置</span>
+            <span class="iconfont iconicon_jiantou-you fs-12"></span>
+          </div>
+          <div class="fs-12 activenext">
+            <span class="steps">3</span>
+            <span class="px-1">确认订单</span>
+            <span class="iconfont iconicon_jiantou-you fs-12"></span>
+          </div>
+          <div class="fs-12">
+            <span class="steps">4</span>
+            <span class="px-1">在线支付</span>
+            <span class="iconfont iconicon_jiantou-you fs-12"></span>
+          </div>
+          <div class="fs-12">
+            <span class="steps">5</span>
+            <span class="px-1">支付成功</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="form-row xufei1">
+        <div class="col-9">
+          <!-- <div class="form-group">
+                      <div class="col alert-success color-green py-2 px-3">
+                          新用户购买域名成功后即送CDN500G流量包，登录百度智能云CDN控制台即可查看
+                      </div>
+                  </div> -->
+          <div class="card border-0">
+            <div class="card-header unbg px-0">
+              <h4 class="mb-0">
+                <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">信息安全</span> </h4>
+            </div>
+            <div class="card-body form-row px-1">
+              <div class="col-12">
+                <div class="form-group form-row">
+                  <label class="col-form-label col-1 py-0 form-inline">隐私保护：</label>
+                  <div class="col form-row">
+                    <button class="btn btn-link p-0 btn-sm subcheck" type="button" data-toggle="modal"
+                      data-target="#kaiqi">
+                      <div class="form-control-sm switch-box">
+                        <input type="checkbox" id="warning" name="privacy" data-mid="isAlarm" checked>
+                        <label for="warning" class="switch"> </label>
+                      </div>
+                    </button>
+                    <span class="form-inline">
+                      免费开启WHOIS信息隐私保护，同意<a href="#">《WHOIS信息保护服务条款》</a>
+                      <button class="btn btn-link btn-sm p-0" data-container="body" data-toggle="popover"
+                        data-placement="right" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+                        data-html="true" data-content="1）启用后，其他人搜索域名信息时将无法搜索到您的个人信息。您可在域名信息页随时开启/关闭此服务。
+                                              <br/>2）若域名不支持隐私保护，则此开关无效。" data-original-title="" title="">
+                        <i class="iconfont iconquestion"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-0">
+            <div class="card-header unbg px-0">
+              <h4 class="mb-0">
+                <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">提交资料</span>
+              </h4>
+            </div>
+            <div class="card-body form-row px-0">
+              <div class="col-12">
+                <div class="form-group form-row">
+                  <label class="col-form-label col-1">选择信息：</label>
+                  <div class="col p-0">
+                    <div class="form-group">
+                      <ul class=" nav account-list mb-2">
+                        <li class="list-inline-item "><button data-toggle="tab"
+                            class="btn btn-outline-secondary btn-sm btn1 active show">信息模板</button></li>
+                        <!-- <li class="list-inline-item "><button data-toggle="tab" class="btn btn-outline-secondary btn-sm btn2">新增信息</button></li> -->
+                      </ul>
+                      <p class="text-danger">选取已经实名认证通过的信息模板，注册后可自动完成实名认证。</p>
+                    </div>
+                    <div class="block1 d-none">
+                      <div class="col p-0">
+                        <div class="form-group form-row">
+                          <label class="col-form-label-sm col-2"> 域名所有者：</label>
+                          <div class="">
+                            <div class="custom-control  custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="checkset">
+                              <label class="custom-control-label" for="checkset">
+                                设置为新模板
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label-sm col-2">所有者类型：</label>
+                          <div class="col">
+                            <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" id="allwarehouse1" name="outboundorder" class="custom-control-input"
+                                checked="">
+                              <label class="custom-control-label" for="allwarehouse1">个人</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" id="notallwarehouse2" name="outboundorder"
+                                class="custom-control-input">
+                              <label class="custom-control-label" for="notallwarehouse2">企业</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label-sm col-2 bef-red"> 域名所有者：</label>
+                          <div class="col-4 p-0 form-inline">
+                            <input type="text " class="form-control form-control-sm mr-1 col-6"
+                              placeholder="中文名，2-10个汉字">
+                            <input type="text " class="form-control form-control-sm col" placeholder="中文名，2-10个汉字">
+                            <p class="mb-0 color-orange">".com" 等国际域名的所有者信息以英文为准，请不要缩写或者简写</p>
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label-sm col-2 bef-red"> 管理联系人：</label>
+                          <div class=" inputdis col-4 p-0 form-inline">
+                            <input type="text " class="form-control form-control-sm mr-1 col-6"
+                              placeholder="中文名，2-10个汉字" disabled="">
+                            <input type="text " class="form-control form-control-sm col" placeholder="中文名，2-10个汉字"
+                              disabled="">
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label-sm col-2 bef-red" style="line-height: 2.2"> 邮箱：</label>
+                          <div class="col-4 p-0">
+                            <input type="text " class="form-control form-control-sm " placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label col-2 bef-red">所属地区：</label>
+                          <div class="col-4  p-0">
+                            <div class="dropdown form-inline" id="cityselect">
+                              <div class="p-0 col-md-12" style="position: relative;">
+                                <input type="text" value="" style="width: 100%;" class="form-control form-control-sm">
+                                <div class="dropdown-menu col-md-1" id="allareas" style="left: 0" role="tablist"
+                                  aria-labelledby="dropdownMenu2" x-placement="bottom-start">
+                                  <a class="list-group-item list-group-item-action active show p-2" id=""
+                                    data-toggle="tab" href="#" role="tab" name="all">全部</a>
+                                  <a class="list-group-item list-group-item-action p-2" id="thischina" data-toggle="tab"
+                                    href="#china" role="tab">中国 <i
+                                      class="iconfont iconicon_jiantou-you float-right"></i></a>
+                                </div>
+                                <div class="dropdown-menu scroll dropdown-menu-c p-0" id="provinces" style="left:103px;"
+                                  role="tablist" aria-labelledby="dropdownMenu2" x-placement="bottom-start">
+                                </div>
+                                <div class="dropdown-menu scroll dropdown-menu-c p-0" id="citys" style="left:205px;"
+                                  role="tablist" aria-labelledby="dropdownMenu2" x-placement="bottom-start">
+                                </div>
+                                <div class="dropdown-menu scroll dropdown-menu-c p-0" id="district" style="left:307px"
+                                  role="tablist" aria-labelledby="dropdownMenu2" x-placement="bottom-start">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label col-2 bef-red">通讯地址：</label>
+                          <div class="col-4  p-0">
+                            <textarea name="" id=""
+                              class="form-control form-control-sm col-textarea-2 mb-2">埇桥区</textarea>
+                            <textarea name="" id=""
+                              class="form-control form-control-sm col-textarea-2">Yong Qiao Qu</textarea>
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label col-2 bef-red">邮政编码：</label>
+                          <div class="col-4 p-0">
+                            <input type="text" class="form-control form-control-sm" value="234000">
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label col-2 bef-red">手机：</label>
+                          <div class="col-4 form-inline p-0">
+                            <input type="text" class="form-control form-control-sm col-3 mr-1" value="086" disabled="">
+                            <input type="text" class="form-control form-control-sm col">
+                          </div>
+                        </div>
+                        <div class="form-group form-row">
+                          <label class="col-form-label col-2">联系电话：</label>
+                          <div class="col-4 form-inline  p-0 pr-0">
+                            <input type="text" class="form-control form-control-sm col-3 mr-1" placeholder="区号">
+                            <input type="text" class="form-control form-control-sm col" placeholder="电话号码">
+                            <button class="btn btn-link btn-sm p-0" data-container="body" data-toggle="popover"
+                              data-placement="right" data-trigger="hover" data-boundaries="150"
+                              data-boundary="scrollParent" data-html="true" data-content="电话号码由7-8位数字组成，不能以0开头"
+                              data-original-title="" style="position:absolute;top:5px;right:-20px;">
+                              <i class="iconfont iconquestion"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="block2 col-8 px-1">
+                      <div class="ml-nge px-3">
+                        <table class="table border table-border">
+                          <thead class="bg-fB p-2">
+                            <tr class="font-weight-light">
+                              <th class="px-3">域名所有者</th>
+                              <th>实名认证状态</th>
+                              <th>管理联系人</th>
+                              <th>联系邮箱</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {if !empty($dclist) && !empty($dclist[0])} {foreach name="dclist" item="v" key="k"}
+                            <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                              <td>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" id="saleorder{$v.id}" name="ordertag" class="custom-control-input"
+                                    value="{$v.id}" {$k==0 ?'checked':''}>
+                                  <label class="custom-control-label" for="saleorder{$v.id}"
+                                    style="top:0">{$v.company_cn}</label>
+                                </div>
+                              </td>
+                              <td><span class="text-primary">{$v.ischeck}</span></td>
+                              <td>{$v.lastname_cn}{$v.firstname_cn}</td>
+                              <td>{$v.email}</td>
+                              <td>
+                                <!-- <a href="javascript:;" class="btn-link btn-xs" onclick="edit($(this))">编辑</a> -->
+                                <a href="javascript:;" class="btn-link btn-xs" onclick="del($(this))">删除</a>
+                                <!-- <a href="javascript:;" class="btn-link btn-xs" onclick="copy($(this))">复制</a> -->
+                              </td>
+                            </tr>
+                            {/foreach}{else /}
+                            <tr>
+                              <td colspan="5" rowspan="1" class="text-center">暂无数据</td>
+                            </tr>
+                            {/if}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card border-0">
+            <div class="card-header unbg px-0">
+              <h4 class="mb-0">
+                <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">增值服务</span> </h4>
+            </div>
+            <div class="card-body form-row px-0">
+              <div class="col-12">
+                <div class="form-group form-row ">
+                  <label class="col-form-label col-1">建站服务：</label>
+                  <div class="col">
+                    <div class="custom-control  custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="checkall4">
+                      <label class="custom-control-label" for="checkall4">
+                        免费开通百度速页，助您三分钟快速搭建企业专属主页！
+                        <button class="btn btn-link btn-sm p-0" data-container="body" data-toggle="popover"
+                          data-placement="right" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+                          data-html="true" data-content="1）速页是百度智能云推出的一款免费的轻主页建站系统，您可以使用它快速搭建一个企业专属主页。
+                                          <br/>2）如您选择开通速页，系统将自动为您开通站点并将您的域名绑定和解析到对应站点上。
+                                          <br/>3）您可以通过 suye.baidu.com 管理和设置您的站点。
+                                          <br/>4）站点开通成功后，系统将向您的域名所有者邮箱发送开通通知信，请您注意查收！" data-original-title="" title="">
+                          <i class="iconfont iconquestion"></i>
+                        </button>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="card border-0">
+            <div class="card-header unbg px-0">
+              <h4 class="mb-0">
+                <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">DNS服务器</span> </h4>
+            </div>
+            <div class="card-body form-row px-0">
+              <div class="col-12">
+                <div class="form-group form-row ">
+                  <label class="col-form-label col-1 py-0"></label>
+                  <div class="col">
+                    <div class="form-row p-0 mb-2">
+                      <label class="col-form-label">DNS Server 1：&nbsp;&nbsp;</label>
+                      <div class="col-4  form-inline">
+                        <input type="text" class="form-control form-control-sm col-5" name="dns1" placeholder="不填则为默认DNS" value="">
+                        <button type="button" class="btn btn-sm btn-link p-0 ml-3 resetdns"> 重置为默认DNS服务器</button>
+                      </div>
+                    </div>
+                    <div class="form-row p-0">
+                      <label class="col-form-label">DNS Server 2：&nbsp;&nbsp;</label>
+                      <div class="col-4">
+                        <input type="text" class="form-control form-control-sm col-5" name="dns2" placeholder="不填则为默认DNS" value="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 px-2">
+          <div class="card text-left">
+            <div class="card-header d-flex">
+              <div class="mr-auto">
+                <h4 class="card-title mb-0">所选配置</h4>
+              </div>
+              <div>
+                <button class="btn btn-sm btn-link p-0" type="button">清空配置</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>
+                <span>域名所有者：</span>
+                <span class="float-right" data-name="company"
+                  style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap;display: inline-block;max-width: 60%;">
+                  - </span>
+              </p>
+              <p>
+                <span>联系人</span>
+                <span class="float-right" data-name="name"
+                  style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap;display: inline-block;max-width: 50%;">
+                  - </span>
+              </p>
+              <p>
+                <span>邮箱</span>
+                <span class="float-right" data-name="email"> - </span>
+              </p>
+              <p>
+                <span>购买量：</span>
+                <span class="float-right"><span data-name="count">0</span>个域名</span>
+              </p>
+              <p class="card-text">
+                总价： <span class="text-danger fs-24" data-name="total">￥0.00</span>
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="form-group form-row p-1">
+                <div class="custom-control  custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="reviewedorder1" checked>
+                  <label class="custom-control-label" for="reviewedorder1" style="top:0px">我已阅读、理解并接受 <a
+                      href="#">《域名注册协议》</a></label>
+                </div>
+              </div>
+              <div class="form-row">
+                <button class="btn btn-danger mr-2 payment" type="button">立即支付</button>
+                <a href="javascript:history.back(-1)" class="btn btn-outline-secondary">返回修改</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="xufei2 d-none">
+        <div class="border border-warning w-100 p-3 position-relative mb-3">
+          <button type="button" class="btn btn-sm bg-white text-warning position-absolute"
+            style="top: -16px">说明</button>
+          <ul class="list-unstyled mb-0 zfs-12 text-999" style="line-height: 2em">
+            <li>1、域名属即时产品，先注先得，请在下单后尽快完成付款，否则可能会被他人抢注。</li>
+            <li>2、部分域名后缀暂时无法进行网站备案，详情可进入 <a href="#"> 工信部备案官网 </a>查询。</li>
+            <li>3、按CNNIC要求，.cn/.中国/.公司/.网络中文域名中包含“中国”、“国家”、“全国”、“中华”等字样，应由对应的权益人注册，个人或非对应组织未经授权不得注册。</li>
+            <li> 4、因部分域名不支持新顶级域后缀邮箱注册，因此在域名注册时，请尽量不要使用新顶级域名后缀的邮箱作为域名所有者邮箱，确保您能正常收到确认邮件。</li>
+          </ul>
+        </div>
+        <table class="table table-border">
+          <thead class="bg-fB p-2">
+            <tr class="font-weight-light">
+              <th class="p-2">产品类型</th>
+              <th class="p-2">产品名称</th>
+              <th class="p-2">配置</th>
+              <th class="p-2">数量</th>
+              <th>时长</th>
+              <th>单价</th>
+              <th>计费方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>预付费</td>
+              <td>BCD（域名服务）</td>
+              <td>2021-03-24</td>
+              <td>1</td>
+              <td>1年</td>
+              <td class="text-danger">￥26.00</td>
+              <td>包年包月</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="p-3 form-row">
+          <div class="col-5 mr-auto">
+            <div class="form-group">
+              <a class="btn btn-link text-primary mr-3 p-0" data-toggle="collapse" href="#collapseExample" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+                +激活代金券
+              </a>
+              <a href="../finance/coupon_list.html">代金券管理</a>
+            </div>
+            <div class="collapse px-2" id="collapseExample">
+              <div class="form-group">
+                <form action="" class="form-row">
+                  <div class="pr-1">
+                    <input type="text" class="form-control form-control-sm" placeholder="请输入代金券号码">
+                  </div>
+                  <button class="btn btn-primary btn-sm mr-1" type="button">确认</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse"
+                    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    取消
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="form-group">代金券（0张可用）</div>
+            <div class="form-row">
+              <label class="col-form-label-sm col-2">产品类型：BCD</label>
+              <div class="col-5">
+                <select name="" id="" class="form-control form-control-sm">
+                  <option value="">无可用代金券</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="text-right">
+              <table class="table border-0 fs-14">
+                <tbody class="text-right">
+                  <tr>
+                    <td class="py-2">产品金额：</td>
+                    <td class="py-2">￥26.00</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2">代金券：</td>
+                    <td class="py-2">-￥0.00</td>
+                  </tr>
+                  <tr>
+                    <td class="py-0">实付金额：</td>
+                    <td class="py-0"><span class="fs-24 text-danger"> ￥26.00</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-danger">*后付费服务将根据使用情况从账户余额中扣除，请保证有足够的金额。</p>
+              <p> <a href="#">《百度智能云线上订购协议》</a></p>
+              <p>
+                <button class="btn btn-outline-secondary subcheck2 mr-2" type="button">返回修改</button>
+                <a href="../finance/pay_orderId.html" class="btn btn-danger px-3">去支付</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+{/block} {block name='js'}
+<div class="modal fade" id="delete" tabindex="-1" role="kaiqi">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 300px">
+    <div class="modal-content m-auto">
+      <div class="modal-header">
+        <h5 class="modal-title">删除联系人</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="col form-inline">
+          <div class="col-2"><i class="iconfont iconicon_guanbi fs-24 text-orange"
+              style="font-size:30px !important; color:orange"></i></div>
+          <div class="col">
+            确定删除该联系人？
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let dlist = JSON.parse(localStorage.getItem('domainlist')),
+    dnames = ''
+  dlist.map(e => {
+    dnames += e.domain + e.suffix + ' ';
+  })
+  $('.domatitle').text(dnames)
+  //所选配置
+  let _c = $('[name="ordertag"]:checked').parents('tr').data('config');
+  $('[data-name="company"]').text(_c['company_cn'] + `(${_c['company_en']})`)
+  $('[data-name="name"]').text(_c['lastname_cn'] + _c['firstname_cn'] + `(${_c['lastname_en']+' '+_c['firstname_en']})`)
+  $('[data-name="email"]').text(_c['email'])
+  $('[name="ordertag"]').change(function () {
+    let _c = $('[name="ordertag"]:checked').parents('tr').data('config');
+    $('[data-name="company"]').text(_c['company_cn'] + `(${_c['company_en']})`)
+    $('[data-name="name"]').text(_c['lastname_cn'] + _c['firstname_cn'] +
+      `(${_c['lastname_en']+' '+_c['firstname_en']})`)
+    $('[data-name="email"]').text(_c['email'])
+  })
+  $('[data-name="count"]').text(dlist.length)
+  //删除配置
+  function del(t) {
+    if (confirm('确认要删除该模板吗?')) {
+      let modelVal = {
+        id: t.parents('tr').data('id')
+      }
+      ajax('{:url("index/Domain/modeldel")}', modelVal, 'post').then(e => {
+        if (e.status == 200) {
+          t.parents('tr').remove();
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  }
+  //计算域名价格
+  $('.payment').prop('disabled', true);
+  $('.payment').text('价格计算中...');
+  ajax('{:url("index/Domain/getDomainListPrice")}', {
+    list: localStorage.getItem('domainlist')
+  }, 'post').then(e => {
+    if (e.status == 200) {
+      $('.payment').text('下一步');
+      $('.payment').prop('disabled', false);
+      $('[data-name="total"]').text('￥' + e.data);
+    } else {
+
+    }
+  })
+  //重置dns
+  $('.resetdns').click(function(){
+    $('[name="dns1"]').val('')
+    $('[name="dns2"]').val('')
+  })
+  //提交域名
+  $('.payment').click(function () {
+    let vals = {
+      domainlist: JSON.stringify(dlist),
+      contact_id: $('[name="ordertag"]:checked').val(),
+      privacy: $('[name="privacy"]').is(':checked'),
+      dns1: $('[name="dns1"]').val(),
+      dns2: $('[name="dns2"]').val(),
+    }
+    ajax('{:url("index/Domain/addAuth")}', vals, 'post').then(e => {
+      if (e.status == 200) {
+        location.href = "{:url('index/Buy/confirm')}";
+      } else {
+        alert(e.msg)
+      }
+    })
+
+  })
+</script>
+<script>
+  $("#reviewedorder1").click(function () {
+    this.checked == true ? $E(".subcheck1").disabled = "" : $E(".subcheck1").disabled = "disabled"
+
+  })
+  $(".subcheck1").click(function () {
+    $(".xufei1").addClass("d-none");
+    $(".xufei2").removeClass("d-none");
+    $(".activenext").addClass("text-primary");
+    $(".activenext").children(".steps").addClass("steps-active");
+  })
+  $(".subcheck2").click(function () {
+    $(".xufei2").addClass("d-none");
+    $(".xufei1").removeClass("d-none");
+    $(".activenext").removeClass("text-primary");
+    $(".activenext").children(".steps").removeClass("steps-active");
+  })
+
+  $("#reviewedorder").click(function () {
+    this.checked == true ? $E(".subcheck").disabled = "" : $E(".subcheck").disabled = "disabled"
+  })
+  setInterval(function () {
+    if ($(".btn1").hasClass("active")) {
+      $(".block1").addClass("d-none");
+      $(".block2").removeClass("d-none");
+    }
+    if ($(".btn2").hasClass("active")) {
+      $(".block2").addClass("d-none");
+      $(".block1").removeClass("d-none");
+    }
+  })
+  $("#allwarehouse1").click(function () {
+    if (this.checked) {
+      $(".inputdis input").attr("disabled", "disabled");
+    }
+  })
+  $("#notallwarehouse2").click(function () {
+    if (this.checked) {
+      $(".inputdis input").attr("disabled", false);
+    }
+  })
+</script>
+{/block}

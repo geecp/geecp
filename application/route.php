@@ -245,3 +245,10 @@ Route::rule('manager/addons/on','admin/Addons/on');
 Route::rule('manager/addons/off','admin/Addons/off');
 // 插件配置
 Route::rule('manager/addons/edit','admin/Addons/edit');
+
+// 系统更新确认
+Route::rule('manager/cloudservice/confirm','admin/Cloudservice/confirm');
+//系统检查变动文件
+Route::rule('manager/cloudservice/checkfile','admin/Cloudservice/checkfile');
+//系统检查版本
+Route::rule('manager/cloudservice/checkversion','admin/Cloudservice/checkversion');

@@ -119,36 +119,38 @@ class Product extends Common
     	// 	$ret['msg'] = '邮件模板ID提交有误！';
     	// 	return json_encode($ret);
     	// }
-    	if(!isset($data['month']) || empty($data['month'])){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '月价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['quarter']) || empty($data['quarter'])){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '季度价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['semestrale']) || empty($data['semestrale'])){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '半年价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['years']) || empty($data['years'])){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '年价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['biennium']) || empty($data['biennium'])){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '两年价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['triennium']) || empty($data['triennium'])){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '三年价格提交有误！';
-    		return json_encode($ret);
-    	}
+    	if($data['type'] != '5'){
+        if(!isset($data['month']) || empty($data['month'])){
+          $ret['status'] = 422;
+          $ret['msg'] = '月价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['quarter']) || empty($data['quarter'])){
+          $ret['status'] = 422;
+          $ret['msg'] = '季度价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['semestrale']) || empty($data['semestrale'])){
+          $ret['status'] = 422;
+          $ret['msg'] = '半年价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['years']) || empty($data['years'])){
+          $ret['status'] = 422;
+          $ret['msg'] = '年价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['biennium']) || empty($data['biennium'])){
+          $ret['status'] = 422;
+          $ret['msg'] = '两年价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['triennium']) || empty($data['triennium'])){
+          $ret['status'] = 422;
+          $ret['msg'] = '三年价格提交有误！';
+          return json_encode($ret);
+        }
+      }
     	if(!isset($data['sort']) || empty($data['sort'])){
     		$ret['status'] = 422;
     		$ret['msg'] = '产品排序提交有误！';
@@ -731,27 +733,30 @@ class Product extends Common
     		$ret['status'] = 422;
     		$ret['msg'] = '增值服务名称提交有误！';
     		return json_encode($ret);
-    	}
-    	if(!isset($data['month']) || $data['month'] < 0){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '月价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['quarter']) || $data['quarter'] < 0){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '季度价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['semestrale']) || $data['semestrale'] < 0){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '半年价格提交有误！';
-    		return json_encode($ret);
-    	}
-    	if(!isset($data['years']) || $data['years'] < 0){
-    		$ret['status'] = 422;
-    		$ret['msg'] = '年价格提交有误！';
-    		return json_encode($ret);
-    	}
+      }
+      // dump($data['type']);
+      // if($data['type'] != '5'){
+        if(!isset($data['month']) || $data['month'] < 0){
+          $ret['status'] = 422;
+          $ret['msg'] = '月价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['quarter']) || $data['quarter'] < 0){
+          $ret['status'] = 422;
+          $ret['msg'] = '季度价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['semestrale']) || $data['semestrale'] < 0){
+          $ret['status'] = 422;
+          $ret['msg'] = '半年价格提交有误！';
+          return json_encode($ret);
+        }
+        if(!isset($data['years']) || $data['years'] < 0){
+          $ret['status'] = 422;
+          $ret['msg'] = '年价格提交有误！';
+          return json_encode($ret);
+        }
+      // }
     	if(!isset($data['sort']) || empty($data['sort'])){
     		$ret['status'] = 422;
     		$ret['msg'] = '排序提交有误！';

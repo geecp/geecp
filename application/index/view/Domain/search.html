@@ -1,0 +1,357 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2">
+          <h4>选购域名</h4>
+        </li>
+      </ul>
+      <ul class="list-inline m-0">
+        <li class="list-inline-item p-2">
+          <a href="#"><i class="iconfont iconguanlian1"></i> 域名价格表</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12 tabseach">
+    <div class="cont-box">
+      <!-- <div class="form-group">
+              <div class="col bg-orange color-orange py-2 px-3">
+                  .cc / .org 暂不支持国内备案
+              </div>
+          </div> -->
+      <div id="myTabContent">
+        <div class="tab-content col-10">
+          <div class="row">
+            <div class="tab-pane fade in active show col p-0" id="moer">
+              <div class="form-row col p-0 m-0">
+                <div class="input-group col p-0">
+                  <input type="text" class="form-control form-control domainname">
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary px-4 py-2" onclick="searchdomain()">立即查询</button>
+          </div>
+        </div>
+      </div>
+      <div class="col p-0 mt-3">
+        <div class="form-row">
+          <div class="col-9 pr-2">
+            <div class="card rounded-0">
+              <div class="card-header">
+                查询结果
+              </div>
+              <div class="card-body">
+                <div>
+                  请在上方输入框输入域名进行查询
+                </div>
+                <div>
+                  <ul class="list-inline listbcd1 mb-5">
+                  </ul>
+                  <div class="form-row py-3 p-1 othercom1 clearfix text-right">
+                    <!-- <div class="text-center col">
+                      <button type="button" class="btn btn-link p-0 otherblock">更多 <i
+                          class="iconfont iconicon_jiantou-xia"></i></button>
+                    </div> -->
+                    <div class="col">
+                      <button type="button" class="btn btn-primary btn-sm" onclick="_SET.alljoin();">全部加入清单</button>
+                    </div>
+                  </div>
+                  <!-- <div class="othercom d-none">
+                    <div class="col p-0">
+                      <h5>其它域名后缀</h5>
+                      <ul class="list-inline listbcd3">
+
+                      </ul>
+                    </div>
+                    <div class="form-row py-3 p-1">
+                      <div class="text-center col">
+                        <button type="button" class="btn btn-link p-0 othernone">收起 <i
+                            class="iconfont iconicon_jiantou-shang"></i></button>
+                      </div>
+                      <div>
+                        <button type="button" class=" btn btn-primary btn-sm">全部加入清单</button>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 ">
+            <div class="card rounded-0">
+              <div class="card-header ">
+                <div class="d-flex ">
+                  <div class="mr-auto ">
+                    <b class=" border-left pl-2 "> 域名清单</b> (<span class="text-danger" data-name="count">0</span>)
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-sm btn-link p-0" onclick="_SET.empty();">清空</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="card-body ">
+                <div class="dnsshop ">
+                  <div class="dns-commodity">
+                    <ul class="list-inline">
+                    </ul>
+                    <div class="form-inline ">
+                      批量修改年限：
+                      <select name="batch" class=" form-control form-control-sm border-0 ">
+                        <option value=" ">-</option>
+                        <option value="1">1年</option>
+                        <option value="2">2年</option>
+                        <option value="3">3年</option>
+                        <option value="4">4年</option>
+                        <option value="5">5年</option>
+                        <option value="10">10年</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer d-flex ">
+                <div class="mr-auto form-inline ">
+                  <span>总价：
+                    <span class="text-danger fs-24 " data-name="total"> ￥0.00</span></span>
+                </div>
+                <button onclick="_SET.next()" class="btn btn-danger next">下一步</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  //域名清单
+  /**
+  *  数据格式
+  * [{ 
+  *   domain: 'toocoo',
+  *   suffix: '.com',
+  *   years: 1
+  * }]
+  */
+  let _DNSLIST = [];
+  //查询域名
+  function searchdomain() {
+    let name = $('.domainname').val();
+    ajax('{:url("index/Domain/searchdomain")}', {
+      domain: name
+    }, 'post').then((e) => {
+      if (e.status == 200) {
+        let d = e.data;
+        $(".listbcd1").html(listbcd(d));
+        getinfo(d);
+      } else {
+        alert(e.msg)
+      }
+    })
+  }
+  //获取域名信息
+  function getinfo(d){
+    d.map((ev, ind) => {
+      ajax('{:url("index/Domain/searchdomaininfo")}', {
+        domain: ev.domain,
+        suffix: ev.suffix
+      }, 'post').then(eve => {
+        if (eve.status == 200) {
+          let has = false;
+          if(_DNSLIST[0]){
+            _DNSLIST.map(e=>{
+              if(e.domain+e.suffix == ev.domain+ev.suffix){
+                has = true
+              }
+            })
+          }
+          let status1 = `${(
+              eve.data == 'loading' && "<span class='text-warning'>(加载中...)</span>" ||
+              eve.data == 'available' && "<span class='text-success'>(未注册)</span>" ||
+              eve.data == 'unavailable' && "<span class='text-warning'>(已注册)</span>" ||
+              "<span class='text-danger'>(不可用)</span>"
+            )}`,
+            status2 = `${(
+              eve.data == 'loading' && "<span class='text-warning'>数据请求中...</span>" ||
+              eve.data == 'available' &&
+              (has?'<button type="button" class="btn btn-sm btn-primary" onclick="_SET.del($(this))">移除清单</button>':"<button type='button' class='btn btn-sm btn-outline-primary' onclick='_SET.add($(this))'>加入清单</button>") ||
+              eve.data == 'unavailable' && "<a href=''>WHOIS信息</a>" ||
+              "<button type='button' class='btn btn-sm btn-outline-secondary disabled' disabled>加入清单</button>"
+            )}`;
+          $(".listbcd1 li").eq(ind).find('.status1').html(status1);
+          $(".listbcd1 li").eq(ind).find('.status2').html(status2);
+          $(".listbcd1 li").eq(ind).attr('data-status',eve.data)
+        } else {
+          // alert(eve.msg)
+        }
+      })
+    })
+  }
+
+  function listbcd(arr) {
+    let html = '';
+    arr.map((item) => {
+      let status = (
+        item.status == 'loading' && "<span class='text-warning'>(加载中...)</span>" ||
+        "<span class='text-danger'>(不可用)</span>"
+      );
+      html += `<li class="border-bottom py-3 " data-domain="${item.domain}" data-suffix="${item.suffix}" data-status="${item.status}">
+                <div class="col px-1 ">
+                    <div class="form-row ">
+                        <div class="mr-auto form-inline ">
+                            <span> <b> ${item.domain+item.suffix}</b></span>
+                            <span class="status1">${status}</span>
+                            <span class="bg-danger text-white px-1 ">hot</span>
+                            <span>${item.description}</span>
+                        </div>
+                        <div>
+                            <span>原价：<s class="text-secondary">￥${item.origin_price}</s></span>
+                            <span>现价：<span class="text-warning">￥${item.price}</span></span>
+                            <span class="status2">
+                              ${(
+                                item.status == 'loading' && "<span class='text-warning'>数据请求中...</span>" ||
+                                "<button type='button' class='btn btn-sm btn-outline-secondary disabled' disabled>加入清单</button>"
+                              )}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </li>`;
+    });
+    return html;
+  }
+  //设置域名清单
+  let _SET = {
+    //初始化
+    init: (d)=>{
+      let dnslist = ``;
+      $('.next').prop('disabled',true);
+      if(!d[0]){
+        dnslist = `<li>
+                    <div class="py-3 text-center text-secondary">
+                      <i class="iconfont icon-nodata-o" style="font-size: 48px;"></i>
+                      <br>
+                      <small>您还没有添加域名</small>
+                    </div>
+                  </li>`;
+        $('.next').text('下一步');
+        $('[data-name="total"]').text('￥0.00');
+      } else {
+        // console.log(d);
+        d.map(e=>{
+          dnslist += _SET.temp(e);
+        })
+        console.log(d)
+        $('.next').text('价格计算中...');
+        ajax('{:url("index/Domain/getDomainListPrice")}',{
+          list: JSON.stringify(d)
+        },'post').then(e=>{
+          if(e.status == 200){
+          $('.next').text('下一步');
+          $('.next').prop('disabled',false);
+          $('[data-name="total"]').text('￥'+e.data);
+          } else {
+
+          }
+        })
+      }
+      $('[data-name="count"]').text(d.length);
+      $('.dns-commodity ul').html(dnslist);
+    },
+    //加入域名清单
+    add: (d)=>{
+      let p = d.parents('li');
+      p.find('.status2').html('<button type="button" class="btn btn-sm btn-primary" onclick="_SET.del($(this))">移除清单</button>');
+      _DNSLIST.push({
+        domain: p.data('domain'),
+        suffix: p.data('suffix'),
+        years: 1
+      })
+      _SET.init(_DNSLIST);
+    },
+    //删除域名清单
+    del: (d)=>{
+      let p = d.parents('li');
+      _DNSLIST = _DNSLIST.filter(e=>{
+        return e.domain+e.suffix != p.data('domain')+p.data('suffix');
+      });
+      $('.listbcd1 [data-suffix="'+p.data('suffix')+'"] .status2').html('<button type="button" class="btn btn-sm btn-outline-primary" onclick="_SET.add($(this))">加入清单</button>')
+      _SET.init(_DNSLIST);
+    },
+    //域名年限发生改变
+    change: (d)=>{
+      let p = d.parents('li')
+      _DNSLIST.map(e=>{
+        if(e.domain+e.suffix == p.data('domain')+p.data('suffix')){
+          e.years = d.val();
+        }
+      })
+      $('[name="batch"]').val(' ');
+      _SET.init(_DNSLIST);
+    },
+    //清空域名清单
+    empty:()=>{
+      $('.listbcd1 li .status2').html('<button type="button" class="btn btn-sm btn-outline-primary" onclick="_SET.add($(this))">加入清单</button>');
+      _DNSLIST = [];
+      _SET.init(_DNSLIST);
+    },
+    //全部加入清单
+    alljoin:()=>{
+      $('.listbcd1 li').map((i,e)=>{
+        if($(e).find('.status2 .btn').text() == '加入清单'){
+          let d = $(e).find('.status2');
+          d.html('<button type="button" class="btn btn-sm btn-primary" onclick="_SET.del($(this))">移除清单</button>');
+          _DNSLIST.push({
+            domain: $(e).data('domain'),
+            suffix: $(e).data('suffix'),
+            years: 1
+          })
+        }
+      })
+      _SET.init(_DNSLIST);
+    },
+    //对清单数据进行模板转出
+    temp: (d)=>{
+      let html = `<li class="d-flex" data-domain="${d.domain}" data-suffix="${d.suffix}">
+                    <div class="mr-auto form-inline ">
+                      <span>${d.domain+d.suffix}</span>
+                    </div>
+                    <div class="form-inline">
+                      <select class=" form-control form-control-sm border-0" onchange="_SET.change($(this))">
+                        <option value="1" ${d.years == 1 && 'selected' || ''}>1年</option>
+                        <option value="2" ${d.years == 2 && 'selected' || ''}>2年</option>
+                        <option value="3" ${d.years == 3 && 'selected' || ''}>3年</option>
+                        <option value="4" ${d.years == 4 && 'selected' || ''}>4年</option>
+                        <option value="5" ${d.years == 5 && 'selected' || ''}>5年</option>
+                        <option value="10" ${d.years == 10 && 'selected' || ''}>10年</option>
+                      </select>
+                      <div class="removeli">
+                        <button type="button" class="btn btn-sm btn-link p-0" onclick="_SET.del($(this))"> <i class="iconfont icon-icon_guanbi"></i></button>
+                      </div>
+                    </div>
+                  </li>`;
+      return html;
+    },
+    //下一步
+    next:()=>{
+      localStorage.setItem('domainlist',JSON.stringify(_DNSLIST));
+      window.location.href = '{:url("index/Domain/add")}';
+    }
+  }
+  _SET.init(_DNSLIST);
+
+  //批量修改年限
+  $('[name="batch"]').change(function(){
+    _DNSLIST.map(e=>{
+      e.years = $(this).val()
+    })
+    _SET.init(_DNSLIST);
+  })
+</script>
+{/block}

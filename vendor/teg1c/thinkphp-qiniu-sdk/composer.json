@@ -1,0 +1,20 @@
+{
+    "name": "teg1c/thinkphp-qiniu-sdk",
+    "description": "基于tp5.1的七牛云sdk，实现了文件上传与文件管理",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tegic",
+            "email": "i@izww.cn"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "tegic\\qiniu\\": ""
+        }
+    }
+}

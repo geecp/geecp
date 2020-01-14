@@ -1,0 +1,241 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+      <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+      <div class="tool-list d-flex">
+          <ul class="list-inline mr-auto  m-0">
+              <li class="list-inline-item p-2">
+                  <h4>域名服务概览</h4>
+              </li>
+          </ul>
+          <ul class="list-inline m-0">
+              <li class="list-inline-item p-2">
+                  <a href="#"><i class="iconfont iconguanlian1"></i> 操作指南</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <div class="card-body fs-12 p-0">
+      <div class="cont-box">
+          <div class="bcdserch p-5">
+              <div class=" m-auto" style="width: 840px">
+                  <div class="form-row">
+                      <div class="col-3">
+                          <label class="col-form-label-sm">累计注册域名：</label>
+                          <label class="col-form-label-sm"><span class="fs-24 text-primary">{$dcount}</span>个</label>
+                      </div>
+                      <div class="col-3">
+                          <label class="col-form-label-sm">当前有效域名：</label>
+                          <label class="col-form-label-sm"><span class="fs-24 text-primary">{$dvcount}</span>个</label>
+                      </div>
+                      <div class="col-3">
+                          <label class="col-form-label-sm">等待验证域名：</label>
+                          <label class="col-form-label-sm"><span class="fs-24 text-danger">{$ddcount}</span>个</label>
+                      </div>
+                      <div class="col-3">
+                          <label class="col-form-label-sm">即将到期域名：</label>
+                          <label class="col-form-label-sm"><span class="fs-24 text-danger">{$decount}</span>个</label>
+                      </div>
+                  </div>
+                  <div class="text-center mt-3">
+                      <!-- <div class="input-group col  form-inline">
+                          <input type="text" class="form-control form-control domainname" placeholder="请输入要查询的域名，如baidu.com；也可不输入后缀，如baidu，系统将为您批量查询所有后缀的域名">
+                          <div class="input-group-append"> -->
+                              <a href="{:url('index/Domain/search')}" class="btn btn-primary px-4 py-2">注册新域名</a>
+                          <!-- </div> -->
+                      <!-- </div> -->
+                      <a href="{:url('index/Domain/manage')}" class="btn btn-primary px-4 py-2">域名管理</a>
+                  </div>
+              </div>
+          </div>
+          <div class="p-4">
+              <div class="form-group">
+                  <div class="col bg-orange color-orange p-2">
+                      4月域名促销热潮火热上线，.com域名新注52元持续不限量， 更有.mobi /.info 新注低至28元！
+                  </div>
+              </div>
+              <div class="mb-1">
+                  企业品牌保护季，中国/公司/网络域名首年1折起，仅需55元！多年购买更有优惠，更有.集团、.网址、.企业、.商店限时特价，更多国际、国内域名、新顶级域名、中文域名火爆促销中
+                  <a href="{:url('index/Domain/price')}">点击查看详情 &gt;&gt;</a>
+              </div>
+              <div class="form-row suffix_list">
+                {if (!empty($plist) && !empty($plist[0]))}
+                {foreach name="plist" item="v"}
+                <div class='col-3'>
+                  <div class='card mr-2 my-2'>
+                    <div class='card-body p-3'>
+                      <div class='form-row mb-2'>
+                        <h4 class='mr-auto'>{$v.domain}</h4>
+                        <h4><span>￥{$v.origin_price|to_double}</span>
+                          <span>￥{$v.price|to_double}</span></h4>
+                      </div>
+                      <p class='card-text'>{$v.description}</p>
+                    </div>
+                  </div>
+                </div>
+                {/foreach}
+                {/if}
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{/block} {block name='modal'}
+<div class="modal fade" id="changepw" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">修改VPS密码</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="vpsname" class="col-sm-3 col-form-label-sm">云服务器名</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly disabled class="form-control-plaintext form-control-sm disabled" id="vpsname" name="vpsname">
+                        <input type="hidden" readonly disabled class="form-control-plaintext form-control-sm disabled" id="pro_id" name="pro_id">
+                        <input type="hidden" readonly disabled class="form-control-plaintext form-control-sm disabled" id="pro_id" name="plug_name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label-sm">输入新密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control form-control-sm" id="password" name="password">
+                        <span class="help-block">密码必须8位以上,字母+数字</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="vpassword" class="col-sm-3 col-form-label-sm">确认新密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control form-control-sm" id="vpassword" name="vpassword">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-sm btn-primary" onclick="changePwd()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+
+</div>
+{/block} {block name='js'}
+<script>
+  // $('.search').click(function(){
+  //   window.location.href="{:url('index/Domain/search')}?domain="+$('.domainname').val();
+  // })
+  // const suf = [{
+  //     w: ".com",
+  //     line: "￥80.00",
+  //     m: "￥52.00",
+  //     text: "网络服务首选经典域名,新用户25元"
+  // }, {
+  //     w: ".cn",
+  //     line: "￥60.00",
+  //     m: "￥28.00",
+  //     text: "注册量最大的中文后缀"
+  // }, {
+  //     w: ".top",
+  //     line: "￥90.00",
+  //     m: "￥9.00",
+  //     text: "巅峰，顶级"
+  // }, {
+  //     w: ".vip",
+  //     line: "￥88.00",
+  //     m: "￥38.00",
+  //     text: "尊贵，专享"
+  // }, {
+  //     w: ".club",
+  //     line: " ￥138.00",
+  //     m: "￥14.00",
+  //     text: "俱乐部专享域名"
+  // }, {
+  //     w: ".com",
+  //     line: "￥80.00",
+  //     m: "￥52.00",
+  //     text: "网络服务首选经典域名,新用户25元"
+  // }, {
+  //     w: ".cn",
+  //     line: "￥60.00",
+  //     m: "￥28.00",
+  //     text: "注册量最大的中文后缀"
+  // }, {
+  //     w: ".top",
+  //     line: "￥90.00",
+  //     m: "￥9.00",
+  //     text: "巅峰，顶级"
+  // }, {
+  //     w: ".vip",
+  //     line: "￥88.00",
+  //     m: "￥38.00",
+  //     text: "尊贵，专享"
+  // }, {
+  //     w: ".club",
+  //     line: " ￥138.00",
+  //     m: "￥14.00",
+  //     text: "俱乐部专享域名"
+  // }, {
+  //     w: ".com",
+  //     line: "￥80.00",
+  //     m: "￥52.00",
+  //     text: "网络服务首选经典域名,新用户25元"
+  // }, {
+  //     w: ".cn",
+  //     line: "￥60.00",
+  //     m: "￥28.00",
+  //     text: "注册量最大的中文后缀"
+  // }, {
+  //     w: ".top",
+  //     line: "￥90.00",
+  //     m: "￥9.00",
+  //     text: "巅峰，顶级"
+  // }, {
+  //     w: ".vip",
+  //     line: "￥88.00",
+  //     m: "￥38.00",
+  //     text: "尊贵，专享"
+  // }, {
+  //     w: ".club",
+  //     line: " ￥138.00",
+  //     m: "￥14.00",
+  //     text: "俱乐部专享域名"
+  // }, ]
+
+  // function mapsuf(arr) {
+  //     let html = '';
+  //     arr.map((item) => {
+  //         html += `<div class='col-3'>
+  //     <div class='card mr-2 my-2'>
+  //       <div class='card-body p-3'>
+  //         <div class='form-row mb-2'>
+  //           <h4 class='mr-auto'>${item.w}</h4>
+  //           <h4><span>${item.line}</span>
+  //             <span>${item.m}</span></h4>
+  //         </div>
+  //         <p class='card-text'>${item.text}</p>
+  //       </div>
+  //     </div>
+  //   </div>
+  //   `;
+  //     })
+  //     return html;
+  // }
+  // $(".suffix_list").html(mapsuf(suf))
+  
+    // function release(item) {
+    //     if (confirm("您确定要释放该资源吗？")) {
+    //         ajax('{:url("index/Vps/release")}', {
+    //             id: item.parents('tr').data('id')
+    //         }, 'delete').then(e => {
+    //             console.log(e);
+    //             // item.parents('tr').remove();
+    //         });
+    //     }
+    // }
+</script>
+{/block}

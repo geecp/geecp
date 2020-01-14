@@ -134,65 +134,63 @@
 </div>
 
 <script>
-    console.log();
-    let btnpx=($(window).width()-992)/2-80;
-    let bhl = 1;
-    $('.solution .container1 .content ul').css('left',($(window).width()-912)/2+'px');
-    $('.pre').css('left',btnpx+'px');
-    $('.next').css('right',btnpx+'px');
-    $('.solution .nav li').click(function () {
-        set(this);
-    })
-
-    let af = function () {
-        let n = 536 * (bhl);
-        let child = $('.solution .content ul').children()[bhl];
-        $(child).addClass('active');
-        $(child).siblings().removeClass('active');
-        $('.solution .content ul').css('transform', 'translateX(-' + n + 'px)');
-    }
-
-    function set(note) {
-        $(note).addClass('active')
-        $(note).siblings().removeClass('active');
-        let bh = $(note).prevAll();
-        bhl = bh.length;
-        let w = 0;
-        bh.each(function () {
-            console.log()
-            w += $(this)[0].clientWidth;
+    $(document).ready(function(){
+        let btnpx=($(window).width()-992)/2-80;
+        let bhl = 1;
+        $('.solution .container1 .content ul').css('left',($(window).width()-912)/2+'px');
+        $('.pre').css('left',btnpx+'px');
+        $('.next').css('right',btnpx+'px');
+        $('.solution .nav li').click(function () {
+            set(this);
         })
-        let wline = 36 + 36 * (bh.length) + w;
-        console.log(wline)
-        if ($(note)[0].clientWidth - 70 > 0) {
-            let i = ($(note)[0].clientWidth - 70) / 2;
-            wline += i;
-        } else {
-            console.log($(note)[0].clientWidth)
-            let i = (70 - $(note)[0].clientWidth) / 2;
-            console.log(i)
-            wline -= i;
-        }
-        if (bh.length <= 0) {
-            $('.pre').addClass('none')
-        } else if (bh.length >= 5) {
-            $('.next').addClass('none');
-        } else {
-            $('.next').removeClass('none');
-            $('.pre').removeClass('none')
-        }
-        $('.solution .nav-line span').css('transform', 'translateX(' + wline + 'px)');
-        af();
-    }
-    $('.pre').click(function () {
-        if ($('.solution .nav ul').children('.active').prev().length >= 1) {
-            set($('.solution .nav ul').children('.active').prev());
-        }
-    })
-    $('.next').click(function () {
-        if ($('.solution .nav ul').children('.active').next().length >= 1) {
-            set($('.solution .nav ul').children('.active').next());
+
+        let af = function () {
+            let n = 536 * (bhl);
+            let child = $('.solution .content ul').children()[bhl];
+            $(child).addClass('active');
+            $(child).siblings().removeClass('active');
+            $('.solution .content ul').css('transform', 'translateX(-' + n + 'px)');
         }
 
+        function set(note) {
+            $(note).addClass('active')
+            $(note).siblings().removeClass('active');
+            let bh = $(note).prevAll();
+            bhl = bh.length;
+            let w = 0;
+            bh.each(function () {
+                w += $(this)[0].clientWidth;
+            })
+            let wline = 36 + 36 * (bh.length) + w;
+            if ($(note)[0].clientWidth - 70 > 0) {
+                let i = ($(note)[0].clientWidth - 70) / 2;
+                wline += i;
+            } else {
+                let i = (70 - $(note)[0].clientWidth) / 2;
+                wline -= i;
+            }
+            if (bh.length <= 0) {
+                $('.pre').addClass('none')
+            } else if (bh.length >= 5) {
+                $('.next').addClass('none');
+            } else {
+                $('.next').removeClass('none');
+                $('.pre').removeClass('none')
+            }
+            $('.solution .nav-line span').css('transform', 'translateX(' + wline + 'px)');
+            af();
+        }
+        $('.pre').click(function () {
+            if ($('.solution .nav ul').children('.active').prev().length >= 1) {
+                set($('.solution .nav ul').children('.active').prev());
+            }
+        })
+        $('.next').click(function () {
+            if ($('.solution .nav ul').children('.active').next().length >= 1) {
+                set($('.solution .nav ul').children('.active').next());
+            }
+
+        })
     })
+
 </script>

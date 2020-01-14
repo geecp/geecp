@@ -22,11 +22,18 @@ class Server extends Common
         $osgroup = new GeeOsgroup();
         $ostype = new GeeOstype();
         $serverlist = $server->where('user_id = ' . session('_userInfo')['id'])->order('id desc')->paginate(10);
+        foreach($serverlist as $k=>$v){
+          if($v['end_time'] <= time()){
+            $server->where('id = '.$v['id'])->update(['status'=>1]);
+            $v['status'] = 1;
+          }
+        }
         $this->assign('list', $serverlist);
         $oslist = $osgroup->order('sort desc,id desc')->select();
         $this->assign('oslist', $oslist);
         $defualtOs = $ostype->where('group_id = ' . $oslist[0]['id'])->select();
         $this->assign('ostypelist', $defualtOs);
+
         return $this->fetch('Server/index');
     }
     /**

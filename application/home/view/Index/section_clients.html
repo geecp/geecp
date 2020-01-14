@@ -855,12 +855,15 @@
         <img src="https://bce.bdstatic.com/bce-portal/static/assets/assets/a789f94c.png" class="circle circle4" style="transform: translate(940px)">
     </div>
     <script>
-        $('.icons-grid div').click(function(){
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-            let id=parseInt($(this)[0].attributes['data-index'].value)+parseInt(1);
-            $('.client-container .client-item:nth-child('+id+')').addClass('active');
-            $('.client-container .client-item:nth-child('+id+')').siblings().removeClass('active');
+        $(document).ready(function(){
+            $('.icons-grid div').click(function(){
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+                let id=parseInt($(this)[0].attributes['data-index'].value)+parseInt(1);
+                $('.client-container .client-item:nth-child('+id+')').addClass('active');
+                $('.client-container .client-item:nth-child('+id+')').siblings().removeClass('active');
+            })
         })
+
 
     </script>

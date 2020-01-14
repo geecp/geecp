@@ -1,0 +1,210 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item py-2">
+          <h4>DNS服务器修改</h4>
+        </li>
+      </ul>
+      <ul class="list-inline m-0">
+
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="form-group">
+        <div class="col bg-orange color-orange py-2 px-3">
+          百度DNS服务提供安全、高效、免费、不限量的域名智能解析服务，变更DNS服务器后，将无法使用。请慎重操作！DNS记录受全国运营商DNS节点缓存影响，通常需要48小时生效，请耐心等待
+        </div>
+      </div>
+      <div class="form-group form-row border-bottom py-3 mx-0">
+        <div class="col-1 px-0">
+          <h4>待选取域名</h4>
+        </div>
+        <div class="col fs-12">
+          <span>{$_GET['domain']}</span>
+        </div>
+      </div>
+      <div class="form-group setdns form-row border-bottom py-3 mx-0">
+        <div class="col-1 px-0">
+          <h4>设置DNS</h4>
+        </div>
+        <div class="col-8 fs-12  form-row ">
+          <div class="col-4 radiobox px-3 py-2">
+            <input type="hidden" name="domain" value="{$_GET['domain']}">
+            <div class="custom-control custom-radio custom-control-inline mb-3">
+              <input type="radio" id="allwarehouse1" name="type" value="0" class="custom-control-input" checked="">
+              <label class="custom-control-label" for="allwarehouse1">使用默认DNS服务器 <button type="button"
+                  class="btn btn-sm  btn-warning text-white p-0 px-2"
+                  style="font-size: 10px !important;border-radius: 10px !important">推荐
+                </button></label></div>
+            <div class="mb-3 pl-4">
+              DNS Server 1：a.ezdnscenter.com
+            </div>
+            <div class="mb-3 pl-4">
+              DNS Server 2：b.ezdnscenter.com
+            </div>
+          </div>
+          <div class="col-5 radiobox px-3 py-2 ">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="notallwarehouse2" name="type" value="1" class="custom-control-input">
+              <label class="custom-control-label" for="notallwarehouse2">使用自定义DNS服务器
+                <button class="btn btn-link btn-sm p-0" data-container="body" data-toggle="popover"
+                  data-placement="right" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent"
+                  data-html="true" data-content="DNS服务器必须为域名" data-original-title="" title="">
+                  <i class="iconfont iconquestion"></i>
+                </button>
+              </label>
+            </div>
+            <div class="mt-3 pl-4">
+              <div class="form-row p-0">
+                <label class="col-form-label">DNS Server 1：&nbsp;&nbsp;</label>
+                <div class="col-7">
+                  <input type="text" class="form-control form-control-sm" name="dns1" value="{$dinfo.host1}">
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 pl-4">
+              <div class="form-row p-0">
+                <label class="col-form-label"> DNS Server 2：&nbsp;&nbsp;</label>
+                <div class="col-7">
+                  <input type="text" class="form-control form-control-sm" name="dns2" value="{$dinfo.host2}">
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 pl-4">
+              <div class="form-row p-0">
+                <label class="col-form-label"> DNS Server 3：&nbsp;&nbsp;</label>
+                <div class="col-7">
+                  <input type="text" class="form-control form-control-sm" name="dns3" value="{$dinfo.host3}">
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 pl-4">
+              <div class="form-row p-0">
+                <label class="col-form-label"> DNS Server 4：&nbsp;&nbsp;</label>
+                <div class="col-7">
+                  <input type="text" class="form-control form-control-sm" name="dns4" value="{$dinfo.host4}">
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 pl-4">
+              <div class="form-row p-0">
+                <label class="col-form-label"> DNS Server 5：&nbsp;&nbsp;</label>
+                <div class="col-7">
+                  <input type="text" class="form-control form-control-sm" name="dns5" value="{$dinfo.host5}">
+                </div>
+              </div>
+            </div>
+            <div class="addinput1">
+              <div class="mt-3 pl-4">
+                <div class="form-row p-0">
+                  <label class="col-form-label"> DNS Server 6：&nbsp;&nbsp;</label>
+                  <div class="col-7">
+                    <input type="text" class="form-control form-control-sm" name="dns6" value="{$dinfo.host6}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="pl-4">
+                          <div class="form-row p-0">
+                              <label class="col-form-label col-3"></label>
+                              <div class="col-7 px-3">
+                                  <button type="button" class="btn btn-sm btn-link p-0 dnsdelet d-none" onclick="addnds.remove()" style="position:absolute;right: -23px;
+                                  top: -119%;"><i class="iconfont icon-icon_shanchu-xian"></i></button>
+
+                                  <button type="button" class="btn btn-sm btn-link p-0 adduserdns" onclick="addnds.addhtml()"><i class="iconfont icon-icon_tianjia"></i>新增一行</button>
+                              </div>
+                          </div>
+                      </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-row pt-1 mx-0">
+        <div class="col-1 px-0">
+          <h4></h4>
+        </div>
+        <div class="col-8 fs-12  form-row ">
+          <a href="javascript:;" class="btn btn-primary btn-sm px-4 py-1 mr-2 edit">修改</a>
+          <a href="{:url('index/Domain/detail')}?domain={$_GET['domain']}" class="btn btn-outline-secondary btn-sm px-4 py-1">取消</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'}{/block} {block name='js'}
+<script>
+$('.edit').click(function(){
+  if(confirm('确认要修改该域名的DNS吗?')){
+    let names = document.querySelectorAll('.setdns [name]'),
+      vals = {};
+    names = [].slice.call(names);
+    names.map((e) => {
+      if ($(e).attr('type') == 'radio') {
+        if ($(e).prop('checked')) {
+          vals[e.name] = $(e).val();
+        }
+      } else {
+        vals[e.name] = $(e).val();
+      }
+    });
+    // console.log(vals)
+    // return;
+    ajax('{:url("index/Domain/changensAuth")}',vals,'post').then(e=>{
+      if(e.status == 200){
+        window.location.href="{:url('index/Domain/detail')}?domain={$_GET['domain']}"
+      } else {
+        alert(e.msg)
+      }
+    })
+  }
+})
+</script>
+<script>
+  //添加DNS
+  const addnds = {
+    i: 7,
+    f: 0,
+    add: (e) => {
+      let n = "",
+        p;
+      $(".addinput1>div").map((e, q) => {
+        addnds.f = e + addnds.i;
+        if (addnds.f < 10) {
+          n = '&nbsp;&nbsp;';
+          p = 'pr-1'
+        } else {
+          n = "";
+          p = "";
+        }
+
+        $(".dnsdelet").removeClass("d-none");
+        return html = `<div class="mt-3 pl-4">
+                      <div class="form-row p-0">
+                          <label class="col-form-label"> DNS Server ${ addnds.f}：${n}</label>
+                          <div class="col-7 adddelete ${p}">
+                              <input type="text" class="form-control form-control-sm">
+                          </div>
+                      </div>
+                    </div>`
+      })
+
+      return html;
+    },
+    addhtml: () => {
+      let html = "";
+      $(".addinput1>div:last-child").after(addnds.add());
+    },
+    remove: (e) => {
+      addnds.i = addnds.i;
+      console.log($(".addinput1>div").length)
+      if ($(".addinput1>div").length >= 2) {
+        $(".addinput1>div:last-child").remove();
+      }
+      $(".addinput1>div").length == 1 ? $(".dnsdelet").addClass("d-none") : null;
+    }
+  }
+</script>
+{/block}

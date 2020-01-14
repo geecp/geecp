@@ -25,13 +25,15 @@
             <div class="form-row">
               <label class="col-form-label p-0">产品信息：</label>
               <div class="col">
-                <ul class="p-0 mb-0" style="list-style-type: none">
+                <ul class="p-0 mb-0 list-inline" style="list-style-type: none">
                   {if $prolist == '0'}
                   账户充值
                   {else /}
                   {foreach name="prolist" item="v"}
-                  <?php $v = object_toArray($v); ?>
-                  <li>{$v.class}</li>
+                  <?php 
+                    $v = object_toArray($v);
+                   ?>
+                  <li class="list-inline-item">{$v.class}</li>
                   {/foreach}
                   {/if}
                 </ul>

@@ -1,0 +1,202 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item py-2">
+          <h4>续费</h4>
+        </li>
+      </ul>
+      <ul class="list-inline m-0">
+        <div class=" form-inline py-1 text-center" style="position: absolute;top:15px;right:15px">
+          <div class="fs-12 text-primary">
+            <span class="steps steps-active">1</span>
+            <span class="px-1">续费</span>
+            <span class="iconfont iconicon_jiantou-you fs-12"></span>
+          </div>
+          <div class="fs-12 px-2 activenext">
+            <span class="steps">2</span>
+            <span class="px-1">确认</span>
+            <span class="iconfont iconicon_jiantou-you fs-12"></span>
+          </div>
+          <div class="fs-12">
+            <span class="steps">3</span>
+            <span class="px-1">续费成功</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12 p-0">
+    <div class="cont-box">
+      <div class="col-12 p-3 xufei1">
+        <div class="form-group form-row">
+          <div class="col-9">
+            <div class="card border-0">
+              <div class="card-header unbg">
+                <h4 class="mb-0">续费域名</h4>
+              </div>
+              <div class="card-body p-0">
+                <table class="table table-border">
+                  <thead class="bg-fB p-2">
+                    <tr class="font-weight-light">
+                      <th class="p-2">域名</th>
+                      <th class="p-2">续费前到期日期</th>
+                      <th class="p-2">续费年限</th>
+                      <th class="p-2">费用</th>
+                    </tr>
+                  </thead>
+                  <tbody class="clist">
+                    <!-- <tr>
+                      <td>sj.com</td>
+                      <td>2021-03-24</td>
+                      <td style="width:200px">
+                        <select class="form-control form-control-sm border-0" onchange="getPrice()">
+                          <option value="">1年</option>
+                          <option value="">2年</option>
+                          <option value="">3年</option>
+                          <option value="">4年</option>
+                        </select>
+                      </td>
+                      <td>￥26.00</td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 p-3">
+            <div class="card text-left">
+              <div class="card-header">
+                <h4 class="card-title mb-0">所选配置</h4>
+              </div>
+              <div class="card-body">
+                <div class="configs">
+                  <!-- <div class="configs-item mb-2 clearfix">
+                    <span>sj.com</span>
+                    <span class="float-right">1年</span>
+                  </div> -->
+                </div>
+                <p class="card-text">
+                  总价： <span class="text-danger fs-24" data-name="total">￥0.00</span>
+                </p>
+              </div>
+              <div class="card-footer">
+                <div class="form-group form-row p-1">
+                  <div class="custom-control  custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="reviewedorder">
+                    <label class="custom-control-label" for="reviewedorder" style="top:0px">我已阅读、理解并接受 <a
+                        href="#">《域名注册协议》</a></label>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div>
+                    <button class="btn btn-danger subcheck payment" disabled="disabled" type="button">立即支付</button>
+                    <button class="btn btn-outline-secondary" type="button">返回修改</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  let dlist = JSON.parse(localStorage.getItem('domainlist')),
+    dnames = ''
+  dlist.map(e => {
+    dnames += e.domain + e.suffix + ' ';
+  })
+  getPrice()
+
+  function setConfigs() {
+    let html = '',
+      clist = '',
+      nlist = JSON.parse(localStorage.getItem('domainlist'));
+    nlist.map(e => {
+      html += `<div class="configs-item mb-2 clearfix">
+                  <span>${e.domain+e.suffix}</span>
+                  <span class="float-right">${e.years}年</span>
+                </div>`
+      clist += `<tr>
+                  <td>${e.domain+e.suffix}</td>
+                  <td>${e.end}</td>
+                  <td style="width:200px">
+                    <select class="form-control form-control-sm border-0" onchange="cyears($(this))">
+                      <option value="1" ${e.years == '1'?'selected':''}>1年</option>
+                      <option value="2" ${e.years == '2'?'selected':''}>2年</option>
+                      <option value="3" ${e.years == '3'?'selected':''}>3年</option>
+                      <option value="4" ${e.years == '4'?'selected':''}>4年</option>
+                      <option value="5" ${e.years == '5'?'selected':''}>5年</option>
+                      <option value="10" ${e.years == '10'?'selected':''}>10年</option>
+                    </select>
+                  </td>
+                  <td>￥${e.price}</td>
+                </tr>`
+    })
+    $('.clist').html(clist)
+    $('.configs').html(html)
+  }
+  //修改年限
+  function cyears(t) {
+    let list = JSON.parse(localStorage.getItem('domainlist'));
+    list[t.parents('tr').index()].years = t.val()
+    localStorage.setItem('domainlist', JSON.stringify(list));
+    getPrice()
+  }
+
+  function getPrice() {
+    //计算域名价格
+    let list = JSON.parse(localStorage.getItem('domainlist'));
+    $('.payment').prop('disabled', true);
+    $('.payment').text('价格计算中...');
+    list.map((e, i) => {
+      let item = [{
+        ...e
+      }]
+      ajax('{:url("index/Domain/getDomainListPrice")}', {
+        list: JSON.stringify(item),
+        type: 'recharge'
+      }, 'post').then(e => {
+        if (e.status == 200) {
+          list[i].price = e.data;
+          if ((i + 1) >= list.length) {
+            let price = 0;
+            $('.payment').text('下一步');
+            if ($('#reviewedorder').prop('checked')) {
+              $('.payment').prop('disabled', false);
+            }
+            list.map(e => {
+              price += Number(e.price)
+            })
+            $('[data-name="total"]').text('￥' + price.toFixed(2));
+            localStorage.setItem('domainlist', JSON.stringify(list));
+            setConfigs()
+          }
+        }
+      })
+    })
+  }
+  $('.payment').click(function(){
+    let dlist = localStorage.getItem('domainlist')
+    ajax('{:url("index/Domain/addAuth")}',{
+      domainlist:dlist,
+      type: 'recharge'
+    },'post').then(e=>{
+      if(e.status == 200){
+        location.href = "{:url('index/Buy/confirm')}";
+      } else {
+        alert(e.msg)
+      }
+    })
+  })
+</script>
+<script>
+  $("#reviewedorder").click(function () {
+    this.checked == true ? $E(".subcheck").disabled = "" : $E(".subcheck").disabled = "disabled"
+  })
+</script>
+{/block}

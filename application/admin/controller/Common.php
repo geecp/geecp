@@ -41,7 +41,7 @@ class Common extends Controller
 			      session('_adminInfo',$res['jti']);
             //路由数据
             $route = new GeeRoute();
-            $startRoute = $route->where('`f_id` = 0 and `is_show` = "1"')->select();
+            $startRoute = $route->where('`f_id` = 0 and `is_show` = "1"')->order('id asc')->select();
             toArray($startRoute);
             $this->assign("startRoute",$startRoute);
             //当前路由数据

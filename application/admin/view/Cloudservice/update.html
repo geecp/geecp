@@ -1,0 +1,291 @@
+{extend name='Common/index' /} {block name='content'}
+<style lang="less">
+  .py-5 {
+    padding: 25px 0 25px 0;
+  }
+
+  .py-3 {
+    padding: 15px 0 15px 0;
+  }
+
+  .my-5 {
+    margin: 25px 0 25px 0;
+  }
+
+  .p-5 {
+    padding: 25px;
+  }
+
+  .p-3 {
+    padding: 15px;
+  }
+
+  .mb-2 {
+    margin-bottom: 10px;
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+
+  .descb {
+    font-size: 16px;
+  }
+
+  .descb1 {
+    font-size: 16px;
+    margin-top: 50px;
+  }
+
+  .examination-btn span {
+    width: 130px;
+    margin-left: 20px;
+  }
+
+  .bg-g {
+    background: #f7f8fa;
+  }
+
+  .border-t {
+    border-top: 1px solid #e8e9eb;
+  }
+
+  .examination-list>div {
+    display: flex;
+  }
+
+  .title {
+    flex: 0 0 150px;
+    text-align: left;
+    color: #999;
+  }
+
+  .count {
+    flex: 1;
+    width: 0;
+    text-align: left;
+  }
+</style>
+<section class="content">
+  <div class="box">
+    <div class="box-body">
+      <div class="alert alert-warning" role="alert">
+        <p><i class="icon fa fa-warning"></i> 系统更新后，如果出现样式错误等，请自行更新缓存并“CTRL+F5”强行刷新</p>
+      </div>
+      <div class="text-center py-3">
+        <p><img src="__THEMES__/defualt/img/geestack2.png" alt="" width="250px"></p>
+        <p class="descb">系统当前版本: {$Think.config.geecp.version}</p>
+      </div>
+      <div class="text-center updates1">
+        <p class="descb1">当前版本为最新版本，您可以点击此按钮, 立即检查是否有新版本。</p>
+        <div class="examination-btn py-3">
+          <span class="setbtn">
+            <button type="button" class="btn btn-primary" onclick="Check_update()">立即检查新版本</button>
+          </span>
+          <span><button type="button" class="btn btn-default">撤回更新</button></span>
+        </div>
+      </div>
+      <div class="updates2" style="display: none;">
+        <div class="border-t p-5 examination-list">
+          <div>
+            <div class="title">需要更新文件</div>
+            <div class="count" id="count"></div>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">查看</button>
+          </div>
+          <div>
+            <div class="title">需要更新数据库</div>
+            <div class="count">暂无更新数据库</div>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">查看</button>
+          </div>
+          <div>
+            <div class="title">需要更新脚本</div>
+            <div class="count">暂无更新脚本</div>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">查看</button>
+          </div>
+        </div>
+        <div class="border-t p-5 examination-list">
+          <div>
+            <div class="title">需要更新文件</div>
+            <div>
+              <div class="mb-2">
+                <label>
+                  <input type="checkbox" class="minimal" value="确保您的系统文件官方文件保持一致，避免被非法篡改，远离盗版">
+                  确保您的系统文件官方文件保持一致，避免被非法篡改，远离盗版
+                </label>
+              </div>
+              <div class="mb-2">
+                <label>
+                  <input type="checkbox" class="minimal" value="已经做好了相关文件的备份工作，认同官方的更新行为并自愿承担更新所存在的风险">
+                  已经做好了相关文件的备份工作，认同官方的更新行为并自愿承担更新所存在的风险
+                </label>
+              </div>
+              <div class="mb-2">
+                <label>
+                  <input type="checkbox" class="minimal" value="认同'购买系统商业授权后进行商业化运营'的协议">
+                  认同“购买系统商业授权后进行商业化运营”的协议
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="examination-btn py-3 text-center">
+          <span><button type="button" class="btn btn-primary" data-toggle="modal"
+             onclick="confirm_update()">一键更新</button></span>
+          <span><button type="button" class="btn btn-default" data-toggle="modal"
+              data-target="#myModal2">撤回更新</button></span>
+        </div>
+      </div>
+      <div class="text-center w-100 py-5 bg-g my-5">
+        <img src="__THEMES__/defualt/img/imggroup.png" alt="" width="150px" class="py-5">
+        <p class="descb">更多系统更新问题和官方公告请QQ扫码加群</p>
+        <p style="font-size: 16px; margin-bottom: 8px;color: #999;">赶快扫码吧</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">更新脚本</h4>
+        </div>
+        <div class="modal-body" id="files">
+
+            <!--<p class="p-3"> M {$item}</p>-->
+
+        </div>
+        <div class="text-center  p-5">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 150px;">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">更新回滚列表</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" role="alert">如果要恢复更早的记录请直接查看 /data/patch/ 目录</div>
+          <div class="alert alert-success" role="alert">恢复时，请手动将此目录中的文件上传至网站即可（选中全部文件和目录直接上传）</div>
+          <p>今天暂无更新</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">更新脚本</h4>
+        </div>
+        <div class="modal-body text-center">
+          <div>
+            <i class="icon fa fa-ban" style="font-size: 50px;color: red;margin-top: 20px;"></i>
+            <p>系统提示</p>
+          </div>
+          <p class="p-3">抱歉，更新前请仔细阅读更新协议！</p>
+        </div>
+        <div class="text-center  p-5">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 150px;">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block}
+
+{block name='js'}
+<script>
+
+  //确认勾选框
+    function confirmBox(){
+            var num = $(".minimal");
+            var content=$("#myModal3 p.p-3");
+            for(var i=0;i<num.length;i++){
+                if(num[i].checked != true){
+                    content.text($(num[i]).val());
+                    $("#myModal3").modal("toggle");
+                  //  alert("请同意"+$(num[i]).val());
+                    return false;
+                }
+            }
+
+            return true;
+
+    }
+
+  //检查更新
+  function Check_update() {
+      $.ajax({
+          url: "{:url('admin/Cloudservice/checkversion')}?name=update",
+          type: "get",
+          success: function(e) {
+              if (e.status == 200) {
+                  //遍历文件
+                  $(e.files).each(function (index,element) {
+                      $("#files").append("<p class='p-3'>"+element+"</p>");
+
+                  });
+                  //文件数量
+                  $("#count").text(e.files.length+"个");
+
+                  new Promise(function (resolve, reject) {
+                      setTimeout(resolve, 1000);
+                      $('.setbtn').html(`<button type="button" class="btn btn-primary" disabled>正在检查...</button>`)
+                  }).then(() => {
+                      $('.updates1').css('display', 'none');
+                  $('.updates2').css('display', 'block');
+                 });
+
+                  return true;
+
+              } else {
+                   //无法升级
+                  alert(e.msg);
+              }
+          },
+          error: function(e) {
+
+          }
+      });
+
+
+  }
+
+  //一键升级
+  function confirm_update() {
+        if(confirmBox()) {
+          $.ajax({
+              url: "{:url('admin/Cloudservice/confirm')}?name=update",
+              type: "get",
+              success: function(e) {
+                  if (e.status == 200) {
+
+                       alert(e.msg);
+                      window.location.reload();
+                  } else {
+                      alert(e.msg);
+                  }
+              },
+              error: function(e) {
+
+              }
+          });
+        }
+  }
+
+  $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+    checkboxClass: 'icheckbox_minimal-blue',
+    radioClass: 'iradio_minimal-blue'
+  })
+</script>
+{/block}

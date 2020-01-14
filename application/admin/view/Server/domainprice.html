@@ -1,0 +1,209 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="nav-tabs-custom" style="margin: 0;">
+    <ul class="nav nav-tabs">
+      <li><a href="{:url('manager/Service/domain')}">域名列表</a></li>
+      <li class="active"><a href="{:url('manager/Service/domainprice')}">域名价格</a></li class="active">
+      <li><a href="{:url('manager/Service/domaintempaudit')}">信息模板</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box" style="border-top: 0;">
+        <div class="box-header clearfix">
+          <div class="box-tools pull-left form-inline">
+            <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+            <button class="btn btn-primary btn-sm serchBtn">查询</button>
+            <div class="pull-right">
+              <a href="javascript:;" class="btn btn-primary btn-sm" onclick="showPrice()">新增域名价格</a>
+            </div>
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-hover tableData">
+            <thead>
+              <tr>
+                <th>域名名称</th>
+                <th>标签</th>
+                <th>描述</th>
+                <th>创建时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list)} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                <td>{$v.domain}</td>
+                <td>{$v.tag}</td>
+                <td>{$v.description}</td>
+                <td>{$v.create_time}</td>
+                <td>
+                  <a href="javascript:;" onclick="showPrice($(this))">编辑</a>
+                  <a href="javascript:;" onclick="delPrice($(this))">删除</a>
+                </td>
+              </tr>
+              {/foreach} {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<div class="modal fade" id="setprice" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">域名价格配置</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">域名名称：</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control form-control-sm" name="domain">
+              <span class="help-block text-muted">例: .com</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">域名接口：</label>
+            <div class="col-sm-7">
+              <select class="form-control form-control-sm" name="pro_id">
+                {if (!empty($prolist) && !empty($prolist[0]))}
+                {foreach name="prolist" item="v"}
+                <option value="{$v.id}">{$v.name}</option>
+                {/foreach}
+                {else/}
+                <option>请先在产品中配置域名产品</option>
+                {/if}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">原价(元/年)：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="origin_price">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">促销价(元/年)：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="price">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">续费价(元/年)：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="recharge">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">转入价(元/年)：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="transferin">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">一年价：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="twelvemonth">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">两年价：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="biennia">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">三年价：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="triennium">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">四年价：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="quadrennium">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">五年价：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="lustrum">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">十年价：</label>
+            <div class="col-sm-7">
+              <input type="number" step="0.01" min="0.01" class="form-control form-control-sm" name="decade">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">标签：</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control form-control-sm" name="tag">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">描述：</label>
+            <div class="col-sm-7">
+              <textarea type="text" class="form-control form-control-sm" name="description"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm subsetprice">确认</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function showPrice(t){
+    if(t){
+      $('#setprice [name="id"]').val(t.parents('tr').data('id'))
+      let _c = t.parents('tr').data('config');
+      for(v in _c){
+        $('#setprice [name="'+v+'"]').val(_c[v]);
+      }
+    } else {
+      $('#setprice [name]').val('');
+    }
+    $('#setprice').modal('show')
+  }
+  $('.subsetprice').click(function(){
+    if(confirm("确定要提交域名价格吗？")){
+      let _i = $('#setprice [name]'),
+          _vals = {};
+          _i.map((i,e)=>{
+            _vals[$(e).attr('name')] = $(e).val()
+          })
+      // console.log(_vals)
+      ajax('{:url("admin/Service/adddomainpriceauth")}',{..._vals},'post').then(e=>{
+        if(e.status == 200){
+          window.location.reload()
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  })
+  $('.tableData').DataTable({
+    'paging': false,
+    'fixedHeader': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': false,
+    'info': true,
+    'autoWidth': false,
+    'deferRender': true,
+    'processing': true,
+  });
+</script>
+{/block}

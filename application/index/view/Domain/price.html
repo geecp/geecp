@@ -1,0 +1,62 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2">
+          <h4>域名价格列表</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body pt-0 fs-12">
+    <div class="cont-box">
+      <div class="domain-price">
+        <div class="pb-2 ml-nge">
+          <div>
+            <table class="table table mytb">
+              <thead class="bg-fB p-2">
+                <tr class="font-weight-light">
+                  <th>域名</th>
+                  <th>原价 (元/年)</th>
+                  <th>促销价 (元/年)</th>
+                  <th>续费 (元/年)</th>
+                  <th>转入 (元/年)</th>
+                </tr>
+              </thead>
+              <tbody class="span-textweight">
+                {if (!empty($plist) && !empty($plist[0]))}
+                {foreach name="plist" item="v"}
+                <tr>
+                  <td>
+                    <span>{$v.domain}</span>
+                    <i class="text-danger">{$v.tag}</i>
+                  </td>
+                  <td>{$v.origin_price|to_double}</td>
+                  <td>{$v.price|to_double}</td>
+                  <td>{$v.recharge|to_double}</td>
+                  <td>{$v.transferin|to_double}</td>
+                </tr>
+
+                {/foreach}
+                {/if}
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between pt-3 pl-3">
+            <ul class="mr-auto"></ul>
+            <div class="pagination mb-0">
+              {$plist->render()}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+
+</script>
+{/block}

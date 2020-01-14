@@ -11,8 +11,11 @@
     <?php
       $items = seekarr($r_lists,'id',$topRoute['id'])?seekarr($r_lists,'id',$topRoute['id'])['child']:false;
       //dump($items);
+      //dump($topRoute);
       //dump($topRoute['id']);
+      //dump($r_lists);
       //dump(seekarr($r_lists,'id',$topRoute['id']));
+      //dump($nowStart);
     ?>
     <div class="main-sidebar">
       <div class="sidebar scroll">
@@ -33,7 +36,7 @@
                     <ul class="list-unstyled mb-0">
                       {foreach name="v['child']" item="var"}
                       <li data-proid="{$var.code}" data-icon="icon-ecs">
-                        <a href="/console/{$var.code}"><span class="{$var['icon']?'iconfont '.$var['icon']:'pl-2'} d-inline-block"></span> {$var.title}</a>
+                        <a href="/console/{$var.code}/index"><span class="{$var['icon']?'iconfont '.$var['icon']:'pl-2'} d-inline-block"></span> {$var.title}</a>
                       </li>
                       {/foreach}
                     </ul>
@@ -46,7 +49,7 @@
           {foreach name="webroutelist" item="v"} {if $v['child']}
           {foreach name="v['child']" item="var"}
           <li class="nav-item defualt" data-proid="{$var.code}">
-            <a class="nav-link py-2" href="/console/{$var.code}"><span class="{$var['icon']?'iconfont '.$var['icon']:'pl-2'}"></span> {$var.title}</a>
+            <a class="nav-link py-2" href="/console/{$var.code}/index"><span class="{$var['icon']?'iconfont '.$var['icon']:'pl-2'}"></span> {$var.title}</a>
           </li>
           {/foreach}
           {/if} {/foreach}
@@ -69,6 +72,7 @@
           {foreach name="items" item="v"}
           <?php 
             $childItems = $v['child'];
+            //dump($childItems);
           ?> {if $childItems}
           <li>
             <!-- active -->
@@ -93,7 +97,7 @@
           {else/}
           <li>
             <a href="/console/{$topRoute['code']}/{$v['code']}"
-              class="sidebar-item text-dark{if $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'].'/'.$v['code'] || $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'].'/'.$v['code'].'.html' || ($v['code'] === 'console/index' && $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'])} active {/if}">
+              class="sidebar-item text-dark{if $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'].'/'.$v['code'] || $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code'].'/'.$v['code'].'.html' || ($v['code'] === 'console/index' && $_SERVER['REDIRECT_URL'] === '/console/'.$topRoute['code']) || $srinfo['code'] == $v['code']} active {/if}">
                <span>{$v.title}</span>
             </a>
           </li>

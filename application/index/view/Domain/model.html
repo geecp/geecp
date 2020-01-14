@@ -1,0 +1,458 @@
+{extend name='index@Common/index' /} {block name='content'}
+
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <!-- <p><small>查询财务状况或管理优惠券和发票。</small></p> -->
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item p-2">
+          <h4>信息模板列表</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="message-demo">
+        <div class="bg-FCF7F1 w-100 py-2 pl-2 mb-2"><span
+            class="text-F38900">信息模板只用于域名注册时快速创建域名信息，不会跟域名绑定;信息模板可以独立实名认证，使用实名认证通过的信息模板注册的域名无需再次提交实名认证。</span></div>
+        <ul class="list-inline d-flex">
+          <li class="list-inline-item mr-auto">
+            <button type="button" class="btn btn-primary btn-sm" onclick="add()">
+              <span class="iconfont icon-icon_tianjia font-weight-bold"></span>
+              <span class="zfs-12">添加信息模板</span>
+            </button>
+          </li>
+          <li class="list-inline-item">
+            <select class="form-control form-control-sm" style="width: 100px" id="messagedemo-select">
+              <option value="domainowner">所有者</option>
+              <option value="contactman">联系人</option>
+            </select>
+          </li>
+          <li class="list-inline-item">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <input type="text" class="form-control form-control-sm zfs-12" placeholder="请输入所有者进行搜索"
+                  style="width: 200px" id="messagedemo-find">
+              </div>
+              <div class="input-group-append">
+                <button type="button" class="btn btn-primary btn-sm"><span
+                    class="iconfont icon-icon_sousuo-xian font-weight-bold"></span></button>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" class="btn btn-light btn-sm">
+              <span class="iconfont icon-icon_shuaxin font-weight-bold"></span>
+            </button>
+          </li>
+        </ul>
+        <div class="pb-2 ml-nge">
+          <div>
+            <table class="table table mytb">
+              <thead class="bg-fB p-2">
+                <tr class="font-weight-light">
+                  <th>域名所有者</th>
+                  <th>所有者类型</th>
+                  <th>实名认证状态</th>
+                  <th>管理联系人</th>
+                  <th>联系邮箱</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="demo-tbody">
+                {if !empty($list) && !empty($list[0])} {foreach name="list" item="v"}
+                <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                  <td>{$v.company_cn}</td>
+                  <td>{$v.usertype == 'O'?'企业':'个人'}</td>
+                  <td>{$v.ischeck}</td>
+                  <td>{$v.lastname_cn}{$v.firstname_cn}</td>
+                  <td>{$v.email}</td>
+                  <td>{$v.status == '1'?'正常':'禁用'}</td>
+                  <td>
+                    <a href="javascript:;" class="btn-link btn-xs" onclick="edit($(this))">编辑</a>
+                    <a href="javascript:;" class="btn-link btn-xs" onclick="del($(this))">删除</a>
+                    <a href="javascript:;" class="btn-link btn-xs" onclick="copy($(this))">复制</a>
+                  </td>
+                </tr>
+                {/foreach}{else /}
+                <tr>
+                  <td colspan="7" rowspan="1" class="text-center">暂无数据</td>
+                </tr>
+                {/if}
+                <!-- <tr>
+                  <td>
+                    <span>快乐亚索</span>
+                  </td>
+                  <td>
+                    <span>个人</span>
+                  </td>
+                  <td>
+                    <span>已实名认证</span>
+                  </td>
+                  <td>
+                    <span>快乐亚索</span>
+                  </td>
+                  <td>
+                    <span>55*****5@qq.com</span>
+                  </td>
+                  <td>完善</td>
+                  <td>
+                    <span><a href="#" data-toggle="modal" data-target="#messagedemo-add">编辑</a></span>
+                    <span class="deleteelement" data-toggle="modal" data-target="#sure-cancel"><a href="#"
+                        class="">删除</a></span>
+                    <span data-toggle="modal" data-target="#messagedemo-add"><a href="#">复制</a></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>快乐风男</span>
+                  </td>
+                  <td>
+                    <span>个人</span>
+                  </td>
+                  <td>
+                    <span><a href="manage_verifySubmit.html">未实名认证</a></span>
+                  </td>
+                  <td>
+                    <span>快乐亚索</span>
+                  </td>
+                  <td>
+                    <span>66*****5@qq.com</span>
+                  </td>
+                  <td>完善</td>
+                  <td>
+                    <span><a href="#" data-toggle="modal" data-target="#messagedemo-add">编辑</a></span>
+                    <span class="deleteelement" data-toggle="modal" data-target="#sure-cancel"><a href="#"
+                        class="">删除</a></span>
+                    <span data-toggle="modal" data-target="#messagedemo-add"><a href="#">复制</a></span>
+                  </td>
+                </tr> -->
+
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between pt-3 pl-3">
+            <ul class="mr-auto"></ul>
+            <div class="pagination mb-0">
+              {$list->render()}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'}
+<div id="messagedemo-add" class="modal fade" tabindex="-1" style="display: none">
+  <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 580px">
+    <div class="modal-content">
+      <div class="modal-header py-0">
+        <span class="text-secondary zfs-14">配置信息模板</span>
+        <a data-dismiss="modal">
+          <span class="iconfont iconicon_guanbi zfs-14 font-weight-bold text-secondary"></span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id">
+        <ul class="list-unstyled">
+          <li class="row mb-3">
+            <div class="col-md-4 ml-3 mb-1 text-left pl-4"><span class="text-secondary">所有者类型：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <div class="custom-control custom-radio mr-4">
+                <input type="radio" class="custom-control-input" name="usertype" id="message-personal" value="I"
+                  checked="checked">
+                <label class="custom-control-label" for="message-personal">个人</label>
+              </div>
+              <div class="custom-control custom-radio" id="message-companyclick">
+                <input type="radio" class="custom-control-input" name="usertype" id="message-company" value="O">
+                <label class="custom-control-label" for="message-company">企业</label>
+              </div>
+            </div>
+          </li>
+          <li class="row mb-3 position-relative company d-none">
+            <div class="col-md-4 ml-3 mb-1 text-left">
+              <span class="text-danger mr-1">*</span><span class="text-secondary">域名所有者：</span>
+              <div class="zfs-12 text-999" style="text-indent:17px;">(企业全称)
+              </div>
+            </div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0" id="domain-owner">
+              <input type="text" class="form-control form-control-sm zfs-12 mr-2" placeholder="中文名" name="company_cn" />
+              <input type="text" class="form-control form-control-sm zfs-12" placeholder="英文名" name="company_en" />
+            </div>
+            <div class="col pl-0">
+              <button class="btn btn-link btn-sm p-0" data-container="body" data-toggle="popover"
+                data-placement="bottom" data-trigger="hover" data-boundaries="200px" data-boundary="scrollParent"
+                data-html="true"
+                data-content="① 所有者信息一经填写无法随意修改<br/>② .cn等国内域名请填写与待审核证件完全相同的名字<br/>③ 如您的域名需ICP备案，请注意应和备案主体信息一致<br/>④ 企业类型的域名所有者请填写企业全称，不要填写企业法人。"
+                data-original-title="" title="">
+                <i class="iconfont iconquestion zfs-18"></i>
+              </button>
+            </div>
+            <div class="col-md-9 offset-3"><span class="text-F38900 zfs-12">".com" 等国际域名的所有者信息以英文为准，请不要缩写或者简写</span>
+            </div>
+          </li>
+          <li class="row mb-2">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">管理联系人：</span></div>
+            <div class="col-md-7 pt-0 pl-0" id="contactman-manage">
+              <div class="d-flex justify-content-start">
+                <input type="text" class="form-control form-control-sm zfs-12 mr-2" placeholder="中文姓"
+                  name="lastname_cn" />
+                <input type="text" class="form-control form-control-sm zfs-12" placeholder="英文姓" name="lastname_en" />
+              </div>
+              <div class="d-flex justify-content-start mt-3">
+                <input type="text" class="form-control form-control-sm zfs-12 mr-2" placeholder="中文名"
+                  name="firstname_cn" />
+                <input type="text" class="form-control form-control-sm zfs-12" placeholder="英文名" name="firstname_en" />
+              </div>
+            </div>
+          </li>
+          <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">证件类型：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <select class="form-control form-control-sm zfs-12" data-type="I" name="idtype">
+                <option value="SFZ" selected="selected" zjdesc="身份证">居民身份证</option>
+                <option value="HZ" zjdesc="护照">护照</option>
+                <option value="JGZ" zjdesc="证件">军官证</option>
+                <option value="GATXZ" zjdesc="通行证">港澳居民来往内地通行证</option>
+                <option value="TWJM" zjdesc="通行证">台湾居民来往内地通行证</option>
+                <option value="WGJM" zjdesc="身份证">外国人永久居留身份证</option>
+              </select>
+              <select class="form-control form-control-sm zfs-12 d-none" data-type="O" name="idtype">
+                <option value="YYZZ" zjdesc="证件" selected="selected">工商营业执照</option>
+                <option value="ORG" zjdesc="证件">组织机构代码证</option>
+                <option value="SHXYZS" zjdesc="证件">统一社会信用代码证</option>
+                <option value="SYDWFR" zjdesc="证件">事业单位法人证书</option>
+                <option value="SHTTFR" zjdesc="证件">社会团体法人登记证书 </option>
+                <option value="MBFQY" zjdesc="证件">民办非企业单位登记证书</option>
+                <option value="LSSWS" zjdesc="证件">律师事务所执业许可证</option>
+                <option value="SFJD" zjdesc="证件">司法鉴定许可证</option>
+                <option value="ZJHD" zjdesc="证件">宗教活动场所登记证</option>
+                <option value="JJHFR" zjdesc="证件">基金会法人登记证书</option>
+                <option value="BDDH" zjdesc="证件">部队代号</option>
+                <option value="JDDW" zjdesc="证件">军队单位对外有偿服务许可证</option>
+                <option value="WGQY" zjdesc="证件">外国企业常驻代表机构登记证</option>
+                <option value="WGZH" zjdesc="证件">外国在华文化中心登记证</option>
+                <option value="WGZFLY" zjdesc="证件">外国政府旅游部门常驻代表机构批准登记证</option>
+                <option value="WGJGZ" zjdesc="证件">境外机构证/香港商业登记证</option>
+                <option value="GZJGZYZ" zjdesc="证件">公证机构执业证</option>
+                <option value="WGZHBXXKZ" zjdesc="证件">北京市外国驻华使馆人员子女学校办学许可证</option>
+                <option value="GATJZZ" zjdesc="证件">港澳台居民居住证</option>
+                <option value="SHFWJGDJZ" zjdesc="证件">社会服务机构登记证书</option>
+                <option value="MBXXBXXKZ" zjdesc="证件">民办学校办学许可证</option>
+                <option value="YLJGZYXKZ" zjdesc="证件">医疗机构执业许可证</option>
+              </select>
+            </div>
+          </li>
+          <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left">
+              <span class="text-danger mr-1">*</span><span class="text-secondary"><span data-type="I">证件号码：</span><span class="d-none" data-type="O">统一社会信用代码：</span></span>
+            </div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <input type="text" class="form-control form-control-sm zfs-12" name="idnumber" />
+            </div>
+          </li>
+          <!-- <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span class="text-secondary">个人证件照：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <input type="text" class="form-control form-control-sm zfs-12" name="email" />
+            </div>
+          </li> -->
+          <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">邮箱地址：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <input type="text" class="form-control form-control-sm zfs-12" name="email" />
+            </div>
+            <div class="col-md-9 offset-3"><span class="text-F38900 zfs-12">请确保邮箱地址的有效性，注册后系统将发送邮箱验证邮件</span></div>
+          </li>
+          <li class="row mt-2">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">所属地区：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <div class="row">
+                <div class="col"><input type="text" class="form-control form-control-sm zfs-12 disabled" value="中国"
+                    disabled name="country_cn" /></div>
+                <div class="col"><input type="text" class="form-control form-control-sm zfs-12" name="state_cn" /></div>
+                <div class="col"><input type="text" class="form-control form-control-sm zfs-12" name="city_cn" /></div>
+
+                <div>
+                  <input type="hidden" class="form-control form-control-sm zfs-12" value="CN" name="country_en" />
+                  <input type="hidden" class="form-control form-control-sm zfs-12" name="state_en" />
+                  <input type="hidden" class="form-control form-control-sm zfs-12" name="city_en" />
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">通讯地址：</span></div>
+            <div class="col-md-7  pt-0 justify-content-start pl-0">
+              <textarea class="form-control zfs-12" rows="3" style="resize: none" placeholder="中文地址，限32个汉字"
+                name="address_cn"></textarea>
+              <textarea class="form-control mt-1 zfs-12" rows="3" style="resize: none" placeholder="英文地址，限128个字母"
+                name="address_en"></textarea>
+            </div>
+          </li>
+          <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">邮政编码：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <input type="text" class="form-control form-control-sm zfs-12" placeholder="6位数字的邮编" maxlength="6"
+                name="zipcode" />
+            </div>
+          </li>
+          <li class="row mt-4">
+            <div class="col-md-4 ml-3 mt-1 text-left"><span class="text-danger mr-1">*</span><span
+                class="text-secondary">手机：</span></div>
+            <div class="col-md-7 d-flex pt-0 justify-content-start pl-0">
+              <input type="text" class="form-control form-control-sm zfs-12 mr-2" value="086" disabled
+                style="width: 60px" />
+              <input type="text" class="form-control form-control-sm zfs-12" placeholder="手机号码" maxlength="11"
+                name="phone" />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer justify-content-end">
+        <button type="button" class="btn btn-light border btn-sm" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary btn-sm submodel">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='js'}
+<script>
+  $('[name="usertype"]').change(function () {
+    if ($('[name="usertype"]:checked').val() == "I") {
+      $('.company').addClass('d-none');
+      $('[data-type="O"]').addClass('d-none')
+      $('[data-type="I"]').removeClass('d-none')
+    } else {
+      $('.company').removeClass('d-none');
+      $('[data-type="O"]').removeClass('d-none')
+      $('[data-type="I"]').addClass('d-none')
+    }
+  })
+  $('[name]').change(function () {
+    if ($(this).attr('name').indexOf('cn') >= 0 && $(this).attr('name') != 'country_cn') {
+      let name = $(this).attr('name').split('_');
+      $('[name="' + name[0] + '_en"]').val(RULE.toUpperCase($(this).toPinyin(), ' '));
+    }
+  })
+  $('.submodel').click(function () {
+    let modelVal = {};
+    $('#messagedemo-add [name]:not(.d-none)').map((i, e) => {
+      if ($(e).attr('type') == 'radio') {
+        if ($(e).prop('checked')) {
+          modelVal[$(e).attr('name')] = $(e).val()
+        }
+      } else {
+        modelVal[$(e).attr('name')] = $(e).val()
+      }
+    })
+    // console.log(modelVal)
+    // return;
+    ajax('{:url("index/Domain/modelAuth")}', modelVal, 'post').then(e => {
+      if (e.status == 200) {
+        window.location.reload()
+      } else {
+        alert(e.msg)
+      }
+    })
+  })
+
+  function add() {
+    $('#messagedemo-add [name][type="hidden"]').val('')
+    $('#messagedemo-add [name][type="text"]').val('')
+    $('#messagedemo-add [name="country_cn"]').val('中国')
+    $('#messagedemo-add [name="country_en"]').val('CN')
+    $('#messagedemo-add textarea').val('')
+    $('#messagedemo-add [name="usertype"]').eq(0).prop('checked', true)
+    $('#messagedemo-add [name="usertype"]').eq(1).prop('checked', false)
+    $('#messagedemo-add .company').addClass('d-none')
+
+    $('#messagedemo-add').modal('show')
+  }
+
+  function edit(t) {
+    $('#messagedemo-add [name][type="hidden"]').val('')
+    $('#messagedemo-add [name][type="text"]').val('')
+    $('#messagedemo-add [name="country_cn"]').val('中国')
+    $('#messagedemo-add [name="country_en"]').val('CN')
+    $('#messagedemo-add textarea').val('')
+    $('#messagedemo-add [name="usertype"]').eq(0).prop('checked', true)
+    $('#messagedemo-add [name="usertype"]').eq(1).prop('checked', false)
+    $('#messagedemo-add .company').addClass('d-none')
+    let _c = t.parents('tr').data('config');
+    // console.log(_c)
+    for (v in _c) {
+      // console.log(v)
+      if (v == 'usertype') {
+        if (_c[v] == 'O') {
+          $('#messagedemo-add .company').removeClass('d-none')
+          $('#messagedemo-add [name="usertype"]').eq(1).prop('checked', true)
+        } else {
+          $('#messagedemo-add [name="usertype"]').eq(0).prop('checked', true)
+          $('#messagedemo-add .company').addClass('d-none')
+        }
+      } else if (v == 'phone') {
+        $('#messagedemo-add [name="' + v + '"]').val(_c[v].split('.')[1])
+      } else {
+        $('#messagedemo-add [name="' + v + '"]').val(_c[v])
+      }
+    }
+    $('#messagedemo-add').modal('show')
+  }
+
+  function copy(t) {
+    $('#messagedemo-add [name][type="hidden"]').val('')
+    $('#messagedemo-add [name][type="text"]').val('')
+    $('#messagedemo-add [name="country_cn"]').val('中国')
+    $('#messagedemo-add [name="country_en"]').val('CN')
+    $('#messagedemo-add textarea').val('')
+    $('#messagedemo-add [name="usertype"]').eq(0).prop('checked', true)
+    $('#messagedemo-add [name="usertype"]').eq(1).prop('checked', false)
+    $('#messagedemo-add .company').addClass('d-none')
+    let _c = t.parents('tr').data('config');
+    // console.log(_c)
+    for (v in _c) {
+      // console.log(v)
+      if (v == 'usertype') {
+        if (_c[v] == 'O') {
+          $('#messagedemo-add .company').removeClass('d-none')
+          $('#messagedemo-add [name="usertype"]').eq(1).prop('checked', true)
+        } else {
+          $('#messagedemo-add [name="usertype"]').eq(0).prop('checked', true)
+          $('#messagedemo-add .company').addClass('d-none')
+        }
+      } else if (v == 'phone') {
+        $('#messagedemo-add [name="' + v + '"]').val(_c[v].split('.')[1])
+      } else if (v == 'id') {
+
+      } else {
+        $('#messagedemo-add [name="' + v + '"]').val(_c[v])
+      }
+    }
+    $('#messagedemo-add').modal('show')
+  }
+
+  function del(t) {
+    if (confirm('确认要删除该模板吗?')) {
+      let modelVal = {
+        id: t.parents('tr').data('id')
+      }
+      ajax('{:url("index/Domain/modeldel")}', modelVal, 'post').then(e => {
+        if (e.status == 200) {
+          t.parents('tr').remove();
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  }
+</script>
+{/block}

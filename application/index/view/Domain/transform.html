@@ -1,0 +1,244 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+      <div class="tool-list d-flex">
+          <ul class="list-inline mr-auto  m-0">
+              <li class="list-inline-item py-2">
+                  <h4>变更域名所有者</h4>
+              </li>
+          </ul>
+          <ul class="list-inline m-0">
+
+          </ul>
+      </div>
+  </div>
+  <div class="card-body fs-12">
+      <div class="cont-box">
+          <div class="form-group form-row border-t">
+              <div class="col-1 mb-3">
+                  <h4 class="mb-0">待过户域名</h4>
+              </div>
+              <div class="pl-2">{$_GET['domain']}</div>
+          </div>
+
+          <div class="form-group form-row border-t">
+              <div class="col-1">
+                  <h4>原域名信息</h4>
+              </div>
+              <div class="col">
+                  <div class="form-group form-row">
+                      <label class="col-form-label-sm col-1 py-0">所有者类型：</label>
+                      <div class="col">
+                          <label class="col-form-label-sm py-0">{$minfo['domaintype'] == 'O'?'企业':'个人'}</label>
+                      </div>
+                  </div>
+                  <div class="form-group form-row">
+                      <label class="col-form-label-sm col-1">域名所有者：</label>
+                      <div class="col">
+                          <label class="col-form-label-sm">{$minfo['ownername_cn']} &nbsp; ({$minfo['ownername']})</label>
+                      </div>
+                  </div>
+                  <div class="form-group form-row">
+                      <label class="col-form-label-sm col-1"> 管理联系人：</label>
+                      <div class="col">
+                          <label class="col-form-label-sm">{$minfo['ownername_cn']} &nbsp; ({$minfo['ownername']})</label>
+                      </div>
+                  </div>
+
+                  <div class="form-group form-row">
+                      <label class="col-form-label-sm col-1"> 邮箱：</label>
+                      <div class="col">
+                          <label class="col-form-label-sm">{$minfo['email']}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group form-row">
+              <div class="col-1">
+                  <h4>新域名信息</h4>
+              </div>
+              <div class="col">
+                  <div class="form-group">
+                      <!-- <ul class=" nav account-list mb-2">
+                          <li class="list-inline-item "><button data-toggle="tab" class="btn btn-light btn-sm btn1 active show">已有信息模板</button></li>
+                          <li class="list-inline-item "><button data-toggle="tab" class="btn btn-light btn-sm btn2">新建过户信息</button></li>
+                      </ul> -->
+                      <p class="text-danger">选取已经实名认证通过的信息模板，过户后可自动完成实名认证。</p>
+                  </div>
+                  <div class="block1 d-none">
+                      <form action="">
+                          <div class="form-group form-row">
+                              <label class="col-form-label-sm col-1  bef-red">所有者类型：</label>
+                              <div class="col">
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                      <input type="radio" id="allwarehouse1" name="outboundorder" class="custom-control-input" checked="">
+                                      <label class="custom-control-label" for="allwarehouse1">个人</label>
+                                  </div>
+                                  <div class="custom-control custom-radio custom-control-inline">
+                                      <input type="radio" id="notallwarehouse2" name="outboundorder" class="custom-control-input">
+                                      <label class="custom-control-label" for="notallwarehouse2">企业</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group form-row">
+                              <label class="col-form-label-sm col-1 bef-red"> 域名所有者：</label>
+                              <div class="form-inline">
+                                  <div>
+                                      <input type="text " class="form-control form-control-sm mr-1 textc" placeholder="中文名，2-10个汉字">
+                                      <input type="text " class="form-control form-control-sm textc2" placeholder="英文名，3-20个字母">
+                                      <button class="btn btn-link btn-sm p-0" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-boundaries="150" data-boundary="scrollParent" data-html="true" data-content="① 所有者信息一经填写无法随意修改；
+                                          <br/>② .cn等国内域名请填写与待审核证件完全相同的名字；
+                                          <br/>③ 如您的域名需ICP备案，请注意应和备案主体信息一致；
+                                          <br/>④ 企业类型的域名所有者请填写企业全称，不要填写企业法人。" data-original-title="" title="">
+                                          <i class="iconfont iconquestion"></i>
+                                      </button>
+                                  </div>
+
+                              </div>
+                          </div>
+                          <div class="form-group form-row">
+                              <label class="col-form-label-sm col-1 bef-red"> 管理联系人：</label>
+                              <div>
+                                  <div class="form-inline inputdis">
+                                      <input type="text " class="form-control form-control-sm mr-1 " placeholder="中文名，2-10个汉字" disabled="">
+                                      <input type="text " class="form-control form-control-sm" placeholder="中文名，2-10个汉字" disabled="">
+                                  </div>
+                                  <p class="mb-0 color-orange">".com" 等国际域名的所有者和联系人信息以英文为准，请不要缩写或者简写</p>
+                                  <p class="mb-0 color-orange">".com/.cn/.net/.top" 等域名变更所有者或联系人后需要重新提交实名认证，认证通过后WHOIS相关信息方能生效</p>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <label class="col-form-label-sm col-1"> 邮箱：</label>
+                              <div>
+                                  <input type="text " class="form-control form-control-sm mr-1 eamil" placeholder="">
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="block2">
+                      <table class="table table-border">
+                          <thead class="bg-fB p-2">
+                              <tr class="font-weight-light">
+                                  <th class="p-2">域名所有者</th>
+                                  <th class="p-2">实名认证状态</th>
+                                  <th class="p-2">管理联系人</th>
+                                  <th class="p-2">联系邮箱</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {if !empty($dclist) && !empty($dclist[0])} {foreach name="dclist" item="v" key="k"}
+                            <tr data-id="{$v.id}" data-config='{$v|json_encode}'>
+                              <td>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" id="saleorder{$v.id}" name="ordertag" class="custom-control-input"
+                                    value="{$v.id}" {$k==0 ?'checked':''}>
+                                  <label class="custom-control-label" for="saleorder{$v.id}"
+                                    style="top:0">{$v.company_cn}</label>
+                                </div>
+                              </td>
+                              <td><span class="text-primary">{$v.ischeck}</span></td>
+                              <td>{$v.lastname_cn}{$v.firstname_cn}</td>
+                              <td>{$v.email}</td>
+                            </tr>
+                            {/foreach}{else /}
+                            <tr>
+                              <td colspan="5" rowspan="1" class="text-center">暂无数据</td>
+                            </tr>
+                            {/if}
+                          </tbody>
+                      </table>
+                  </div>
+
+                  <div class="form-group form-row p-1">
+                      <div class="custom-control  custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="reviewedorder">
+                          <label class="custom-control-label" for="reviewedorder" style="top:0px">我已阅读、理解并接受  <a href="#">《域名在线过户协议》</a></label>
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <label class="col-form-label-sm col-1"></label>
+                      <div>
+                          <button class="btn btn-primary btn-sm subcheck" disabled="disabled" type="button">保存</button>
+                          <button class="btn btn-light btn-sm" type="button">取消</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{/block} {block name='modal'} {/block} {block name='js'}
+<script>
+  $('.subcheck').click(function(){
+    if(confirm('确认要对该域名进行过户操作吗?')){
+      ajax('{:url("index/Domain/transformAuth")}',{
+        domainname: '{$_GET["domain"]}',
+        userid: $('[name="ordertag"]:checked').val()
+      },'post').then(e=>{
+        if(e.status == 200){
+          window.location.href="{:url('index/Domain/detail')}?domain={$_GET['domain']}"
+        } else {
+          alert(e.msg)
+        }
+      })
+    }
+  })
+</script>
+<script>
+$("#reviewedorder").click(function() {
+        this.checked == true ? $E(".subcheck").disabled = "" : $E(".subcheck").disabled = "disabled"
+    })
+    setInterval(function() {
+        if ($(".btn1").hasClass("active")) {
+            $(".block1").addClass("d-none");
+            $(".block2").removeClass("d-none");
+        }
+        if ($(".btn2").hasClass("active")) {
+            $(".block2").addClass("d-none");
+            $(".block1").removeClass("d-none");
+        }
+    })
+    $("#allwarehouse1").click(function() {
+        if (this.checked) {
+            $(".inputdis input").attr("disabled", "disabled");
+        }
+    })
+    $("#notallwarehouse2").click(function() {
+        if (this.checked) {
+            $(".inputdis input").attr("disabled", false);
+        }
+    })
+
+    var sendCode = {
+        init: function(t, n) {
+            sendCode.times(t, n);
+            //after('<label for="" class="col-form-label col-3">验证码发送成功</label>')
+        },
+        times: function(t, n) {
+            var time = n;
+            if (time == 0) {
+                t.removeClass('hidden');
+                t.next().remove();
+                time = n;
+            } else {
+                if (t.next().length) {
+                    t.next().text(time + 's');
+                } else {
+                    t.addClass('hidden');
+                    t.html('<button class="btn btn-ces btn-sm mx-1 px-2" type="button" style="background-color: #ddd;width:100%" disabled="disabled">' + time + 's后重新获取</button>');
+
+                }
+                time--;
+                setTimeout(function() {
+                    sendCode.times(t, time);
+                }, 1000)
+            }
+
+        }
+    };
+    $("#getauthencode").click(function() {
+        sendCode.init($(this), 30)
+    })
+</script>
+{/block}

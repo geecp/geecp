@@ -1,0 +1,163 @@
+{extend name='Common/index' /} {block name='content'}
+<style>
+  .border-t {
+    border-top: 1px solid #e8e9eb;
+  }
+
+  .p-5 {
+    padding: 25px;
+  }
+
+  .examination-list>div {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    flex: 0 0 250px;
+    text-align: right;
+    color: #000;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .count {
+    flex: 1;
+    width: 0;
+    text-align: left;
+    font-size: 14px;
+  }
+  .count ul{
+    list-style-type: none;
+    padding: 0;
+  }
+  .count li{
+    margin-bottom: 10px;
+  }
+</style>
+<section class="content">
+  <div class="box">
+    <div class="box-body">
+      <div>
+        <p>云服务状态诊断</p>
+        <div class="border-t p-5 examination-list">
+          <div>
+            <div class="title">站点URL</div>
+            <div class="count">http://ce.geecp.com/</div>
+          </div>
+          <div>
+            <div class="title">站点ID</div>
+            <div class="count">209012</div>
+          </div>
+          <div>
+            <div class="title">通信密钥</div>
+            <div class="count">
+              <p>7c445*****4cb36</p>
+              <p><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">查看全部</button></p>
+              <p>请查看您的站点ID和通信密钥, 需要保证与云服务平台记录的值一致, 否则不能正常使用云平台的各项服务.</p>
+            </div>
+          </div>
+          <div>
+            <div class="title">系统版本</div>
+            <div class="count">
+              <p>WeEngine2.5.3v (Release 201912280002)</p>
+              <p><button type="button" class="btn btn-primary">重置站点ID和通信密钥</button></p>
+              <p>如果您的站点ID和通信密钥与您绑定的站点信息中的记录不一致, 或访问云服务失败并多次重试后无效时. 请点击重置按钮, 重新注册您的站点信息(如果需要使用相同的微擎论坛账号绑定,
+                需要先在云服务后台中解除绑定)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>云服务网络诊断</p>
+        <div class="border-t p-5 examination-list">
+          <div>
+            <div class="title">服务器时间检查</div>
+            <div class="count"><i class="icon fa fa-check text-green"></i> 正常</div>
+          </div>
+          <div>
+            <div class="title">DNS解析函数</div>
+            <div class="count"><i class="icon fa fa-check text-green"></i> 正常</div>
+          </div>
+          <div>
+            <div class="title">云平台域名解析</div>
+            <div class="count">
+              <ul>
+                <li>云节点1：59.80.39.110; 速率测试：请求接口成功，耗时 0.22588 秒</li>
+                <li>云节点2：220.194.224.244; 速率测试：请求接口成功，耗时 0.10377 秒</li>
+                <li>云节点3：182.118.11.68; 速率测试：请求接口成功，耗时 0.08699 秒</li>
+                <li> 云节点4：43.242.166.88; 速率测试：请求接口成功，耗时 0.30401 秒</li>
+                <li> 云节点5：116.95.25.196; 速率测试：请求接口成功，耗时 0.18416 秒</li>
+                <li>云节点6：211.97.73.224; 速率测试：请求接口成功，耗时 0.15001 秒</li>
+                <li> 云节点7：116.178.66.65; 速率测试：请求接口成功，耗时 0.24124 秒</li>
+                <li> 云节点8：14.204.74.140; 速率测试：请求接口成功，耗时 0.25554 秒</li>
+                <li> 云节点9：211.91.160.228; 速率测试：请求接口成功，耗时 0.07218 秒</li>
+                <li> 云节点10：221.204.166.70; 速率测试：请求接口成功，耗时 0.1717 秒</li>
+                <li> 云节点11：113.200.16.234; 速率测试：请求接口成功，耗时 0.20347 秒</li>
+                <li> 云节点12：42.56.76.104; 速率测试：请求接口成功，耗时 0.17782 秒</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="title">绑定云服务接口IP</div>
+            <div class="count">
+              自定义接口IP：59.80.39.110
+              <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal1">设置接口IP</button>
+            </div>
+          </div>
+          <div>
+            <div class="title">云平台到站点测试</div>
+            <div class="count"><i class="icon fa fa-check text-green"></i> 正常</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body text-center">
+          <div>
+            <i class="icon fa fa-ban" style="font-size: 50px;color: red;margin-top: 20px;"></i>
+            <p>系统提示</p>
+          </div>
+          <p class="p-3">Token: <span>7c445085f8c9e21185f4d50f6884cb36</span></p>
+        </div>
+        <div class="text-center  p-5">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 150px;">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">设置云服务ip地址</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+              <label class="col-sm-3 control-label text-right">云服务ip</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" value="59.80.39.110">
+                <p>如果您解析的云服务ip异常，可以在此手动设置</p>
+              </div>
+          </div>
+        </div>
+        <div class="text-center  p-5">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 150px;">取消</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 150px;">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+{/block}

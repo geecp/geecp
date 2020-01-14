@@ -17,6 +17,10 @@ use app\admin\model\GeeAddons; //
 use app\admin\model\GeeUser; // 
 use app\admin\model\GeeVps; //vps表
 use app\index\model\GeeBilling; //vps表
+use app\index\model\GeeDomain; //域名表
+use app\index\model\GeeDomainPrice; //域名价格表
+use app\admin\model\GeeDomainContact; //域名模板表
+
 use think\Db;
 
 class Service extends Common
@@ -847,5 +851,164 @@ class Service extends Common
       $res = $plug->vps($putData);
       // dump($res);
       echo $res;
+    }
+
+    public function domain(){
+      $d = new GeeDomain();
+      $dp = new GeeDomainPrice();
+      $pro = new GeeProduct();
+      $addons = new GeeAddons();
+      $plug = new \addons\domain\domain();
+      $list = $d->order('id')->select();
+      foreach ($list as $k => $v) {
+          $suffix = '.' . explode(".", $v['domainname'])[1];
+          $dpinfo = $dp->where('domain = "' . $suffix . '"')->find();
+          $proinfo = $pro->where('id = ' . $dpinfo['pro_id'])->find();
+          $adninfo = $addons->where('id = ' . $proinfo['plug'])->find();
+          $putData = [
+              'way' => $adninfo['name'],
+              'pro_id' => $dpinfo['pro_id'],
+              'function' => 'control',
+              'action' => 'domainDetail',
+              'data' => [
+                  'domainname' => $v['domainname'],
+              ],
+          ];
+          $adnres = $plug->domain($putData);
+          $adnres = json_decode($adnres, true);
+          $v['runstate'] = $adnres['data'][0]['runstate'];
+          $v['dnvcstate'] = $adnres['data'][0]['dnvcstate'];
+          $v['domaintype'] = $adnres['data'][0]['domaintype'];
+
+          $d->where('id = ' . $v['id'])->update([
+              'r_state' => $v['runstate'],
+              'd_state' => $v['dnvcstate'],
+              'domaintype' => $v['domaintype'],
+              'domainpass' => $adnres['data'][0]['password'],
+              'userid' => $adnres['data'][0]['userid'],
+              'dns' => json_encode([
+                  'dns1' => ['host' => $adnres['data'][0]['host1'], 'ip' => $adnres['data'][0]['hostip1']],
+                  'dns2' => ['host' => $adnres['data'][0]['host2'], 'ip' => $adnres['data'][0]['hostip2']],
+                  'dns3' => ['host' => $adnres['data'][0]['host3'], 'ip' => $adnres['data'][0]['hostip3']],
+                  'dns4' => ['host' => $adnres['data'][0]['host4'], 'ip' => $adnres['data'][0]['hostip4']],
+                  'dns5' => ['host' => $adnres['data'][0]['host5'], 'ip' => $adnres['data'][0]['hostip5']],
+                  'dns6' => ['host' => $adnres['data'][0]['host6'], 'ip' => $adnres['data'][0]['hostip6']],
+              ]),
+              'end_time' => strtotime($adnres['data'][0]['ExpireTime']),
+              'newstas' => $adnres['data'][0]['d_constt'],
+              'isname' => $adnres['data'][0]['isNameDomain'],
+          ]);
+      }
+      $this->assign('list', $list);
+      return $this->fetch('Server/domain');
+    }
+    /**
+     * 测试domain接口
+     */
+    public function domainchecked(){
+      $p = $_POST;
+    	$ret = [
+    		'status'=> 200,
+    		'msg'=> '操作成功',
+    		'data'=> ''
+      ];
+      $addons = new GeeAddons();
+      $plug= new \addons\domain\domain();
+      $way = $addons->where('`range` = "domain" and `status` = 2')->find();
+
+      $putData = [
+        'function'=>'control',
+        'user_id'=> session('_userInfo')['id'],
+        'action'=>'checked',
+        'plug_name'=> 'cndns',
+        'data'=>[
+        ]
+      ];
+      $res = $plug->domain($putData);
+      // dump($res);
+      return $res;
+      // return json_encode($res);
+    }
+    
+    public function domainprice(){
+      $dp = new GeeDomainPrice();
+      $pro = new GeeProduct();
+      $prolist = $pro->where('type = "5"')->order('id desc')->select();
+      // dump($prolist);
+      $list = $dp->order('id desc')->select();
+    	$this->assign('list',$list);
+    	$this->assign('prolist',$prolist);
+      return $this->fetch('Server/domainprice');
+    }
+    public function adddomainpriceauth(){
+      $dp = new GeeDomainPrice();
+      $p = $_POST;
+    	$ret = [
+    		'status'=> 200,
+    		'msg'=> '操作成功',
+    		'data'=> ''
+      ];
+      foreach($p as $k=>$v){
+          if((empty($v)) && $k != 'id' && $k != 'twelvemonth' && $k != 'biennia' && $k != 'triennium' && $k != 'quadrennium' && $k != 'lustrum' && $k != 'decade'){
+            $ret['status'] = 422;
+            $ret['msg'] = '域名价格信息不符合规范！请修改后再提交';
+            return json_encode($ret);
+            break;
+          }
+      }
+      if(!$p['id']){
+        unset($p['id']);
+        $has = $dp->where('domain = "'.$p['domain'].'"')->find();
+        if($has){
+          $ret['status'] = 422;
+          $ret['msg'] = '已存在相同的域名!请修改后重新提交!';
+          return json_encode($ret);
+        }
+        $res = $dp->save($p);
+      } else {
+        $id = $p['id'];
+        unset($p['id']);
+        $res = $dp->where('id = '.$id)->update($p);
+      }
+
+      if(!$res){
+        $ret['status'] = 422;
+        $ret['msg'] = '网络错误!请稍后再试';
+        return json_encode($ret);
+      }
+      return json_encode($ret);
+    }
+    public function domaintempaudit(){
+      $d = new GeeDomain();
+      $dp = new GeeDomainPrice();
+      $dc = new GeeDomainContact();
+      $list = $dc->select();
+
+      //插件提交更新联系人信息
+      $pro = new GeeProduct();
+      $addons = new GeeAddons();
+      $plug = new \addons\domain\domain();
+      foreach ($list as $k => $v) {
+          foreach (json_decode($v['contact_id'], true) as $key => $val) {
+              $putData = [
+                  'way' => $key,
+                  'pro_id' => $val['pro_id'],
+                  'function' => 'control',
+                  'action' => 'contactList',
+                  'data' => [
+                      'userid' => $val['value'],
+                  ],
+              ];
+              // dump($putData);
+              $adnres = $plug->domain($putData);
+              // dump(json_decode($adnres,true));
+              $v['ischecked'] = json_decode($adnres, true)['data'][0]['ischecked'];
+              $v['status'] = json_decode($adnres, true)['data'][0]['isforbidden'];
+              $dc->where('id = ' . $v['id'])->update(['ischecked' => json_decode($adnres, true)['data'][0]['ischecked'], 'status' => json_decode($adnres, true)['data'][0]['isforbidden']]);
+          }
+      }
+
+      $this->assign('list', $list);
+      return $this->fetch('Server/domaintempaudit');
     }
 }

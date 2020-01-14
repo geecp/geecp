@@ -1462,55 +1462,58 @@
     </div>
 </div>
 <script>
-    $('.section-products .p1 .nav-link').click(function(){
-        $('.section-products .tab-content').css('height','0px');
-        if(this.hash=='#myTab2_3'){
-            $('.section-products .p1 .tab-content').css('height','480px');
-        }else{
-            $('.section-products .p1 .tab-content').css('height','400px');
-        }
-        $('.section-products .nav-link').removeClass('active');
-        $(this).addClass('active');
-        $('.section-products .p1 .tab-content .tab-pane').removeClass('none-tab');
-        $('.section-products .p2 .tab-content .tab-pane').addClass('none-tab');
-        $('.section-products .p3 .tab-content .tab-pane').addClass('none-tab');
-        $('.section-products .tab-content .tab-pane').removeClass('show');
-        $('.section-products .tab-content .tab-pane').removeClass('active');
-        $('.section-products .tab-content '+this.hash).addClass('show');
-        $('.section-products .tab-content '+this.hash).addClass('active');
+    $(document).ready(function(){
+        $('.section-products .p1 .nav-link').click(function(){
+            $('.section-products .tab-content').css('height','0px');
+            if(this.hash=='#myTab2_3'){
+                $('.section-products .p1 .tab-content').css('height','480px');
+            }else{
+                $('.section-products .p1 .tab-content').css('height','400px');
+            }
+            $('.section-products .nav-link').removeClass('active');
+            $(this).addClass('active');
+            $('.section-products .p1 .tab-content .tab-pane').removeClass('none-tab');
+            $('.section-products .p2 .tab-content .tab-pane').addClass('none-tab');
+            $('.section-products .p3 .tab-content .tab-pane').addClass('none-tab');
+            $('.section-products .tab-content .tab-pane').removeClass('show');
+            $('.section-products .tab-content .tab-pane').removeClass('active');
+            $('.section-products .tab-content '+this.hash).addClass('show');
+            $('.section-products .tab-content '+this.hash).addClass('active');
+        })
+        $('.section-products .p2 .nav-link').click(function(){
+            $('.section-products .tab-content').css('height','0px');
+            if(this.hash=='#myTab3_3'){
+                $('.section-products .p2 .tab-content').css('height','480px');
+            }else{
+                $('.section-products .p2 .tab-content').css('height','400px');
+            }
+            $('.section-products .nav-link').removeClass('active');
+            $(this).addClass('active');
+            $('.section-products .p2 .tab-content .tab-pane').removeClass('none-tab');
+            $('.section-products .p1 .tab-content .tab-pane').addClass('none-tab');
+            $('.section-products .p3 .tab-content .tab-pane').addClass('none-tab');
+            $('.section-products .tab-content .tab-pane').removeClass('show');
+            $('.section-products .tab-content .tab-pane').removeClass('active');
+            $('.section-products .tab-content '+this.hash).addClass('show');
+            $('.section-products .tab-content '+this.hash).addClass('active');
+        })
+        $('.section-products .p3 .nav-link').click(function(){
+            $('.section-products .tab-content').css('height','0px');
+            if(this.hash=='#myTab2_3'){
+                $('.section-products .p3 .tab-content').css('height','480px');
+            }else{
+                $('.section-products .p3 .tab-content').css('height','400px');
+            }
+            $('.section-products .p3 .tab-content .tab-pane').removeClass('none-tab');
+            $('.section-products .p2 .tab-content .tab-pane').addClass('none-tab');
+            $('.section-products .p1 .tab-content .tab-pane').addClass('none-tab');
+            $('.section-products .nav-link').removeClass('active');
+            $(this).addClass('active');
+            $('.section-products .tab-content .tab-pane').removeClass('show');
+            $('.section-products .tab-content .tab-pane').removeClass('active');
+            $('.section-products .tab-content '+this.hash).addClass('show');
+            $('.section-products .tab-content '+this.hash).addClass('active');
+        })
     })
-    $('.section-products .p2 .nav-link').click(function(){
-        $('.section-products .tab-content').css('height','0px');
-        if(this.hash=='#myTab3_3'){
-            $('.section-products .p2 .tab-content').css('height','480px');
-        }else{
-            $('.section-products .p2 .tab-content').css('height','400px');
-        }
-        $('.section-products .nav-link').removeClass('active');
-        $(this).addClass('active');
-        $('.section-products .p2 .tab-content .tab-pane').removeClass('none-tab');
-        $('.section-products .p1 .tab-content .tab-pane').addClass('none-tab');
-        $('.section-products .p3 .tab-content .tab-pane').addClass('none-tab');
-        $('.section-products .tab-content .tab-pane').removeClass('show');
-        $('.section-products .tab-content .tab-pane').removeClass('active');
-        $('.section-products .tab-content '+this.hash).addClass('show');
-        $('.section-products .tab-content '+this.hash).addClass('active');
-    })
-    $('.section-products .p3 .nav-link').click(function(){
-        $('.section-products .tab-content').css('height','0px');
-        if(this.hash=='#myTab2_3'){
-            $('.section-products .p3 .tab-content').css('height','480px');
-        }else{
-            $('.section-products .p3 .tab-content').css('height','400px');
-        }
-        $('.section-products .p3 .tab-content .tab-pane').removeClass('none-tab');
-        $('.section-products .p2 .tab-content .tab-pane').addClass('none-tab');
-        $('.section-products .p1 .tab-content .tab-pane').addClass('none-tab');
-        $('.section-products .nav-link').removeClass('active');
-        $(this).addClass('active');
-        $('.section-products .tab-content .tab-pane').removeClass('show');
-        $('.section-products .tab-content .tab-pane').removeClass('active');
-        $('.section-products .tab-content '+this.hash).addClass('show');
-        $('.section-products .tab-content '+this.hash).addClass('active');
-    })
+
 </script>

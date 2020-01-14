@@ -45,7 +45,7 @@
               placeholder="请输入产品描述">{$info?$info['describe']:''}</textarea>
           </div>
         </div>
-        <div class="form-group form-update_list {$info?$info['type']!='8'?'':'hidden':''}">
+        <div class="form-group form-update_list {$info?($info['type']!='8' && $info['type']!='5')?'':'hidden':''}">
           <label for="update_list" class="col-sm-2 control-label" multiple>可选升级套餐</label>
           <div class="col-sm-10">
             <select name="update_list" id="update_list" class="form-control" multiple style="height: 200px;">
@@ -59,7 +59,7 @@
             <span class="help-block">按住 Ctrl+Click 选择</span>
           </div>
         </div>
-        <div class="form-group form-email_model {$info?$info['type']!='8'?'':'hidden':''}">
+        <div class="form-group form-email_model {$info?($info['type']!='8' && $info['type']!='5')?'':'hidden':''}">
           <label for="email_model" class="col-sm-2 control-label">邮件模板ID</label>
           <div class="col-sm-10">
             <select name="email_model" id="email_model" class="form-control">
@@ -79,42 +79,42 @@
               value="{$info?$info['label']:''}" autocomplete="off">
           </div>
         </div>
-        <div class="form-group form-month">
+        <div class="form-group form-month {$info?($info['type']!='5')?'':'hidden':''}">
           <label for="month" class="col-sm-2 control-label">月价格</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="month" name="month" placeholder="请输入月价格"
               value="{$info?$info['month']:''}" autocomplete="off">
           </div>
         </div>
-        <div class="form-group form-quarter">
+        <div class="form-group form-quarter {$info?($info['type']!='5')?'':'hidden':''}">
           <label for="quarter" class="col-sm-2 control-label">季度价格</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="quarter" name="quarter" placeholder="请输入季度价格"
               value="{$info?$info['quarter']:''}" autocomplete="off">
           </div>
         </div>
-        <div class="form-group form-semestrale">
+        <div class="form-group form-semestrale {$info?($info['type']!='5')?'':'hidden':''}">
           <label for="semestrale" class="col-sm-2 control-label">半年价格</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="semestrale" name="semestrale" placeholder="请输入半年价格"
               value="{$info?$info['semestrale']:''}" autocomplete="off">
           </div>
         </div>
-        <div class="form-group form-years">
+        <div class="form-group form-years {$info?($info['type']!='5')?'':'hidden':''}">
           <label for="years" class="col-sm-2 control-label">年价格</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="years" name="years" placeholder="请输入年价格"
               value="{$info?$info['years']:''}" autocomplete="off">
           </div>
         </div>
-        <div class="form-group form-biennium">
+        <div class="form-group form-biennium {$info?($info['type']!='5')?'':'hidden':''}">
           <label for="biennium" class="col-sm-2 control-label">两年价格</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="biennium" name="biennium" placeholder="请输入两年价格"
               value="{$info?$info['biennium']:''}" autocomplete="off">
           </div>
         </div>
-        <div class="form-group form-triennium">
+        <div class="form-group form-triennium {$info?($info['type']!='5')?'':'hidden':''}">
           <label for="triennium" class="col-sm-2 control-label">三年价格</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="triennium" name="triennium" placeholder="请输入三年价格"
@@ -211,6 +211,8 @@
     if ($(this).val() == '8') {
       $('.form-group.form-update_list,.form-group.form-email_model,.form-group.form-plug').addClass('hidden');
       $('.form-group.form-added').removeClass('hidden');
+    } else if($(this).val() == '5'){
+      $('.form-group.form-update_list,.form-group.form-email_model,.form-group.form-added,.form-group.form-month,.form-group.form-quarter,.form-group.form-semestrale,.form-group.form-years,.form-group.form-biennium,.form-group.form-triennium').addClass('hidden');
     } else {
       $('.form-group').removeClass('hidden');
       $('.form-group.form-added').addClass('hidden');

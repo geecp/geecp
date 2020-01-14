@@ -525,23 +525,29 @@ function vali_data($rule, $data)
 /**
  * 随机名称
  */
-function rand_name($length = 8)
+function rand_name($length = 8,$small)
 {
-    // 密码字符集，可任意添加你需要的字符
-    $chars = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-        't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
-        'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
-        'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-    // 在 $chars 中随机取 $length 个数组元素键名
-    $keys = array_rand($chars, $length);
-    $name = '';
-    for ($i = 0; $i < $length; $i++) {
-        // 将 $length 个数组元素连接成字符串
-        $name .= $chars[$keys[$i]];
+    // // 密码字符集，可任意添加你需要的字符
+    // $chars = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+    //     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+    //     't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
+    //     'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+    //     'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    //     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    // // 在 $chars 中随机取 $length 个数组元素键名
+    // $keys = array_rand($chars, $length);
+    // $name = '';
+    // for ($i = 0; $i < $length; $i++) {
+    //     // 将 $length 个数组元素连接成字符串
+    //     $name .= $chars[$keys[$i]];
+    // }
+    $chars = '0123456789abcdefghknopqrstuvxyz';
+    $count = strlen($chars) - 1;
+    $code = '';
+    while( strlen($code) < $length){
+      $code .= substr($chars,rand(0,$count),1);
     }
-    return $name;
+    return !!$small?strtolower($code):$code;
 }
 
 /**
@@ -804,4 +810,112 @@ function hideStar($str)
         }
     }
     return $rs;
+}
+
+
+
+if (!function_exists('copydirs')) {
+
+    /**
+     * 复制文件夹
+     * @param string $source 源文件夹
+     * @param string $dest   目标文件夹
+     */
+    function copydirs($source, $dest)
+    {
+        //保存记录
+        static $fileslog=array();
+
+        if (!is_dir($dest)) {
+            mkdir($dest, 0755, true);
+        }
+        foreach (
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::SELF_FIRST
+            ) as $item
+        ) {
+            if ($item->isDir()) {
+                $sontDir = $dest . DS . $iterator->getSubPathName();
+                if (!is_dir($sontDir)) {
+                    mkdir($sontDir, 0755, true);
+                }
+            } else {
+                copy($item, $dest . DS . $iterator->getSubPathName());
+                $fileslog[]=$dest . DS . $iterator->getSubPathName();
+            }
+        }
+
+        return $fileslog;
+    }
+}
+
+
+if (!function_exists('rmdirs')) {
+
+    /**
+     * 删除文件夹
+     * @param string $dirname  目录
+     * @param bool   $withself 是否删除自身
+     * @return boolean
+     */
+    function rmdirs($dirname, $withself = true)
+    {
+        if (!is_dir($dirname)) {
+            return false;
+        }
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($dirname, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $fileinfo) {
+            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
+            $todo($fileinfo->getRealPath());
+        }
+        if ($withself) {
+            @rmdir($dirname);
+        }
+        return true;
+    }
+}
+
+if (!function_exists('setconfig')) {
+
+    /**
+     * 修改config的函数
+     * @param $arr1 配置前缀
+     * @param $arr2 数据变量
+     * @return bool 返回状态
+     */
+    function setconfig($pat, $rep)
+    {
+        /**仅支持二维数组
+         * 原理就是 打开config配置文件 然后使用正则查找替换 然后在保存文件.
+         * 传递的参数为2个数组 前面的为配置 后面的为数值.  正则的匹配为单引号
+         * setconfig(['geecp','version'],['1.0.2']);
+         *
+         */
+        if (is_array($pat) && is_array($rep)) {
+            $pats[0]='/\'' . $pat[0] . '\'\s*\[?([\s\S]+)\''.$pat[1].'\'\s*=>\'?(.*)\'?/';
+            if($rep[0]=="true" || $rep[0]=="false"){
+                $reps[0] = "'".$pat[0]."'"."$1 '$pat[1]' => ".$rep[0].",";
+            }else{
+                $reps[0] = "'".$pat[0]."'"."$1 '$pat[1]' => "."'".$rep[0]."',";
+            }
+
+            $fileurl = APP_PATH . "config.php";
+            ksort($pats);
+            ksort($reps);
+            $string  = file_get_contents($fileurl); //加载配置文件
+
+            $string  = preg_replace($pats, $reps, $string);
+
+            // 正则查找然后替换
+            file_put_contents($fileurl, $string); // 写入配置文件
+            return true;
+        } else {
+            return flase;
+        }
+    }
 }

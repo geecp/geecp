@@ -1,0 +1,221 @@
+{extend name='index@Common/index' /} {block name='content'}
+<div class="card">
+  <div class="card-header  border-t pb-0" style="background-color: #fff">
+    <div class="tool-list d-flex">
+      <ul class="list-inline mr-auto  m-0">
+        <li class="list-inline-item py-2">
+          <h4>{$_GET['domain']}</h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-body fs-12">
+    <div class="cont-box">
+      <div class="card border-0">
+        <div class="card-header unbg px-0">
+          <h4 class="mb-0">
+            <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">信息安全</span> </h4>
+        </div>
+        <div class="card-body form-row px-1">
+          <div class="col-6">
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">域名所有者：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$minfo.ownername_cn} &nbsp; {$minfo.ownername}
+                  <a href="{:url('index/Domain/transform')}?domain={$_GET['domain']}">变更（过户）</a>
+                </label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0"> 注册日期：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$info.create_time}</label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0 form-inline">DNS服务器：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$dinfo.host1}
+                  <a href="{:url('index/Domain/changens')}?domain={$_GET['domain']}" class="p-0"><i class="iconfont iconicon_xie"></i> 修改DNS</a>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">域名状态：</label>
+              <div class="col">
+                <label class="col-form-label py-0">
+                  {$info['r_state']}
+                </label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">到期时间：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$info.end_time|date='Y-m-d H:i:s',###}
+                  <!-- <button class="btn btn-link btn-sm p-0" disabled="disabled" type="button">续费</button> -->
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card border-0">
+        <div class="card-header unbg px-0">
+          <h4 class="mb-0">
+            <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">信息安全</span> </h4>
+        </div>
+        <div class="card-body form-row px-1">
+          <div class="col-6">
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0 form-inline">隐私保护：</label>
+              <div class="col form-row">
+                <button class="btn btn-link p-0 btn-sm subcheck" type="button">
+                  <div class="form-control-sm switch-box">
+                    <input type="checkbox" id="warning" data-mid="isAlarm" onchange="cwhois($(this))" ${dinfo['d_constt'] == '1'?'checked':''}>
+                    <label for="warning" class="switch"> </label>
+                  </div>
+                </button>
+                <span class="form-inline">未开启WHOIS信息隐私保护</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card border-0">
+        <div class="card-header unbg px-0">
+          <h4 class="mb-0">
+            <span style="padding-bottom: 11px;border-bottom: 3px solid #e5e5e5;">域名信息</span> </h4>
+        </div>
+        <div class="card-body form-row px-1">
+          <div class="col-6">
+
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">所有者类型：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$minfo['domaintype'] == 'O'?'企业':'个人'}</label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">邮箱地址：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$minfo['email']}</label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">通信地址：</label>
+              <div class="col">
+                <label class="col-form-label py-0 mb-2 pb-1">{$minfo['address_cn']}</label><br />
+                <label class="col-form-label py-0">{$minfo['address']}</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">联系人：</label>
+              <div class="col">
+                <label class="col-form-label py-0">
+                  {$minfo['ownername_cn']} &nbsp; {$minfo['ownername']}
+                </label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0">地区：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$minfo['country_cn']} {$minfo['province_cn']} {$minfo['city_cn']} </label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0 form-inline">邮政编码：</label>
+              <div class="col">
+                <label class="col-form-label py-0">{$minfo['postcode']}</label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <label class="col-form-label col-2 py-0 form-inline"> 手机：</label>
+              <div class="col">
+                <label class="col-form-label py-0"> {$minfo['phone']}</label>
+              </div>
+            </div>
+          </div>
+          <a href="manage_editdetail.html" class="btn btn-primary btn-sm px-4 py-1">修改</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block} {block name='modal'}{/block} {block name='js'}
+<script>
+  function cwhois(t){
+    ajax('{:url("index/Domain/whoisProtect")}',{
+      domain: '{$_GET["domain"]}',
+      newstas: t.prop('checked')?1:0,
+    },'post').then(e=>{
+      if(e.status == 200){
+
+      } else {
+        alert(e.msg)
+      }
+    })
+  }
+</script>
+<script>
+  setInterval(function () {
+    if ($(".btn1").hasClass("active")) {
+      $(".block1").addClass("d-none");
+      $(".block2").removeClass("d-none");
+    }
+    if ($(".btn2").hasClass("active")) {
+      $(".block2").addClass("d-none");
+      $(".block1").removeClass("d-none");
+    }
+  })
+  $("#allwarehouse1").click(function () {
+    if (this.checked) {
+      $(".inputdis input").attr("disabled", "disabled");
+    }
+  })
+  $("#notallwarehouse2").click(function () {
+    if (this.checked) {
+      $(".inputdis input").attr("disabled", false);
+    }
+  })
+
+  var sendCode = {
+    init: function (t, n) {
+      sendCode.times(t, n);
+      //after('<label for="" class="col-form-label col-3">验证码发送成功</label>')
+    },
+    times: function (t, n) {
+      var time = n;
+      if (time == 0) {
+        t.removeClass('hidden');
+        t.next().remove();
+        time = n;
+      } else {
+        if (t.next().length) {
+          t.next().text(time + 's');
+        } else {
+          t.addClass('hidden');
+          t.html(
+            '<button class="btn btn-ces btn-sm mx-1 px-2" type="button" style="background-color: #ddd;width:100%" disabled="disabled">' +
+            time + 's后重新获取</button>');
+
+        }
+        time--;
+        setTimeout(function () {
+          sendCode.times(t, time);
+        }, 1000)
+      }
+
+    }
+  };
+  $("#getauthencode").click(function () {
+    sendCode.init($(this), 30)
+  })
+  if ($(".warning").checked) {
+
+  }
+</script>
+{/block}

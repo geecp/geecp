@@ -64,6 +64,14 @@ class Common extends Controller
             //当前路由父级模块
             $startRoute1 = $route->order('id')->select();
             $redirectUrl = $_SERVER['REDIRECT_URL'];
+            $nowredirectUrl = explode('/',explode('.',$redirectUrl)[0]);
+            $nowRoutes = $route->where('code = "'.$nowredirectUrl[count($nowredirectUrl) - 1].'"')->find();
+            // dump($nowredirectUrl);
+            if($nowRoutes['s_id']){
+              $srinfo = $route->where('id = '.$nowRoutes['s_id'])->find();
+              $this->assign('srinfo',$srinfo);
+              // dump($nowRoutes);
+            }
             $nowStart = $this->nowRoute($startRoute1,$redirectUrl);
             if($nowStart['f_id'] != 0){
               $topRoute = $route->where('id = '.$nowStart['f_id'])->where('is_show = "1"')->find();
@@ -77,6 +85,7 @@ class Common extends Controller
             if($nowStart){
             	$this->assign("nowStart",$nowStart);
             }
+
             // dump(passToHash('111111'));
         }else{
             return $this->redirect('index/Login/index');
@@ -108,6 +117,8 @@ class Common extends Controller
         } else {
           $varCode = '/'.$var['code'];
         }
+        // dump(strstr($redirectUrl,$varCode.'/'));
+
         if(strstr($redirectUrl,$varCode.'/') !== false){
           $nowStart = $var;
           $routeRes = routeAnalysis($var['id']);
@@ -118,6 +129,8 @@ class Common extends Controller
           }
         }
       }
+      // dump($nowStart);
+
       return $nowStart;
     }
     /**

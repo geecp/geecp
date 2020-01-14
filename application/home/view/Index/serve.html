@@ -317,58 +317,61 @@
         </div>
     </section>
 <script>
-    $('.certificate .content-wrap').hover(function(e){
-        $('.arrow').css('opacity',1);
-        clearInterval(timericon);
-        event.stopPropagation();
-    return false;
-    },function(e){
-        $('.arrow').css('opacity',0);
-        timericon=setInterval(function(){foricon()},2000)
-        event.stopPropagation();
-        return false;
-    });
+    $(document).ready(function(){
+        $('.certificate .content-wrap').hover(function(e){
+            $('.arrow').css('opacity',1);
+            clearInterval(timericon);
+            event.stopPropagation();
+            return false;
+        },function(e){
+            $('.arrow').css('opacity',0);
+            timericon=setInterval(function(){foricon()},2000)
+            event.stopPropagation();
+            return false;
+        });
 
-    function foricon (){
-        $('.inner li').each(function(){
-            let px=$(this)[0].attributes['data-x'].value-196;
-            if($(this)[0].attributes['data-x'].value<=-392){
-                $(this).css('opacity','0');
-                $(this).css('display','none');
-                $(this)[0].attributes['data-x'].value=1568;
-                $(this).css('transform','translateX('+px+'px)');
-                $(this)[0].attributes['data-x'].value=$(this)[0].attributes['data-x'].value-196;
-            }else{
-                $(this).css('transform','translateX('+px+'px)');
-                $(this)[0].attributes['data-x'].value=$(this)[0].attributes['data-x'].value-196;
-                $(this).css('opacity','1');
-                $(this).css('display','block');
-            }
+        function foricon (){
+            $('.inner li').each(function(){
+                let px=$(this)[0].attributes['data-x'].value-196;
+                if($(this)[0].attributes['data-x'].value<=-392){
+                    $(this).css('opacity','0');
+                    $(this).css('display','none');
+                    $(this)[0].attributes['data-x'].value=1568;
+                    $(this).css('transform','translateX('+px+'px)');
+                    $(this)[0].attributes['data-x'].value=$(this)[0].attributes['data-x'].value-196;
+                }else{
+                    $(this).css('transform','translateX('+px+'px)');
+                    $(this)[0].attributes['data-x'].value=$(this)[0].attributes['data-x'].value-196;
+                    $(this).css('opacity','1');
+                    $(this).css('display','block');
+                }
+            })
+        }
+        let timericon=setInterval(function(){
+            foricon();
+        },2000)
+        $('.arrow .next-arrow').click(function(){
+            foricon()
         })
-    }
-    let timericon=setInterval(function(){
-        foricon();
-    },2000)
-    $('.arrow .next-arrow').click(function(){
-        foricon()
-    })
-    $('.arrow .pre-arrow').click(function(){
-        $('.inner li').each(function(){
-            let px=parseInt( $(this)[0].attributes['data-x'].value)+196;
-            if($(this)[0].attributes['data-x'].value>=1372){
-                $(this).css('opacity','0');
-                $(this).css('display','none');
-                $(this)[0].attributes['data-x'].value=-588;
-                $(this).css('transform','translateX('+px+'px)');
-                let dx=parseInt($(this)[0].attributes['data-x'].value)+196;
-                $(this)[0].attributes['data-x'].value=dx;
-            }else{
-                $(this).css('transform','translateX('+px+'px)');
-                let dx=parseInt($(this)[0].attributes['data-x'].value)+196;
-                $(this)[0].attributes['data-x'].value=dx;
-                $(this).css('opacity','1');
-                $(this).css('display','block');
-            }
+        $('.arrow .pre-arrow').click(function(){
+            $('.inner li').each(function(){
+                let px=parseInt( $(this)[0].attributes['data-x'].value)+196;
+                if($(this)[0].attributes['data-x'].value>=1372){
+                    $(this).css('opacity','0');
+                    $(this).css('display','none');
+                    $(this)[0].attributes['data-x'].value=-588;
+                    $(this).css('transform','translateX('+px+'px)');
+                    let dx=parseInt($(this)[0].attributes['data-x'].value)+196;
+                    $(this)[0].attributes['data-x'].value=dx;
+                }else{
+                    $(this).css('transform','translateX('+px+'px)');
+                    let dx=parseInt($(this)[0].attributes['data-x'].value)+196;
+                    $(this)[0].attributes['data-x'].value=dx;
+                    $(this).css('opacity','1');
+                    $(this).css('display','block');
+                }
+            })
         })
     })
+
 </script>

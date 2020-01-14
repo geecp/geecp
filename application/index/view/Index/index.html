@@ -8,7 +8,7 @@
 </div>
 <div class="row">
   <div class="col-6">
-    <div class="card" style="border-radius: 0;">
+    <div class="card" style="border-radius: 0;height: 150px;border: 0;">
       <div class="card-body">
         <div class="media">
           <div class="media-body">
@@ -22,9 +22,352 @@
       </div>
     </div>
   </div>
+  <div class="col-6">
+    <div class="row">
+      <div class="col-6">
+        <div class="card" style="border-radius: 0;height: 150px;border: 0;background: transparent;">
+          <div class="card-body" style="padding: 0;">
+            <div class="media mb-3 bg-white px-3" style="height: 67px;">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$ocount}</b><span class="fs-12 text-muted">个待支付订单</span>
+                <a href="{:url('index/Billing/order')}" class="float-right fs-12 text-muted">查看</a>
+              </div>
+            </div>
+            <div class="media bg-white px-3" style="height: 67px;">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$tcount}</b class="fs-18"><span class="fs-12 text-muted">个我的工单</span>
+                <a href="{:url('index/Ticket/list')}" class="float-right fs-12 text-muted">查看</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card" style="border-radius: 0;height: 150px;border: 0;background: transparent;">
+          <div class="card-body" style="padding: 0;">
+            <div class="media mb-3 bg-white px-3" style="height: 67px;">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">0</b><span class="fs-12 text-muted">个站内信</span>
+                <a href="javascript:;" class="float-right fs-12 text-muted">查看</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-3">
+    <div class="card" style="border-radius: 0;border: 0;">
+      <div class="card-header bg-white" style="border: 0;">
+        近30天消费趋势
+      </div>
+      <div class="card-body">
+        <div style="width:100%;">
+          <div id="report_consume" style="width:100%;height: 145px;overflow: hidden;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-3">
+    <div class="card" style="border-radius: 0;border: 0;">
+      <div class="card-header bg-white" style="border: 0;">
+        近30天消费统计
+      </div>
+      <div class="card-body">
+        <div class="form-inline" style="width:100%;height: 145px;">
+          <div id="report-order-chart" style="width:100%;height: 100%;overflow: hidden;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-3">
+    <div class="card" style="border-radius: 0;border: 0;height: 230px;">
+      <div class="card-header bg-white" style="border: 0;">
+        域名
+      </div>
+      <div class="card-body py-2 px-3">
+        <div class="media">
+          <div class="media-body align-self-center mr-5 text-center">
+            <div class="number bg-light" style="border-radius: 100%;width: 90px;height: 90px;line-height: 90px;font-weight: bold;font-size: 24px;margin: 0 auto;">{$dcount}</div>
+            <div class="mt-3 text-muted fs-12">拥有域名总数</div>
+          </div>
+          <div class="media-right align-self-center">
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$dvcount}</b><span class="fs-12 text-muted">使用中</span>
+              </div>
+            </div>
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$decount}</b><span class="fs-12 text-muted">即将到期(30天内)</span>
+              </div>
+            </div>
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$endcount}</b><span class="fs-12 text-muted">已到期</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-3">
+    <div class="card" style="border-radius: 0;border: 0;height: 230px;">
+      <div class="card-header bg-white" style="border: 0;">
+        VPS主机
+      </div>
+      <div class="card-body py-2 px-3">
+        <div class="media">
+          <div class="media-body align-self-center mr-5 text-center">
+            <div class="number bg-light" style="border-radius: 100%;width: 90px;height: 90px;line-height: 90px;font-weight: bold;font-size: 24px;margin: 0 auto;">{$vcount}</div>
+            <div class="mt-3 text-muted fs-12">拥有VPS主机总数</div>
+          </div>
+          <div class="media-right align-self-center">
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$vucount}</b><span class="fs-12 text-muted">使用中</span>
+              </div>
+            </div>
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$vecount}</b><span class="fs-12 text-muted">即将到期(30天内)</span>
+              </div>
+            </div>
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$vendcount}</b><span class="fs-12 text-muted">已到期</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-3">
+    <div class="card" style="border-radius: 0;border: 0;height: 230px;">
+      <div class="card-header bg-white" style="border: 0;">
+        物理服务器
+      </div>
+      <div class="card-body py-2 px-3">
+        <div class="media">
+          <div class="media-body align-self-center mr-5 text-center">
+            <div class="number bg-light" style="border-radius: 100%;width: 90px;height: 90px;line-height: 90px;font-weight: bold;font-size: 24px;margin: 0 auto;">{$scount}</div>
+            <div class="mt-3 text-muted fs-12">拥有物理服务器总数</div>
+          </div>
+          <div class="media-right align-self-center">
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$sucount}</b><span class="fs-12 text-muted">使用中</span>
+              </div>
+            </div>
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$secount}</b><span class="fs-12 text-muted">即将到期(30天内)</span>
+              </div>
+            </div>
+            <div class="media mb-2 bg-light p-2 px-3">
+              <div class="media-body align-self-center clearfix" style="line-height: 27px;">
+                <b class="fs-18 mr-3">{$sendcount}</b><span class="fs-12 text-muted">已到期</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {/block}
 {block name='js'}
+<script>
+  let val = new Number();
+  setTimeout(function () {
+    let data = JSON.parse('{$proTree|json_encode}');
+    pHistory(data);
+  }, 500);
+  $('[name="hstarttime"],[name="hendtime"],[name="htype"]').change(function () {
+    gethistory();
+  })
+  $('[name="starttime"], [name="endtime"]').change(function () {
+    gethistory('pie');
+  });
 
+  function gethistory(type) {
+    let val;
+    if (type == 'pie') {
+      val = {
+        start: $('[name="starttime"]').val(),
+        end: $('[name="endtime"]').val(),
+        type: $('[name="type"]').val(),
+        ctype: type,
+      }
+    } else {
+      val = {
+        start: $('[name="hstarttime"]').val(),
+        end: $('[name="hendtime"]').val(),
+        type: $('[name="type"]').val(),
+        ctype: type,
+      }
+    }
+
+    ajax('{:url("index/Consumption/gethistory")}', {
+      ...val
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        if (type == 'pie') {
+          pHistory(e.data.data)
+          $('[data-name="allPrice"]').text(e.data.allPrice.toFixed(2))
+          let html = '';
+          if (e.data.data.length && e.data.data) {
+            e.data.data.map(e => {
+              html += `
+              <tr>
+                <td>${e.name}</td>
+                <td>￥${e.value.toFixed(2)}</td>
+                <td>￥${e.value.toFixed(2)}</td>
+                <td>￥0.00</td>
+                <td> - </td>
+              </tr>
+              `;
+            })
+          } else {
+            html = `
+              <tr>
+                <td colspan="5" rowspan="1" class="text-center">暂无相关消费数据</td>
+              </tr>
+              `;
+          }
+          console.log(html)
+          $('[data-name="prolist"]').html(html);
+        } else {
+          cHistory(e.data.date, e.data.data)
+        }
+      }
+    })
+  }
+  setTimeout(function () {
+    let date = JSON.parse('{$hdate|json_encode}'),
+      data = JSON.parse('{$hval|json_encode}');
+    cHistory(date, data)
+  }, 500);
+  window.cbdate = () => {
+    gethistory();
+  }
+
+  function pHistory(data) {
+    let namelist = [];
+    namelist = data.map(e => {
+      return {
+        name: e.name + ',' + e.value,
+        value: e.value
+      }
+    });
+    report = [];
+    report = echarts.init(document.getElementById('report-order-chart'), ETheme.ligntBlue);
+    option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: (v) => {
+          let res = v.name.split(',');
+          let str = res[0];
+          return `消费统计<br />${str}：￥${v.value.toFixed(2)}(${v.percent}%)`;
+        }
+      },
+      legend: {
+        orient: 'vertical',
+        x: 'right',
+        data: namelist,
+        formatter: function (e) {
+          let res = e.split(',');
+          let str = res[0];
+          if (str.length > 10) {
+            str = str.slice(0, 10) + "..."
+          }
+          return str?`${str}：￥${Number(res[1]).toFixed(2)}`:'';
+        }
+      },
+      series: [{
+        type: 'pie',
+        radius: ["65%", "90%"],
+        center: ['25%', '50%'],
+        avoidLabelOverlap: false,
+        label: {
+          normal: {
+            show: true,
+            position: 'center',
+            formatter: function () {
+              let price = 0;
+              data.map(e => {
+                price += e.value;
+              })
+              return "总金额：" + price.toFixed(2) + "元"
+            }
+          }
+        },
+        data: namelist,
+        labelLine: {
+          normal: {
+            show: false
+          }
+        },
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }]
+    };
+
+    report.setOption(option);
+  }
+
+  function cHistory(date, data) {
+    report = [];
+    report = echarts.init(document.getElementById('report_consume'), ETheme.ligntBlue);
+    option = {
+      grid: {
+        top: 0,
+        left: 20,
+        right: 35,
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        },
+        formatter: (e, i) => {
+          return `${e[0].axisValue} <br /> ${e[0].value} 元`;
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date
+      },
+      yAxis: {
+        type: 'value'
+      },
+      dataZoom: [{
+        id: 'dataZoomX',
+        type: 'slider',
+        xAxisIndex: [0],
+        start: 0,
+        end: 100
+      }],
+      series: [{
+        type: 'line',
+        data: data,
+        areaStyle: {}
+      }]
+    };
+    report.setOption(option);
+  }
+</script>
 {/block}
  

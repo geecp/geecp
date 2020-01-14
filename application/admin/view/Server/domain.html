@@ -1,0 +1,70 @@
+{extend name='Common/index' /} {block name='content'}
+<section class="content">
+  <div class="nav-tabs-custom" style="margin: 0;">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="{:url('manager/Service/domain')}">域名列表</a></li>
+      <li><a href="{:url('manager/Service/domainprice')}">域名价格</a></li>
+      <li><a href="{:url('manager/Service/domaintempaudit')}">信息模板</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box" style="border-top: 0;">
+        <div class="box-header clearfix">
+          <div class="box-tools pull-left form-inline">
+            <input type="text" class="form-control input-sm global_filter" placeholder="关键字">
+            <button class="btn btn-primary btn-sm serchBtn">查询</button>
+            <div class="pull-right">
+              <!-- <a href="javascript:;" class="btn btn-primary btn-sm" onclick="checked()">接口测试</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered table-hover tableData">
+            <thead>
+              <tr>
+                <th>域名</th>
+                <th>开通时间</th>
+                <th>到期时间</th>
+                <th>所属用户</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {if !empty($list)} {foreach name="list" item="v"}
+              <tr data-id="{$v.id}" data-name="{$v.domainname}" data-user="{$v.user}">
+                <td>{$v.domainname}</td>
+                <td>{$v.create_time}</td>
+                <td>{$v.end_time|date='Y-m-d H:i:s',###}</td>
+                <td>{$v.user}</td>
+                <td>{$v.r_state}</td>
+                <td>
+                  <!-- <a href="javascript:;" onclick="showRenew($(this))">续费</a> -->
+                  <a href="{:url('index/Domain/tomanager')}?domain={$v.domainname}" target="_blank">控制面板</a>
+                </td>
+              </tr>
+              {/foreach} {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{/block} {block name='js'}
+<script>
+  
+  $('.tableData').DataTable({
+    'paging': false,
+    'fixedHeader': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': false,
+    'info': true,
+    'autoWidth': false,
+    'deferRender': true,
+    'processing': true,
+  });
+</script>
+{/block}
