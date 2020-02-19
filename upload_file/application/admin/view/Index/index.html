@@ -1,0 +1,332 @@
+{extend name='Common/index' /}
+{block name='content'}
+<!-- <section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                  <p>请购买商用授权</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+<div class="home content">
+  <div class="box box-widget">
+    <div class="box-header" style="border: 0;">
+      <h5 class="box-title" style="font-size: 14px;">数据总览</h5>
+    </div>
+    <div class="box-footer" style="border: 0;padding: 15px;">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="description-block">
+                <h5 class="description-percentage">注册用户</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$reg}</h4>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="description-block">
+                <h5 class="description-percentage">个人用户</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$puser}</h4>
+              </div>
+            </div>
+            <div class="col-md-4 border-right">
+              <div class="description-block">
+                <h5 class="description-percentage">企业用户</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$euser}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">总订单</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$all}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">今日订单</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$now}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">已付款订单</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$pay}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">总交易流水</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$pmoney|to_double}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">退款金额</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">0.00</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-widget">
+    <div class="box-header" style="border: 0;">
+      <h5 class="box-title" style="font-size: 14px;">运营概览</h5>
+    </div>
+    <div class="box-footer" style="border: 0;padding: 15px;">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="description-block">
+                <h5 class="description-percentage">待处理工单</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$ft}</h4>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="description-block">
+                <h5 class="description-percentage">待反馈工单</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$wt}</h4>
+              </div>
+            </div>
+            <div class="col-md-4 border-right">
+              <div class="description-block">
+                <h5 class="description-percentage">总工单</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$allt}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">已注册域名</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$dcount}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">VPS主机</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$vcount}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">物理机</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">{$scount}</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">云主机</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">0</h4>
+              </div>
+            </div>
+            <div class="col-md-2" style="width: 20%;">
+              <div class="description-block">
+                <h5 class="description-percentage">其他</h5>
+                <h4 class="description-text" style="font-size: 28px;margin: 0;">0</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-widget">
+    <div class="box-header" style="border: 0;">
+      <h5 class="box-title" style="font-size: 14px;">数据概览</h5>
+    </div>
+    <div class="box-footer" style="border: 0;padding: 15px;">
+      <div class="row">
+        <div class="col-md-6">
+          <div style="width:100%;">
+            <div id="report_user" style="width:100%;height: 285px;overflow: hidden;"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div style="width:100%;">
+            <div id="report_consume" style="width:100%;height: 285px;overflow: hidden;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+
+{block name='js'}
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- <script src="__STATIC__/dist/js/pages/dashboard.js"></script> -->
+<script>
+  let val = new Number();
+  setTimeout(function () {
+    let date = JSON.parse('{$uhdate|json_encode}'),
+      data = JSON.parse('{$uhval|json_encode}');
+    uHistory(date, data)
+  }, 500);
+  $('[name="hstarttime"],[name="hendtime"],[name="htype"]').change(function () {
+    gethistory();
+  })
+  $('[name="starttime"], [name="endtime"]').change(function () {
+    gethistory('user');
+  });
+
+  function gethistory(type) {
+    let val;
+    if (type == 'user') {
+      val = {
+        start: $('[name="starttime"]').val(),
+        end: $('[name="endtime"]').val(),
+        type: $('[name="type"]').val(),
+        ctype: type,
+      }
+    } else {
+      val = {
+        start: $('[name="hstarttime"]').val(),
+        end: $('[name="hendtime"]').val(),
+        type: $('[name="type"]').val(),
+        ctype: type,
+      }
+    }
+
+    ajax('{:url("index/Consumption/gethistory")}', {
+      ...val
+    }, 'post').then(e => {
+      if (e.status == 200) {
+        if (type == 'user') {
+          uHistory(e.data.date, e.data.data)
+        } else {
+          cHistory(e.data.date, e.data.data)
+        }
+      }
+    })
+  }
+  setTimeout(function () {
+    let date = JSON.parse('{$hdate|json_encode}'),
+      data = JSON.parse('{$hval|json_encode}');
+    cHistory(date, data)
+  }, 500);
+  window.cbdate = () => {
+    gethistory();
+  }
+
+  function uHistory(date, data) {
+    report = [];
+    report = echarts.init(document.getElementById('report_user'), ETheme.ligntBlue);
+    option = {
+      title: {
+        text: '30天内注册用户数',
+        textStyle:{
+          fontWeight: 'normal',
+          fontSize: 16
+        }
+      },
+      grid: {
+        top: 50,
+        left: 20,
+        right: 35,
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        },
+        formatter: (e, i) => {
+          return `${e[0].axisValue} <br /> ${e[0].value} 人`;
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date
+      },
+      yAxis: {
+        type: 'value',
+        // minInterval: 5
+      },
+      dataZoom: [{
+        id: 'dataZoomX',
+        type: 'slider',
+        xAxisIndex: [0],
+        start: 0,
+        end: 100
+      }],
+      series: [{
+        type: 'line',
+        data: data,
+        areaStyle: {}
+      }]
+    };
+    report.setOption(option);
+  }
+
+  function cHistory(date, data) {
+    report = [];
+    report = echarts.init(document.getElementById('report_consume'), ETheme.ligntBlue);
+    option = {
+      title: {
+        text: '30天内交易金额',
+        textStyle:{
+          fontWeight: 'normal',
+          fontSize: 16
+        }
+      },
+      grid: {
+        top: 50,
+        left: 20,
+        right: 35,
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        },
+        formatter: (e, i) => {
+          return `${e[0].axisValue} <br /> ${e[0].value} 元`;
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: date
+      },
+      yAxis: {
+        type: 'value'
+      },
+      dataZoom: [{
+        id: 'dataZoomX',
+        type: 'slider',
+        xAxisIndex: [0],
+        start: 0,
+        end: 100
+      }],
+      series: [{
+        type: 'line',
+        data: data,
+        areaStyle: {}
+      }]
+    };
+    report.setOption(option);
+  }
+</script>
+{/block}
